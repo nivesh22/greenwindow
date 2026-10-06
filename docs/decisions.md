@@ -49,3 +49,15 @@ Format:
 - Decision: After T0, build one vertical slice: ingest → observations → a few models (`snaive_24`, `sarimax_wx`, `chronos2_cov`) + NESO → snapshots → JSON export → scheduled workflow to `data` branch → web Home + Scheduler on Vercel. Then add remaining models, scorer/leaderboard, backtest, and the other pages. This also covers T-1b (skeleton walk).
 - Reason: Owner's priority; proves the plumbing early. All spec acceptance criteria still apply per task.
 - Spec sections affected: 11 (order only).
+
+## 2026-10-05 — Slice build choices (T1–T11 minimal versions)
+- **Forecast origin = hour after the latest actual**, not the wall-clock hour. Actuals lag ~1–2 h; this avoids imputing trailing values. `run_id`/`issued_at_utc` are that origin hour, so the first forecast hour or two may already be in the past when published. Spec 6.6 assumed the issue hour.
+- **Weather for history:** bootstrap uses the Historical Forecast API; each run then overlays the Forecast API's `past_days=7` (also a forecast product, so D3 holds). Future covariates come from the same Forecast API call.
+- **Weather points/weights (T1):** London, Birmingham, Glasgow, North Sea (54.0N, 1.5E) with per-variable weights (temp/solar follow population and the solar fleet; wind follows Scotland and offshore). In `config/locations.yaml`; documented simplification.
+- **Bank holidays:** England (`holidays.country_holidays("GB", subdiv="ENG")`), judged on the Europe/London local date.
+- **Validation:** plain pandas validators in `schemas.py` and `export/app_json.py` instead of pandera (spec allows either; avoids a heavy dependency for now).
+- **New direct dependencies:** `pyyaml` (config), `holidays` (spec 4.3), `scipy` (normal quantiles for SARIMAX intervals; already a statsmodels dependency).
+- **snaive intervals:** empirical quantiles of lag-m differences, scaled by sqrt(k) for k seasons ahead (seasonal random walk). Spec only said "empirical residual quantiles".
+- **SARIMAX spec (placeholder until course week 3–4):** SARIMAX(2,0,1) + constant, exog = weather + bank-holiday dummy + Fourier(24h, K=3) + Fourier(168h, K=2). Constant exog columns are dropped per fit.
+- **Keepalive (V6):** the workflow runs `gh workflow enable` each run. Unverified whether this resets the 60-day timer; calendar check (H12) remains the real safeguard.
+- **Rerunning the same run_id** without Chronos drops that run's Chronos rows (same-run replacement, as spec 6.6 defines it).

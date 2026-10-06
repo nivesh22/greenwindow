@@ -1,0 +1,72 @@
+name: pipeline
+
+# Spec 6.6 / T11: every 6 hours at minute :17 (never :00, the most congested slot), plus manual runs.
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      no_chronos:
+        description: "Skip Chronos-2 models"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # push to the data branch
+  actions: write    # keepalive: re-enable this workflow
+
+concurrency:
+  group: pipeline
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GREENWINDOW_DATA_DIR: ${{ github.workspace }}/data_branch
+      HF_HOME: ${{ github.workspace }}/.hf_cache
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          ref: data
+          path: data_branch
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.11"
+          enable-cache: true
+
+      - run: uv sync --locked --extra chronos
+
+      - name: Cache Chronos-2 weights
+        uses: actions/cache@v4
+        with:
+          path: .hf_cache
+          key: hf-amazon-chronos-2-v1
+
+      - name: Run pipeline
+        run: uv run python -m greenwindow.live.pipeline ${{ inputs.no_chronos && '--no-chronos' || '' }}
+
+      - name: Commit to data branch
+        working-directory: data_branch
+        run: |
+          git config user.name "greenwindow-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add parquet app_data
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "data: pipeline run $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push origin HEAD:data
+          fi
+
+      # V6: scheduled workflows are disabled after 60 days without repo activity. Bot commits to `data` may not
+      # count, so re-enable through the Actions API on every run. Unverified safety net; see docs/decisions.md.
+      - name: Keepalive
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow enable pipeline.yml --repo "${{ github.repository }}" || true
