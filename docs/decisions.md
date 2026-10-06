@@ -61,3 +61,11 @@ Format:
 - **SARIMAX spec (placeholder until course week 3–4):** SARIMAX(2,0,1) + constant, exog = weather + bank-holiday dummy + Fourier(24h, K=3) + Fourier(168h, K=2). Constant exog columns are dropped per fit.
 - **Keepalive (V6):** the workflow runs `gh workflow enable` each run. Unverified whether this resets the 60-day timer; calendar check (H12) remains the real safeguard.
 - **Rerunning the same run_id** without Chronos drops that run's Chronos rows (same-run replacement, as spec 6.6 defines it).
+
+## 2026-10-05 — Web app choices (T12–T13 minimal versions)
+- **Toolchain (V10), pinned exactly:** Vite 8.3.2, React 19.3.0, TypeScript 6.0.3 (TypeScript 7 is out but the Vite template pins 6), Recharts 3.10.1 (range-area support confirmed via `Area` `isRange`), TanStack Query 5.104.1, zod 4.6.5, react-router-dom 7.18.4, Tailwind 4.3.3, Vitest 5.0.3, Testing Library 16.3.3, jsdom 29.
+- **Lint:** oxlint (the current Vite template's default) instead of ESLint. Same purpose, much faster; no extra config.
+- **Optimizer additions to spec 6.7:** an `InvalidJobError` for out-of-range inputs (spec only defined `InfeasibleJobError`); `gramsDifference` is clamped at 0 like `intensityReductionPct` (in cautious mode the best-by-P90 window can have a higher median); `robust` is false when no change is recommended.
+- **Pages in the slice:** Forecast (Home), Plan a job (Scheduler), Leaderboard, About & limits. Backtest page waits for T9.
+- **Not yet done from spec 10.4:** axe accessibility check, Playwright end-to-end test. Initial JS is 234 KB gzipped (budget 400 KB).
+- **V11 (no Vercel builds from `data`):** `web/vercel.json` sets `git.deploymentEnabled.data = false`. Because Vercel reads `vercel.json` from the commit being deployed, the same file is also committed on the `data` branch at `web/vercel.json`, and the project has an Ignored Build Step command that exits 0 on the `data` branch as a backstop.

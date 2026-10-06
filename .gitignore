@@ -35,3 +35,4 @@ Thumbs.db
 
 # Local pipeline output (CI uses a checkout of the data branch)
 data_local/
+!.env.example

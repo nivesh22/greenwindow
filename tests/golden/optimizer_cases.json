@@ -1,0 +1,62 @@
+{
+  "_doc": "Golden cases for web/src/scheduler/optimizer.ts (spec 10.4). Forecast hours start at `start` and step 1h; indexes in `omit` are left out. Values in gCO2/kWh.",
+  "cases": [
+    {
+      "name": "known minimum",
+      "forecast": { "start": "2026-10-05T00:00:00Z", "q10": [90, 80, 40, 30, 50, 90, 90, 90], "q50": [100, 90, 50, 40, 60, 100, 100, 100], "q90": [110, 100, 60, 50, 70, 110, 110, 110] },
+      "job": { "durationH": 2, "powerKw": 3, "earliestStart": "2026-10-05T00:00:00Z", "deadline": "2026-10-05T08:00:00Z" },
+      "mode": "expected",
+      "expect": { "bestStart": "2026-10-05T02:00:00Z", "avgIntensityBest": 45, "avgIntensityNow": 95, "gramsDifference": 300, "robust": true, "nCandidates": 7 }
+    },
+    {
+      "name": "infeasible job",
+      "forecast": { "start": "2026-10-05T00:00:00Z", "q10": [1, 1, 1, 1], "q50": [2, 2, 2, 2], "q90": [3, 3, 3, 3] },
+      "job": { "durationH": 5, "powerKw": 1, "earliestStart": "2026-10-05T00:00:00Z", "deadline": "2026-10-05T04:00:00Z" },
+      "mode": "expected",
+      "expect": { "error": "InfeasibleJobError" }
+    },
+    {
+      "name": "expected and cautious pick different starts",
+      "forecast": { "start": "2026-10-05T00:00:00Z", "q10": [180, 20, 90], "q50": [200, 80, 100], "q90": [220, 300, 120] },
+      "job": { "durationH": 1, "powerKw": 1, "earliestStart": "2026-10-05T00:00:00Z", "deadline": "2026-10-05T03:00:00Z" },
+      "mode": "expected",
+      "alsoCautious": { "bestStart": "2026-10-05T02:00:00Z" },
+      "expect": { "bestStart": "2026-10-05T01:00:00Z", "robust": false }
+    },
+    {
+      "name": "robust boundary: equal is not robust",
+      "forecast": { "start": "2026-10-05T00:00:00Z", "q10": [100, 50], "q50": [120, 70], "q90": [140, 100] },
+      "job": { "durationH": 1, "powerKw": 1, "earliestStart": "2026-10-05T00:00:00Z", "deadline": "2026-10-05T02:00:00Z" },
+      "mode": "expected",
+      "expect": { "bestStart": "2026-10-05T01:00:00Z", "robust": false }
+    },
+    {
+      "name": "robust boundary: just below is robust",
+      "forecast": { "start": "2026-10-05T00:00:00Z", "q10": [100, 50], "q50": [120, 70], "q90": [140, 99.9] },
+      "job": { "durationH": 1, "powerKw": 1, "earliestStart": "2026-10-05T00:00:00Z", "deadline": "2026-10-05T02:00:00Z" },
+      "mode": "expected",
+      "expect": { "bestStart": "2026-10-05T01:00:00Z", "robust": true }
+    },
+    {
+      "name": "ties go to the earliest start",
+      "forecast": { "start": "2026-10-05T00:00:00Z", "q10": [90, 40, 40, 40], "q50": [100, 50, 50, 50], "q90": [110, 60, 60, 60] },
+      "job": { "durationH": 1, "powerKw": 1, "earliestStart": "2026-10-05T00:00:00Z", "deadline": "2026-10-05T04:00:00Z" },
+      "mode": "expected",
+      "expect": { "bestStart": "2026-10-05T01:00:00Z" }
+    },
+    {
+      "name": "window with a missing hour is skipped",
+      "forecast": { "start": "2026-10-05T00:00:00Z", "q10": [90, 90, 10, 10, 60, 60], "q50": [100, 100, 20, 20, 70, 70], "q90": [110, 110, 30, 30, 80, 80], "omit": [3] },
+      "job": { "durationH": 2, "powerKw": 1, "earliestStart": "2026-10-05T00:00:00Z", "deadline": "2026-10-05T06:00:00Z" },
+      "mode": "expected",
+      "expect": { "bestStart": "2026-10-05T01:00:00Z", "avgIntensityBest": 60, "nCandidates": 3 }
+    },
+    {
+      "name": "no better than run-now: no change",
+      "forecast": { "start": "2026-10-05T00:00:00Z", "q10": [30, 40, 50], "q50": [40, 50, 60], "q90": [50, 60, 70] },
+      "job": { "durationH": 1, "powerKw": 2, "earliestStart": "2026-10-05T00:00:00Z", "deadline": "2026-10-05T03:00:00Z" },
+      "mode": "expected",
+      "expect": { "bestStart": "2026-10-05T00:00:00Z", "intensityReductionPct": 0, "gramsDifference": 0, "robust": false }
+    }
+  ]
+}
