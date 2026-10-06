@@ -42,7 +42,7 @@ A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbo
 
 ## Integrations (MCP)
 - **GitHub** — via `git` + `gh` CLI (user's login, not the GitHub MCP; user chose this over the scoped PAT in spec H6). Repo: https://github.com/nivesh22/greenwindow. The login can reach all the user's repos — **only ever touch `nivesh22/greenwindow`**.
-- **Vercel MCP** — connected to the right account (re-authorized 2026-10-06); project `greenwindow` = `prj_gRuE7wuY4vEFubHVaF733Lbq8BrB`, team `team_m7YL7oSzBRAQquW2NEjk5VHM`. The Vercel **CLI** is signed in to the wrong account — **do not use the CLI**. Root Directory = `web`; must not build on `data` branch pushes (V11/H9).
+- **Vercel MCP** — connected to the right account (re-authorized 2026-10-06); project `greenwindow` = `prj_gRuE7wuY4vEFubHVaF733Lbq8BrB` (scope `niveshs-projects-b8d725ac`). Call MCP tools with the project ID and **no teamId** (passing the team ID returns 403). The Vercel **CLI** is signed in to the wrong account — **do not use the CLI**. Root Directory = `web`; must not build on `data` branch pushes (V11/H9).
 - **Supabase** — the spec explicitly rejects it for v1 (D6, 15.1). Do not use it unless the user changes the decision and it's recorded in `docs/decisions.md`.
 
 ## Wording rules worth repeating
