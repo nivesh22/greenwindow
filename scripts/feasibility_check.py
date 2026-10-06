@@ -25,10 +25,11 @@ import sys
 import time
 import traceback
 import warnings
+from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -173,7 +174,7 @@ def weather(kind: str, params_extra: dict) -> pd.DataFrame:
     payload = r.json()
     payload = payload if isinstance(payload, list) else [payload]
     frames = []
-    for loc, p in zip(LOCATIONS, payload):
+    for loc, p in zip(LOCATIONS, payload, strict=True):
         h = p["hourly"]
         missing = [v for v in WEATHER_VARS if v not in h]
         if missing:
@@ -287,7 +288,7 @@ def b1(c: Check) -> None:
 
 
 def b2(c: Check) -> None:
-    now = datetime.now(timezone.utc).replace(second=0, microsecond=0)
+    now = datetime.now(UTC).replace(second=0, microsecond=0)
     r = get(f"{CARBON_BASE}/intensity/{iso_min(now)}/fw48h")
     r.raise_for_status()
     df = carbon_frame(r.json()["data"])
@@ -308,7 +309,7 @@ def b2(c: Check) -> None:
 
 
 def b3(c: Check) -> None:
-    end = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0) - timedelta(days=1)
+    end = datetime.now(UTC).replace(minute=0, second=0, microsecond=0) - timedelta(days=1)
     accepted: dict[int, Any] = {}
     for days in (32, 31, 30, 28, 14, 7, 1):
         r = get(f"{CARBON_BASE}/intensity/{iso_min(end - timedelta(days=days))}/{iso_min(end)}")
@@ -322,7 +323,7 @@ def b3(c: Check) -> None:
 
 
 def b4(c: Check) -> None:
-    today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+    today = datetime.now(UTC).replace(hour=0, minute=0, second=0, microsecond=0)
     counts = {}
     for years in (1, 2):
         s = today - timedelta(days=365 * years)
@@ -335,7 +336,7 @@ def b4(c: Check) -> None:
 
 
 def b5(c: Check) -> None:
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     end = now.replace(minute=0, second=0, microsecond=0)
     chunk = max(1, min(SHARED.get("max_range_days", 7), 28))
     # 60 days: 28 for this check, the rest so the classical models get a 56-day window.
@@ -398,21 +399,29 @@ def c1(c: Check) -> None:
 
 
 def c2(c: Check) -> None:
-    end = datetime.now(timezone.utc).date() - timedelta(days=1)
+    end = datetime.now(UTC).date() - timedelta(days=1)
     start = end - timedelta(days=60)
     w = weather("hindcast", {"start_date": start.isoformat(), "end_date": end.isoformat()})
     SHARED["weather_hc"] = w
     expected = (end - start).days * 24 + 24
     present = int(w.notna().all(axis=1).sum())
     null_pct = 100 * float(w.isna().any(axis=1).mean())
-    c.evidence.update(host=OM_HINDCAST, start=str(start), end=str(end), expected_hours=expected, rows=len(w),
-                      complete_hours=present, null_pct=round(null_pct, 2), units=SHARED.get("weather_units"))
+    c.evidence.update(
+        host=OM_HINDCAST,
+        start=str(start),
+        end=str(end),
+        expected_hours=expected,
+        rows=len(w),
+        complete_hours=present,
+        null_pct=round(null_pct, 2),
+        units=SHARED.get("weather_units"),
+    )
     c.status = "PASS" if present >= 0.9 * expected and null_pct <= 5 else "FAIL"
     c.detail = f"{present}/{expected} complete hours over 61 days, {null_pct:.2f}% rows with nulls"
 
 
 def c3(c: Check) -> None:
-    end = datetime.now(timezone.utc).date() - timedelta(days=365)
+    end = datetime.now(UTC).date() - timedelta(days=365)
     start = end - timedelta(days=6)
     w = weather("hindcast", {"start_date": start.isoformat(), "end_date": end.isoformat()})
     null_pct = 100 * float(w.isna().any(axis=1).mean()) if len(w) else 100.0
@@ -471,7 +480,9 @@ def fourier(index: pd.DatetimeIndex, period: int, k: int) -> pd.DataFrame:
 
 
 def exog(df: pd.DataFrame) -> pd.DataFrame:
-    return pd.concat([df[["temp_c", "wind100_ms", "solar_wm2"]], fourier(df.index, 24, 3), fourier(df.index, 168, 2)], axis=1)
+    return pd.concat(
+        [df[["temp_c", "wind100_ms", "solar_wm2"]], fourier(df.index, 24, 3), fourier(df.index, 168, 2)], axis=1
+    )
 
 
 def d1(c: Check) -> None:
@@ -489,9 +500,14 @@ def d1(c: Check) -> None:
     pred = fc.predicted_mean.to_numpy()
     lo, hi = fc.conf_int(alpha=0.2).to_numpy().T
     err = mae(fut["ci_actual"], pred)
-    c.evidence.update(spec="SARIMAX(2,0,1)+const, exog: weather + Fourier(24,k=3) + Fourier(168,k=2) [gate only, not final]",
-                      train_hours=len(hist), origin=str(origin), fit_seconds=round(fit_s, 2), mae_48h=round(err, 2),
-                      coverage80=round(float(np.mean((fut["ci_actual"] >= lo) & (fut["ci_actual"] <= hi))), 2))
+    c.evidence.update(
+        spec="SARIMAX(2,0,1)+const, exog: weather + Fourier(24,k=3) + Fourier(168,k=2) [gate only, not final]",
+        train_hours=len(hist),
+        origin=str(origin),
+        fit_seconds=round(fit_s, 2),
+        mae_48h=round(err, 2),
+        coverage80=round(float(np.mean((fut["ci_actual"] >= lo) & (fut["ci_actual"] <= hi))), 2),
+    )
     SHARED["mae_sarimax"] = err
     c.status = "PASS" if fit_s < 60 and len(pred) == HORIZON else ("WARN" if len(pred) == HORIZON else "FAIL")
     c.detail = f"fit+forecast {fit_s:.1f} s on {len(hist)} h, 48h MAE {err:.1f}"
@@ -508,7 +524,9 @@ def d2(c: Check) -> None:
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         res = UnobservedComponents(
-            hist["ci_actual"], level="local level", freq_seasonal=[{"period": 24, "harmonics": 3}],
+            hist["ci_actual"],
+            level="local level",
+            freq_seasonal=[{"period": 24, "harmonics": 3}],
             exog=hist[cols],
         ).fit(disp=False, maxiter=200)
         pred = res.get_forecast(steps=len(fut), exog=fut[cols]).predicted_mean.to_numpy()
@@ -585,8 +603,13 @@ def d4(c: Check, skip: bool) -> None:
     # Pass only the keyword names the installed version actually has (V5: never assume a signature).
     def call(context: pd.DataFrame, future: pd.DataFrame | None) -> pd.DataFrame:
         kw: dict[str, Any] = {}
-        for name, val in (("prediction_length", HORIZON), ("quantile_levels", QUANTILES), ("id_column", "id"),
-                          ("timestamp_column", "timestamp"), ("target", "target")):
+        for name, val in (
+            ("prediction_length", HORIZON),
+            ("quantile_levels", QUANTILES),
+            ("id_column", "id"),
+            ("timestamp_column", "timestamp"),
+            ("target", "target"),
+        ):
             if name in params:
                 kw[name] = val
         if future is not None:
@@ -609,8 +632,11 @@ def d4(c: Check, skip: bool) -> None:
         mono = bool(q is not None and np.all(np.diff(q, axis=1) >= -1e-6))
         med = out[[col for col in qcols if str(col) == "0.5"][0]].to_numpy() if qcols else None
         runs[label] = {
-            "rows": len(out), "columns": [str(x) for x in out.columns], "warm_seconds": round(warm, 2),
-            "quantiles_monotone": mono, "mae_48h": None if med is None else round(mae(fut["ci_actual"], med), 2),
+            "rows": len(out),
+            "columns": [str(x) for x in out.columns],
+            "warm_seconds": round(warm, 2),
+            "quantiles_monotone": mono,
+            "mae_48h": None if med is None else round(mae(fut["ci_actual"], med), 2),
         }
     peak_mb = (proc.memory_info().rss - rss0) / 1e6
     c.evidence.update(load_seconds=round(load_s, 1), rss_increase_mb=round(peak_mb), context_hours=len(hist), runs=runs)
@@ -622,7 +648,9 @@ def d4(c: Check, skip: bool) -> None:
         c.status = "WARN"
     else:
         c.status = "PASS"
-    c.detail = "; ".join(f"{k}: {v['rows']} rows, warm {v['warm_seconds']} s, MAE {v['mae_48h']}" for k, v in runs.items())
+    c.detail = "; ".join(
+        f"{k}: {v['rows']} rows, warm {v['warm_seconds']} s, MAE {v['mae_48h']}" for k, v in runs.items()
+    )
 
 
 # --------------------------------------------------------------------------- E: toolchain
@@ -650,7 +678,11 @@ def e2(c: Check) -> None:
 
 
 def e3(c: Check) -> None:
-    urls = {"github_api": "https://api.github.com", "raw": RAW_PROBE_URL, "huggingface": "https://huggingface.co/amazon/chronos-2"}
+    urls = {
+        "github_api": "https://api.github.com",
+        "raw": RAW_PROBE_URL,
+        "huggingface": "https://huggingface.co/amazon/chronos-2",
+    }
     codes = {}
     for k, u in urls.items():
         try:
@@ -693,7 +725,9 @@ def e5(c: Check) -> None:
 
 
 def e6(c: Check) -> None:
-    r = SESSION.get("https://registry.npmjs.org/react", timeout=30, headers={"Accept": "application/vnd.npm.install-v1+json"})
+    r = SESSION.get(
+        "https://registry.npmjs.org/react", timeout=30, headers={"Accept": "application/vnd.npm.install-v1+json"}
+    )
     c.status = "PASS" if r.status_code == 200 else "FAIL"
     c.detail = f"HTTP {r.status_code}"
 
@@ -710,8 +744,10 @@ def e7(c: Check) -> None:
 def verdict() -> str:
     if any(r.status == "FAIL" and r.blocking for r in RESULTS):
         return "NO-GO"
-    if any(r.status in ("WARN", "FAIL") for r in RESULTS) or USED_SYNTHETIC or any(
-        r.status == "SKIP" and r.blocking for r in RESULTS
+    if (
+        any(r.status in ("WARN", "FAIL") for r in RESULTS)
+        or USED_SYNTHETIC
+        or any(r.status == "SKIP" and r.blocking for r in RESULTS)
     ):
         return "CONDITIONAL"
     return "GO"
@@ -720,7 +756,7 @@ def verdict() -> str:
 def write_report(v: str, args: argparse.Namespace) -> None:
     OUT_DIR.mkdir(exist_ok=True)
     meta = {
-        "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at_utc": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "verdict": v,
         "synthetic_model_data": USED_SYNTHETIC,
         "args": vars(args),
