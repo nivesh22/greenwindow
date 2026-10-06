@@ -220,6 +220,7 @@ dependencies = [
     { name = "pyarrow" },
     { name = "pyyaml" },
     { name = "requests" },
+    { name = "scipy" },
     { name = "statsmodels" },
 ]
 
@@ -246,6 +247,7 @@ requires-dist = [
     { name = "pyarrow", specifier = ">=15" },
     { name = "pyyaml", specifier = ">=6" },
     { name = "requests", specifier = ">=2.31" },
+    { name = "scipy", specifier = ">=1.11" },
     { name = "statsmodels", specifier = ">=0.14" },
     { name = "torch", marker = "extra == 'chronos'", specifier = "==2.8.0", index = "https://download.pytorch.org/whl/cpu" },
 ]

@@ -1,0 +1,12 @@
+# Pipeline settings (spec D2, D8, 6.4, 6.6). All times UTC, hour-beginning.
+horizon_h: 48
+quantiles: [0.1, 0.5, 0.9]
+classical_window_days: 56      # D8: trailing window for classical models
+chronos_context_days: 28       # D8: Chronos-2 context
+retention_days: 120            # D6: snapshots and scores
+recent_refresh_days: 7         # 4.2 step 1: actuals re-fetched each run (revisions)
+bootstrap_days: 400            # T4: history to build on first run (>= 12 months)
+carbon_chunk_days: 30          # V1: API accepts <= 30 days per request
+max_interp_gap_h: 3            # Section 9: interpolate gaps up to this length for model input
+wind_unit: "m/s"               # V4: requested with wind_speed_unit=ms
+cron_minute: 17                # T11: never :00

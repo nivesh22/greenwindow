@@ -32,3 +32,6 @@ web/.vercel/
 Thumbs.db
 .vscode/
 .idea/
+
+# Local pipeline output (CI uses a checkout of the data branch)
+data_local/

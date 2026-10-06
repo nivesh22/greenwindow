@@ -12,6 +12,7 @@ dependencies = [
     "statsmodels>=0.14",
     "pyyaml>=6",
     "holidays>=0.50",
+    "scipy>=1.11",
 ]
 
 [project.optional-dependencies]
