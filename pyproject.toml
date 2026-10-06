@@ -13,6 +13,7 @@ dependencies = [
     "pyyaml>=6",
     "holidays>=0.50",
     "scipy>=1.11",
+    "prophet>=1.1.5",
 ]
 
 [project.optional-dependencies]

@@ -58,10 +58,10 @@ def patched(monkeypatch, tmp_path):
 def test_pipeline_end_to_end_and_idempotent(patched) -> None:
     report = pipeline.run_pipeline(NOW, include_chronos=False)
     assert report.run_id == "20261005T11"  # origin = hour after the latest actual
-    assert set(report.ok) == {"neso", "snaive_24", "snaive_168", "sarimax_wx"} and not report.failed
+    assert set(report.ok) == {"neso", "snaive_24", "snaive_168", "ets", "sarimax_wx", "ucm_wx", "prophet_wx"}, report.failed
 
     snaps = pd.read_parquet(patched / "parquet" / "forecast_snapshots.parquet")
-    assert len(snaps) == 4 * 48 and snaps.groupby(["run_id", "model", "target_ts_utc"]).size().max() == 1
+    assert len(snaps) == 7 * 48 and snaps.groupby(["run_id", "model", "target_ts_utc"]).size().max() == 1
 
     pipeline.run_pipeline(NOW, include_chronos=False)  # same run_id: rows replaced, not duplicated
     again = pd.read_parquet(patched / "parquet" / "forecast_snapshots.parquet")

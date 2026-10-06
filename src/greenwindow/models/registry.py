@@ -4,8 +4,11 @@ from __future__ import annotations
 
 from greenwindow.config import Settings
 from greenwindow.models.base import Forecaster
+from greenwindow.models.ets import ETS
 from greenwindow.models.naive import SeasonalNaive
+from greenwindow.models.prophet_model import ProphetWeather
 from greenwindow.models.sarimax import SarimaxWeather
+from greenwindow.models.ucm import UCMWeather
 
 NESO = {"name": "neso", "label": "NESO (operator forecast)", "family": "benchmark", "uses_covariates": False}
 
@@ -16,7 +19,10 @@ def live_models(settings: Settings, include_chronos: bool = True) -> list[Foreca
     models: list[Forecaster] = [
         SeasonalNaive(24, window_hours=classical_h, max_gap_h=gap),
         SeasonalNaive(168, window_hours=classical_h, max_gap_h=gap),
+        ETS(window_hours=classical_h, max_gap_h=gap),
         SarimaxWeather(window_hours=classical_h, max_gap_h=gap),
+        UCMWeather(window_hours=classical_h, max_gap_h=gap),
+        ProphetWeather(window_hours=classical_h, max_gap_h=gap),
     ]
     if include_chronos:
         from greenwindow.models.chronos2 import Chronos2

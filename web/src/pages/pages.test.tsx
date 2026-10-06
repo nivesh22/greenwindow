@@ -5,6 +5,7 @@ import type { ReactNode } from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { StaleBanner } from '../components/Status'
 import { FIXTURES, FIXTURE_NOW, clone, stubFetch } from '../test/fixtures'
+import { Backtest } from './Backtest'
 import { Home } from './Home'
 import { Leaderboard } from './Leaderboard'
 import { Scheduler } from './Scheduler'
@@ -109,5 +110,24 @@ describe('StaleBanner', () => {
   it('appears after 12 hours', () => {
     render(<StaleBanner generatedAt={gen} now={Date.parse(gen) + 13 * 3_600_000} />)
     expect(screen.getByRole('status')).toHaveTextContent('13 hours ago')
+  })
+})
+
+describe('Backtest', () => {
+  it('shows the optimism caveat next to the numbers and switches horizon', async () => {
+    stubFetch()
+    wrap(<Backtest />)
+    expect(await screen.findByRole('note')).toHaveTextContent(/closer to reality/)
+    expect(screen.getAllByText('benchmark').length).toBeGreaterThan(0)
+    await userEvent.click(screen.getByRole('radio', { name: '25–48 h' }))
+    expect(screen.getByRole('radio', { name: '25–48 h' })).toHaveAttribute('aria-checked', 'true')
+  })
+
+  it('requests the summary from the site itself, not the data branch', async () => {
+    const spy = vi.fn(async (url: string) => new Response(JSON.stringify(FIXTURES[url.split('/').pop() ?? ''])))
+    vi.stubGlobal('fetch', spy)
+    wrap(<Backtest />)
+    await screen.findByRole('note')
+    expect(spy).toHaveBeenCalledWith('/backtest_summary.json')
   })
 })

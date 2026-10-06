@@ -69,3 +69,14 @@ Format:
 - **Pages in the slice:** Forecast (Home), Plan a job (Scheduler), Leaderboard, About & limits. Backtest page waits for T9.
 - **Not yet done from spec 10.4:** axe accessibility check, Playwright end-to-end test. Initial JS is 234 KB gzipped (budget 400 KB).
 - **V11 (no Vercel builds from `data`):** `web/vercel.json` sets `git.deploymentEnabled.data = false`. Because Vercel reads `vercel.json` from the commit being deployed, the same file is also committed on the `data` branch at `web/vercel.json`, and the project has an Ignored Build Step command that exits 0 on the `data` branch as a backstop.
+
+## 2026-10-06 — ETS, course models (UCM, Prophet), backtest
+- **`ets`:** ETS(A,N,A), 24h season, analytic intervals. ETS(A,Ad,A) was tried first: the damped trend still drifted over 48h (MASE ≈ 2 on a 6-origin trial, worse than seasonal naive), so the trend was dropped. Spec 6.2 only says "additive ETS with 24h seasonality".
+- statsmodels 0.15 `ETSResults.get_prediction` crashes when endog is an ndarray; the model passes a RangeIndex Series.
+- **`ucm_wx`** (course week 4): local level + trigonometric seasonals (24h K=3, 168h K=2) + AR(1) + weather and holiday regressors.
+- **`prophet_wx`** (course week 2): daily + weekly seasonality, no yearly (56-day window), weather and holiday regressors, `interval_width=0.8`, seeded fit and uncertainty simulation. New dependency `prophet` (course model; ships a precompiled Stan model, installs cleanly on Windows and Linux).
+- **Backtest (spec 6.4):** observations rebuilt from the APIs with hindcast weather only, so it runs from a clean clone; daily 00:00 UTC origins over 90 days; classical models parallelised across processes (deterministic per job), Chronos in the main process. `--end` pins the period for reproducibility.
+- **Sensitivity (spec 8.2):** run on every third origin to fit the 30-minute budget. Classical window {28, 56, 84} days, Chronos context {14, 28, 56} days. Benchmarks have no sensitivity runs.
+- **MASE scale:** in-sample seasonal-naive (m=24) MAE of each origin's 56-day window, shared by all models at that origin.
+- **NESO in the backtest:** included as `neso_published` (forecast as returned by the API, lead time unknown), labelled as not a fair comparison (spec 5.3 item 7).
+- **backtest_summary.json:** `horizon_bucket` also takes `"all"`. Served from the site itself (`web/public`), so the web client fetches it same-origin.

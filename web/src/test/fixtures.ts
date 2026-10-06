@@ -1,4 +1,5 @@
 // Shared contract fixtures written by the Python exporter (tests/app_data, spec 10.4).
+import backtestSummary from '../../../tests/app_data/backtest_summary.json'
 import latestForecast from '../../../tests/app_data/latest_forecast.json'
 import leaderboard from '../../../tests/app_data/leaderboard.json'
 import meta from '../../../tests/app_data/meta.json'
@@ -9,6 +10,7 @@ export const FIXTURES: Record<string, unknown> = {
   'latest_forecast.json': latestForecast,
   'recent_observations.json': recentObservations,
   'leaderboard.json': leaderboard,
+  'backtest_summary.json': backtestSummary,
 }
 
 export const clone = <T,>(x: T): T => JSON.parse(JSON.stringify(x)) as T

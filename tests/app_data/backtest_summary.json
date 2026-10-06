@@ -1,0 +1,422 @@
+{
+ "schema_version": 1,
+ "generated_at_utc": "2026-10-06T01:43:20Z",
+ "origins": {
+  "start": "2026-07-07T00:00:00Z",
+  "end": "2026-10-04T00:00:00Z",
+  "count": 90
+ },
+ "caveat": "Backtest weather comes from archived forecasts that are closer to reality than a true 1-2-day-ahead forecast, so models that use weather look better here than they will live. NESO rows are its forecast as published, with unknown lead time: not a fair head-to-head. The live leaderboard is the unbiased check.",
+ "rows": [
+  {
+   "model": "chronos2_cov",
+   "horizon_bucket": "1-6",
+   "mase": 0.285,
+   "mae": 10.0,
+   "wql": 0.05,
+   "coverage80": 0.859
+  },
+  {
+   "model": "chronos2_uni",
+   "horizon_bucket": "1-6",
+   "mase": 0.296,
+   "mae": 10.4,
+   "wql": 0.053,
+   "coverage80": 0.833
+  },
+  {
+   "model": "ets",
+   "horizon_bucket": "1-6",
+   "mase": 0.339,
+   "mae": 11.9,
+   "wql": 0.062,
+   "coverage80": 0.794
+  },
+  {
+   "model": "neso_published",
+   "horizon_bucket": "1-6",
+   "mase": 0.358,
+   "mae": 12.3,
+   "wql": null,
+   "coverage80": null
+  },
+  {
+   "model": "ucm_wx",
+   "horizon_bucket": "1-6",
+   "mase": 0.441,
+   "mae": 15.5,
+   "wql": 0.076,
+   "coverage80": 0.769
+  },
+  {
+   "model": "sarimax_wx",
+   "horizon_bucket": "1-6",
+   "mase": 0.442,
+   "mae": 15.4,
+   "wql": 0.076,
+   "coverage80": 0.911
+  },
+  {
+   "model": "prophet_wx",
+   "horizon_bucket": "1-6",
+   "mase": 0.766,
+   "mae": 26.5,
+   "wql": 0.132,
+   "coverage80": 0.624
+  },
+  {
+   "model": "snaive_24",
+   "horizon_bucket": "1-6",
+   "mase": 1.199,
+   "mae": 41.8,
+   "wql": 0.21,
+   "coverage80": 0.741
+  },
+  {
+   "model": "snaive_168",
+   "horizon_bucket": "1-6",
+   "mase": 1.537,
+   "mae": 53.8,
+   "wql": 0.265,
+   "coverage80": 0.669
+  },
+  {
+   "model": "neso_published",
+   "horizon_bucket": "25-48",
+   "mase": 0.339,
+   "mae": 11.8,
+   "wql": null,
+   "coverage80": null
+  },
+  {
+   "model": "chronos2_cov",
+   "horizon_bucket": "25-48",
+   "mase": 0.625,
+   "mae": 21.8,
+   "wql": 0.112,
+   "coverage80": 0.81
+  },
+  {
+   "model": "prophet_wx",
+   "horizon_bucket": "25-48",
+   "mase": 0.745,
+   "mae": 25.9,
+   "wql": 0.137,
+   "coverage80": 0.632
+  },
+  {
+   "model": "chronos2_uni",
+   "horizon_bucket": "25-48",
+   "mase": 0.932,
+   "mae": 32.6,
+   "wql": 0.165,
+   "coverage80": 0.779
+  },
+  {
+   "model": "ucm_wx",
+   "horizon_bucket": "25-48",
+   "mase": 1.183,
+   "mae": 41.7,
+   "wql": 0.215,
+   "coverage80": 0.846
+  },
+  {
+   "model": "sarimax_wx",
+   "horizon_bucket": "25-48",
+   "mase": 1.211,
+   "mae": 42.2,
+   "wql": 0.204,
+   "coverage80": 0.777
+  },
+  {
+   "model": "ets",
+   "horizon_bucket": "25-48",
+   "mase": 1.269,
+   "mae": 44.3,
+   "wql": 0.234,
+   "coverage80": 0.679
+  },
+  {
+   "model": "snaive_24",
+   "horizon_bucket": "25-48",
+   "mase": 1.272,
+   "mae": 44.7,
+   "wql": 0.231,
+   "coverage80": 0.844
+  },
+  {
+   "model": "snaive_168",
+   "horizon_bucket": "25-48",
+   "mase": 1.3,
+   "mae": 45.7,
+   "wql": 0.241,
+   "coverage80": 0.773
+  },
+  {
+   "model": "neso_published",
+   "horizon_bucket": "7-24",
+   "mase": 0.334,
+   "mae": 11.7,
+   "wql": null,
+   "coverage80": null
+  },
+  {
+   "model": "chronos2_cov",
+   "horizon_bucket": "7-24",
+   "mase": 0.454,
+   "mae": 15.8,
+   "wql": 0.085,
+   "coverage80": 0.845
+  },
+  {
+   "model": "prophet_wx",
+   "horizon_bucket": "7-24",
+   "mase": 0.653,
+   "mae": 22.7,
+   "wql": 0.123,
+   "coverage80": 0.69
+  },
+  {
+   "model": "chronos2_uni",
+   "horizon_bucket": "7-24",
+   "mase": 0.704,
+   "mae": 24.7,
+   "wql": 0.132,
+   "coverage80": 0.773
+  },
+  {
+   "model": "ets",
+   "horizon_bucket": "7-24",
+   "mase": 1.02,
+   "mae": 35.7,
+   "wql": 0.203,
+   "coverage80": 0.574
+  },
+  {
+   "model": "ucm_wx",
+   "horizon_bucket": "7-24",
+   "mase": 1.026,
+   "mae": 36.2,
+   "wql": 0.199,
+   "coverage80": 0.717
+  },
+  {
+   "model": "snaive_24",
+   "horizon_bucket": "7-24",
+   "mase": 1.064,
+   "mae": 37.5,
+   "wql": 0.205,
+   "coverage80": 0.776
+  },
+  {
+   "model": "sarimax_wx",
+   "horizon_bucket": "7-24",
+   "mase": 1.153,
+   "mae": 40.2,
+   "wql": 0.198,
+   "coverage80": 0.793
+  },
+  {
+   "model": "snaive_168",
+   "horizon_bucket": "7-24",
+   "mase": 1.22,
+   "mae": 43.0,
+   "wql": 0.233,
+   "coverage80": 0.816
+  },
+  {
+   "model": "neso_published",
+   "horizon_bucket": "all",
+   "mase": 0.339,
+   "mae": 11.8,
+   "wql": null,
+   "coverage80": null
+  },
+  {
+   "model": "chronos2_cov",
+   "horizon_bucket": "all",
+   "mase": 0.518,
+   "mae": 18.1,
+   "wql": 0.094,
+   "coverage80": 0.829
+  },
+  {
+   "model": "prophet_wx",
+   "horizon_bucket": "all",
+   "mase": 0.713,
+   "mae": 24.8,
+   "wql": 0.131,
+   "coverage80": 0.653
+  },
+  {
+   "model": "chronos2_uni",
+   "horizon_bucket": "all",
+   "mase": 0.767,
+   "mae": 26.9,
+   "wql": 0.138,
+   "coverage80": 0.784
+  },
+  {
+   "model": "ucm_wx",
+   "horizon_bucket": "all",
+   "mase": 1.031,
+   "mae": 36.4,
+   "wql": 0.191,
+   "coverage80": 0.788
+  },
+  {
+   "model": "ets",
+   "horizon_bucket": "all",
+   "mase": 1.059,
+   "mae": 37.0,
+   "wql": 0.199,
+   "coverage80": 0.654
+  },
+  {
+   "model": "sarimax_wx",
+   "horizon_bucket": "all",
+   "mase": 1.093,
+   "mae": 38.1,
+   "wql": 0.185,
+   "coverage80": 0.8
+  },
+  {
+   "model": "snaive_24",
+   "horizon_bucket": "all",
+   "mase": 1.185,
+   "mae": 41.6,
+   "wql": 0.219,
+   "coverage80": 0.805
+  },
+  {
+   "model": "snaive_168",
+   "horizon_bucket": "all",
+   "mase": 1.3,
+   "mae": 45.7,
+   "wql": 0.241,
+   "coverage80": 0.776
+  }
+ ],
+ "sensitivity": [
+  {
+   "setting": "chronos_context_days",
+   "value": 14,
+   "model": "chronos2_cov",
+   "mase": 0.566
+  },
+  {
+   "setting": "chronos_context_days",
+   "value": 14,
+   "model": "chronos2_uni",
+   "mase": 0.875
+  },
+  {
+   "setting": "chronos_context_days",
+   "value": 28,
+   "model": "chronos2_cov",
+   "mase": 0.512
+  },
+  {
+   "setting": "chronos_context_days",
+   "value": 28,
+   "model": "chronos2_uni",
+   "mase": 0.847
+  },
+  {
+   "setting": "chronos_context_days",
+   "value": 56,
+   "model": "chronos2_cov",
+   "mase": 0.513
+  },
+  {
+   "setting": "chronos_context_days",
+   "value": 56,
+   "model": "chronos2_uni",
+   "mase": 0.867
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 28,
+   "model": "ets",
+   "mase": 1.144
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 28,
+   "model": "prophet_wx",
+   "mase": 0.699
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 28,
+   "model": "sarimax_wx",
+   "mase": 1.07
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 28,
+   "model": "ucm_wx",
+   "mase": 1.088
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 56,
+   "model": "ets",
+   "mase": 1.122
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 56,
+   "model": "prophet_wx",
+   "mase": 0.679
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 56,
+   "model": "sarimax_wx",
+   "mase": 1.089
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 56,
+   "model": "snaive_168",
+   "mase": 1.292
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 56,
+   "model": "snaive_24",
+   "mase": 1.173
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 56,
+   "model": "ucm_wx",
+   "mase": 1.039
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 84,
+   "model": "ets",
+   "mase": 1.118
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 84,
+   "model": "prophet_wx",
+   "mase": 0.646
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 84,
+   "model": "sarimax_wx",
+   "mase": 1.117
+  },
+  {
+   "setting": "classical_window_days",
+   "value": 84,
+   "model": "ucm_wx",
+   "mase": 1.066
+  }
+ ]
+}

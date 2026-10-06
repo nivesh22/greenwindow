@@ -17,7 +17,8 @@ A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbo
 - T-1 feasibility: **GO** (`docs/feasibility_report.md`).
 - **Thin end-to-end slice done:** ingest -> observations (400-day bootstrap) -> `snaive_24`, `snaive_168`, `sarimax_wx`, `chronos2_uni`, `chronos2_cov` + NESO -> snapshots -> scorer -> JSON export -> `pipeline.yml` (cron `17 */6 * * *`, ~1 min on Actions) -> `data` branch. React app in `web/` (Forecast, Plan a job, Leaderboard, About). CI green (Python + web).
 - **Live:** https://greenwindow-one.vercel.app (Vercel Hobby, Root Directory `web`, auto-deploys `main`; V11 verified: `data` commits do not deploy).
-- **Next (spec Section 11 order):** `ets` model; course models `ucm_wx` and `prophet_wx`; backtest runner + `make backtest` + Backtest page (T8/T9); axe a11y check; Playwright e2e (Should); LightGBM etc. (T15).
+- **Done 2026-10-06:** `ets` (A,N,A), `ucm_wx`, `prophet_wx` in the live registry; backtest (`make backtest`, ~11 min, 90 origins + sensitivity) -> `web/public/backtest_summary.json`, `docs/results.md`; Backtest page.
+- **Next:** axe a11y check; Playwright e2e (Should); significance test (R11); LightGBM (R10); weather slider (R12); README results + screenshots (T14).
 - Owner preference: minimal working thing first, improve incrementally; keep token use reasonable.
 - Env: `.venv` (Python 3.11) has torch **2.8.0+cpu** pinned — newer torch fails to load on this Windows build.
 - Local pipeline output goes to `data_local/` (gitignored); set `GREENWINDOW_DATA_DIR` to override. `--no-chronos` on a rerun of the same hour drops that run's Chronos rows.
@@ -41,7 +42,7 @@ A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbo
 
 ## Integrations (MCP)
 - **GitHub** — via `git` + `gh` CLI (user's login, not the GitHub MCP; user chose this over the scoped PAT in spec H6). Repo: https://github.com/nivesh22/greenwindow. The login can reach all the user's repos — **only ever touch `nivesh22/greenwindow`**.
-- **Vercel MCP** — connected (`.mcp.json`) but authorized to a **different Vercel account** than the one hosting `greenwindow` (it cannot see the project). The Vercel CLI is also signed in to the wrong account — **do not use the CLI**. Check deploys via GitHub instead: `gh api repos/nivesh22/greenwindow/deployments` and commit statuses. Owner can re-authorize the MCP via `/mcp` to fix. Root Directory = `web`; must not build on `data` branch pushes (V11/H9).
+- **Vercel MCP** — connected to the right account (re-authorized 2026-10-06); project `greenwindow` = `prj_gRuE7wuY4vEFubHVaF733Lbq8BrB`, team `team_m7YL7oSzBRAQquW2NEjk5VHM`. The Vercel **CLI** is signed in to the wrong account — **do not use the CLI**. Root Directory = `web`; must not build on `data` branch pushes (V11/H9).
 - **Supabase** — the spec explicitly rejects it for v1 (D6, 15.1). Do not use it unless the user changes the decision and it's recorded in `docs/decisions.md`.
 
 ## Wording rules worth repeating

@@ -74,11 +74,30 @@ export const leaderboardSchema = z.object({
   ),
 })
 
+export const backtestSummarySchema = z.object({
+  ...base,
+  origins: z.object({ start: hourTs, end: hourTs, count: z.number().int().positive() }),
+  caveat: z.string().min(1),
+  rows: z.array(
+    z.object({
+      model: z.string(),
+      horizon_bucket: z.enum(['all', '1-6', '7-24', '25-48']),
+      mase: num,
+      mae: num,
+      wql: num.nullable(),
+      coverage80: num.nullable(),
+    }),
+  ),
+  sensitivity: z.array(z.object({ setting: z.string(), value: z.number().int(), model: z.string(), mase: num })),
+})
+
 export const FILES = {
   meta: { file: 'meta.json', schema: metaSchema },
   latestForecast: { file: 'latest_forecast.json', schema: latestForecastSchema },
   recentObservations: { file: 'recent_observations.json', schema: recentObservationsSchema },
   leaderboard: { file: 'leaderboard.json', schema: leaderboardSchema },
+  // Produced by `make backtest`, committed in web/public and served with the site (spec 7.6).
+  backtestSummary: { file: 'backtest_summary.json', schema: backtestSummarySchema, sameOrigin: true },
 } as const
 
 export type FileKey = keyof typeof FILES
@@ -88,4 +107,5 @@ export type LatestForecast = z.infer<typeof latestForecastSchema>
 export type ForecastPoint = z.infer<typeof forecastPointSchema>
 export type RecentObservations = z.infer<typeof recentObservationsSchema>
 export type Leaderboard = z.infer<typeof leaderboardSchema>
+export type BacktestSummary = z.infer<typeof backtestSummarySchema>
 export type FileData = { [K in FileKey]: z.infer<(typeof FILES)[K]['schema']> }

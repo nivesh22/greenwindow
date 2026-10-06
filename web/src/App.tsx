@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { makeQueryClient } from './data/hooks'
 import { About } from './pages/About'
+import { Backtest } from './pages/Backtest'
 import { Home } from './pages/Home'
 import { Leaderboard } from './pages/Leaderboard'
 import { Scheduler } from './pages/Scheduler'
@@ -15,6 +16,7 @@ export function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/scheduler" element={<Scheduler />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/backtest" element={<Backtest />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<p>Page not found.</p>} />
       </Routes>

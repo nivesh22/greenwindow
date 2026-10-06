@@ -29,8 +29,10 @@ export function parseFile<K extends FileKey>(key: K, raw: unknown): FileData[K] 
   return result.data as FileData[K]
 }
 
-export async function fetchFile<K extends FileKey>(key: K, base: string = DATA_BASE_URL): Promise<FileData[K]> {
-  const { file } = FILES[key]
+export async function fetchFile<K extends FileKey>(key: K, base?: string): Promise<FileData[K]> {
+  const spec = FILES[key]
+  const { file } = spec
+  base ??= 'sameOrigin' in spec ? '' : DATA_BASE_URL
   let res: Response
   try {
     res = await fetch(`${base}/${file}`)

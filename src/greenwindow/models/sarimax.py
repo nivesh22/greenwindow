@@ -1,6 +1,6 @@
 """SARIMAX dynamic harmonic regression with weather and holiday regressors (spec 6.2: sarimax_wx).
 
-FPP ch. 10 style: ARMA errors, Fourier terms for daily (24h) and weekly (168h) seasonality,
+FPP ch. 10 style: ARMA errors, an intercept, Fourier terms for daily (24h) and weekly (168h) seasonality,
 plus temperature, 100m wind, solar radiation and a bank-holiday dummy as regressors.
 """
 
@@ -53,12 +53,15 @@ class SarimaxWeather:
         h = prepare_history(history, self.window_hours, self.max_gap_h)
         x_hist, x_fut = self._exog(h), self._exog(future_covariates)
         keep = x_hist.columns[x_hist.std() > 0]  # e.g. no bank holiday in the window -> drop the dummy
+        # Explicit intercept column instead of trend="c": with whole-week windows statsmodels judges the Fourier
+        # block to already contain a constant and rejects trend="c". Same model either way.
+        x_hist, x_fut = x_hist[keep].assign(const=1.0), x_fut[keep].assign(const=1.0)
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            fit = SARIMAX(h[TARGET].to_numpy(), exog=x_hist[keep].to_numpy(), order=self.order, trend="c").fit(
+            fit = SARIMAX(h[TARGET].to_numpy(), exog=x_hist.to_numpy(), order=self.order, trend="n").fit(
                 disp=False, maxiter=200
             )
-            pred = fit.get_forecast(steps=horizon, exog=x_fut[keep].to_numpy())
+            pred = fit.get_forecast(steps=horizon, exog=x_fut.to_numpy())
         mean = np.asarray(pred.predicted_mean)
         se = np.asarray(pred.se_mean)
         out = {"mean": mean} | {qcol(t): mean + norm.ppf(t) * se for t in quantiles}
