@@ -93,10 +93,10 @@ Energy/load planner, operations analyst, sustainability analyst. The forecast �
 
 | # | Item | How to verify |
 |---|------|---------------|
-| V1 | Carbon Intensity endpoints for a date range (`/intensity/{from}/{to}`) and the 48h forward view (`/intensity/{from}/fw48h`), plus the **maximum date range per request** (believed ~14 days) | Fetch the OpenAPI docs at `api.carbonintensity.org.uk` |
+| V1 | Carbon Intensity endpoints for a date range (`/intensity/{from}/{to}`) and the 48h forward view (`/intensity/{from}/fw48h`), plus the **maximum date range per request** (believed ~14 days) | Fetch the OpenAPI docs at `api.carbonintensity.org.uk`. **Verified 2026-10-05 (T-1):** both endpoints work; ranges up to 30 days accepted, 31+ days rejected ("greater than 31 days"). Chunk at 30 days. fw48h returned 96 half-hours |
 | V2 | Whether the `forecast` values returned for *past* periods have a defined lead time (suspected: no) | Read docs; compare stored snapshots vs. the later-returned values |
-| V3 | Exact Open-Meteo host and parameters for the **Historical Forecast API** | open-meteo.com/en/docs/historical-forecast-api |
-| V4 | Open-Meteo variable names: `temperature_2m`, `wind_speed_100m`, `shortwave_radiation` | open-meteo.com/en/docs |
+| V3 | Exact Open-Meteo host and parameters for the **Historical Forecast API** | open-meteo.com/en/docs/historical-forecast-api. **Verified 2026-10-05 (T-1):** `https://historical-forecast-api.open-meteo.com/v1/forecast` with `latitude`/`longitude` (comma lists for multiple points), `hourly`, `start_date`, `end_date`, `timezone=UTC`, `wind_speed_unit=ms` |
+| V4 | Open-Meteo variable names: `temperature_2m`, `wind_speed_100m`, `shortwave_radiation` | open-meteo.com/en/docs. **Verified 2026-10-05 (T-1):** all three exist on both APIs; units °C, m/s (with `wind_speed_unit=ms`), W/m² |
 | V5 | `Chronos2Pipeline.predict_df` argument names (context df, future covariates df, `prediction_length`, `quantile_levels`, id/timestamp/target column names) in the **installed** version | `help(Chronos2Pipeline.predict_df)` after install |
 | V6 | GitHub Actions scheduling. **Partly verified** (60-day auto-disable and delays confirmed by secondary sources). **Still open:** whether bot commits to the `data` branch count as "activity". Assume they do not and add a keepalive that uses the Actions API | GitHub docs "Events that trigger workflows → schedule" |
 | V7 | Hosting: current Vercel Hobby limits (transfer, builds), the Vite framework preset, and the `Root Directory = web` setting; GitHub Pages as fallback host | Official Vercel docs |
