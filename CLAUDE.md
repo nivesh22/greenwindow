@@ -14,9 +14,11 @@ A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbo
 - Section 15 lists human-only prerequisites (accounts, tokens, settings). Don't try to do these for the user; remind them when a task depends on one.
 
 ## Current status
-- Phase: project setup. No code yet. Next task: **T-1 feasibility gate** (`scripts/feasibility_check.py` — referenced by the spec but not yet in this folder; ask the user for it or write it from spec 14.3).
-- Open questions for the user: spec 13.1 (instructor OK for Chronos-2, name, course models, hosting, time budget).
-- Proposed but NOT applied: course-alignment changes (Prophet, UCM, factor covariates). Don't build them unless the user confirms.
+- T-1 feasibility gate: **GO** (2026-10-05), report in `docs/feasibility_report.md`. Instructor OK for Chronos-2 assumed by owner.
+- Build order (see `docs/decisions.md`): T0 scaffold → thin end-to-end slice (ingest → `snaive_24`/`sarimax_wx`/`chronos2_cov` + NESO → snapshots → JSON → cron to `data` branch → web Home + Scheduler on Vercel) → then the rest of spec Section 11.
+- Model set is course-aligned (FPP 2nd ed.): add `ucm_wx` and `prophet_wx` after the slice. Owner may change it later.
+- Owner preference: minimal working thing first, improve incrementally; keep token use reasonable.
+- Env: `.venv` (Python 3.11) has torch **2.8.0+cpu** pinned — newer torch fails to load on this Windows build.
 
 ## Layout (target, spec 4.4)
 - `src/greenwindow/` Python pipeline (`ingest/`, `features/`, `models/`, `backtest/`, `live/`, `export/`, `schemas.py`)
