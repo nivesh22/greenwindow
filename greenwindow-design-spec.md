@@ -103,7 +103,7 @@ Energy/load planner, operations analyst, sustainability analyst. The forecast â†
 | V8 | Chronos-2 CPU inference time and memory for a ~28-day hourly context | Measure in task T7. **Gate measurement 2026-10-05 (laptop CPU, torch 2.8.0):** load 11 s, +513 MB RSS, warm 48h forecast on 672h context 0.07 s univariate / 0.13 s with covariates |
 | V9 | Browser access to `raw.githubusercontent.com` on the `data` branch: CORS header present, refresh lag, behavior under repeated polling. Fallback: GitHub Pages serving the same JSON | Feasibility check E4; manual test in T-1b |
 | V10 | Current stable versions and APIs of Node, Vite, React, Recharts (including range-area support for the P10 to P90 band), zod, TanStack Query, Vitest | Package docs at build time; pin in `package.json` and lockfile |
-| V11 | How to stop Vercel from building on every push to the `data` branch (project Git settings, `vercel.json` `git.deploymentEnabled`, or Ignored Build Step) | Vercel docs; confirm in the Deployments tab after the first pipeline run |
+| V11 | How to stop Vercel from building on every push to the `data` branch (project Git settings, `vercel.json` `git.deploymentEnabled`, or Ignored Build Step) | Vercel docs; confirm in the Deployments tab after the first pipeline run. **Verified 2026-10-06:** `web/vercel.json` with `git.deploymentEnabled.data = false`, committed on both `main` and `data`; pipeline commit `aa9da9d` on `data` produced no Vercel deployment or commit status, while `main` deployed to production |
 
 ---
 
