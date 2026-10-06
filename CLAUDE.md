@@ -13,12 +13,14 @@ A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbo
 - Section 7.6 is the pipeline↔app JSON contract. Change it only on both sides at once (rule 12).
 - Section 15 lists human-only prerequisites (accounts, tokens, settings). Don't try to do these for the user; remind them when a task depends on one.
 
-## Current status
-- T-1 feasibility gate: **GO** (2026-10-05), report in `docs/feasibility_report.md`. Instructor OK for Chronos-2 assumed by owner.
-- Build order (see `docs/decisions.md`): T0 scaffold → thin end-to-end slice (ingest → `snaive_24`/`sarimax_wx`/`chronos2_cov` + NESO → snapshots → JSON → cron to `data` branch → web Home + Scheduler on Vercel) → then the rest of spec Section 11.
-- Model set is course-aligned (FPP 2nd ed.): add `ucm_wx` and `prophet_wx` after the slice. Owner may change it later.
+## Current status (2026-10-05)
+- T-1 feasibility: **GO** (`docs/feasibility_report.md`).
+- **Thin end-to-end slice done:** ingest -> observations (400-day bootstrap) -> `snaive_24`, `snaive_168`, `sarimax_wx`, `chronos2_uni`, `chronos2_cov` + NESO -> snapshots -> scorer -> JSON export -> `pipeline.yml` (cron `17 */6 * * *`, ~1 min on Actions) -> `data` branch. React app in `web/` (Forecast, Plan a job, Leaderboard, About). CI green (Python + web).
+- **Waiting on owner:** import the repo into Vercel (Root Directory `web`); the Vercel MCP cannot create projects (403). Then confirm no deployments are triggered by `data` commits (V11).
+- **Next (spec Section 11 order):** `ets` model; course models `ucm_wx` and `prophet_wx`; backtest runner + `make backtest` + Backtest page (T8/T9); axe a11y check; Playwright e2e (Should); LightGBM etc. (T15).
 - Owner preference: minimal working thing first, improve incrementally; keep token use reasonable.
 - Env: `.venv` (Python 3.11) has torch **2.8.0+cpu** pinned — newer torch fails to load on this Windows build.
+- Local pipeline output goes to `data_local/` (gitignored); set `GREENWINDOW_DATA_DIR` to override. `--no-chronos` on a rerun of the same hour drops that run's Chronos rows.
 
 ## Layout (target, spec 4.4)
 - `src/greenwindow/` Python pipeline (`ingest/`, `features/`, `models/`, `backtest/`, `live/`, `export/`, `schemas.py`)
