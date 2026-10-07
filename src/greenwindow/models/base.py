@@ -8,7 +8,8 @@ from typing import Protocol
 import numpy as np
 import pandas as pd
 
-COVARIATES = ["temp_c", "wind100", "solar_wm2", "is_bank_holiday"]
+# wind_cf (power-curve capacity factor) replaces raw wind100 speed: closer to what drives the fuel mix.
+COVARIATES = ["temp_c", "wind_cf", "solar_wm2", "is_bank_holiday"]
 TARGET = "ci_actual"
 CROSSING_TOL = 1e-6
 

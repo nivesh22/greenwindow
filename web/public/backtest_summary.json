@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "generated_at_utc": "2026-10-06T01:43:20Z",
+ "generated_at_utc": "2026-10-07T21:41:16Z",
  "origins": {
   "start": "2026-07-07T00:00:00Z",
   "end": "2026-10-04T00:00:00Z",
@@ -11,10 +11,10 @@
   {
    "model": "chronos2_cov",
    "horizon_bucket": "1-6",
-   "mase": 0.285,
-   "mae": 10.0,
-   "wql": 0.05,
-   "coverage80": 0.859
+   "mase": 0.287,
+   "mae": 10.1,
+   "wql": 0.051,
+   "coverage80": 0.826
   },
   {
    "model": "chronos2_uni",
@@ -43,26 +43,26 @@
   {
    "model": "ucm_wx",
    "horizon_bucket": "1-6",
-   "mase": 0.441,
+   "mase": 0.443,
    "mae": 15.5,
-   "wql": 0.076,
-   "coverage80": 0.769
+   "wql": 0.077,
+   "coverage80": 0.772
   },
   {
    "model": "sarimax_wx",
    "horizon_bucket": "1-6",
-   "mase": 0.442,
-   "mae": 15.4,
+   "mase": 0.445,
+   "mae": 15.5,
    "wql": 0.076,
-   "coverage80": 0.911
+   "coverage80": 0.907
   },
   {
    "model": "prophet_wx",
    "horizon_bucket": "1-6",
-   "mase": 0.766,
-   "mae": 26.5,
-   "wql": 0.132,
-   "coverage80": 0.624
+   "mase": 0.698,
+   "mae": 24.2,
+   "wql": 0.12,
+   "coverage80": 0.635
   },
   {
    "model": "snaive_24",
@@ -91,18 +91,18 @@
   {
    "model": "chronos2_cov",
    "horizon_bucket": "25-48",
-   "mase": 0.625,
-   "mae": 21.8,
-   "wql": 0.112,
-   "coverage80": 0.81
+   "mase": 0.581,
+   "mae": 20.3,
+   "wql": 0.106,
+   "coverage80": 0.822
   },
   {
    "model": "prophet_wx",
    "horizon_bucket": "25-48",
-   "mase": 0.745,
-   "mae": 25.9,
-   "wql": 0.137,
-   "coverage80": 0.632
+   "mase": 0.682,
+   "mae": 23.7,
+   "wql": 0.128,
+   "coverage80": 0.653
   },
   {
    "model": "chronos2_uni",
@@ -115,18 +115,18 @@
   {
    "model": "ucm_wx",
    "horizon_bucket": "25-48",
-   "mase": 1.183,
-   "mae": 41.7,
-   "wql": 0.215,
-   "coverage80": 0.846
+   "mase": 1.188,
+   "mae": 41.9,
+   "wql": 0.217,
+   "coverage80": 0.829
   },
   {
    "model": "sarimax_wx",
    "horizon_bucket": "25-48",
-   "mase": 1.211,
-   "mae": 42.2,
-   "wql": 0.204,
-   "coverage80": 0.777
+   "mase": 1.226,
+   "mae": 42.7,
+   "wql": 0.208,
+   "coverage80": 0.772
   },
   {
    "model": "ets",
@@ -163,18 +163,18 @@
   {
    "model": "chronos2_cov",
    "horizon_bucket": "7-24",
-   "mase": 0.454,
-   "mae": 15.8,
-   "wql": 0.085,
-   "coverage80": 0.845
+   "mase": 0.42,
+   "mae": 14.7,
+   "wql": 0.08,
+   "coverage80": 0.844
   },
   {
    "model": "prophet_wx",
    "horizon_bucket": "7-24",
-   "mase": 0.653,
-   "mae": 22.7,
-   "wql": 0.123,
-   "coverage80": 0.69
+   "mase": 0.605,
+   "mae": 21.1,
+   "wql": 0.115,
+   "coverage80": 0.702
   },
   {
    "model": "chronos2_uni",
@@ -195,10 +195,10 @@
   {
    "model": "ucm_wx",
    "horizon_bucket": "7-24",
-   "mase": 1.026,
+   "mase": 1.025,
    "mae": 36.2,
    "wql": 0.199,
-   "coverage80": 0.717
+   "coverage80": 0.718
   },
   {
    "model": "snaive_24",
@@ -211,10 +211,10 @@
   {
    "model": "sarimax_wx",
    "horizon_bucket": "7-24",
-   "mase": 1.153,
-   "mae": 40.2,
-   "wql": 0.198,
-   "coverage80": 0.793
+   "mase": 1.159,
+   "mae": 40.4,
+   "wql": 0.201,
+   "coverage80": 0.796
   },
   {
    "model": "snaive_168",
@@ -235,18 +235,18 @@
   {
    "model": "chronos2_cov",
    "horizon_bucket": "all",
-   "mase": 0.518,
-   "mae": 18.1,
-   "wql": 0.094,
-   "coverage80": 0.829
+   "mase": 0.484,
+   "mae": 16.9,
+   "wql": 0.089,
+   "coverage80": 0.831
   },
   {
    "model": "prophet_wx",
    "horizon_bucket": "all",
-   "mase": 0.713,
-   "mae": 24.8,
-   "wql": 0.131,
-   "coverage80": 0.653
+   "mase": 0.655,
+   "mae": 22.8,
+   "wql": 0.122,
+   "coverage80": 0.669
   },
   {
    "model": "chronos2_uni",
@@ -259,10 +259,10 @@
   {
    "model": "ucm_wx",
    "horizon_bucket": "all",
-   "mase": 1.031,
+   "mase": 1.034,
    "mae": 36.4,
-   "wql": 0.191,
-   "coverage80": 0.788
+   "wql": 0.192,
+   "coverage80": 0.78
   },
   {
    "model": "ets",
@@ -275,10 +275,10 @@
   {
    "model": "sarimax_wx",
    "horizon_bucket": "all",
-   "mase": 1.093,
-   "mae": 38.1,
-   "wql": 0.185,
-   "coverage80": 0.8
+   "mase": 1.103,
+   "mae": 38.5,
+   "wql": 0.187,
+   "coverage80": 0.798
   },
   {
    "model": "snaive_24",
@@ -302,7 +302,7 @@
    "setting": "chronos_context_days",
    "value": 14,
    "model": "chronos2_cov",
-   "mase": 0.566
+   "mase": 0.544
   },
   {
    "setting": "chronos_context_days",
@@ -314,7 +314,7 @@
    "setting": "chronos_context_days",
    "value": 28,
    "model": "chronos2_cov",
-   "mase": 0.512
+   "mase": 0.487
   },
   {
    "setting": "chronos_context_days",
@@ -326,7 +326,7 @@
    "setting": "chronos_context_days",
    "value": 56,
    "model": "chronos2_cov",
-   "mase": 0.513
+   "mase": 0.492
   },
   {
    "setting": "chronos_context_days",
@@ -344,19 +344,19 @@
    "setting": "classical_window_days",
    "value": 28,
    "model": "prophet_wx",
-   "mase": 0.699
+   "mase": 0.69
   },
   {
    "setting": "classical_window_days",
    "value": 28,
    "model": "sarimax_wx",
-   "mase": 1.07
+   "mase": 1.081
   },
   {
    "setting": "classical_window_days",
    "value": 28,
    "model": "ucm_wx",
-   "mase": 1.088
+   "mase": 1.063
   },
   {
    "setting": "classical_window_days",
@@ -368,13 +368,13 @@
    "setting": "classical_window_days",
    "value": 56,
    "model": "prophet_wx",
-   "mase": 0.679
+   "mase": 0.632
   },
   {
    "setting": "classical_window_days",
    "value": 56,
    "model": "sarimax_wx",
-   "mase": 1.089
+   "mase": 1.096
   },
   {
    "setting": "classical_window_days",
@@ -392,7 +392,7 @@
    "setting": "classical_window_days",
    "value": 56,
    "model": "ucm_wx",
-   "mase": 1.039
+   "mase": 1.047
   },
   {
    "setting": "classical_window_days",
@@ -404,19 +404,19 @@
    "setting": "classical_window_days",
    "value": 84,
    "model": "prophet_wx",
-   "mase": 0.646
+   "mase": 0.6
   },
   {
    "setting": "classical_window_days",
    "value": 84,
    "model": "sarimax_wx",
-   "mase": 1.117
+   "mase": 1.124
   },
   {
    "setting": "classical_window_days",
    "value": 84,
    "model": "ucm_wx",
-   "mase": 1.066
+   "mase": 1.068
   }
  ]
 }

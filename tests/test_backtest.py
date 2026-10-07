@@ -27,7 +27,7 @@ def test_backtest_on_fixture() -> None:
     res = pd.concat(frames, ignore_index=True)
     assert len(res) == 10 * 2 * 48
     res = res.join(obs["ci_actual"].rename("actual"), on="target_ts_utc").join(
-        obs[["temp_c", "wind100", "solar_wm2", "is_bank_holiday"]], on="target_ts_utc"
+        obs[["temp_c", "wind100", "wind_cf", "solar_wm2", "is_bank_holiday"]], on="target_ts_utc"
     )
 
     summary, tables = summarize(res, obs, origins, SETTINGS, seconds=1.0)

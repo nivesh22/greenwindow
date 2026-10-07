@@ -1,21 +1,33 @@
 # Weather sampling points (spec D4). Per-variable weights are a documented simplification,
 # not an optimized choice: temperature and solar follow where people and the solar fleet are
-# (mostly England); wind follows the wind fleet (Scotland and the North Sea).
-# Each weight column sums to 1.
+# (mostly England); wind roughly follows installed wind capacity (onshore Scotland plus the main
+# offshore clusters). Each weight column sums to 1.
 points:
   - name: London
     lat: 51.51
     lon: -0.13
-    weights: {temp: 0.45, wind: 0.10, solar: 0.45}
+    weights: {temp: 0.45, wind: 0.05, solar: 0.45}
   - name: Birmingham
     lat: 52.48
     lon: -1.90
-    weights: {temp: 0.35, wind: 0.10, solar: 0.40}
+    weights: {temp: 0.35, wind: 0.05, solar: 0.40}
   - name: Glasgow
     lat: 55.86
     lon: -4.25
-    weights: {temp: 0.20, wind: 0.30, solar: 0.15}
+    weights: {temp: 0.20, wind: 0.25, solar: 0.15}
   - name: North Sea (Hornsea/Dogger Bank area)
     lat: 54.00
     lon: 1.50
-    weights: {temp: 0.00, wind: 0.50, solar: 0.00}
+    weights: {temp: 0.00, wind: 0.30, solar: 0.00}
+  - name: East Anglia offshore
+    lat: 52.60
+    lon: 2.40
+    weights: {temp: 0.00, wind: 0.15, solar: 0.00}
+  - name: Moray Firth offshore
+    lat: 58.20
+    lon: -2.90
+    weights: {temp: 0.00, wind: 0.10, solar: 0.00}
+  - name: Irish Sea (Walney/Burbo area)
+    lat: 54.00
+    lon: -3.50
+    weights: {temp: 0.00, wind: 0.10, solar: 0.00}

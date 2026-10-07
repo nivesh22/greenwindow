@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import pandas as pd
 
-OBSERVATION_COLUMNS = ["ci_actual", "n_halfhours", "temp_c", "wind100", "solar_wm2", "is_bank_holiday"]
+OBSERVATION_COLUMNS = ["ci_actual", "n_halfhours", "temp_c", "wind100", "wind_cf", "solar_wm2", "is_bank_holiday"]
 CI_RANGE = (0.0, 600.0)
-WEATHER_BOUNDS = {"temp_c": (-40.0, 50.0), "wind100": (0.0, 80.0), "solar_wm2": (0.0, 1400.0)}
+WEATHER_BOUNDS = {"temp_c": (-40.0, 50.0), "wind100": (0.0, 80.0), "wind_cf": (0.0, 1.0), "solar_wm2": (0.0, 1400.0)}
 
 
 class SchemaError(ValueError):

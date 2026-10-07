@@ -18,7 +18,11 @@ FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
 HINDCAST_URL = "https://historical-forecast-api.open-meteo.com/v1/forecast"
 VARIABLES = {"temperature_2m": "temp_c", "wind_speed_100m": "wind100", "shortwave_radiation": "solar_wm2"}
 WEIGHT_KEY = {"temp_c": "temp", "wind100": "wind", "solar_wm2": "solar"}
-WEATHER_COLUMNS = list(WEIGHT_KEY)
+WEATHER_COLUMNS = [*WEIGHT_KEY, "wind_cf"]
+
+# Generic normalised turbine power curve at hub height (documented simplification, docs/decisions.md):
+# zero below cut-in, cubic ramp to rated, flat to cut-out, zero above (storm shutdown).
+CUT_IN_MS, RATED_MS, CUT_OUT_MS = 3.0, 12.0, 25.0
 
 
 def _params(locations: list[Location]) -> dict[str, Any]:
@@ -70,8 +74,19 @@ def fetch_weather(
     return parse_weather(get_json(url, params), locations)
 
 
+def wind_capacity_factor(speed_ms: pd.Series | pd.DataFrame) -> pd.Series | pd.DataFrame:
+    """100 m wind speed (m/s) -> fraction of rated output in [0, 1]. NaN stays NaN."""
+    ramp = (speed_ms**3 - CUT_IN_MS**3) / (RATED_MS**3 - CUT_IN_MS**3)
+    cf = ramp.clip(lower=0.0, upper=1.0)
+    return cf.where((speed_ms < CUT_OUT_MS) | speed_ms.isna(), 0.0)
+
+
 def national_weather(long: pd.DataFrame, locations: list[Location]) -> pd.DataFrame:
-    """Weighted national features indexed by ts_utc. A null at any point with weight > 0 makes the hour null."""
+    """Weighted national features indexed by ts_utc. A null at any point with weight > 0 makes the hour null.
+
+    wind_cf applies the power curve per point before weighting: the curve is non-linear, so averaging
+    speeds first would understate output when some sites are windy and others calm.
+    """
     out = {}
     for col, key in WEIGHT_KEY.items():
         wide = long.pivot_table(index="ts_utc", columns="location", values=col, dropna=False)
@@ -79,6 +94,9 @@ def national_weather(long: pd.DataFrame, locations: list[Location]) -> pd.DataFr
         used = list(weights[weights > 0].index)
         wide = wide.reindex(columns=used)
         out[col] = (wide * weights[used]).sum(axis=1).where(wide.notna().all(axis=1))
+        if col == "wind100":
+            cf = wind_capacity_factor(wide)
+            out["wind_cf"] = (cf * weights[used]).sum(axis=1).where(cf.notna().all(axis=1))
     df = pd.DataFrame(out).sort_index()
     df.index.name = "ts_utc"
     return df

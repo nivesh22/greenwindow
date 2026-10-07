@@ -56,12 +56,15 @@ class SarimaxWeather:
         # Explicit intercept column instead of trend="c": with whole-week windows statsmodels judges the Fourier
         # block to already contain a constant and rejects trend="c". Same model either way.
         x_hist, x_fut = x_hist[keep].assign(const=1.0), x_fut[keep].assign(const=1.0)
+        mod = SARIMAX(h[TARGET].to_numpy(), exog=x_hist.to_numpy(), order=self.order, trend="n")
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            fit = SARIMAX(h[TARGET].to_numpy(), exog=x_hist.to_numpy(), order=self.order, trend="n").fit(
-                disp=False, maxiter=200
-            )
-            pred = fit.get_forecast(steps=horizon, exog=x_fut.to_numpy())
+            pred = mod.fit(disp=False, maxiter=200).get_forecast(steps=horizon, exog=x_fut.to_numpy())
+            if not np.isfinite(pred.se_mean).all():
+                # L-BFGS occasionally stops at a unit-root boundary (backtest origin 2026-08-03); Powell does not
+                pred = mod.fit(disp=False, maxiter=1000, method="powell").get_forecast(
+                    steps=horizon, exog=x_fut.to_numpy()
+                )
         mean = np.asarray(pred.predicted_mean)
         se = np.asarray(pred.se_mean)
         out = {"mean": mean} | {qcol(t): mean + norm.ppf(t) * se for t in quantiles}

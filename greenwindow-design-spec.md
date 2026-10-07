@@ -138,6 +138,7 @@ Energy/load planner, operations analyst, sustainability analyst. The forecast â†
 **Decision:** Four fixed points defined in `config/locations.yaml` (e.g., London, Birmingham/Manchester area, Edinburgh/Glasgow area, and one northern/offshore-wind-relevant point), combined with fixed weights into three national features: temperature, 100m wind speed, shortwave radiation.
 **Rationale:** Wind and solar generation drive intensity; a single city would miss Scotland's wind fleet.
 **Implications:** Weights are a documented simplification, not an optimized choice. Pick the coordinates during T1 and record them in the Data Card.
+**Amended 2026-10-07:** seven points (three more offshore wind points), plus a fourth derived feature `wind_cf`: a generic turbine power curve applied to each point's 100m wind speed, then weighted. Models use `wind_cf` instead of `wind100`. See `docs/decisions.md`.
 
 ### Decision D5: Forecast snapshots are immutable
 
@@ -549,6 +550,7 @@ All files are parquet on the `data` branch. Validate with `pandera` on read and 
 | n_halfhours | int8 | Yes | 0, 1, or 2 |
 | temp_c | float | Yes | Weighted national temperature (hindcast) |
 | wind100 | float | Yes | Weighted 100m wind speed; unit recorded in config |
+| wind_cf | float | Yes | Weighted wind capacity factor in [0, 1]: power curve per point, then weighted (added 2026-10-07) |
 | solar_wm2 | float | Yes | Weighted shortwave radiation |
 | is_bank_holiday | bool | Yes | England-and-Wales bank holiday flag (document choice) |
 

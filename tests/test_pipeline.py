@@ -76,6 +76,16 @@ def test_pipeline_end_to_end_and_idempotent(patched) -> None:
     assert files["meta.json"]["latest_actual_ts_utc"] == "2026-10-05T10:00:00Z"
 
 
+def test_observations_missing_a_column_are_rebuilt(patched) -> None:
+    pipeline.run_pipeline(NOW, include_chronos=False)
+    path = patched / "parquet" / "observations.parquet"
+    pd.read_parquet(path).drop(columns="wind_cf").to_parquet(path)  # as stored before wind_cf existed
+    report = pipeline.run_pipeline(NOW, include_chronos=False)
+    assert "ets" in report.ok, report.failed
+    obs = pd.read_parquet(path)
+    assert "wind_cf" in obs.columns and obs["wind_cf"].notna().all()
+
+
 def test_invalid_export_is_rejected(patched) -> None:
     pipeline.run_pipeline(NOW, include_chronos=False)
     files = {p.name: json.loads(p.read_text()) for p in (patched / "app_data").glob("*.json")}

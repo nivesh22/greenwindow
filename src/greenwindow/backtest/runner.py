@@ -141,7 +141,7 @@ def run_backtest(end: pd.Timestamp, days: int, workers: int, include_chronos: bo
             )
     res = pd.concat(frames, ignore_index=True)
     res = res.join(obs["ci_actual"].rename("actual"), on="target_ts_utc")
-    res = res.join(obs[COVARIATES], on="target_ts_utc")
+    res = res.join(obs[[*COVARIATES, "wind100"]], on="target_ts_utc")
     OUT_DIR.mkdir(exist_ok=True)
     res.to_parquet(OUT_DIR / "backtest_results.parquet")
 

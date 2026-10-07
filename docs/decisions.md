@@ -80,3 +80,12 @@ Format:
 - **MASE scale:** in-sample seasonal-naive (m=24) MAE of each origin's 56-day window, shared by all models at that origin.
 - **NESO in the backtest:** included as `neso_published` (forecast as returned by the API, lead time unknown), labelled as not a fair comparison (spec 5.3 item 7).
 - **backtest_summary.json:** `horizon_bucket` also takes `"all"`. Served from the site itself (`web/public`), so the web client fetches it same-origin.
+
+## 2026-10-07 — Wind power feature (`wind_cf`) and more wind points
+- **Why:** at 25-48 h ahead our best model (Chronos-2 + weather, MASE 0.625) is well behind NESO (0.339), and errors are largest at low wind. Turbine output is not linear in wind speed, and averaging speeds across sites before converting hides that.
+- **`wind_cf`:** generic normalised power curve at 100 m: 0 below 3 m/s, cubic ramp to 1 at 12 m/s, 1 up to 25 m/s, 0 at and above 25 m/s (storm cut-out). Applied per point, then weighted. A simplification: real fleet curves are smoother (mixed turbines, wake losses, curtailment) and are not fitted here.
+- **Models:** `COVARIATES` uses `wind_cf` instead of `wind100`. `wind100` stays in observations and in `recent_observations.json` (JSON contract unchanged).
+- **Points:** added East Anglia offshore (52.6N, 2.4E), Moray Firth offshore (58.2N, 2.9W) and Irish Sea (54.0N, 3.5W), with wind weight only. Wind weights now roughly follow installed capacity: Glasgow 0.25, North Sea 0.30, East Anglia 0.15, Moray 0.10, Irish Sea 0.10, London 0.05, Birmingham 0.05. Temperature and solar weights are unchanged.
+- **Migration:** if stored observations lack a column in `OBSERVATION_COLUMNS`, the pipeline re-bootstraps them from the APIs (400 days) instead of leaving history half-filled. Snapshots are untouched.
+- **Result** (backtest pinned to `--end 2026-10-06T01:00`, same 90 origins as before): Chronos-2 + weather MASE 0.518 -> 0.484 overall, 0.625 -> 0.581 at 25-48 h, 0.454 -> 0.420 at 7-24 h, unchanged at 1-6 h. Prophet + weather 0.713 -> 0.655. SARIMAX and UCM unchanged (±0.01). Weather-input caveat (D3/5.3) still applies; the live leaderboard is the check.
+- **SARIMAX fallback:** with the new inputs, L-BFGS stopped at a unit-root boundary at one origin (2026-08-03; log-likelihood 0, non-finite forecast variance). If the forecast variance is not finite, the model refits with Powell.

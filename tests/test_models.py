@@ -6,6 +6,7 @@ import pandas as pd
 import pytest
 
 from greenwindow.config import load_settings
+from greenwindow.ingest.weather import wind_capacity_factor
 from greenwindow.models.base import ForecastContractError, forecast_at, future_index, validate_forecast
 from greenwindow.models.registry import live_models
 
@@ -31,6 +32,7 @@ def synthetic_obs(days: int = 60, seed: int = 0) -> pd.DataFrame:
             "n_halfhours": 2,
             "temp_c": temp,
             "wind100": wind,
+            "wind_cf": wind_capacity_factor(pd.Series(wind)).to_numpy(),
             "solar_wm2": solar,
             "is_bank_holiday": False,
         },

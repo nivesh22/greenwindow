@@ -27,7 +27,7 @@ from greenwindow.live import store
 from greenwindow.live.scorer import apply_retention, score_snapshots
 from greenwindow.models.base import COVARIATES, forecast_at, future_index
 from greenwindow.models.registry import NESO, live_models
-from greenwindow.schemas import validate_observations
+from greenwindow.schemas import OBSERVATION_COLUMNS, validate_observations
 
 log = logging.getLogger("greenwindow.pipeline")
 
@@ -57,6 +57,10 @@ def refresh_observations(now: pd.Timestamp, settings: Settings) -> tuple[pd.Data
     """Steps 1 and 3: update observations; return them and the national weather frame (past week + next days)."""
     locs = load_locations()
     old = store.read_table("observations")
+    if old is not None and set(OBSERVATION_COLUMNS) - set(old.columns):
+        # a new derived column: rebuild from the APIs rather than leave history half-filled
+        log.info("stored observations lack %s; re-bootstrapping", sorted(set(OBSERVATION_COLUMNS) - set(old.columns)))
+        old = None
     recent_wx = national_weather(fetch_weather("forecast", locs, past_days=settings.recent_refresh_days), locs)
     if old is None:
         start = now - pd.Timedelta(days=settings.bootstrap_days)

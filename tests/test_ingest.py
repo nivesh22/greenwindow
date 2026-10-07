@@ -22,7 +22,7 @@ def hh_frame(start: str, values: list[float | None]) -> pd.DataFrame:
 
 
 def weather_national(index: pd.DatetimeIndex) -> pd.DataFrame:
-    return pd.DataFrame({"temp_c": 10.0, "wind100": 8.0, "solar_wm2": 100.0}, index=index)
+    return pd.DataFrame({"temp_c": 10.0, "wind100": 8.0, "wind_cf": 0.3, "solar_wm2": 100.0}, index=index)
 
 
 # ---------------------------------------------------------------- config
@@ -32,7 +32,7 @@ def test_config_loads_and_weights_sum_to_one() -> None:
     s = load_settings()
     assert s.horizon_h == 48 and s.quantiles == (0.1, 0.5, 0.9)
     locs = load_locations()
-    assert len(locs) == 4
+    assert len(locs) == 7
     for key in ("temp", "wind", "solar"):
         assert sum(loc.weights[key] for loc in locs) == pytest.approx(1.0)
 
@@ -127,6 +127,7 @@ def test_validate_rejects_bad_data() -> None:
             "n_halfhours": 2,
             "temp_c": 10.0,
             "wind100": 5.0,
+            "wind_cf": 0.1,
             "solar_wm2": 0.0,
             "is_bank_holiday": False,
         },
@@ -162,6 +163,28 @@ def test_national_weather_weights_and_null_propagation() -> None:
     assert nat["temp_c"].iloc[0] == pytest.approx(15.0)
     assert np.isnan(nat["temp_c"].iloc[1])  # B has weight 0.5 and is null
     assert nat["wind100"].tolist() == [2.0, 2.0]  # only B has wind weight
+    assert nat["wind_cf"].tolist() == [0.0, 0.0]  # 2 m/s is below cut-in
+
+
+def test_wind_capacity_factor_curve() -> None:
+    cf = weather.wind_capacity_factor(pd.Series([0.0, 3.0, 7.5, 12.0, 20.0, 25.0, np.nan]))
+    assert cf.iloc[:2].tolist() == [0.0, 0.0]
+    assert 0.0 < cf.iloc[2] < 0.5  # cubic ramp: half of rated speed gives well under half of output
+    assert cf.iloc[3:5].tolist() == [1.0, 1.0]
+    assert cf.iloc[5] == 0.0  # storm cut-out
+    assert np.isnan(cf.iloc[6])
+
+
+def test_wind_cf_applies_curve_per_point_before_weighting() -> None:
+    locs = [
+        Location("A", 51.0, 0.0, {"temp": 0.5, "wind": 0.5, "solar": 1.0}),
+        Location("B", 55.0, -4.0, {"temp": 0.5, "wind": 0.5, "solar": 0.0}),
+    ]
+    t = ["2026-10-05T00:00"]
+    payload = [om_payload(t, wind_speed_100m=[0.0]), om_payload(t, wind_speed_100m=[14.0])]
+    nat = weather.national_weather(weather.parse_weather(payload, locs), locs)
+    assert nat["wind100"].iloc[0] == pytest.approx(7.0)
+    assert nat["wind_cf"].iloc[0] == pytest.approx(0.5)  # curve of the mean speed would be ~0.17
 
 
 def test_parse_weather_missing_variable_raises() -> None:

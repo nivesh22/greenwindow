@@ -18,7 +18,8 @@ A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbo
 - **Thin end-to-end slice done:** ingest -> observations (400-day bootstrap) -> `snaive_24`, `snaive_168`, `sarimax_wx`, `chronos2_uni`, `chronos2_cov` + NESO -> snapshots -> scorer -> JSON export -> `pipeline.yml` (cron `17 */6 * * *`, ~1 min on Actions) -> `data` branch. React app in `web/` (Forecast, Plan a job, Leaderboard, About). CI green (Python + web).
 - **Live:** https://greenwindow-one.vercel.app (Vercel Hobby, Root Directory `web`, auto-deploys `main`; V11 verified: `data` commits do not deploy).
 - **Done 2026-10-06:** `ets` (A,N,A), `ucm_wx`, `prophet_wx` in the live registry; backtest (`make backtest`, ~11 min, 90 origins + sensitivity) -> `web/public/backtest_summary.json`, `docs/results.md`; Backtest page.
-- **Next:** axe a11y check; Playwright e2e (Should); significance test (R11); LightGBM (R10); weather slider (R12); README results + screenshots (T14).
+- **Done 2026-10-07:** `wind_cf` (power curve per point, 7 weather points) replaces `wind100` as model input; Chronos-2+wx 25-48 h MASE 0.625 -> 0.581. Live pipeline re-bootstraps observations once on deploy (missing column).
+- **Next:** model ensemble (Chronos+Prophet); axe a11y check; Playwright e2e (Should); significance test (R11); LightGBM (R10); weather slider (R12); README results + screenshots (T14).
 - Owner preference: minimal working thing first, improve incrementally; keep token use reasonable.
 - Env: `.venv` (Python 3.11) has torch **2.8.0+cpu** pinned — newer torch fails to load on this Windows build.
 - Local pipeline output goes to `data_local/` (gitignored); set `GREENWINDOW_DATA_DIR` to override. `--no-chronos` on a rerun of the same hour drops that run's Chronos rows.

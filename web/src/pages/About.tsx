@@ -6,7 +6,7 @@ const BIASES: [string, string][] = [
   ['Regime drift', "Britain's grid is decarbonising and its mix keeps changing. Short training windows limit, but do not remove, the problem."],
   ['One country', 'Results are for Great Britain only and do not transfer to other grids.'],
   ['Operator forecast vintage', "Past NESO forecasts returned by the API have unknown lead times, so historical comparisons with NESO are not a fair head-to-head. Only our live snapshots are."],
-  ['Weather aggregation', 'Weather comes from four fixed points (London, Birmingham, Glasgow, the North Sea) with fixed weights, a simplification of where wind and solar actually are.'],
+  ['Weather aggregation', 'Weather comes from seven fixed points (London, Birmingham, Glasgow and four offshore wind areas) with fixed weights, a simplification of where wind and solar actually are. Wind speed is turned into an estimated share of wind capacity with a generic turbine power curve, not a fitted one.'],
   ['Revisions', 'Recent actuals can be revised. Each run re-reads the last 7 days and rescoring is idempotent.'],
   ['Weather API terms', "Open-Meteo's free tier is for non-commercial use. This is a portfolio project."],
 ]
