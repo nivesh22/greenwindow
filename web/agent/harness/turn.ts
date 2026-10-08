@@ -34,6 +34,8 @@ export interface TurnInput {
   request: ChatRequest
   ipHash: string
   nowMs: number
+  /** From the limit check (null while anonymous limits are IP-only). */
+  messagesLeft?: number | null
   signal: AbortSignal
 }
 
@@ -228,10 +230,11 @@ export function createTurnRunner(deps: TurnDeps): (input: TurnInput, emit: (ev: 
   const newId = deps.newId ?? (() => crypto.randomUUID())
   const { config, store, data, registry, router } = deps
 
-  return async ({ request, ipHash, nowMs, signal }, emit) => {
+  return async (input, emit) => {
+    const { request, ipHash, nowMs, signal } = input
     const turnId = newId()
     const conversationId = request.conversation_id ?? newId()
-    emit({ type: 'turn_start', data: { turn_id: turnId, conversation_id: conversationId, messages_left: null } })
+    emit({ type: 'turn_start', data: { turn_id: turnId, conversation_id: conversationId, messages_left: input.messagesLeft ?? null } })
 
     const tracer = new Tracer({ turnId, now, newId })
     const budget = new Budget(
@@ -275,7 +278,9 @@ export function createTurnRunner(deps: TurnDeps): (input: TurnInput, emit: (ev: 
     }
     const result = await runLoop(messages, loopOpts)
     // X4: the answer is sent once, after the grounding gate. Numbers the user wrote are allowed too.
-    const userTexts = [...request.history.filter((h) => h.role === 'user').map((h) => h.content), request.message]
+    // Allowed number sources besides this turn's tools: what the user wrote, and earlier answers (each was
+    // grounded when sent; a forged history can only affect the sender's own conversation).
+    const userTexts = [...request.history.map((h) => h.content), request.message]
     const answer = await groundAnswer(result, { loop: loopOpts, userTexts, tracer, now })
     budget.dispose()
     const stopReason = answer.stopReason
