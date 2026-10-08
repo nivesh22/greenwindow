@@ -120,6 +120,8 @@ export class Tracer {
           model: str(a[ATTR.requestModel], s.name),
           provider: str(a[ATTR.system], 'unknown'),
           failover: a[ATTR.failover] === true,
+          failover_reason: typeof a[ATTR.failoverReason] === 'string' ? (a[ATTR.failoverReason] as string) : null,
+          finish_reason: Array.isArray(a['gen_ai.response.finish_reasons']) ? String(a['gen_ai.response.finish_reasons'][0]) : null,
           tokens_in: tokens(s.tokensIn),
           tokens_out: tokens(s.tokensOut),
           cost_usd: Math.max(0, s.costUsd),
