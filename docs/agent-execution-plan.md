@@ -110,12 +110,12 @@ and I set up together while the agents run.
 
 | ID | Task | Agent | Needs |
 |----|------|-------|-------|
-| P1a.1 ∥ | `openai_compat.ts` (streaming parser, fragmented tool calls, usage), single-provider `router.ts`, `loop.ts`, `budget.ts` (steps, tokens, cost, wall clock), `retry.ts`, in-memory tracer. `ScriptedProvider` tests. | harness-engineer | P0.6 |
-| P1a.2 ∥ | `ForecastSource` (HTTP + fixture), `get_forecast`, `recommend_window`, `estimate_co2` (range + O1 wording behind a constant), `lookup_device` + `devices.json` with cited sources | tools-engineer | P0.6 |
-| P1a.3 ∥ | `sse.ts`, `useChat`, a basic `ChatPanel` with status lines and a final answer, a Stop button, tested against a mock SSE stream built from `events.ts`. Scheduler page: chat above/beside the existing form (no sync yet). | frontend-engineer | P0.6 |
-| P1a.4 ∥ | `store/supabase.ts` implementing `Store` (usage, cost_ledger, turns, spans), the `consume_message()` SQL function, `api/health.ts`, the `api/chat.ts` skeleton (SSE, body parsing, IP hash, cost-ledger check). Hello-SSE preview deploy (spike S2, live). | backend-engineer | P0.6, P0.9 (H1) |
-| P1a.5 | Recorded Gemini fixtures for the parser tests (spike S3, live): stream with text, tool calls, usage | orchestrator | **H2** |
-| P1a.6 | Integration: `turn.ts` (no gates), system prompt v1, wiring, preview deploy, manual J1 check on the preview URL, cost per turn measured | orchestrator | P1a.1–5, **H4** |
+| P1a.1 ∥ ✅ | `openai_compat.ts` (streaming parser, fragmented tool calls, usage), single-provider `router.ts`, `loop.ts`, `budget.ts` (steps, tokens, cost, wall clock), `retry.ts`, in-memory tracer. `ScriptedProvider` tests. | harness-engineer | P0.6 |
+| P1a.2 ∥ ✅ | `ForecastSource` (HTTP + fixture), `get_forecast`, `recommend_window`, `estimate_co2` (range + O1 wording behind a constant), `lookup_device` + `devices.json` with cited sources | tools-engineer | P0.6 |
+| P1a.3 ∥ ✅ | `sse.ts`, `useChat`, a basic `ChatPanel` with status lines and a final answer, a Stop button, tested against a mock SSE stream built from `events.ts`. Scheduler page: chat above/beside the existing form (no sync yet). | frontend-engineer | P0.6 |
+| P1a.4 ∥ ✅ | `store/supabase.ts` implementing `Store` (usage, cost_ledger, turns, spans), the `consume_message()` SQL function, `api/health.ts`, the `api/chat.ts` skeleton (SSE, body parsing, IP hash, cost-ledger check). Hello-SSE preview deploy (spike S2, live). | backend-engineer | P0.6, P0.9 (H1) |
+| P1a.5 ✅ | Recorded Gemini fixtures for the parser tests (spike S3, live): stream with text, tool calls, usage | orchestrator | **H2** ✅ |
+| P1a.6 ✅ | Integration: `turn.ts` (no gates), system prompt v1, wiring, preview deploy, manual J1 check on the preview URL, cost per turn measured | orchestrator | P1a.1–5, **H4** |
 
 **Owner, meanwhile:** H4 (env vars in Vercel + `web/.env.local`). Decide O1. Optionally start H6 (Google OAuth), which
 takes a while.
@@ -124,10 +124,10 @@ takes a while.
 
 | ID | Task | Agent | Needs |
 |----|------|-------|-------|
-| P1b.1 ∥ | Gateway provider config, failover + circuit breaker, `provider_down`, deterministic `grounding.ts` (moved from P2), all stop reasons tested. Recorded gateway fixtures (spike S4, live). | harness-engineer | P1a, **H3** |
-| P1b.2 ∥ | `PlanPanel` refactor with two-way sync (`plan_update` ↔ `panel_state`), `TraceDrawer` (tools + LLM calls), unavailable/limit notice, starter chips, 360 px layout, keyboard and screen-reader labels | frontend-engineer | P1a |
-| P1b.3 ∥ | Per-IP and global rate limits via `consume_message`, kill switch end to end (80% flag, 100% pause, manual reset SQL), span persistence via `waitUntil`, keepalive step in `pipeline.yml` | backend-engineer | P1a |
-| P1b.4 ∥ | `explain_uncertainty` | tools-engineer | P1a |
+| P1b.1 ∥ 🟡 | Gateway provider config, failover + circuit breaker, `provider_down`, deterministic `grounding.ts` (moved from P2), all stop reasons tested. Recorded gateway fixtures (spike S4, live). | harness-engineer | P1a, **H3** |
+| P1b.2 ∥ ✅ | `PlanPanel` refactor with two-way sync (`plan_update` ↔ `panel_state`), `TraceDrawer` (tools + LLM calls), unavailable/limit notice, starter chips, 360 px layout, keyboard and screen-reader labels | frontend-engineer | P1a |
+| P1b.3 ∥ ✅ | Per-IP and global rate limits via `consume_message`, kill switch end to end (80% flag, 100% pause, manual reset SQL), span persistence via `waitUntil`, keepalive step in `pipeline.yml` | backend-engineer | P1a |
+| P1b.4 ∥ ✅ | `explain_uncertainty` | tools-engineer | P1a |
 | P1b.5 | Integration, the full suite, preview check, then merge `assistant` → `main` (**production release 1**). Update CLAUDE.md status. | orchestrator | P1b.1–4 |
 
 **Owner, meanwhile:** review the preview before release 1 (about 10 min). Optionally H5 (GitHub Actions secrets).
@@ -185,17 +185,17 @@ never print or decrypt values.
 |----|------|----------------------|-------|--------------------------|-----------|
 | **H1** ✅ | Supabase project (free): `Greenwindow`, ref `sndukjnxdvhrnbtazrlu`, eu-west-1 (Ireland; London not chosen, no impact). CLI logged in 2026-10-08. Still needed: API keys into Vercel/`.env.local` (H4) and the DB password for `supabase link`. | **Now** (P0.9, P1a.4) | supabase.com → New project → name `greenwindow`, region **London (eu-west-2)**, free plan, save the DB password in your password manager. Then run `npx supabase login` in **your own terminal** (it needs a TTY; `!` in Claude Code has none). | `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (server; newer projects call it the *secret* key), `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` (the *publishable* key; public by design) | 10 min |
 | **H2** | Gemini API key | **Now** (P1a.5 fixtures, P1a.6) | aistudio.google.com → Get API key → create in a new project. **Do not enable billing** (we stay on the free tier). | `GEMINI_API_KEY` | 5 min |
-| **H3** | Vercel AI Gateway key | P1b.1 (Haiku failover, S4) | Vercel dashboard → AI Gateway → enable → API keys → create. If it asks for a card or a paid plan, **stop and tell me** (rule 7). | `AI_GATEWAY_API_KEY` | 5 min |
-| **H4** | Env vars in Vercel + `web/.env.local` | P1a.6 | Add H1–H3 values. I'll give you the exact list, including generated non-secret config such as `IP_SALT` (you generate it with `openssl rand -hex 32`). | — | 10 min |
+| **H3** ✅ | Vercel AI Gateway key | P1b.1 (Haiku failover, S4) | Vercel dashboard → AI Gateway → enable → API keys → create. If it asks for a card or a paid plan, **stop and tell me** (rule 7). | `AI_GATEWAY_API_KEY` | 5 min |
+| **H4** ✅ | Env vars in Vercel + `web/.env.local` | P1a.6 | Add H1–H3 values. I'll give you the exact list, including generated non-secret config such as `IP_SALT` (you generate it with `openssl rand -hex 32`). | — | 10 min |
 | **O1** | CO2 wording decision | P1a.2 merge | Choose (a) or (b) in §1 | — | 1 min |
-| **H5** | GitHub Actions secrets | P2.6 (live evals) | github.com/nivesh22/greenwindow → Settings → Secrets → Actions: `GEMINI_API_KEY`, `AI_GATEWAY_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | — | 5 min |
+| **H5** ✅ | GitHub Actions secrets | P2.6 (live evals) | github.com/nivesh22/greenwindow → Settings → Secrets → Actions: `GEMINI_API_KEY`, `AI_GATEWAY_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | — | 5 min |
 | **H6** | Google OAuth client | P3.2, P3.4 | console.cloud.google.com → new project → OAuth consent screen (External, scopes `email` + `profile` only, privacy URL `https://greenwindow-one.vercel.app/privacy`) → Credentials → OAuth client (Web) with redirect URI `https://<project-ref>.supabase.co/auth/v1/callback`. Paste the client ID/secret into Supabase (H7), not into Vercel. | (stored in Supabase) | 20 min |
 | **H7** | Supabase Auth settings | P3.2, P3.4 | Authentication → Providers: enable **Anonymous**, enable **Google** (H6 values), enable **Manual linking**. URL config: site URL = production URL, add the preview URL pattern. | — | 5 min |
 | **H8** | Cloudflare Turnstile (free) | P3.2 | dash.cloudflare.com → Turnstile → add site (production + `*.vercel.app` preview hostnames) | `VITE_TURNSTILE_SITEKEY`, `TURNSTILE_SECRET` | 5 min |
 | **H9** | VAPID key pair | P4.3 | `npx web-push generate-vapid-keys` locally. Put the private key straight into Vercel. | `VITE_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (`mailto:` your address) | 5 min |
 | **H10** | Langfuse Cloud Hobby | P4.5 | cloud.langfuse.com (EU region) → project → API keys | `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_BASE_URL` | 5 min |
 | **H11** | Make yourself admin | P4.3 | Sign in on production once. I insert your user ID into `admins` with a migration seed you approve. | — | 2 min |
-| **H12** | Jev decision | P2.5 | After S1: approve (or not) Jev via the gateway, with its cost counted toward the $5 | — | 2 min |
+| **H12** ✅ | Jev decision | P2.5 | After S1: approve (or not) Jev via the gateway, with its cost counted toward the $5 | — | 2 min |
 | H13 | (Optional) Mac git identity | any | On the Mac: `git config --global user.name nivesh22` and `git config --global user.email nivesh@g.ucla.edu` | — | 1 min |
 
 Also generated by the owner, server-only: `CRON_SECRET` (P3, also stored in Supabase Vault), `IP_SALT` (P1a).
@@ -225,21 +225,23 @@ Also generated by the owner, server-only: `CRON_SECRET` (P3, also stored in Supa
 
 ## 8. Status
 
-Last updated 2026-10-08 (evening).
+Last updated 2026-10-08 (late evening). Integration branch `assistant`; preview: https://greenwindow-git-assistant-niveshs-projects-b8d725ac.vercel.app/scheduler (Vercel login required).
 
 | Phase | State | Notes |
 |-------|-------|-------|
-| P0 | ✅ done | Rules/docs v0.2, subagents, contracts, Supabase project + migration 0001 applied (`supabase migration list` shows it remote). |
-| P1a | ✅ done 2026-10-08 | P1a.1–P1a.4 merged into `assistant` (183 tests). P1a.6: `turn.ts` + system prompt wired into `/api/chat`. **J1 works locally end to end** against live Gemini, Supabase and the published forecast: optimizer-exact start, CO2 wording + caveat, $0, ~9 s. Preview verified by the owner (J1 answered end to end on the `assistant` preview). |
-| P1b | 🟡 in progress (agents started 2026-10-08) | Next: grounding check, PlanPanel sync, trace drawer, limits, keepalive, `explain_uncertainty`, region `dub1`. |
-| P2 | not started | Gates on rules + LLM first, then Jev (S1 passed live: 5/5 router intents, ~300 ms, ~$0.000017/call). |
-| P3 | not started | |
-| P4 | not started | |
+| P0 | ✅ done | Rules/docs v0.2, subagents, contracts, Supabase project, migration 0001 applied. |
+| P1a | ✅ done 2026-10-08 | Harness core, core tools, chat UI, API + Supabase store, `turn.ts` + system prompt. Owner verified J1 on the preview. |
+| P1b | 🟡 in progress | ✅ P1b.2 plan panel two-way sync, two-column layout, "How I got this" drawer. ✅ P1b.3 migration 0002 (80% alert, `reset_budget`, `budget_status`) **applied and checked live**; limit tests; health keepalive in `pipeline.yml`; `sse-test` removed. ✅ P1b.4 `explain_uncertainty`. ✅ Functions in `dub1`. 🟡 P1b.1 grounding check + circuit breaker (harness agent running). Then P1b.5: integration (`messages_left` in `turn_start`), live check, owner review, **release 1** (`assistant` → `main`). 206 tests green. |
+| P2 | not started | Gates on rules + Gemini classifier first, then Jev adapter (approved, H12). Live evals can use the GitHub secrets (H5). |
+| P3 | not started | Needs H6 (Google OAuth), H7 (Supabase Auth settings), H8 (Turnstile). |
+| P4 | not started | Needs H9 (VAPID), H10 (Langfuse), H11 (admin). |
 
-**Owner items closed 2026-10-08:** H1, H2, H3 (+ paid top-up, auto-reload off), H4 (Preview), O1 (wording: "estimated emissions difference" with range + caveat, never saved/avoided; rule 9 rewritten). **Open:** H12 (approve Jev for P2.5: live test passed, ~$0.000017/decision).
+**Owner items closed:** H1, H2, H3 (+ paid gateway top-up, auto-reload off), H4 (env vars on Preview), H5 (GitHub Actions secrets), O1 (wording: "estimated emissions difference" with range + caveat; rule 9 rewritten), H12 (Jev approved for P2.5). **Next owner items:** review the preview before release 1; then H6–H8 for P3 (can start any time; Google OAuth takes longest).
 
-**Known issues / fixed on the preview (2026-10-08):**
-- Fixed: Vercel 500 (Node ESM needs `.js` extensions on relative imports; guard test added).
-- Fixed: answers cut off mid-sentence. Gemini's reasoning tokens count against `max_tokens` (live check: 112 of 120 tokens spent thinking). Cap raised to 2048, `reasoning_effort: low` sent to Gemini, reasoning tokens counted as output, and a `finish_reason: length` answer is now a `token_budget` stop, never shown as complete. The finish reason is recorded on every LLM span.
-- Fixed: `estimate_co2` takes no arguments (the model kept passing the wrong literal), saving one step per turn. Turns: 4 steps, ~5–6 s.
-- Open: free-tier rate limits. `gemini-3.5-flash` hits per-minute 429s after a few quick calls (flash-lite takes over); `gemini-3.8-flash` daily quota is tiny. Haiku (paid) is the last backstop. Watch the failover rate once Ops exists.
+**Live facts (details in `docs/spikes.md`):** model route `gemini-3.5-flash` → `gemini-3.5-flash-lite` → `gemini-3.8-flash` → `anthropic/claude-haiku-5.5` (paid, $0.10/$0.50 per 1M). Jev via gateway: 5/5 router intents, ~300 ms, ~$0.000017/decision. Turn: 4 model steps, ~5–6 s, $0 on Gemini.
+
+**Known issues / fixes (2026-10-08):**
+- Fixed: Vercel 500 (Node ESM needs `.js` extensions on relative imports; guard test `agent/imports.test.ts`).
+- Fixed: answers cut off mid-sentence (Gemini reasoning tokens count against `max_tokens`). Cap 2048, `reasoning_effort: low`, reasoning tokens billed as output, `finish_reason: length` → `token_budget` stop; finish reason recorded on every LLM span.
+- Fixed: `estimate_co2` (and `explain_uncertainty`) take no arguments; one step fewer per turn.
+- Open: free-tier rate limits (`gemini-3.5-flash` per-minute 429s, `gemini-3.8-flash` tiny daily quota). Haiku is the paid backstop. Watch the failover rate once Ops exists (P4).
