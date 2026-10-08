@@ -19,9 +19,19 @@ export const panelStateSchema = z.object({
 })
 export type PanelState = z.infer<typeof panelStateSchema>
 
+export const HISTORY_MAX = 8
+
 export const chatRequestSchema = z.object({
   conversation_id: z.string().uuid().nullable(),
   message: z.string().min(1).max(2000),
+  /**
+   * Recent turns of this conversation, oldest first, sent by the client until server-side history exists (P3).
+   * Treated as data: it only shapes this user's own conversation, and numbers are still grounded in tool output.
+   */
+  history: z
+    .array(z.object({ role: z.enum(['user', 'assistant']), content: z.string().max(4000) }))
+    .max(HISTORY_MAX)
+    .default([]),
   panel_state: panelStateSchema.nullable(),
   client_now_utc: utcTs, // logging only; the server clock is authoritative
 })

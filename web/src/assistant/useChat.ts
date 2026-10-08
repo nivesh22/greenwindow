@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { ChatRequest, PanelState, PlanUpdate, StopReason, TraceSummary } from '../../agent/harness/events'
+import { HISTORY_MAX, type ChatRequest, type PanelState, type PlanUpdate, type StopReason, type TraceSummary } from '../../agent/harness/events'
 import { parseSse } from './sse'
 
 export interface ChatMessage {
@@ -38,6 +38,11 @@ async function httpError(res: Response): Promise<ChatError> {
 
 export function useChat(opts: UseChatOptions = {}) {
   const [messages, setMessages] = useState<ChatMessage[]>([])
+  // Messages before the one being sent, for the request's `history` (no server-side history until P3).
+  const historyRef = useRef<ChatMessage[]>([])
+  useEffect(() => {
+    historyRef.current = messages
+  }, [messages])
   const [status, setStatus] = useState<string | null>(null)
   const [conversationId, setConversationId] = useState<string | null>(null)
   const [limit, setLimit] = useState<LimitState | null>(null)
@@ -72,6 +77,10 @@ export function useChat(opts: UseChatOptions = {}) {
     const body: ChatRequest = {
       conversation_id: convRef.current,
       message,
+      history: historyRef.current
+        .filter((m) => m.text.length > 0)
+        .slice(-HISTORY_MAX)
+        .map((m) => ({ role: m.role, content: m.text.slice(0, 4000) })),
       panel_state: optsRef.current.getPanelState?.() ?? null,
       client_now_utc: nowUtc(),
     }

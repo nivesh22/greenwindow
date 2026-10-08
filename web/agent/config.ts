@@ -12,13 +12,29 @@ const envSchema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
   IP_SALT: z.string().min(16).optional(),
 
-  // Models. IDs from docs/spikes.md (2026-10-08); confirmed live in S3/S4 before use.
-  PRIMARY_MODEL: z.string().default('gemini-3.8-flash'),
+  // Models (docs/spikes.md live checks, 2026-10-08). MODEL_ROUTE is the failover order, "<provider>:<model>" comma
+  // separated. Free gateway credit cannot use Haiku (403), so the default stays on free Gemini models; add
+  // "ai-gateway:anthropic/claude-haiku-5.5" once paid gateway credit exists.
+  MODEL_ROUTE: z
+    .string()
+    .default('gemini-direct:gemini-3.5-flash,gemini-direct:gemini-3.5-flash-lite,gemini-direct:gemini-3.8-flash')
+    .transform((v, ctx) => {
+      const route = v.split(',').map((e) => e.trim()).filter(Boolean).map((e) => {
+        const i = e.indexOf(':')
+        return { provider: e.slice(0, i), model: e.slice(i + 1) }
+      })
+      for (const r of route) {
+        if (r.provider !== 'gemini-direct' && r.provider !== 'ai-gateway') ctx.addIssue({ code: 'custom', message: `bad provider in MODEL_ROUTE: ${r.provider}` })
+        if (!r.model) ctx.addIssue({ code: 'custom', message: 'empty model in MODEL_ROUTE' })
+      }
+      return route as { provider: 'gemini-direct' | 'ai-gateway'; model: string }[]
+    }),
   CHEAP_MODEL: z.string().default('gemini-3.5-flash-lite'),
-  FALLBACK_MODEL: z.string().default('anthropic/claude-haiku-5.5'),
   GEMINI_BASE_URL: z.string().url().default('https://generativelanguage.googleapis.com/v1beta/openai'),
   GATEWAY_BASE_URL: z.string().url().default('https://ai-gateway.vercel.sh/v1'),
   DATA_BASE_URL: z.string().url().default('https://raw.githubusercontent.com/nivesh22/greenwindow/data/app_data'),
+  // backtest_summary.json is served by the site itself. Previews are behind Vercel login, so use production.
+  BACKTEST_BASE_URL: z.string().url().default('https://greenwindow-one.vercel.app'),
 
   // Per-turn budgets (design §5.3).
   MAX_STEPS: num(6),
@@ -27,7 +43,7 @@ const envSchema = z.object({
   MAX_TURN_COST_USD: num(0.01),
   TURN_WALL_MS: num(45_000),
   TOOL_TIMEOUT_MS: num(5_000),
-  FIRST_TOKEN_TIMEOUT_MS: num(6_000),
+  FIRST_TOKEN_TIMEOUT_MS: num(15_000), // whole-call wait for the first stream event; Gemini may send one chunk at the end
 
   // Spend and limits (design §10–11).
   MONTHLY_BUDGET_USD: num(5),

@@ -1,6 +1,7 @@
 import type { RetryPolicy } from '../harness/retry'
 import { AllProvidersFailed, ModelRouter } from './router'
 import { ev, providerError, ScriptedProvider } from './scripted'
+import type { ModelProvider } from './types'
 
 const req = { messages: [{ role: 'user' as const, content: 'hi' }], maxOutputTokens: 10, temperature: 0 }
 const sig = (): AbortSignal => new AbortController().signal
@@ -102,5 +103,26 @@ describe('ModelRouter', () => {
     const r = new ModelRouter([{ provider: a, model: 'ma' }, { provider: b, model: 'mb' }], { retry: policy() })
     await expect(r.complete(req, ctrl.signal)).rejects.toBe(reason)
     expect(b.calls).toBe(0)
+  })
+})
+
+describe('first-event timeout', () => {
+  it('fails over without retrying when the first provider sends nothing in time', async () => {
+    const hang: ModelProvider = {
+      id: 'gemini-direct',
+      async *complete(_req, signal) {
+        await new Promise((_, reject) => signal.addEventListener('abort', () => reject(signal.reason), { once: true }))
+        yield { type: 'finish', reason: 'stop' } as const
+      },
+    }
+    let hangCalls = 0
+    const counted: ModelProvider = { id: 'gemini-direct', complete: (r, s) => (hangCalls++, hang.complete(r, s)) }
+    const ok = new ScriptedProvider([[{ type: 'text', delta: 'hi' }, { type: 'finish', reason: 'stop' }]])
+    const router = new ModelRouter([{ provider: counted, model: 'slow' }, { provider: ok, model: 'fast' }], { firstEventTimeoutMs: 20 })
+    const res = await router.complete({ messages: [], maxOutputTokens: 10, temperature: 0 }, new AbortController().signal)
+    expect(res.model).toBe('fast')
+    expect(hangCalls).toBe(1)
+    expect(res.calls[0]).toMatchObject({ ok: false, errorKind: 'timeout' })
+    expect(res.calls[1]).toMatchObject({ failover: true })
   })
 })

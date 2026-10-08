@@ -4,7 +4,10 @@ import { chatRequestSchema } from '../agent/harness/events'
 import { SupabaseStore } from '../agent/store/supabase'
 import type { ConsumeResult, LimitKind, Store } from '../agent/store/types'
 import { errorBody, ipHash, json, sseResponse } from './_lib/http'
-import { placeholderRunner, type TurnRunner } from './_lib/turn_runner'
+import { HttpForecastSource } from '../agent/data/forecast_source'
+import { buildRouter, createTurnRunner } from '../agent/harness/turn'
+import { buildRegistry } from '../agent/tools'
+import type { TurnRunner } from './_lib/turn_runner'
 
 export const maxDuration = 60
 
@@ -69,6 +72,19 @@ export function createChatHandler(deps: ChatDeps): (request: Request) => Promise
   }
 }
 
+// Module scope: reused across requests on a warm Fluid instance (forecast cache, registry).
+let shared: { store: SupabaseStore; runTurn: TurnRunner; config: AgentConfig } | null = null
+
+function getShared(config: AgentConfig): typeof shared {
+  if (shared) return shared
+  if (!config.SUPABASE_URL || !config.SUPABASE_SERVICE_ROLE_KEY || !config.GEMINI_API_KEY) return null
+  const store = new SupabaseStore({ url: config.SUPABASE_URL, key: config.SUPABASE_SERVICE_ROLE_KEY })
+  const data = new HttpForecastSource({ baseUrl: config.DATA_BASE_URL, backtestBaseUrl: config.BACKTEST_BASE_URL })
+  const runTurn = createTurnRunner({ config, store, data, registry: buildRegistry(), router: buildRouter(config) })
+  shared = { store, runTurn, config }
+  return shared
+}
+
 export default {
   async fetch(request: Request): Promise<Response> {
     let config: AgentConfig
@@ -77,8 +93,8 @@ export default {
     } catch {
       return notConfigured()
     }
-    if (!config.SUPABASE_URL || !config.SUPABASE_SERVICE_ROLE_KEY) return notConfigured()
-    const store = new SupabaseStore({ url: config.SUPABASE_URL, key: config.SUPABASE_SERVICE_ROLE_KEY })
-    return createChatHandler({ store, runTurn: placeholderRunner, config, now: Date.now })(request)
+    const s = getShared(config)
+    if (!s) return notConfigured()
+    return createChatHandler({ store: s.store, runTurn: s.runTurn, config: s.config, now: Date.now })(request)
   },
 }

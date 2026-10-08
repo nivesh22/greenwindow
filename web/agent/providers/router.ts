@@ -58,7 +58,12 @@ export class AllProvidersFailed extends ProvidersDown {
   }
 }
 
+/** The provider sent nothing within firstEventTimeoutMs. Not retried: the router fails over at once. */
+export class FirstEventTimeout extends ProviderError {}
+
 export interface RouterOptions {
+  /** Max wait for a provider's first stream event before failing over (design §5.4). Default: no limit. */
+  firstEventTimeoutMs?: number
   retry?: RetryPolicy
   hooks?: RouterHooks
   now?: () => number
@@ -77,6 +82,7 @@ export class ModelRouter {
   private readonly retry: RetryPolicy
   private readonly hooks: RouterHooks
   private readonly now: () => number
+  private readonly firstEventTimeoutMs: number | null
 
   constructor(entries: readonly RouteEntry[], opts: RouterOptions = {}) {
     if (entries.length === 0) throw new Error('ModelRouter needs at least one entry')
@@ -84,6 +90,7 @@ export class ModelRouter {
     this.retry = opts.retry ?? DEFAULT_RETRY_POLICY
     this.hooks = opts.hooks ?? {}
     this.now = opts.now ?? Date.now
+    this.firstEventTimeoutMs = opts.firstEventTimeoutMs ?? null
   }
 
   /** The models a call may end up on (for worst-case cost checks). */
@@ -120,7 +127,7 @@ export class ModelRouter {
           const midStream = raw instanceof MidStreamError
           const err = midStream ? raw.inner : raw
           lastError = err
-          const delay = midStream ? null : retryDelayMs(err, attempts - 1, deadlineMs, this.retry)
+          const delay = midStream || err instanceof FirstEventTimeout ? null : retryDelayMs(err, attempts - 1, deadlineMs, this.retry)
           if (delay !== null) {
             await this.retry.sleep(delay, signal)
             continue
@@ -145,10 +152,22 @@ export class ModelRouter {
 
   private async collect(entry: RouteEntry, req: ModelRequest, signal: AbortSignal): Promise<ModelEvent[]> {
     const events: ModelEvent[] = []
+    const ctrl = new AbortController()
+    const timeout = new FirstEventTimeout(
+      { provider: entry.provider.id, status: null, retryAfterMs: null, kind: 'timeout' },
+      `no response from ${entry.model} within ${this.firstEventTimeoutMs} ms`,
+    )
+    const timer = this.firstEventTimeoutMs === null ? null : setTimeout(() => ctrl.abort(timeout), this.firstEventTimeoutMs)
     try {
-      for await (const e of entry.provider.complete(req, signal)) events.push(e)
+      for await (const e of entry.provider.complete(req, AbortSignal.any([signal, ctrl.signal]))) {
+        if (timer) clearTimeout(timer)
+        events.push(e)
+      }
     } catch (err) {
+      if (ctrl.signal.aborted && !signal.aborted) throw timeout
       throw events.length > 0 ? new MidStreamError(err) : err
+    } finally {
+      if (timer) clearTimeout(timer)
     }
     return events
   }
