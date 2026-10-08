@@ -2,11 +2,16 @@
 
 | | |
 |---|---|
-| Status | Draft v0.1, for owner review |
+| Status | v0.2, approved with amendments (2026-10-08) |
 | Date | 2026-10-08 |
 | Owner | nivesh22 |
 | Inputs | `docs/agent-discovery-notes.md` (decisions), `greenwindow-design-spec.md` v0.3 (forecasting spec, frozen) |
 | Next document | [`docs/agent-design.md`](agent-design.md) (architecture, schemas, APIs, the harness internals) |
+
+> **v0.2 (2026-10-08):** amended by [`docs/agent-execution-plan.md`](agent-execution-plan.md) §1 (X1–X9): P1 split into
+> P1a/P1b, Supabase from P1a, Jev as an optional adapter behind the gate interface (rules + LLM classifier first), final
+> answer buffered until grounding passes (no `text_reset`/`replace`), Haiku 5.5 fallback, replay evals in CI, `assistant`
+> integration branch. Where this document and §1 of the plan disagree, the plan wins.
 
 This PRD says **what** we build and **why**. It does not choose libraries, table layouts, or file structure; the
 design doc does that. Requirements are numbered `FR-x.y` (functional) and `NFR-x` (non-functional), each with a
@@ -130,7 +135,7 @@ Priority: **M** must, **S** should, **C** could. Phase: when it ships (§10).
 |----|-------------|-----|----|----------------------|
 | FR-2.1 | A hand-written loop: build context → call model → if tool calls, validate and run them → append results → repeat until a final answer or a budget is hit. Provider SDKs are used for transport only. | M | P1 | Loop code is in the repo and unit-tested with a scripted fake model. |
 | FR-2.2 | Budgets per turn: max steps (default 6), max input/output tokens, max cost, wall-clock limit inside the function timeout. Hitting a budget ends the turn gracefully with a partial answer and a reason. | M | P1 | A test per budget type. The trace records which budget stopped the turn. |
-| FR-2.3 | Provider-agnostic model interface. Default: Gemini Flash (free tier). Automatic failover to Claude Haiku 4.5 on rate limit, error, or timeout. Model choice is configurable per environment. | M | P1 | A fault-injection test makes the primary fail. The turn completes on the fallback and the trace marks the failover. |
+| FR-2.3 | Provider-agnostic model interface. Default: Gemini Flash (free tier). Automatic failover to Claude Haiku 5.5 on rate limit, error, or timeout. Model choice is configurable per environment. | M | P1 | A fault-injection test makes the primary fail. The turn completes on the fallback and the trace marks the failover. |
 | FR-2.4 | Every tool has a zod input and output schema. Invalid model arguments are rejected with a structured error the model sees and can correct (max 1 repair attempt per call). | M | P1 | A test with bad arguments: the model gets the error, retries, and succeeds. |
 | FR-2.5 | Transient errors (network, 429, 5xx) are retried with backoff and jitter, within the turn budget. | M | P1 | Unit test of the retry policy. |
 | FR-2.6 | Grounding rule: any start time, intensity, or CO2 figure in the final answer must come from a tool result in the same turn. The output check (FR-3.2) enforces it. | M | P2 | Eval scenarios with a hallucinated time are blocked or corrected. |
@@ -321,7 +326,7 @@ green tests in its worktree. Keep token use reasonable (no subagent for small ed
 | Vercel Hobby | Function duration 60s (sources conflict; verify, Fluid compute settings may differ). Cron only once a day, with up to ~59 min jitter. Non-commercial use. | Turn wall-clock budget sits under the function limit. Minute-level reminders and recurring jobs need Supabase `pg_cron`/`pg_net` or GitHub Actions, not Vercel cron. |
 | Supabase free | 500 MB DB, 50k MAU, anonymous sign-ins and Google OAuth included. Projects pause after 7 days inactive. | A keepalive ping from the existing 6-hourly `pipeline.yml`. Trace retention keeps the DB small. |
 | Langfuse Cloud Hobby | 50k units/month, 30-day data access, 2 users. | Sample exports (FR-8.2). Supabase is the source of truth. |
-| Anthropic Haiku 4.5 | Paid per token, the main spend once the free tier is exhausted. | Prompt caching and tight context (FR-2.7). Per-turn cost cap. |
+| Anthropic Haiku 5.5 | Paid per token, the main spend once the free tier is exhausted. | Prompt caching and tight context (FR-2.7). Per-turn cost cap. |
 
 Other risks:
 - **Free anonymous chat is abused.** Mitigated by CAPTCHA, IP limits, the 3-message gate, and the kill switch.

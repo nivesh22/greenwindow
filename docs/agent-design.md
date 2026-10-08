@@ -2,13 +2,18 @@
 
 | | |
 |---|---|
-| Status | Draft v0.1, for owner review |
+| Status | v0.2, approved with amendments (2026-10-08) |
 | Date | 2026-10-08 |
 | Implements | `docs/agent-prd.md` v0.1 (FR/NFR IDs referenced throughout) |
 | Leaves unchanged | `greenwindow-design-spec.md` v0.3 (forecasting pipeline, JSON contract 7.6) |
 | Branch | `agent-overhaul` |
 
 ---
+
+> **v0.2 (2026-10-08):** amended by [`docs/agent-execution-plan.md`](agent-execution-plan.md) §1 (X1–X9): P1 split into
+> P1a/P1b, Supabase from P1a, Jev as an optional adapter behind the gate interface (rules + LLM classifier first), final
+> answer buffered until grounding passes (no `text_reset`/`replace`), Haiku 5.5 fallback, replay evals in CI, `assistant`
+> integration branch. Where this document and §1 of the plan disagree, the plan wins.
 
 ## 1. Scope and reading guide
 
@@ -148,13 +153,13 @@ covers `agent/**`, `api/**`, `src/scheduler/optimizer.ts`, `src/lib/{time,format
 | 3 | Load context | The conversation (create if new), last 8 messages, summary, profile, and the panel state from the request. | `turn_start` | 80 ms |
 | 4 | Gates A (parallel) | `guard_in` ∥ `router`. If guard_in ≠ allow, or intent ∈ {off_topic, smalltalk}: a templated or short reply without tools, then go to 8. | `gate` ×2 | 500 ms |
 | 5 | Gates B (parallel, plan intents only) | `ask_or_act` ∥ `risk_mode`. If ask: the loop runs with a "ask exactly this question" instruction and no tools. | `gate` ×2 | 500 ms |
-| 6 | Loop | Model ↔ tools until a final answer or a budget stops it (§5). | `text_delta`, `tool_start`, `tool_end`, `plan_update` | 12 s |
+| 6 | Loop | Model ↔ tools until a final answer or a budget stops it (§5). | `tool_start`, `tool_end`, `plan_update` (then `answer`) | 12 s |
 | 7 | guard_out | Grounding + overclaim check. On fail: regenerate once with the violation listed, else a templated answer built from the tool outputs. | `gate` | 600 ms |
 | 8 | Persist | Messages, the turn, spans, usage, cost (one batched write via `waitUntil`). | `done` | async |
 
-The user sees a streamed answer from stage 6 onward. Because the output check (stage 7) needs the full text, text is
-streamed **provisionally**. If guard_out replaces it, the client gets a `replace` flag on `done` and swaps in the
-corrected text. This is rare by design, and it is tracked on Ops.
+(v0.2, X4) The user sees live `gate`, `tool_start` and `tool_end` events from stage 4 onward. The answer text is
+**buffered**: the loop collects it, the deterministic grounding check (and guard_out from P2) runs, and only then is the
+text sent as one `answer` event. A failed check regenerates once, else a templated answer built from the tool outputs.
 
 Wall-clock cap per turn: 45 s (`TURN_WALL_MS`), far below the 300 s Fluid limit (Spike S2). The handler sets
 `export const maxDuration = 60`.
@@ -191,7 +196,7 @@ fragments by index, and emits `tool_call` only when the call is complete. Two co
 | Provider | baseUrl | Auth | Models (config defaults, Spike S3/S4) |
 |----------|---------|------|----------------------------------------|
 | `gemini-direct` | `https://generativelanguage.googleapis.com/v1beta/openai` | `Bearer GEMINI_API_KEY` | primary `gemini-flash-latest`, cheap `gemini-flash-lite-latest` |
-| `ai-gateway` | `https://ai-gateway.vercel.sh/v1` | `Bearer AI_GATEWAY_API_KEY` | fallback `anthropic/claude-haiku-4.5` |
+| `ai-gateway` | `https://ai-gateway.vercel.sh/v1` | `Bearer AI_GATEWAY_API_KEY` | fallback Haiku 5.5 (gateway slug: Spike S4) |
 
 No provider SDKs: plain `fetch` keeps the transport visible and dependency-free (decision entry, §17).
 
@@ -204,7 +209,7 @@ runLoop(ctx, messages, tools, budget, emit):
     stream = router.complete({model, messages, tools, ...}, signal(budget.deadline))
     text = ''; calls = []
     for ev in stream:
-      text: text += ev.delta; emit(text_delta)
+      text: text += ev.delta                                       # buffered (X4), no streaming to the client
       tool_call: calls.push(ev.call)
       usage: budget.charge(model, ev); tracer.llmSpan(...)
     messages.push(assistant(text, calls))
@@ -249,7 +254,7 @@ Any non-`final` stop returns the partial text plus a short reason line and is st
   and `Retry-After` honored if under the remaining wall time. No retry after any text has streamed (we fail over instead).
 - `router.ts`: the order is `[primary, fallback]`. Fail over when: retries are exhausted, 429 (quota, immediately, no retry,
   since a free-tier RPD hit won't clear), timeout to first token > 6 s, or a malformed tool call twice. If text was already
-  streamed, emit `text_reset` and restart the step on the fallback.
+  collected (buffered, X4), discard it and restart the step on the fallback.
 - Circuit breaker per provider, held in memory per Fluid instance: open after 3 failures in 60 s, for 5 min. While
   open, go straight to the fallback. The failover is recorded on the LLM span (`failover=true`, `failover_reason`).
 - Both providers down → stop `provider_down` → "The assistant is unavailable right now, the planner form still works."
@@ -448,11 +453,10 @@ const ChatRequest = z.object({
 | `tool_start` | `{call_id, tool, status_text}` (for example, "Checking the forecast…") |
 | `tool_end` | `{call_id, tool, ok, latency_ms, summary}` |
 | `plan_update` | `{duration_h, power_kw, earliest_utc, deadline_utc, mode, model, best_start_utc, run_id}` |
-| `text_delta` | `{text}` |
-| `text_reset` | `{}` (failover mid-stream) |
+| `answer` | `{text}` (once, after grounding; v0.2 X4) |
 | `limit` | `{kind: 'anon_limit'|'daily_cap'|'rate'|'budget_paused', message, sign_in: boolean}` |
 | `error` | `{code, message}` |
-| `done` | `{turn_id, stop_reason, replace?: string, trace: TraceSummary}` |
+| `done` | `{turn_id, stop_reason, trace: TraceSummary}` |
 
 `TraceSummary` = gate decisions + tool calls (name, args, ok, ms) + LLM calls (model, provider, failover, tokens,
 cost, ms) + totals. It feeds the "How I got this" drawer directly (FR-1.4), so the drawer needs no extra fetch.
@@ -660,7 +664,7 @@ About 15 household, 10 developer, 6 small business, 6 model-accuracy/explain, 5 
   Secrets: `GEMINI_API_KEY`, `AI_GATEWAY_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (for writing `eval_runs`). Fails if the
   pass rate is < 0.90, window correctness < 1.0, or banned claims > 0. Made a required check on `main` at P2 exit.
 - **Harness unit tests** use a `ScriptedProvider` (a sequence of `ModelEvent`s per call) with no network. They cover
-  the budgets, failover, `text_reset`, repair, parallel tools, and stop reasons. They run in the normal `npm test`.
+  the budgets, failover, repair, parallel tools, and stop reasons. They run in the normal `npm test`.
 
 ## 16. Security and privacy
 
@@ -736,7 +740,7 @@ Supabase line (now approved, see decisions). Add the agent doc links and the new
 
 | Layer | Tooling | What |
 |-------|---------|------|
-| Harness unit | Vitest + `ScriptedProvider` | Loop, budgets (each stop reason), retry, failover + breaker, `text_reset`, repair, parallel tools, context cap |
+| Harness unit | Vitest + `ScriptedProvider` | Loop, budgets (each stop reason), retry, failover + breaker, repair, parallel tools, context cap |
 | Providers | Vitest + recorded SSE fixtures | The OpenAI-compat stream parser (text, fragmented tool calls, usage chunk, errors). Gemini and gateway samples recorded in the spikes |
 | Gates | Vitest, Jev mocked | Thresholds, fallbacks, timeouts, decision → action mapping, grounding regexes |
 | Tools | Vitest on `tests/app_data` | Each tool's I/O schema. `recommend_window` agrees with `tests/golden/optimizer_cases.json`. The CO2 range invariant `low > 0 ⇔ robust`. .ics validity |
@@ -820,7 +824,7 @@ the full suite plus the evals, and commits per task.
 | S1 | Jev through Vercel AI Gateway: endpoint path, body (`state`/`questions` vs chat format), model ID, latency | docs + a 10-call script | OpenRouter `typesafe/jev-1.13`. Then the gate fallbacks only |
 | S2 | Vercel Hobby with Fluid: `maxDuration` 60–300 s and SSE streaming for a Vite project's `/api` functions | deploy a hello-SSE function to a preview | Lower the wall clock to fit. If streaming fails, use chunked JSON lines |
 | S3 | Gemini OpenAI-compat: streaming tool calls (fragmentation), `stream_options.include_usage`, model aliases, free-tier RPD for our project | a script + recorded fixtures | Parse the usage from the final chunk or estimate it. Pin explicit model IDs |
-| S4 | Haiku 4.5 model ID on the gateway, usage reporting, prompt-cache support via OpenAI-compat | a script | No explicit caching (keep the stable-prefix ordering) |
+| S4 | Haiku 5.5 model ID on the gateway, usage reporting, prompt-cache support via OpenAI-compat | a script | No explicit caching (keep the stable-prefix ordering) |
 | S5 | Supabase JWT verification: JWKS (asymmetric keys) vs the legacy secret on new projects | Supabase docs + project settings | `supabase.auth.getUser(jwt)` call (one extra round trip) |
 | S6 | `linkIdentity` when the Google account already exists | test project | `/api/session/merge` re-assigns rows from the anonymous user ID |
 | S7 | Google Calendar template URL parameters | manual test | .ics only |

@@ -1,5 +1,7 @@
 {
-  "enabledMcpjsonServers": ["vercel"],
+  "enabledMcpjsonServers": [
+    "vercel"
+  ],
   "permissions": {
     "allow": [
       "Bash(uv run pytest:*)",
@@ -15,6 +17,8 @@
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
+      "Read(./web/.env)",
+      "Read(./web/.env.*)",
       "Bash(git push --force:*)"
     ]
   }

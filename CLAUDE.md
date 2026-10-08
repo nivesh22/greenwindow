@@ -5,7 +5,9 @@ The source of truth is `greenwindow-design-spec.md` (v0.3). The agent rules live
 @AGENTS.md
 
 ## What we're building (one paragraph)
-A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbon intensity (NESO API) and Open-Meteo weather, runs forecasting models (seasonal naive, ETS, SARIMAX+weather, Chronos-2 uni/cov, optional LightGBM), stores immutable snapshots as parquet on an orphan `data` branch, scores them against actuals, and exports small JSON files (`app_data/*.json`, spec 7.6). A static Vite + React + TypeScript app on Vercel reads those JSON files from `raw.githubusercontent.com` and renders the forecast, an in-browser scheduler optimizer, a live leaderboard, backtest results, and an About/Limits page. No backend, no database, no secrets.
+A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbon intensity (NESO API) and Open-Meteo weather, runs forecasting models (seasonal naive, ETS, SARIMAX+weather, Chronos-2 uni/cov, optional LightGBM), stores immutable snapshots as parquet on an orphan `data` branch, scores them against actuals, and exports small JSON files (`app_data/*.json`, spec 7.6). A static Vite + React + TypeScript app on Vercel reads those JSON files from `raw.githubusercontent.com` and renders the forecast, an in-browser scheduler optimizer, a live leaderboard, backtest results, and an About/Limits page.
+
+**Agent overhaul (from 2026-10-08):** a chat assistant ("GreenWindow Assistant") in Plan a job, with a hand-written TypeScript agent harness in `web/agent/` served by Vercel Functions in `web/api/`, Supabase (free) for spend/limits/traces and later auth+memory, Gemini (free tier) with Haiku 5.5 failover via Vercel AI Gateway. Docs: `docs/agent-prd.md`, `docs/agent-design.md`, **`docs/agent-execution-plan.md` (phases, agents, owner setup checklist; its §1 amends the other two)**. Supabase project ref `sndukjnxdvhrnbtazrlu` (eu-west-1). Agent work merges into the `assistant` branch (preview), `main` only at phase exits.
 
 ## How to read the spec
 - Sections 2–12 in order for the build. Section 11 is the task list (T-1 … T15) — do tasks in order, one at a time.
@@ -20,7 +22,7 @@ A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbo
 - **Done 2026-10-06:** `ets` (A,N,A), `ucm_wx`, `prophet_wx` in the live registry; backtest (`make backtest`, ~11 min, 90 origins + sensitivity) -> `web/public/backtest_summary.json`, `docs/results.md`; Backtest page.
 - **Done 2026-10-07:** `wind_cf` (power curve per point, 7 weather points) replaces `wind100` as model input; Chronos-2+wx 25-48 h MASE 0.625 -> 0.581. Live pipeline re-bootstraps observations once on deploy (missing column).
 - **Done 2026-10-07:** `blend_wx` (Chronos for 1-24 h; 0.7 Chronos + 0.3 Prophet for 25-48 h), backfilled from stored snapshots; 25-48 h MASE 0.553.
-- **Next:** axe a11y check; Playwright e2e (Should); significance test (R11); LightGBM (R10); weather slider (R12); README results + screenshots (T14).
+- **Next (agent overhaul):** P0 of `docs/agent-execution-plan.md`. Forecasting backlog (paused): axe a11y check; Playwright e2e (Should); significance test (R11); LightGBM (R10); weather slider (R12); README results + screenshots (T14).
 - Owner preference: minimal working thing first, improve incrementally; keep token use reasonable.
 - Env: `.venv` (Python 3.11) has torch **2.8.0+cpu** pinned — newer torch fails to load on this Windows build.
 - Local pipeline output goes to `data_local/` (gitignored); set `GREENWINDOW_DATA_DIR` to override. `--no-chronos` on a rerun of the same hour drops that run's Chronos rows.
@@ -45,7 +47,7 @@ A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbo
 ## Integrations (MCP)
 - **GitHub** — via `git` + `gh` CLI (user's login, not the GitHub MCP; user chose this over the scoped PAT in spec H6). Repo: https://github.com/nivesh22/greenwindow. The login can reach all the user's repos — **only ever touch `nivesh22/greenwindow`**.
 - **Vercel MCP** — connected to the right account (re-authorized 2026-10-06); project `greenwindow` = `prj_gRuE7wuY4vEFubHVaF733Lbq8BrB` (scope `niveshs-projects-b8d725ac`). Call MCP tools with the project ID and **no teamId** (passing the team ID returns 403). The Vercel **CLI** is signed in to the wrong account — **do not use the CLI**. Root Directory = `web`; must not build on `data` branch pushes (V11/H9).
-- **Supabase** — the spec explicitly rejects it for v1 (D6, 15.1). Do not use it unless the user changes the decision and it's recorded in `docs/decisions.md`.
+- **Supabase** — adopted 2026-10-08 for the assistant (reverses D6; see `docs/decisions.md`). Project `Greenwindow`, ref `sndukjnxdvhrnbtazrlu`. CLI via `npx supabase@2.120.0` (owner logged in on this machine). Never print keys; never read `.env*`.
 
 ## Wording rules worth repeating
 - Never "CO2 saved". Say "estimated difference in average grid intensity".

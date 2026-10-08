@@ -81,6 +81,17 @@ Format:
 - **NESO in the backtest:** included as `neso_published` (forecast as returned by the API, lead time unknown), labelled as not a fair comparison (spec 5.3 item 7).
 - **backtest_summary.json:** `horizon_bucket` also takes `"all"`. Served from the site itself (`web/public`), so the web client fetches it same-origin.
 
+## 2026-10-08 — Agent overhaul: backend, Supabase, models, rule changes
+- **Context:** the owner wants an agentic showcase (`docs/agent-prd.md`, `docs/agent-design.md`, `docs/agent-execution-plan.md`). It conflicts with rules written for the static app.
+- **Backend:** Vercel Functions inside `web/` (`web/api/`, server code in `web/agent/`), so the agent imports `optimizer.ts` directly. Forecast pages still read only the published JSON; the JSON contract (7.6) is unchanged.
+- **Supabase adopted (reverses D6):** free tier, project `sndukjnxdvhrnbtazrlu` (eu-west-1). From P1a: spend ledger, usage counters, turns, spans. From P3: auth (anonymous + Google), memory. From P4: pg_cron jobs. CLI pinned at `supabase@2.120.0`.
+- **Models:** Gemini Flash (free tier, direct OpenAI-compatible endpoint) as primary; Claude Haiku 5.5 via Vercel AI Gateway as fallback. Plain `fetch` adapter, no provider SDKs (keeps the transport visible, no new dependencies).
+- **Jev:** optional adapter behind the typed gate interface, only after spike S1 confirms it from primary sources and the owner approves the spend. Gates ship first on rules + a Flash-Lite classifier.
+- **Answers are buffered** until the deterministic grounding check passes (plan X4). Evals: replay mode in CI, live mode on demand (X7).
+- **Rules changed:** AGENTS.md 6 (own `/api/*` allowed for the assistant), 7 (LLM spend capped at $5/month with a kill switch, server secrets in Vercel/GitHub only), new 14 (numbers come from tools) and 15 (evals, `assistant` branch). Rule 9 (CO2 wording) is unchanged until the owner decides O1.
+- **Secrets (names only):** `GEMINI_API_KEY`, `AI_GATEWAY_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `IP_SALT`; public `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`. Later phases add the rest of design §16.
+- **Spec sections affected:** 1 (scope), 4.4 (layout), D6, 15.1. The forecasting spec v0.3 is otherwise frozen.
+
 ## 2026-10-07 — Wind power feature (`wind_cf`) and more wind points
 - **Why:** at 25-48 h ahead our best model (Chronos-2 + weather, MASE 0.625) is well behind NESO (0.339), and errors are largest at low wind. Turbine output is not linear in wind speed, and averaging speeds across sites before converting hides that.
 - **`wind_cf`:** generic normalised power curve at 100 m: 0 below 3 m/s, cubic ramp to 1 at 12 m/s, 1 up to 25 m/s, 0 at and above 25 m/s (storm cut-out). Applied per point, then weighted. A simplification: real fleet curves are smoother (mixed turbines, wake losses, curtailment) and are not fitted here.
