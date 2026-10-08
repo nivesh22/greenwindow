@@ -88,7 +88,7 @@ describe('ChatPanel', () => {
     const { unmount } = render(<ChatPanel />)
     await userEvent.type(screen.getByLabelText('Message to the assistant'), 'hi{Enter}')
     const alert = await screen.findByRole('alert')
-    expect(alert).toHaveTextContent('Assistant unavailable — the planner form below still works.')
+    expect(alert).toHaveTextContent('Assistant unavailable — the plan panel still works.')
     expect(alert).toHaveTextContent('Down for now.')
     unmount()
 
