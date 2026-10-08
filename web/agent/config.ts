@@ -51,14 +51,16 @@ export interface Price {
 }
 
 /**
- * Price table, checked 2026-10-08. Gemini is used on the free tier (no billing on the key). The gateway's listed
- * Haiku 5.5 price was unverified (docs/spikes.md S4), so a conservative $1/$5 is used until confirmed live: it
- * makes the kill switch trip early, never late. Unknown models are priced at the most expensive entry.
+ * Price table, checked live 2026-10-08 (docs/spikes.md "Live checks"). Gemini is used on the free tier (no billing
+ * on the key). Haiku 5.5 via the gateway: $0.10 / $0.50 per 1M below 100k input tokens (our turns stay far below).
+ * Unknown models are priced at a deliberately high worst case so the kill switch trips early, never late.
  */
 export const PRICES: Record<string, Price> = {
   'gemini-3.8-flash': { inUsdPerMTok: 0, outUsdPerMTok: 0, cachedInUsdPerMTok: 0, free: true },
   'gemini-3.5-flash-lite': { inUsdPerMTok: 0, outUsdPerMTok: 0, cachedInUsdPerMTok: 0, free: true },
-  'anthropic/claude-haiku-5.5': { inUsdPerMTok: 1, outUsdPerMTok: 5, cachedInUsdPerMTok: 0.1, free: false },
+  'gemini-3.5-flash': { inUsdPerMTok: 0, outUsdPerMTok: 0, cachedInUsdPerMTok: 0, free: true },
+  'anthropic/claude-haiku-5.5': { inUsdPerMTok: 0.1, outUsdPerMTok: 0.5, cachedInUsdPerMTok: 0.01, free: false },
+  'typesafe-ai/jev': { inUsdPerMTok: 0.042, outUsdPerMTok: 0, cachedInUsdPerMTok: 0.042, free: false },
 }
 export const PRICES_CHECKED = '2026-10-08'
 
