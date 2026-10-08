@@ -11,13 +11,14 @@ import pandas as pd
 
 from greenwindow.export.app_json import SCHEMA_VERSION, iso, r1
 from greenwindow.live.scorer import BUCKETS
+from greenwindow.models import blend
 
 CAVEAT = (
     "Backtest weather comes from archived forecasts that are closer to reality than a true 1-2-day-ahead "
     "forecast, so models that use weather look better here than they will live. NESO rows are its forecast "
     "as published, with unknown lead time: not a fair head-to-head. The live leaderboard is the unbiased check."
 )
-LABELS = {"neso_published": "NESO as published (lead time unknown)"}
+LABELS = {"neso_published": "NESO as published (lead time unknown)", blend.NAME: blend.LABEL}
 
 
 def _scale_by_origin(obs: pd.DataFrame, origins: list[pd.Timestamp], window_days: int, m: int = 24) -> pd.Series:

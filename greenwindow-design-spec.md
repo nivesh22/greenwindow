@@ -609,7 +609,7 @@ These files live in `app_data/` on the `data` branch (and `backtest_summary.json
 | generated_at_utc | string | When the pipeline run finished |
 | latest_run_id | string | Matches `run_id` in 7.2 |
 | latest_actual_ts_utc | string or null | Most recent hour with an actual |
-| models | array | `{name, label, family, uses_covariates}`; `family` is `"benchmark"`, `"classical"`, or `"foundation"` |
+| models | array | `{name, label, family, uses_covariates}`; `family` is `"benchmark"`, `"classical"`, `"foundation"`, or `"ensemble"` (added 2026-10-07, additive) |
 | attribution | array of string | Required credit lines (NESO, Open-Meteo) |
 
 **`latest_forecast.json`**

@@ -1,7 +1,7 @@
 """End-to-end pipeline on fixture data with no network (spec 10.3), plus exporter and scorer checks."""
 
 import json
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
 import numpy as np
 import pandas as pd
@@ -84,6 +84,31 @@ def test_observations_missing_a_column_are_rebuilt(patched) -> None:
     assert "ets" in report.ok, report.failed
     obs = pd.read_parquet(path)
     assert "wind_cf" in obs.columns and obs["wind_cf"].notna().all()
+
+
+def test_blend_backfilled_from_stored_snapshots(patched, monkeypatch) -> None:
+    from greenwindow.models import blend
+
+    pipeline.run_pipeline(NOW, include_chronos=False)
+    path = patched / "parquet" / "forecast_snapshots.parquet"
+    snaps = pd.read_parquet(path)
+    chronos = snaps[snaps["model"] == "prophet_wx"].assign(model=blend.CHRONOS)  # stand-in for a stored Chronos run
+    pd.concat([snaps, chronos], ignore_index=True).to_parquet(path)
+
+    def later_carbon(start, end, chunk_days=30):  # six hours more actuals -> a new run_id
+        df = fake_carbon(start, end, chunk_days)
+        df["ci_actual"] = 180.0
+        return df[df["from_utc"] < LAST_ACTUAL + pd.Timedelta(hours=7)]
+
+    monkeypatch.setattr(pipeline, "fetch_carbon_actuals", later_carbon)
+    report = pipeline.run_pipeline(NOW + timedelta(hours=6), include_chronos=False)
+    assert report.run_id == "20261005T17"
+    after = pd.read_parquet(path)
+    old_run = snaps["run_id"].iloc[0]
+    assert set(after.loc[after["model"] == blend.NAME, "run_id"]) == {old_run}  # backfilled, nothing else touched
+    before = snaps.set_index(["run_id", "model", "horizon_h"]).sort_index()
+    kept = after.set_index(["run_id", "model", "horizon_h"]).loc[before.index]
+    pd.testing.assert_frame_equal(kept, before)
 
 
 def test_invalid_export_is_rejected(patched) -> None:

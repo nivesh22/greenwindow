@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "generated_at_utc": "2026-10-07T21:41:16Z",
+ "generated_at_utc": "2026-10-08T03:16:43Z",
  "origins": {
   "start": "2026-07-07T00:00:00Z",
   "end": "2026-10-04T00:00:00Z",
@@ -8,6 +8,14 @@
  },
  "caveat": "Backtest weather comes from archived forecasts that are closer to reality than a true 1-2-day-ahead forecast, so models that use weather look better here than they will live. NESO rows are its forecast as published, with unknown lead time: not a fair head-to-head. The live leaderboard is the unbiased check.",
  "rows": [
+  {
+   "model": "blend_wx",
+   "horizon_bucket": "1-6",
+   "mase": 0.287,
+   "mae": 10.1,
+   "wql": 0.051,
+   "coverage80": 0.826
+  },
   {
    "model": "chronos2_cov",
    "horizon_bucket": "1-6",
@@ -89,6 +97,14 @@
    "coverage80": null
   },
   {
+   "model": "blend_wx",
+   "horizon_bucket": "25-48",
+   "mase": 0.553,
+   "mae": 19.3,
+   "wql": 0.099,
+   "coverage80": 0.829
+  },
+  {
    "model": "chronos2_cov",
    "horizon_bucket": "25-48",
    "mase": 0.581,
@@ -161,6 +177,14 @@
    "coverage80": null
   },
   {
+   "model": "blend_wx",
+   "horizon_bucket": "7-24",
+   "mase": 0.42,
+   "mae": 14.7,
+   "wql": 0.08,
+   "coverage80": 0.844
+  },
+  {
    "model": "chronos2_cov",
    "horizon_bucket": "7-24",
    "mase": 0.42,
@@ -231,6 +255,14 @@
    "mae": 11.8,
    "wql": null,
    "coverage80": null
+  },
+  {
+   "model": "blend_wx",
+   "horizon_bucket": "all",
+   "mase": 0.47,
+   "mae": 16.4,
+   "wql": 0.086,
+   "coverage80": 0.834
   },
   {
    "model": "chronos2_cov",

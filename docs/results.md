@@ -1,6 +1,6 @@
 # Backtest results
 
-Generated 2026-10-07T21:41:16Z by `make backtest` in 13.9 min. 90 daily origins (00:00 UTC) from 2026-07-07 to 2026-10-04, 48-hour horizon.
+Generated 2026-10-08T03:16:43Z by `make backtest` in 12.5 min. 90 daily origins (00:00 UTC) from 2026-07-07 to 2026-10-04, 48-hour horizon.
 
 > **Caveat.** Backtest weather comes from archived forecasts that are closer to reality than a true 1-2-day-ahead forecast, so models that use weather look better here than they will live. NESO rows are its forecast as published, with unknown lead time: not a fair head-to-head. The live leaderboard is the unbiased check.
 
@@ -11,6 +11,7 @@ Primary metrics: MASE (point; < 1 beats in-sample seasonal naive) and WQL (proba
 | Model | MASE | MAE | WQL | 80% coverage |
 |---|---|---|---|---|
 | NESO as published (lead time unknown) | 0.339 | 11.8 | – | – |
+| Chronos-2 + Prophet blend | 0.470 | 16.4 | 0.086 | 83% |
 | Chronos-2 + weather | 0.484 | 16.9 | 0.089 | 83% |
 | Prophet + weather | 0.655 | 22.8 | 0.122 | 67% |
 | Chronos-2 | 0.767 | 26.9 | 0.138 | 78% |
@@ -24,6 +25,7 @@ Primary metrics: MASE (point; < 1 beats in-sample seasonal naive) and WQL (proba
 
 | Model | MASE | MAE | WQL | 80% coverage |
 |---|---|---|---|---|
+| Chronos-2 + Prophet blend | 0.287 | 10.1 | 0.051 | 83% |
 | Chronos-2 + weather | 0.287 | 10.1 | 0.051 | 83% |
 | Chronos-2 | 0.296 | 10.4 | 0.053 | 83% |
 | ETS (daily season) | 0.339 | 11.9 | 0.062 | 79% |
@@ -39,6 +41,7 @@ Primary metrics: MASE (point; < 1 beats in-sample seasonal naive) and WQL (proba
 | Model | MASE | MAE | WQL | 80% coverage |
 |---|---|---|---|---|
 | NESO as published (lead time unknown) | 0.334 | 11.7 | – | – |
+| Chronos-2 + Prophet blend | 0.420 | 14.7 | 0.080 | 84% |
 | Chronos-2 + weather | 0.420 | 14.7 | 0.080 | 84% |
 | Prophet + weather | 0.605 | 21.1 | 0.115 | 70% |
 | Chronos-2 | 0.704 | 24.7 | 0.132 | 77% |
@@ -53,6 +56,7 @@ Primary metrics: MASE (point; < 1 beats in-sample seasonal naive) and WQL (proba
 | Model | MASE | MAE | WQL | 80% coverage |
 |---|---|---|---|---|
 | NESO as published (lead time unknown) | 0.339 | 11.8 | – | – |
+| Chronos-2 + Prophet blend | 0.553 | 19.3 | 0.099 | 83% |
 | Chronos-2 + weather | 0.581 | 20.3 | 0.106 | 82% |
 | Prophet + weather | 0.682 | 23.7 | 0.128 | 65% |
 | Chronos-2 | 0.932 | 32.6 | 0.165 | 78% |
@@ -86,6 +90,7 @@ Primary metrics: MASE (point; < 1 beats in-sample seasonal naive) and WQL (proba
 
 | Model | 00-05 | 06-11 | 12-17 | 18-23 |
 |---|---|---|---|---|
+| Chronos-2 + Prophet blend | 17.3 | 15.8 | 14.2 | 18.4 |
 | Chronos-2 + weather | 17.6 | 16.6 | 14.4 | 19.1 |
 | Chronos-2 | 25.2 | 23.8 | 25.1 | 33.4 |
 | ETS (daily season) | 28.9 | 36.1 | 41.0 | 42.1 |
@@ -100,6 +105,7 @@ Primary metrics: MASE (point; < 1 beats in-sample seasonal naive) and WQL (proba
 
 | Model | high wind | low wind | mid wind |
 |---|---|---|---|
+| Chronos-2 + Prophet blend | 15.6 | 17.8 | 15.9 |
 | Chronos-2 + weather | 15.9 | 18.1 | 16.8 |
 | Chronos-2 | 25.5 | 30.2 | 24.8 |
 | ETS (daily season) | 35.0 | 38.9 | 37.1 |
@@ -114,6 +120,7 @@ Primary metrics: MASE (point; < 1 beats in-sample seasonal naive) and WQL (proba
 
 | Model | weekday | weekend/holiday |
 |---|---|---|
+| Chronos-2 + Prophet blend | 16.2 | 16.8 |
 | Chronos-2 + weather | 16.6 | 17.8 |
 | Chronos-2 | 27.0 | 26.5 |
 | ETS (daily season) | 36.4 | 38.5 |

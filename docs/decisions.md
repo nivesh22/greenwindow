@@ -89,3 +89,10 @@ Format:
 - **Migration:** if stored observations lack a column in `OBSERVATION_COLUMNS`, the pipeline re-bootstraps them from the APIs (400 days) instead of leaving history half-filled. Snapshots are untouched.
 - **Result** (backtest pinned to `--end 2026-10-06T01:00`, same 90 origins as before): Chronos-2 + weather MASE 0.518 -> 0.484 overall, 0.625 -> 0.581 at 25-48 h, 0.454 -> 0.420 at 7-24 h, unchanged at 1-6 h. Prophet + weather 0.713 -> 0.655. SARIMAX and UCM unchanged (±0.01). Weather-input caveat (D3/5.3) still applies; the live leaderboard is the check.
 - **SARIMAX fallback:** with the new inputs, L-BFGS stopped at a unit-root boundary at one origin (2026-08-03; log-likelihood 0, non-finite forecast variance). If the forecast variance is not finite, the model refits with Powell.
+
+## 2026-10-07 — Chronos-2 + Prophet blend (`blend_wx`)
+- **What:** hours 1-24 copy `chronos2_cov`; hours 25-48 are 0.7 x `chronos2_cov` + 0.3 x `prophet_wx` (mean and each quantile). Derived from stored snapshots, no refit (`models/blend.py`).
+- **Weight choice:** 0.7 picked on the same 90-origin backtest (in-sample choice; mild optimism). The gain held in both halves of the period (25-48 h MAE 19.5 -> 18.9 and 21.0 -> 19.6). Blending did not help at 1-24 h, so those hours stay Chronos-only.
+- **Result:** 25-48 h MASE 0.581 -> 0.553, all horizons 0.484 -> 0.470, 80% coverage 83%.
+- **Leaderboard continuity:** a new model row; existing models and their history are untouched. Blend rows are backfilled for any stored run that has both components, because those inputs were issued at that run's origin (no leakage). Rows for runs before 2026-10-08 were derived after the fact, not issued live. No existing snapshot row is edited (D5 holds).
+- **JSON contract (7.6):** `family` gains `"ensemble"`. Additive; `schema_version` stays 1 because the web app deploys on push to `main`, before the next cron pipeline run writes it.

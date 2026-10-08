@@ -14,7 +14,10 @@ const BUCKETS = [
 ] as const
 type Bucket = (typeof BUCKETS)[number]['key']
 
-const EXTRA_LABELS: Record<string, string> = { neso_published: 'NESO as published*' }
+const EXTRA_LABELS: Record<string, string> = {
+  neso_published: 'NESO as published*',
+  blend_wx: 'Chronos-2 + Prophet blend', // until meta.json lists it
+}
 const BENCHMARKS = new Set(['snaive_24', 'snaive_168'])
 
 export function Backtest() {

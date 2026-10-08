@@ -25,6 +25,7 @@ from greenwindow.ingest.carbon import fetch_carbon_actuals, fetch_neso_forward_f
 from greenwindow.ingest.weather import fetch_weather, national_weather
 from greenwindow.live import store
 from greenwindow.live.scorer import apply_retention, score_snapshots
+from greenwindow.models import blend
 from greenwindow.models.base import COVARIATES, forecast_at, future_index
 from greenwindow.models.registry import NESO, live_models
 from greenwindow.schemas import OBSERVATION_COLUMNS, validate_observations
@@ -46,6 +47,8 @@ def models_meta(settings: Settings, include_chronos: bool = True) -> list[dict[s
         {"name": m.name, "label": m.label, "family": m.family, "uses_covariates": m.uses_covariates}
         for m in live_models(settings, include_chronos)
     ]
+    if include_chronos:
+        ms.append(blend.META)
     return ms + [NESO]
 
 
@@ -148,6 +151,10 @@ def run_pipeline(now: datetime, include_chronos: bool = True) -> RunReport:
     old = store.read_table("forecast_snapshots")
     kept = [old[old["run_id"] != run_id]] if old is not None else []  # same run_id: replace (idempotent)
     snaps = pd.concat([*kept, *new_rows], ignore_index=True)
+    blended = blend.blend_rows(snaps, horizon)  # this run, plus any earlier run that has both components
+    if run_id in set(blended["run_id"]):
+        report.ok.append(blend.NAME)
+    snaps = pd.concat([snaps, blended], ignore_index=True)
     snaps = apply_retention(snaps, now_ts, settings.retention_days)
     scores = score_snapshots(snaps, obs)
 

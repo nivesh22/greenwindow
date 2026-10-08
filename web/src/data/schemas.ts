@@ -12,7 +12,7 @@ const base = { schema_version: z.number().int(), generated_at_utc: utcTs }
 export const modelInfoSchema = z.object({
   name: z.string().min(1),
   label: z.string().min(1),
-  family: z.enum(['benchmark', 'classical', 'foundation']),
+  family: z.enum(['benchmark', 'classical', 'foundation', 'ensemble']),
   uses_covariates: z.boolean(),
 })
 

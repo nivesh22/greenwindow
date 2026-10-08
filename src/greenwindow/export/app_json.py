@@ -24,7 +24,7 @@ ATTRIBUTION = [
     "Carbon intensity data: National Energy System Operator (NESO) Carbon Intensity API, CC BY 4.0.",
     "Weather data by Open-Meteo.com, CC BY 4.0.",
 ]
-FAMILIES = {"benchmark", "classical", "foundation"}
+FAMILIES = {"benchmark", "classical", "foundation", "ensemble"}
 
 
 class ExportError(ValueError):

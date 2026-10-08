@@ -13,10 +13,11 @@ const FAMILY_LABEL: Record<ModelInfo['family'], string> = {
   benchmark: 'Benchmarks',
   classical: 'Classical',
   foundation: 'Foundation model',
+  ensemble: 'Blend',
 }
 
 export function ModelPicker({ id, label, models, value, onChange, allowNone }: Props) {
-  const families = (['foundation', 'classical', 'benchmark'] as const).filter((f) => models.some((m) => m.family === f))
+  const families = (['ensemble', 'foundation', 'classical', 'benchmark'] as const).filter((f) => models.some((m) => m.family === f))
   return (
     <label htmlFor={id} className="flex flex-col gap-1 text-sm">
       <span className="font-medium text-stone-700 dark:text-stone-300">{label}</span>

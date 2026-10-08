@@ -29,6 +29,7 @@ from greenwindow.export.app_json import iso
 from greenwindow.ingest.build_observations import build_observations
 from greenwindow.ingest.carbon import fetch_carbon_actuals
 from greenwindow.ingest.weather import fetch_weather, national_weather
+from greenwindow.models import blend
 from greenwindow.models.base import COVARIATES, Forecaster, forecast_at, future_index
 from greenwindow.models.registry import live_models
 
@@ -140,6 +141,12 @@ def run_backtest(end: pd.Timestamp, days: int, workers: int, include_chronos: bo
                 )
             )
     res = pd.concat(frames, ignore_index=True)
+    cw, cc = settings.classical_window_days, settings.chronos_context_days
+    is_default = ((res["model"] == blend.CHRONOS) & (res["setting_value"] == cc)) | (
+        (res["model"] == blend.PROPHET) & (res["setting_value"] == cw)
+    )
+    blended = blend.blend_rows(res[is_default], settings.horizon_h, key="origin_utc")
+    res = pd.concat([res, blended.assign(setting="default", setting_value=0)], ignore_index=True)
     res = res.join(obs["ci_actual"].rename("actual"), on="target_ts_utc")
     res = res.join(obs[[*COVARIATES, "wind100"]], on="target_ts_utc")
     OUT_DIR.mkdir(exist_ok=True)
