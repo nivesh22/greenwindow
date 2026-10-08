@@ -337,4 +337,13 @@ describe('runLoop', () => {
     await runLoop(input, h.opts)
     expect(input).toEqual(user)
   })
+
+  it("toolChoice 'none': sends the tools with choice none and drops any tool call instead of running it", async () => {
+    h = setup([[ev.text('Start at 03:00.'), ev.call('echo', { x: 1 }), ev.finish('tool_calls')]], { toolChoice: 'none' })
+    const r = await runLoop(user, h.opts)
+    expect(r).toMatchObject({ stopReason: 'final', text: 'Start at 03:00.', steps: 1 })
+    expect(r.messages.at(-1)).toEqual({ role: 'assistant', content: 'Start at 03:00.' })
+    expect(h.provider.requests[0]?.toolChoice).toBe('none')
+    expect(h.events).toEqual([])
+  })
 })

@@ -184,6 +184,8 @@ export async function runLoop(input: readonly Msg[], opts: LoopOptions): Promise
       }
 
       lastText = text
+      // toolChoice 'none' (e.g. the grounding rewrite): a tool call is not allowed, so it is dropped, never run.
+      if (opts.toolChoice === 'none') calls.length = 0
       messages.push(calls.length > 0 ? { role: 'assistant', content: text, toolCalls: calls } : { role: 'assistant', content: text })
       // A cut-off answer (Gemini's reasoning tokens count against max_tokens) is never presented as complete.
       if (calls.length === 0) return finish === 'length' ? result('token_budget', 'output truncated (finish_reason length)') : result('final', null)
