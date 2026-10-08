@@ -37,3 +37,4 @@ Thumbs.db
 data_local/
 !.env.example
 backtest_out/
+.claude/worktrees/
