@@ -1,5 +1,5 @@
 // Shared helpers for Vercel Web-standard handlers.
-import { encodeSse, type SseEvent } from '../../agent/harness/events'
+import { encodeSse, type SseEvent } from '../../agent/harness/events.js'
 
 export function json(status: number, body: unknown, headers: Record<string, string> = {}): Response {
   return new Response(JSON.stringify(body), {

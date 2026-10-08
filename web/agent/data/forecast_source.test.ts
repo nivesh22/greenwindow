@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { FIXTURE_DIR } from '../tools/testing'
-import { FixtureForecastSource, HttpForecastSource } from './forecast_source'
+import { FIXTURE_DIR } from '../tools/testing.js'
+import { FixtureForecastSource, HttpForecastSource } from './forecast_source.js'
 
 const read = (f: string): string => readFileSync(join(FIXTURE_DIR, f), 'utf8')
 const BODIES: Record<string, string> = {

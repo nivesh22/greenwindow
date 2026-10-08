@@ -1,8 +1,8 @@
 // Hand-written SSE fixtures in the OpenAI Chat Completions stream format. Recorded Gemini/gateway fixtures replace
 // or extend these in P1a.5 (spike S3) and P1b (S4).
-import { ProviderError } from '../harness/errors'
-import { buildRequestBody, OpenAICompatProvider, parseRetryAfter } from './openai_compat'
-import type { ModelEvent, ModelRequest } from './types'
+import { ProviderError } from '../harness/errors.js'
+import { buildRequestBody, OpenAICompatProvider, parseRetryAfter } from './openai_compat.js'
+import type { ModelEvent, ModelRequest } from './types.js'
 
 const req: ModelRequest = {
   model: 'gemini-3.8-flash',

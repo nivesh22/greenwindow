@@ -1,7 +1,7 @@
 // Per-turn budgets (design §5.3): steps, cumulative input tokens, output tokens per call, cost, wall clock.
-import { costUsd } from '../config'
-import type { Msg } from '../providers/types'
-import { BudgetExceeded } from './errors'
+import { costUsd } from '../config.js'
+import type { Msg } from '../providers/types.js'
+import { BudgetExceeded } from './errors.js'
 
 export interface BudgetLimits {
   maxSteps: number

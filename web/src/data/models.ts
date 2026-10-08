@@ -1,5 +1,5 @@
 // Model selection helpers, pure so the agent server can share them with the pages.
-import type { LatestForecast, Meta, ModelInfo } from './schemas'
+import type { LatestForecast, Meta, ModelInfo } from './schemas.js'
 
 export const DEFAULT_MODEL = 'chronos2_cov'
 

@@ -1,13 +1,13 @@
 // POST /api/chat: validates the body, applies limits, then streams a turn as SSE (design §8).
-import { loadConfig, type AgentConfig } from '../agent/config'
-import { chatRequestSchema } from '../agent/harness/events'
-import { SupabaseStore } from '../agent/store/supabase'
-import type { ConsumeResult, LimitKind, Store } from '../agent/store/types'
-import { errorBody, ipHash, json, sseResponse } from './_lib/http'
-import { HttpForecastSource } from '../agent/data/forecast_source'
-import { buildRouter, createTurnRunner } from '../agent/harness/turn'
-import { buildRegistry } from '../agent/tools'
-import type { TurnRunner } from './_lib/turn_runner'
+import { loadConfig, type AgentConfig } from '../agent/config.js'
+import { chatRequestSchema } from '../agent/harness/events.js'
+import { SupabaseStore } from '../agent/store/supabase.js'
+import type { ConsumeResult, LimitKind, Store } from '../agent/store/types.js'
+import { errorBody, ipHash, json, sseResponse } from './_lib/http.js'
+import { HttpForecastSource } from '../agent/data/forecast_source.js'
+import { buildRouter, createTurnRunner } from '../agent/harness/turn.js'
+import { buildRegistry } from '../agent/tools/index.js'
+import type { TurnRunner } from './_lib/turn_runner.js'
 
 export const maxDuration = 60
 

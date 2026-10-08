@@ -1,8 +1,8 @@
 import { z } from 'zod'
-import { costUsd, loadConfig } from './config'
-import { encodeSse, sseEventSchema } from './harness/events'
-import { defineTool, ToolRegistry } from './tools/registry'
-import { MemoryStore } from './store/types'
+import { costUsd, loadConfig } from './config.js'
+import { encodeSse, sseEventSchema } from './harness/events.js'
+import { defineTool, ToolRegistry } from './tools/registry.js'
+import { MemoryStore } from './store/types.js'
 
 const NOW = Date.parse('2026-10-06T00:30:00Z')
 const args = { userId: null, ipHash: 'h', isAnonymous: true, dailyCap: 20, anonCap: 3, ipHourlyCap: 2, globalDailyCap: 100, nowMs: NOW }

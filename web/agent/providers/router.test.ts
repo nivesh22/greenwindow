@@ -1,7 +1,7 @@
-import type { RetryPolicy } from '../harness/retry'
-import { AllProvidersFailed, ModelRouter } from './router'
-import { ev, providerError, ScriptedProvider } from './scripted'
-import type { ModelProvider } from './types'
+import type { RetryPolicy } from '../harness/retry.js'
+import { AllProvidersFailed, ModelRouter } from './router.js'
+import { ev, providerError, ScriptedProvider } from './scripted.js'
+import type { ModelProvider } from './types.js'
 
 const req = { messages: [{ role: 'user' as const, content: 'hi' }], maxOutputTokens: 10, temperature: 0 }
 const sig = (): AbortSignal => new AbortController().signal

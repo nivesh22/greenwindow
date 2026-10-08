@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { fmtMass } from '../../src/lib/format'
-import { ToolUserError, defineTool } from './registry'
+import { fmtMass } from '../../src/lib/format.js'
+import { ToolUserError, defineTool } from './registry.js'
 
 /**
  * All user-facing CO2 wording lives here so it can be switched in one place (owner decision O1 is pending).

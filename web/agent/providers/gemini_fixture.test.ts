@@ -1,9 +1,9 @@
 // Replays a real Gemini OpenAI-compat stream (recorded 2026-10-08, docs/spikes.md live checks) through the parser.
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { ProviderError } from '../harness/errors'
-import { ChatStreamParser, toWireMessage } from './openai_compat'
-import type { ModelEvent } from './types'
+import { ProviderError } from '../harness/errors.js'
+import { ChatStreamParser, toWireMessage } from './openai_compat.js'
+import type { ModelEvent } from './types.js'
 
 const raw = readFileSync(join(import.meta.dirname, 'fixtures', 'gemini-3.5-flash-lite.tool_call.sse'), 'utf8')
 const malformed = (m: string) => new ProviderError({ provider: 'gemini-direct', status: null, retryAfterMs: null, kind: 'malformed' }, m)

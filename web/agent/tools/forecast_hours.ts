@@ -1,9 +1,9 @@
 // Shared by get_forecast and recommend_window: the selected model's hourly forecast, built the same way
 // web/src/pages/Scheduler.tsx builds its HourForecast[] (points with a null q10 or q90 are dropped).
-import { forecastModels, pickDefault } from '../../src/data/models'
-import { HOUR_MS } from '../../src/lib/time'
-import type { HourForecast } from '../../src/scheduler/optimizer'
-import { ToolUserError, type ToolCtx } from './registry'
+import { forecastModels, pickDefault } from '../../src/data/models.js'
+import { HOUR_MS } from '../../src/lib/time.js'
+import type { HourForecast } from '../../src/scheduler/optimizer.js'
+import { ToolUserError, type ToolCtx } from './registry.js'
 
 export const STALE_AFTER_MS = 12 * HOUR_MS
 

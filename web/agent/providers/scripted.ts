@@ -1,6 +1,6 @@
 // Deterministic provider for harness tests: plays back a pre-set sequence of responses, one per complete() call.
-import { ProviderError } from '../harness/errors'
-import type { ModelEvent, ModelProvider, ModelRequest, ProviderErrorInfo, ProviderId } from './types'
+import { ProviderError } from '../harness/errors.js'
+import type { ModelEvent, ModelProvider, ModelRequest, ProviderErrorInfo, ProviderId } from './types.js'
 
 /** One scripted response: events to yield, optionally followed by an error (a mid-stream failure). */
 export type ScriptStep = ModelEvent[] | { events: ModelEvent[]; error: ProviderError } | ProviderError

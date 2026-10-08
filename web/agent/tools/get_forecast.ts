@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { toMs } from '../../src/lib/time'
-import { floorHour, loadForecast } from './forecast_hours'
-import { defineTool } from './registry'
+import { toMs } from '../../src/lib/time.js'
+import { floorHour, loadForecast } from './forecast_hours.js'
+import { defineTool } from './registry.js'
 
 const point = z.object({ ts: z.string(), q10: z.number(), q50: z.number(), q90: z.number() })
 

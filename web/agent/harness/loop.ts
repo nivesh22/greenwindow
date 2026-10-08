@@ -1,14 +1,14 @@
 // The model ↔ tools loop (design §5.2, amended by X4: the answer text is buffered and returned, never emitted
 // here; turn.ts sends it as one `answer` event after grounding).
 import { z } from 'zod'
-import { AllProvidersFailed, type LlmCallRecord, type ModelRouter } from '../providers/router'
-import type { Msg, ToolCall } from '../providers/types'
-import { ATTR, type Tracer } from '../telemetry/tracer'
-import type { ToolCtx, ToolDef, ToolRegistry } from '../tools/registry'
-import { ToolUserError } from '../tools/registry'
-import { type Budget, estimateMessagesTokens, estimateTokens } from './budget'
-import { BudgetExceeded, ProvidersDown } from './errors'
-import { planUpdateSchema, type PlanUpdate, type SseEvent, type StopReason } from './events'
+import { AllProvidersFailed, type LlmCallRecord, type ModelRouter } from '../providers/router.js'
+import type { Msg, ToolCall } from '../providers/types.js'
+import { ATTR, type Tracer } from '../telemetry/tracer.js'
+import type { ToolCtx, ToolDef, ToolRegistry } from '../tools/registry.js'
+import { ToolUserError } from '../tools/registry.js'
+import { type Budget, estimateMessagesTokens, estimateTokens } from './budget.js'
+import { BudgetExceeded, ProvidersDown } from './errors.js'
+import { planUpdateSchema, type PlanUpdate, type SseEvent, type StopReason } from './events.js'
 
 export interface LoopOptions {
   router: ModelRouter

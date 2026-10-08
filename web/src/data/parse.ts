@@ -1,5 +1,5 @@
 // Pure parsing of the published JSON files (no fetch, no import.meta.env), shared by the app and the agent server.
-import { FILES, SUPPORTED_SCHEMA_VERSION, type FileData, type FileKey } from './schemas'
+import { FILES, SUPPORTED_SCHEMA_VERSION, type FileData, type FileKey } from './schemas.js'
 
 export class DataFetchError extends Error {
   readonly file: string

@@ -1,5 +1,5 @@
-import { traceSummarySchema } from '../harness/events'
-import { ATTR, Tracer } from './tracer'
+import { traceSummarySchema } from '../harness/events.js'
+import { ATTR, Tracer } from './tracer.js'
 
 describe('Tracer', () => {
   it('records spans with parent ids, durations and a valid summary', () => {

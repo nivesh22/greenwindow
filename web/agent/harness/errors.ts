@@ -1,6 +1,6 @@
 // Contract (orchestrator-owned): typed errors used across the harness.
-import type { StopReason } from './events'
-import type { ProviderErrorInfo } from '../providers/types'
+import type { StopReason } from './events.js'
+import type { ProviderErrorInfo } from '../providers/types.js'
 
 export class BudgetExceeded extends Error {
   readonly reason: Extract<StopReason, 'max_steps' | 'token_budget' | 'cost_budget' | 'wall_clock'>

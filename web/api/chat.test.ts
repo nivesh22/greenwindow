@@ -1,10 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { loadConfig } from '../agent/config'
-import type { SseEvent } from '../agent/harness/events'
-import { MemoryStore, type ConsumeResult, type Store } from '../agent/store/types'
-import { createChatHandler } from './chat'
-import { HEARTBEAT_MS, ipHash, sseResponse } from './_lib/http'
-import { placeholderRunner } from './_lib/turn_runner'
+import { loadConfig } from '../agent/config.js'
+import type { SseEvent } from '../agent/harness/events.js'
+import { MemoryStore, type ConsumeResult, type Store } from '../agent/store/types.js'
+import { createChatHandler } from './chat.js'
+import { HEARTBEAT_MS, ipHash, sseResponse } from './_lib/http.js'
+import { placeholderRunner } from './_lib/turn_runner.js'
 
 const FULL_ENV = { SUPABASE_URL: 'https://x.supabase.co', SUPABASE_SERVICE_ROLE_KEY: 'sb_secret_x', IP_SALT: 'salt-salt-salt-salt' }
 const body = {

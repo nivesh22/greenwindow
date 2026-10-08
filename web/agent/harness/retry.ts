@@ -1,5 +1,5 @@
 // Retry policy for model calls (design §5.4). Pure: randomness, sleep and the clock are injectable for tests.
-import { ProviderError } from './errors'
+import { ProviderError } from './errors.js'
 
 export const MAX_RETRIES = 2
 const BASE_MS = 250

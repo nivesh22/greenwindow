@@ -7,7 +7,7 @@
 // both `apikey` and `Authorization: Bearer`, as PostgREST expects for JWTs. The docs page does not state outright
 // that PostgREST rejects a Bearer sb_secret_ key; apikey-only is the documented recommendation.
 import { z } from 'zod'
-import type { BudgetState, ConsumeArgs, ConsumeResult, SpanRecord, Store, TurnRecord } from './types'
+import type { BudgetState, ConsumeArgs, ConsumeResult, SpanRecord, Store, TurnRecord } from './types.js'
 
 export class StoreError extends Error {
   readonly code: 'http' | 'network' | 'parse'

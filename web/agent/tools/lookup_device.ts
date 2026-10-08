@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import devicesJson from './devices.json'
-import { defineTool } from './registry'
+import { DEVICES_DATA as devicesJson } from './devices.js'
+import { defineTool } from './registry.js'
 
 const deviceSchema = z.object({
   id: z.string(),

@@ -1,9 +1,9 @@
 // ForecastSource implementations (design §7.6): HTTP with a TTL cache and stale fallback, and a fixture reader.
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { parseFile } from '../../src/data/parse'
-import { FILES, type FileData, type FileKey } from '../../src/data/schemas'
-import type { Fetched, ForecastSource } from './types'
+import { parseFile } from '../../src/data/parse.js'
+import { FILES, type FileData, type FileKey } from '../../src/data/schemas.js'
+import type { Fetched, ForecastSource } from './types.js'
 
 export const DEFAULT_TTL_MS = 10 * 60_000
 

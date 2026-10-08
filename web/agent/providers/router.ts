@@ -5,9 +5,9 @@
 // Each attempt's events are buffered and returned only once the stream finished cleanly (X4: nothing reaches the
 // user before grounding), so restarting a step on the next provider is always safe. A provider that has yielded any
 // event is never retried; it fails over instead.
-import { ProviderError, ProvidersDown } from '../harness/errors'
-import { DEFAULT_RETRY_POLICY, retryDelayMs, type RetryPolicy } from '../harness/retry'
-import type { ModelEvent, ModelProvider, ModelRequest, ProviderId } from './types'
+import { ProviderError, ProvidersDown } from '../harness/errors.js'
+import { DEFAULT_RETRY_POLICY, retryDelayMs, type RetryPolicy } from '../harness/retry.js'
+import type { ModelEvent, ModelProvider, ModelRequest, ProviderId } from './types.js'
 
 export interface RouteEntry {
   provider: ModelProvider

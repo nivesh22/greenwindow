@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { StoreError, SupabaseStore } from './supabase'
-import type { ConsumeArgs, SpanRecord, TurnRecord } from './types'
+import { StoreError, SupabaseStore } from './supabase.js'
+import type { ConsumeArgs, SpanRecord, TurnRecord } from './types.js'
 
 interface Call {
   url: string

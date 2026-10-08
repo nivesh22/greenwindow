@@ -1,5 +1,5 @@
-import { Budget, estimateMessagesTokens, estimateTokens, type BudgetLimits } from './budget'
-import { BudgetExceeded } from './errors'
+import { Budget, estimateMessagesTokens, estimateTokens, type BudgetLimits } from './budget.js'
+import { BudgetExceeded } from './errors.js'
 
 const limits: BudgetLimits = { maxSteps: 2, maxInputTokens: 1000, maxOutputTokens: 100, maxCostUsd: 0.01, wallMs: 1000 }
 

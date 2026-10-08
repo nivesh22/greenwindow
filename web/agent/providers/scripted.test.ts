@@ -1,5 +1,5 @@
-import { ev, providerError, ScriptedProvider } from './scripted'
-import type { ModelEvent, ModelRequest } from './types'
+import { ev, providerError, ScriptedProvider } from './scripted.js'
+import type { ModelEvent, ModelRequest } from './types.js'
 
 const req: ModelRequest = { model: 'm', messages: [{ role: 'user', content: 'hi' }], maxOutputTokens: 10, temperature: 0 }
 

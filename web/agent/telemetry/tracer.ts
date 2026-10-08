@@ -1,7 +1,7 @@
 // In-memory tracer for one turn (design §14). Spans are collected here and written in one insert at the end of the
 // turn; summary() builds the `done.trace` payload. Clock and id generator are injectable for tests.
-import type { TraceSummary } from '../harness/events'
-import type { SpanKind, SpanRecord } from '../store/types'
+import type { TraceSummary } from '../harness/events.js'
+import type { SpanKind, SpanRecord } from '../store/types.js'
 
 /** Attribute names (OTel GenAI where they exist, gw.* otherwise). The summary reads these. */
 export const ATTR = {

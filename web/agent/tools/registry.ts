@@ -1,11 +1,11 @@
 // Contract (orchestrator-owned): the shared tool registry. Design §7.1. The chat uses it now; the MCP server
 // (P5) will expose the same definitions.
 import { z } from 'zod'
-import type { Mode, Recommendation } from '../../src/scheduler/optimizer'
-import type { ForecastSource } from '../data/types'
-import type { Intent } from '../gates/types'
-import type { ToolSpec } from '../providers/types'
-import type { Store } from '../store/types'
+import type { Mode, Recommendation } from '../../src/scheduler/optimizer.js'
+import type { ForecastSource } from '../data/types.js'
+import type { Intent } from '../gates/types.js'
+import type { ToolSpec } from '../providers/types.js'
+import type { Store } from '../store/types.js'
 
 export type Phase = 'P1' | 'P2' | 'P3' | 'P4'
 

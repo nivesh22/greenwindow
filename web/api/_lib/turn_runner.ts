@@ -1,4 +1,4 @@
-import type { ChatRequest, SseEvent, TraceSummary } from '../../agent/harness/events'
+import type { ChatRequest, SseEvent, TraceSummary } from '../../agent/harness/events.js'
 
 export type TurnRunner = (
   input: { request: ChatRequest; ipHash: string; nowMs: number; signal: AbortSignal },

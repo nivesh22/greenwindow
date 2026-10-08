@@ -1,7 +1,7 @@
 // Contract (orchestrator-owned): persistence used by the harness and API. Design §9, P1a subset
 // (usage, cost ledger, turns, spans). The Supabase implementation lives in store/supabase.ts (backend-engineer);
 // MemoryStore below is the reference implementation used by unit tests.
-import type { StopReason } from '../harness/events'
+import type { StopReason } from '../harness/events.js'
 
 export interface ConsumeArgs {
   userId: string | null // null before auth (P1–P2)

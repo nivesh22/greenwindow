@@ -6,8 +6,8 @@
 // usage may be absent (nothing is emitted and the caller estimates); `finish_reason` 'stop' with tool calls is
 // reported as 'tool_calls'.
 import { z } from 'zod'
-import { ProviderError } from '../harness/errors'
-import type { FinishReason, ModelEvent, ModelProvider, ModelRequest, Msg, ProviderErrorInfo, ProviderId, ToolCall } from './types'
+import { ProviderError } from '../harness/errors.js'
+import type { FinishReason, ModelEvent, ModelProvider, ModelRequest, Msg, ProviderErrorInfo, ProviderId, ToolCall } from './types.js'
 
 export interface OpenAICompatConfig {
   id: ProviderId

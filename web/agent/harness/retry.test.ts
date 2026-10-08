@@ -1,5 +1,5 @@
-import { providerError } from '../providers/scripted'
-import { backoffMs, retryDelayMs, withRetry, type RetryPolicy } from './retry'
+import { providerError } from '../providers/scripted.js'
+import { backoffMs, retryDelayMs, withRetry, type RetryPolicy } from './retry.js'
 
 const policy = (over: Partial<RetryPolicy> = {}): RetryPolicy => ({
   maxRetries: 2,

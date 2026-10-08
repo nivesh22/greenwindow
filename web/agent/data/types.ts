@@ -1,5 +1,5 @@
 // Contract (orchestrator-owned): read access to the published JSON files (spec 7.6). Design §7.6.
-import type { BacktestSummary, LatestForecast, Leaderboard, Meta, RecentObservations } from '../../src/data/schemas'
+import type { BacktestSummary, LatestForecast, Leaderboard, Meta, RecentObservations } from '../../src/data/schemas.js'
 
 export interface Fetched<T> {
   data: T

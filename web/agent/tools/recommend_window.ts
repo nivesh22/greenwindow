@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import { MODES, type PlanUpdate } from '../harness/events'
-import { HOUR_MS, formatDateTime, fromLocalInput, toIso, toMs } from '../../src/lib/time'
-import { InfeasibleJobError, InvalidJobError, recommend } from '../../src/scheduler/optimizer'
-import { ceilHour, floorHour, loadForecast } from './forecast_hours'
-import { ToolUserError, defineTool } from './registry'
+import { MODES, type PlanUpdate } from '../harness/events.js'
+import { HOUR_MS, formatDateTime, fromLocalInput, toIso, toMs } from '../../src/lib/time.js'
+import { InfeasibleJobError, InvalidJobError, recommend } from '../../src/scheduler/optimizer.js'
+import { ceilHour, floorHour, loadForecast } from './forecast_hours.js'
+import { ToolUserError, defineTool } from './registry.js'
 
 const localTime = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/, 'Use YYYY-MM-DDTHH:mm in UK local time')
 

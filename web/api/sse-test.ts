@@ -1,6 +1,6 @@
 // Temporary: live SSE streaming check on a preview deploy (spike S2). Remove after P1a.6.
-import { json, sseResponse } from './_lib/http'
-import { emptyTrace } from './_lib/turn_runner'
+import { json, sseResponse } from './_lib/http.js'
+import { emptyTrace } from './_lib/turn_runner.js'
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 

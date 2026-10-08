@@ -1,9 +1,9 @@
 // GET /api/health -> {ok:true}. ?db=1 also reads the cost ledger (Supabase keepalive).
 // Handler form: Web-standard `export default { fetch(request) }` (docs/spikes.md S2,
 // https://vercel.com/docs/functions/runtimes/node-js).
-import { loadConfig } from '../agent/config'
-import { SupabaseStore } from '../agent/store/supabase'
-import { json } from './_lib/http'
+import { loadConfig } from '../agent/config.js'
+import { SupabaseStore } from '../agent/store/supabase.js'
+import { json } from './_lib/http.js'
 
 export default {
   async fetch(request: Request): Promise<Response> {
