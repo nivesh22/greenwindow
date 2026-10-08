@@ -74,6 +74,55 @@ describe('chat handler', () => {
     expect(evs[0]?.data).toMatchObject({ kind: 'budget_paused', sign_in: false })
   })
 
+  it('budget: allowed until addSpend reaches the limit, then budget_paused', async () => {
+    const store = new MemoryStore()
+    const nowMs = Date.UTC(2026, 9, 8, 10)
+    const h = mkHandler(FULL_ENV, store)
+    expect(parseSse(await (await h(post(body))).text())[0]?.event).toBe('turn_start')
+    await store.addSpend(nowMs, 4.99, 5)
+    expect(parseSse(await (await h(post(body, { 'x-forwarded-for': '9.9.9.9' }))).text())[0]?.event).toBe('turn_start')
+    await store.addSpend(nowMs, 0.01, 5)
+    const evs = parseSse(await (await h(post(body, { 'x-forwarded-for': '8.8.8.8' }))).text())
+    expect(evs).toHaveLength(1)
+    expect(evs[0]?.data).toMatchObject({ kind: 'budget_paused', message: expect.stringContaining('paused for this month') })
+  })
+
+  it('IP hourly cap boundary: the cap-th message passes, the next is rate-limited with a clear message', async () => {
+    const cap = loadConfig(FULL_ENV).IP_HOURLY_CAP
+    const h = mkHandler(FULL_ENV)
+    for (let i = 0; i < cap; i++) {
+      expect(parseSse(await (await h(post(body))).text())[0]?.event).toBe('turn_start')
+    }
+    const evs = parseSse(await (await h(post(body))).text())
+    expect(evs).toHaveLength(1)
+    expect(evs[0]?.data).toMatchObject({ kind: 'rate', message: expect.stringContaining('Too many requests') })
+    // A different IP is unaffected.
+    expect(parseSse(await (await h(post(body, { 'x-forwarded-for': '7.7.7.7' }))).text())[0]?.event).toBe('turn_start')
+  })
+
+  it('passes configured caps to the store and messages_left to the runner', async () => {
+    const seen: unknown[] = []
+    const store: Store = Object.assign(new MemoryStore(), {
+      consumeMessage: async (a: unknown): Promise<ConsumeResult> => {
+        seen.push(a)
+        return { allowed: true, kind: null, messagesLeft: 2 }
+      },
+    })
+    let left: number | null | undefined
+    const cfg = loadConfig(FULL_ENV)
+    const h = createChatHandler({
+      store,
+      config: cfg,
+      now: () => 0,
+      runTurn: async ({ messagesLeft }) => {
+        left = messagesLeft
+      },
+    })
+    await (await h(post(body))).text()
+    expect(seen[0]).toMatchObject({ ipHourlyCap: cfg.IP_HOURLY_CAP, globalDailyCap: cfg.GLOBAL_DAILY_CAP })
+    expect(left).toBe(2)
+  })
+
   it('happy path: turn_start, answer, done with SSE framing and headers', async () => {
     const r = await mkHandler()(post(body))
     expect(r.status).toBe(200)

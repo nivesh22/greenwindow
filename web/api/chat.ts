@@ -66,7 +66,7 @@ export function createChatHandler(deps: ChatDeps): (request: Request) => Promise
       }, request.signal)
     }
     return sseResponse(
-      (emit, signal) => runTurn({ request: parsed.data, ipHash: hash, nowMs, signal }, emit),
+      (emit, signal) => runTurn({ request: parsed.data, ipHash: hash, nowMs, messagesLeft: res.messagesLeft, signal }, emit),
       request.signal,
     )
   }
