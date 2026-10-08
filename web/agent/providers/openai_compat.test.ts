@@ -135,8 +135,8 @@ describe('OpenAICompatProvider stream parsing', () => {
       DONE,
     ])
     expect(events).toEqual([
-      { type: 'usage', inputTokens: 500, outputTokens: 20, cachedInputTokens: 0 },
       { type: 'tool_call', call: { id: 'call_1', name: 'recommend_window', argsJson: '{"duration_h":3}' } },
+      { type: 'usage', inputTokens: 500, outputTokens: 20, cachedInputTokens: 0 },
       { type: 'finish', reason: 'tool_calls' },
     ])
   })

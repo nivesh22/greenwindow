@@ -44,19 +44,19 @@ describe('Budget', () => {
   it('checks the worst-case cost of the most expensive routable model before the call', () => {
     // Haiku: 1000 in × $1/M + 100 out × $5/M = $0.0015 per call.
     const big = new Budget({ ...limits, maxInputTokens: 1e9, maxCostUsd: 0.002 }, { now: () => t })
-    expect(reasonOf(() => big.assertCanStart(['gemini-3.8-flash', 'anthropic/claude-haiku-5.5'], 1000))).toBeNull()
-    big.charge('anthropic/claude-haiku-5.5', 1000, 0) // $0.001 actual
-    expect(reasonOf(() => big.assertCanStart(['gemini-3.8-flash', 'anthropic/claude-haiku-5.5'], 1000))).toBe('cost_budget')
+    expect(reasonOf(() => big.assertCanStart(['gemini-3.8-flash', 'test/worst-case-priced'], 1000))).toBeNull()
+    big.charge('test/worst-case-priced', 1000, 0) // $0.001 actual
+    expect(reasonOf(() => big.assertCanStart(['gemini-3.8-flash', 'test/worst-case-priced'], 1000))).toBe('cost_budget')
     // a free model alone still fits
     expect(reasonOf(() => big.assertCanStart('gemini-3.8-flash', 1000))).toBeNull()
     big.dispose()
   })
 
   it('post-call actual totals are checked', () => {
-    expect(b.charge('anthropic/claude-haiku-5.5', 2000, 1000)).toBeCloseTo(0.007)
+    expect(b.charge('test/worst-case-priced', 2000, 1000)).toBeCloseTo(0.007)
     expect(reasonOf(() => b.assertWithinTotals())).toBe('token_budget')
     const c = new Budget({ ...limits, maxInputTokens: 1e9 }, { now: () => t })
-    c.charge('anthropic/claude-haiku-5.5', 1000, 2000) // $0.011
+    c.charge('test/worst-case-priced', 1000, 2000) // $0.011
     expect(reasonOf(() => c.assertWithinTotals())).toBe('cost_budget')
     c.dispose()
   })

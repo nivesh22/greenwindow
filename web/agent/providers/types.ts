@@ -7,6 +7,11 @@ export interface ToolCall {
   id: string
   name: string
   argsJson: string // raw JSON text from the model; parsed and zod-validated by the loop
+  /**
+   * Opaque provider data that must be echoed back with this call on the next request (Gemini 3 sends
+   * `extra_content.google.thought_signature`; docs/spikes.md live checks). Never shown or logged.
+   */
+  extra?: Record<string, unknown>
 }
 
 export interface Msg {

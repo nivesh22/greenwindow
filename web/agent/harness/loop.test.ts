@@ -269,14 +269,14 @@ describe('runLoop', () => {
 
   it('cost_budget: pre-call worst case on a paid model, nothing is sent', async () => {
     // 800 output tokens × $5/M = $0.004 > $0.003
-    h = setup([[ev.finish()]], {}, { maxCostUsd: 0.003 }, 'anthropic/claude-haiku-5.5')
+    h = setup([[ev.finish()]], {}, { maxCostUsd: 0.003 }, 'test/worst-case-priced')
     const r = await runLoop(user, h.opts)
     expect(r.stopReason).toBe('cost_budget')
     expect(h.provider.calls).toBe(0)
   })
 
   it('cost_budget: post-call actual stops before running tools', async () => {
-    h = setup([[ev.call('echo', { x: 1 }), ev.usage(100, 900), ev.finish('tool_calls')]], {}, { maxCostUsd: 0.0045, maxOutputTokens: 100 }, 'anthropic/claude-haiku-5.5')
+    h = setup([[ev.call('echo', { x: 1 }), ev.usage(100, 900), ev.finish('tool_calls')]], {}, { maxCostUsd: 0.0045, maxOutputTokens: 100 }, 'test/worst-case-priced')
     const r = await runLoop(user, h.opts)
     expect(r.stopReason).toBe('cost_budget')
     expect(h.events).toEqual([])

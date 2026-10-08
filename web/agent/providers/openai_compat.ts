@@ -7,7 +7,7 @@
 // reported as 'tool_calls'.
 import { z } from 'zod'
 import { ProviderError } from '../harness/errors'
-import type { FinishReason, ModelEvent, ModelProvider, ModelRequest, Msg, ProviderErrorInfo, ProviderId } from './types'
+import type { FinishReason, ModelEvent, ModelProvider, ModelRequest, Msg, ProviderErrorInfo, ProviderId, ToolCall } from './types'
 
 export interface OpenAICompatConfig {
   id: ProviderId
@@ -29,7 +29,12 @@ type WireMessage =
   | {
       role: 'assistant'
       content: string | null
-      tool_calls?: { id: string; type: 'function'; function: { name: string; arguments: string } }[]
+      tool_calls?: {
+        id: string
+        type: 'function'
+        function: { name: string; arguments: string }
+        extra_content?: Record<string, unknown>
+      }[]
     }
   | { role: 'tool'; tool_call_id: string; content: string }
 
@@ -44,7 +49,12 @@ export function toWireMessage(m: Msg): WireMessage {
       return {
         role: 'assistant',
         content: m.content.length > 0 ? m.content : null,
-        tool_calls: calls.map((c) => ({ id: c.id, type: 'function', function: { name: c.name, arguments: c.argsJson } })),
+        tool_calls: calls.map((c) => ({
+          id: c.id,
+          type: 'function',
+          function: { name: c.name, arguments: c.argsJson },
+          ...(c.extra ? { extra_content: c.extra } : {}),
+        })),
       }
     }
     case 'tool':
@@ -96,6 +106,7 @@ const toolCallDelta = z.object({
   index: z.number().int().nonnegative().optional(),
   id: z.string().nullish(),
   function: z.object({ name: z.string().nullish(), arguments: z.string().nullish() }).nullish(),
+  extra_content: z.record(z.string(), z.unknown()).nullish(),
 })
 
 const chunkSchema = z.object({
@@ -139,6 +150,7 @@ interface PendingCall {
   id: string | null
   name: string
   args: string
+  extra: Record<string, unknown> | null
 }
 
 /** Stateful parser: feed decoded text, get ModelEvents. Exported for unit tests. */
@@ -148,6 +160,8 @@ export class ChatStreamParser {
   private order: string[] = []
   private lastKey: string | null = null
   private finish: FinishReason | null = null
+  /** Latest usage seen. Usage is cumulative and some providers (Gemini) repeat it on every chunk: emit once. */
+  private usage: Extract<ModelEvent, { type: 'usage' }> | null = null
   private sawDone = false
   private sawAny = false
   private readonly malformed: (msg: string) => ProviderError
@@ -187,6 +201,7 @@ export class ChatStreamParser {
       throw this.malformed(this.sawAny ? 'stream ended without finish_reason or [DONE]' : 'empty stream')
     }
     this.flushCalls(out)
+    if (this.usage) out.push(this.usage)
     const reason = this.order.length > 0 && this.finish !== 'length' && this.finish !== 'content_filter' ? 'tool_calls' : (this.finish ?? 'stop')
     out.push({ type: 'finish', reason })
     return out
@@ -223,12 +238,12 @@ export class ChatStreamParser {
     }
     const u = chunk.usage
     if (u && (typeof u.prompt_tokens === 'number' || typeof u.completion_tokens === 'number')) {
-      out.push({
+      this.usage = {
         type: 'usage',
         inputTokens: u.prompt_tokens ?? 0,
         outputTokens: u.completion_tokens ?? 0,
         cachedInputTokens: u.prompt_tokens_details?.cached_tokens ?? 0,
-      })
+      }
     }
   }
 
@@ -240,13 +255,14 @@ export class ChatStreamParser {
     else key = `p${this.order.length}`
     let c = this.calls.get(key)
     if (!c) {
-      c = { id: null, name: '', args: '' }
+      c = { id: null, name: '', args: '', extra: null }
       this.calls.set(key, c)
       this.order.push(key)
     }
     if (tc.id) c.id = tc.id
     if (tc.function?.name) c.name = c.name.length === 0 ? tc.function.name : c.name
     if (tc.function?.arguments) c.args += tc.function.arguments
+    if (tc.extra_content) c.extra = { ...(c.extra ?? {}), ...tc.extra_content }
     this.lastKey = key
   }
 
@@ -256,7 +272,9 @@ export class ChatStreamParser {
       const c = this.calls.get(key)
       if (!c) continue
       if (c.name.length === 0) throw this.malformed('tool call without a function name')
-      out.push({ type: 'tool_call', call: { id: c.id ?? this.newId(), name: c.name, argsJson: c.args } })
+      const call: ToolCall = { id: c.id ?? this.newId(), name: c.name, argsJson: c.args }
+      if (c.extra) call.extra = c.extra
+      out.push({ type: 'tool_call', call })
     }
   }
 }
