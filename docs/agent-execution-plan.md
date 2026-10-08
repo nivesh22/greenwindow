@@ -189,8 +189,8 @@ never print or decrypt values.
 | **H4** ✅ | Env vars in Vercel + `web/.env.local` | P1a.6 | Add H1–H3 values. I'll give you the exact list, including generated non-secret config such as `IP_SALT` (you generate it with `openssl rand -hex 32`). | — | 10 min |
 | **O1** | CO2 wording decision | P1a.2 merge | Choose (a) or (b) in §1 | — | 1 min |
 | **H5** ✅ | GitHub Actions secrets | P2.6 (live evals) | github.com/nivesh22/greenwindow → Settings → Secrets → Actions: `GEMINI_API_KEY`, `AI_GATEWAY_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | — | 5 min |
-| **H6** | Google OAuth client | P3.2, P3.4 | console.cloud.google.com → new project → OAuth consent screen (External, scopes `email` + `profile` only, privacy URL `https://greenwindow-one.vercel.app/privacy`) → Credentials → OAuth client (Web) with redirect URI `https://<project-ref>.supabase.co/auth/v1/callback`. Paste the client ID/secret into Supabase (H7), not into Vercel. | (stored in Supabase) | 20 min |
-| **H7** | Supabase Auth settings | P3.2, P3.4 | Authentication → Providers: enable **Anonymous**, enable **Google** (H6 values), enable **Manual linking**. URL config: site URL = production URL, add the preview URL pattern. | — | 5 min |
+| **H6** ✅ | Google OAuth client | P3.2, P3.4 | console.cloud.google.com → new project → OAuth consent screen (External, scopes `email` + `profile` only, privacy URL `https://greenwindow-one.vercel.app/privacy`) → Credentials → OAuth client (Web) with redirect URI `https://<project-ref>.supabase.co/auth/v1/callback`. Paste the client ID/secret into Supabase (H7), not into Vercel. | (stored in Supabase) | 20 min |
+| **H7** ✅ | Supabase Auth settings | P3.2, P3.4 | Authentication → Providers: enable **Anonymous**, enable **Google** (H6 values), enable **Manual linking**. URL config: site URL = production URL, add the preview URL pattern. | — | 5 min |
 | **H8** | Cloudflare Turnstile (free) | P3.2 | dash.cloudflare.com → Turnstile → add site (production + `*.vercel.app` preview hostnames) | `VITE_TURNSTILE_SITEKEY`, `TURNSTILE_SECRET` | 5 min |
 | **H9** | VAPID key pair | P4.3 | `npx web-push generate-vapid-keys` locally. Put the private key straight into Vercel. | `VITE_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (`mailto:` your address) | 5 min |
 | **H10** | Langfuse Cloud Hobby | P4.5 | cloud.langfuse.com (EU region) → project → API keys | `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_BASE_URL` | 5 min |
@@ -236,7 +236,7 @@ Last updated 2026-10-08 (late evening). Integration branch `assistant`; preview:
 | P3 | not started | Needs H6 (Google OAuth), H7 (Supabase Auth settings), H8 (Turnstile). |
 | P4 | not started | Needs H9 (VAPID), H10 (Langfuse), H11 (admin). |
 
-**Owner items closed:** H1, H2, H3 (+ paid gateway top-up, auto-reload off), H4 (env vars on Preview), H5 (GitHub Actions secrets), O1 (wording: "estimated emissions difference" with range + caveat; rule 9 rewritten), H12 (Jev approved for P2.5). **Next owner items:** review the preview before release 1; then H6–H8 for P3 (can start any time; Google OAuth takes longest).
+**Owner items closed:** H1, H2, H3 (+ paid gateway top-up, auto-reload off), H4 (env vars on Preview), H5 (GitHub Actions secrets), O1 (wording: "estimated emissions difference" with range + caveat; rule 9 rewritten), H12 (Jev approved for P2.5), H6 + H7 (Google OAuth client in Supabase only; anonymous sign-ins + manual linking on; verified live 2026-10-08: anonymous signup 200, Google authorize 302 to accounts.google.com; manual linking to be tested in P3). **Next owner items:** release-1 go-ahead; H8 (Turnstile), H9 (VAPID), H10 (Langfuse).
 
 **Live facts (details in `docs/spikes.md`):** model route `gemini-3.5-flash` → `gemini-3.5-flash-lite` → `gemini-3.8-flash` → `anthropic/claude-haiku-5.5` (paid, $0.10/$0.50 per 1M). Jev via gateway: 5/5 router intents, ~300 ms, ~$0.000017/decision. Turn: 4 model steps, ~5–6 s, $0 on Gemini.
 
