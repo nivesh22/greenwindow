@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react'
+import { ChatPanel } from '../assistant/ChatPanel'
+import { ASSISTANT_ENABLED } from '../assistant/flag'
 import { ForecastChart } from '../components/ForecastChart'
 import { ModelPicker } from '../components/ModelPicker'
 import { ErrorPanel, Loading } from '../components/Status'
@@ -26,7 +28,7 @@ export function validateForm(f: FormState, firstMs: number, endMs: number): Part
   return errors
 }
 
-export function Scheduler({ now = Date.now() }: { now?: number }) {
+export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABLED }: { now?: number; assistantEnabled?: boolean }) {
   const meta = useDataFile('meta')
   const fc = useDataFile('latestForecast')
   const [model, setModel] = useState<string | null>(null)
@@ -91,6 +93,8 @@ export function Scheduler({ now = Date.now() }: { now?: number }) {
           grid intensity, and say whether that choice still holds if the forecast is off.
         </p>
       </section>
+
+      {assistantEnabled && <ChatPanel />}
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,20rem)_1fr]">
         <form
