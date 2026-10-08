@@ -6,7 +6,7 @@
 | Date | 2026-10-08 |
 | Owner | nivesh22 |
 | Inputs | `docs/agent-discovery-notes.md` (decisions), `greenwindow-design-spec.md` v0.3 (forecasting spec, frozen) |
-| Next document | `docs/agent-design.md` (architecture, schemas, APIs, the harness internals) |
+| Next document | [`docs/agent-design.md`](agent-design.md) (architecture, schemas, APIs, the harness internals) |
 
 This PRD says **what** we build and **why**. It does not choose libraries, table layouts, or file structure; the
 design doc does that. Requirements are numbered `FR-x.y` (functional) and `NFR-x` (non-functional), each with a
