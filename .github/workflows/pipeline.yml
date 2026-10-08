@@ -70,3 +70,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow enable pipeline.yml --repo "${{ github.repository }}" || true
+
+      # Supabase keepalive (design §12): a cheap DB read via the app. Never fails the pipeline. Until the API is
+      # released to production, a 404 here is expected.
+      - name: Supabase keepalive
+        if: always()
+        run: curl -fsS --max-time 20 "https://greenwindow-one.vercel.app/api/health?db=1" || echo "keepalive failed (non-fatal)"

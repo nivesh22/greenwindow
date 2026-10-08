@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { StoreError, SupabaseStore } from './supabase.js'
 import type { ConsumeArgs, SpanRecord, TurnRecord } from './types.js'
 
@@ -83,6 +83,22 @@ describe('SupabaseStore', () => {
     expect(r).toEqual({ month: '2026-10', spentUsd: 5.01, paused: true })
     expect(calls[0]?.url).toBe('https://x.supabase.co/rest/v1/rpc/add_spend')
     expect(calls[0]?.body).toEqual({ p_usd: 0.01, p_limit_usd: 5 })
+  })
+
+  it('addSpend warns once on the 80% crossing and tolerates a missing alert_80', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const { f } = fake([
+      { body: { month: '2026-10', spent_usd: 4, paused: false, alerted_80: true, alert_80: true } },
+      { body: { month: '2026-10', spent_usd: 4.1, paused: false, alerted_80: true, alert_80: false } },
+      { body: { month: '2026-10', spent_usd: 4.2, paused: false } },
+    ])
+    const s = mk('sb_secret_abc', f)
+    expect(await s.addSpend(0, 4, 5)).toEqual({ month: '2026-10', spentUsd: 4, paused: false })
+    await s.addSpend(0, 0.1, 5)
+    await s.addSpend(0, 0.1, 5)
+    expect(warn).toHaveBeenCalledTimes(1)
+    expect(warn).toHaveBeenCalledWith('budget 80%', '2026-10')
+    warn.mockRestore()
   })
 
   it('saveTurn inserts the turn then the spans in snake_case', async () => {

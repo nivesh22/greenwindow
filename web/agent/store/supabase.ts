@@ -37,6 +37,7 @@ const ledgerSchema = z.object({
   month: z.string(),
   spent_usd: z.coerce.number(), // numeric may arrive as number or string
   paused: z.boolean(),
+  alert_80: z.boolean().optional(), // add_spend only: true on the call that first crosses 80%
 })
 
 const monthOf = (ms: number): string => new Date(ms).toISOString().slice(0, 7)
@@ -127,6 +128,7 @@ export class SupabaseStore implements Store {
     // The SQL function uses the database clock for the month.
     const raw = await this.call('/rpc/add_spend', { method: 'POST', body: { p_usd: usd, p_limit_usd: limitUsd } })
     const r = this.parse(ledgerSchema, raw, 'add_spend')
+    if (r.alert_80) console.warn('budget 80%', r.month)
     return { month: r.month, spentUsd: r.spent_usd, paused: r.paused }
   }
 
