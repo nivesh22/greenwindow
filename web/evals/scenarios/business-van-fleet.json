@@ -1,0 +1,16 @@
+{
+ "id": "business-van-fleet",
+ "persona": "business",
+ "turns": [
+  {
+   "user": "10 delivery vans on 7 kW chargers, each needs 4 hours, all ready by 6am.",
+   "expect": {
+    "answer_matches": [
+     "(one (job|machine|at a time)|single|separately|individual|batch|multiple|not (yet )?(able|support))"
+    ],
+    "no_banned_claim": true,
+    "stop_reason": "final"
+   }
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "id": "developer-l4-cautious",
+ "persona": "developer",
+ "turns": [
+  {
+   "user": "2 L4 GPUs for an inference batch, 3 hours, critical, must finish by 5am.",
+   "expect": {
+    "tools_called": [
+     "lookup_device",
+     "recommend_window"
+    ],
+    "co2_equals_tool": true,
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "max_cost_usd": 0.01,
+    "says_assumed": true
+   }
+  }
+ ],
+ "panel_state": {
+  "duration_h": null,
+  "power_kw": null,
+  "earliest_utc": null,
+  "deadline_utc": null,
+  "mode": "cautious",
+  "model": null,
+  "edited_by_user": false
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "id": "developer-gpu-4090",
+ "persona": "developer",
+ "turns": [
+  {
+   "user": "One RTX 4090 job, 3 hours, finishing by 11pm tonight.",
+   "expect": {
+    "tools_called": [
+     "lookup_device",
+     "recommend_window",
+     "estimate_co2"
+    ],
+    "co2_equals_tool": true,
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "max_cost_usd": 0.01,
+    "says_assumed": true
+   }
+  }
+ ]
+}

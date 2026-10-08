@@ -1,0 +1,16 @@
+{
+ "id": "developer-unknown-accelerator",
+ "persona": "developer",
+ "turns": [
+  {
+   "user": "Run on 2 TPU v5 chips for 4 hours, done by 8am.",
+   "expect": {
+    "tools_called": [
+     "lookup_device"
+    ],
+    "no_banned_claim": true,
+    "stop_reason": "final"
+   }
+  }
+ ]
+}

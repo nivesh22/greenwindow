@@ -1,0 +1,17 @@
+{
+  // Type-checks the evals together with the agent code (web/tsconfig.agent.json does not include web/evals yet).
+  // Run: npx tsc -p evals/tsconfig.json
+  "extends": "../tsconfig.agent.json",
+  "compilerOptions": { "tsBuildInfoFile": "../node_modules/.tmp/tsconfig.evals.tsbuildinfo" },
+  "include": [
+    ".",
+    "../agent",
+    "../api",
+    "../src/scheduler/optimizer.ts",
+    "../src/lib/time.ts",
+    "../src/lib/format.ts",
+    "../src/data/schemas.ts",
+    "../src/data/parse.ts",
+    "../src/data/models.ts"
+  ]
+}

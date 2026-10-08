@@ -1,0 +1,19 @@
+{
+ "id": "business-three-cnc",
+ "persona": "business",
+ "turns": [
+  {
+   "user": "I run 3 CNC machines, 2 kW each, 4 hours each. Plan all three to finish by 6pm.",
+   "expect": {
+    "answer_matches": [
+     "(one (job|machine|at a time)|single|separately|individual|batch|multiple|not (yet )?(able|support))"
+    ],
+    "no_banned_claim": true,
+    "stop_reason": "final",
+    "gates": {
+     "router": "plan_batch"
+    }
+   }
+  }
+ ]
+}

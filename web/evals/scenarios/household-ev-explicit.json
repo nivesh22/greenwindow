@@ -1,0 +1,30 @@
+{
+ "id": "household-ev-explicit",
+ "persona": "household",
+ "turns": [
+  {
+   "user": "Charge my EV with a 7 kW charger for 4 hours, finished by 8am.",
+   "expect": {
+    "tools_called": [
+     "recommend_window",
+     "estimate_co2"
+    ],
+    "co2_equals_tool": true,
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "max_cost_usd": 0.01,
+    "window_equals_optimizer": {
+     "duration_h": 4,
+     "power_kw": 7,
+     "deadline_local": "2026-10-06T08:00",
+     "mode": "expected"
+    },
+    "gates": {
+     "router": "plan_job",
+     "guard_in": "allow"
+    }
+   }
+  }
+ ]
+}

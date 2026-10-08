@@ -1,0 +1,16 @@
+{
+ "id": "developer-model-pick-36h",
+ "persona": "developer",
+ "turns": [
+  {
+   "user": "Which model should I trust for a plan 36 hours out?",
+   "expect": {
+    "tool_not_called": [
+     "recommend_window",
+     "estimate_co2"
+    ],
+    "no_banned_claim": true
+   }
+  }
+ ]
+}

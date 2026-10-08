@@ -1,0 +1,18 @@
+{
+ "id": "edge-deadline-in-past",
+ "persona": "edge",
+ "turns": [
+  {
+   "user": "Charge for 4 hours at 7 kW, it has to be done by midnight last night.",
+   "expect": {
+    "tool_not_called": [
+     "estimate_co2"
+    ],
+    "no_banned_claim": true,
+    "answer_matches": [
+     "(past|passed|already|earlier|later|different|new deadline)"
+    ]
+   }
+  }
+ ]
+}

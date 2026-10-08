@@ -1,0 +1,12 @@
+{
+ "id": "offtopic-paris-weather",
+ "persona": "offtopic",
+ "turns": [
+  {
+   "user": "What's the weather going to be like in Paris this weekend?",
+   "expect": {
+    "refuses": true
+   }
+  }
+ ]
+}

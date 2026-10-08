@@ -1,0 +1,22 @@
+{
+ "id": "developer-gpu-h100x8",
+ "persona": "developer",
+ "turns": [
+  {
+   "user": "Training job on 8 H100 GPUs, 6 hours, must finish by 8am tomorrow. When should I start?",
+   "expect": {
+    "tools_called": [
+     "lookup_device",
+     "recommend_window",
+     "estimate_co2"
+    ],
+    "co2_equals_tool": true,
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "max_cost_usd": 0.01,
+    "says_assumed": true
+   }
+  }
+ ]
+}

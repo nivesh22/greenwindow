@@ -1,0 +1,15 @@
+{
+ "id": "accuracy-compare",
+ "persona": "accuracy",
+ "turns": [
+  {
+   "user": "Compare Chronos and Prophet for me.",
+   "expect": {
+    "tools_called": [
+     "compare_models"
+    ],
+    "no_banned_claim": true
+   }
+  }
+ ]
+}

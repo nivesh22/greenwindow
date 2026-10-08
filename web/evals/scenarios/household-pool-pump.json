@@ -1,0 +1,26 @@
+{
+ "id": "household-pool-pump",
+ "persona": "household",
+ "turns": [
+  {
+   "user": "Pool pump, 4 hours at 1.1 kW, any time before noon tomorrow.",
+   "expect": {
+    "tools_called": [
+     "recommend_window",
+     "estimate_co2"
+    ],
+    "co2_equals_tool": true,
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "max_cost_usd": 0.01,
+    "window_equals_optimizer": {
+     "duration_h": 4,
+     "power_kw": 1.1,
+     "deadline_local": "2026-10-07T12:00",
+     "mode": "expected"
+    }
+   }
+  }
+ ]
+}
