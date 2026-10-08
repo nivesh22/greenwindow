@@ -109,6 +109,11 @@ export class Budget {
     return cost
   }
 
+  /** Records a cost reported in dollars (gate calls: Jev returns its cost, not billable tokens). */
+  chargeUsd(usd: number): void {
+    if (Number.isFinite(usd) && usd > 0) this.costUsd += usd
+  }
+
   /** Post-call check of the actual totals (throws BudgetExceeded). */
   assertWithinTotals(): void {
     if (this.inputTokens > this.limits.maxInputTokens) {
