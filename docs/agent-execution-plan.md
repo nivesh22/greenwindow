@@ -45,7 +45,7 @@ Owner:    H1-H3  H4, O1  H5      H6-H8,  H9-H11
 |-------|------|---------------|--------------------|
 | P0 | Docs, rules, contracts and agent definitions in place. Supabase project exists. | Contracts compile. `npm test` and `npm run typecheck` green. `.claude/agents/*.md` committed. Migration 0001 applied. | No (docs/rules commit to `main` only) |
 | P1a | One chat turn works end to end on the `assistant` preview URL. | J1 ("charge my EV before 7am") answered with an optimizer-exact start time. Spend written to `cost_ledger`. Harness unit tests green. | No |
-| P1b | The slice is safe to put in front of the public. | Failover fault test, kill-switch test, rate-limit test and grounding tests pass. Trace drawer and panel sync work. Mobile 360 px is usable. | **Yes** |
+| P1b | ✅ done 2026-10-08, **release 1** (`assistant` → `main`) | Grounding check (pass / one rewrite / template) + circuit breaker; plan panel two-way sync, two-column layout, "How I got this" drawer; migration 0002 (80% alert, `reset_budget`, `budget_status`) applied live; health keepalive; `explain_uncertainty`; functions in `dub1`; `recommend_window` returns London-time fields (prompt v2); route Gemini 3.5-flash → Haiku 5.5 → flash-lite → 3.8-flash. Turns ~10–13 s, ~$0.002 when Haiku answers. 269 web tests + Python suite green. |
 | P2 | Gates and the eval suite. | Replay evals ≥ 90%, 100% window correctness, 0 banned claims, required check on `main`. Gate p95 within NFR-1. | Yes |
 | P3 | Users, memory, impact ledger. | J2, J3 and J7 work end to end. pgTAP RLS tests pass. Delete-my-data test passes. | Yes |
 | P4 | Follow-through and ops. | J4, J5, J6 and J8 work. The Ops page shows real data. README showcase done. | Yes |
@@ -124,11 +124,11 @@ takes a while.
 
 | ID | Task | Agent | Needs |
 |----|------|-------|-------|
-| P1b.1 ∥ 🟡 | Gateway provider config, failover + circuit breaker, `provider_down`, deterministic `grounding.ts` (moved from P2), all stop reasons tested. Recorded gateway fixtures (spike S4, live). | harness-engineer | P1a, **H3** |
+| P1b.1 ∥ ✅ | Gateway provider config, failover + circuit breaker, `provider_down`, deterministic `grounding.ts` (moved from P2), all stop reasons tested. Recorded gateway fixtures (spike S4, live). | harness-engineer | P1a, **H3** |
 | P1b.2 ∥ ✅ | `PlanPanel` refactor with two-way sync (`plan_update` ↔ `panel_state`), `TraceDrawer` (tools + LLM calls), unavailable/limit notice, starter chips, 360 px layout, keyboard and screen-reader labels | frontend-engineer | P1a |
 | P1b.3 ∥ ✅ | Per-IP and global rate limits via `consume_message`, kill switch end to end (80% flag, 100% pause, manual reset SQL), span persistence via `waitUntil`, keepalive step in `pipeline.yml` | backend-engineer | P1a |
 | P1b.4 ∥ ✅ | `explain_uncertainty` | tools-engineer | P1a |
-| P1b.5 | Integration, the full suite, preview check, then merge `assistant` → `main` (**production release 1**). Update CLAUDE.md status. | orchestrator | P1b.1–4 |
+| P1b.5 ✅ | Integration, the full suite, preview check, then merge `assistant` → `main` (**production release 1**). Update CLAUDE.md status. | orchestrator | P1b.1–4 |
 
 **Owner, meanwhile:** review the preview before release 1 (about 10 min). Optionally H5 (GitHub Actions secrets).
 
@@ -232,11 +232,11 @@ Last updated 2026-10-08 (late evening). Integration branch `assistant`; preview:
 | P0 | ✅ done | Rules/docs v0.2, subagents, contracts, Supabase project, migration 0001 applied. |
 | P1a | ✅ done 2026-10-08 | Harness core, core tools, chat UI, API + Supabase store, `turn.ts` + system prompt. Owner verified J1 on the preview. |
 | P1b | 🟡 in progress | ✅ P1b.2 plan panel two-way sync, two-column layout, "How I got this" drawer. ✅ P1b.3 migration 0002 (80% alert, `reset_budget`, `budget_status`) **applied and checked live**; limit tests; health keepalive in `pipeline.yml`; `sse-test` removed. ✅ P1b.4 `explain_uncertainty`. ✅ Functions in `dub1`. 🟡 P1b.1 grounding check + circuit breaker (harness agent running). Then P1b.5: integration (`messages_left` in `turn_start`), live check, owner review, **release 1** (`assistant` → `main`). 206 tests green. |
-| P2 | not started | Gates on rules + Gemini classifier first, then Jev adapter (approved, H12). Live evals can use the GitHub secrets (H5). |
+| P2 | next | Gates on rules + Gemini classifier first, then Jev adapter (approved, H12). Live evals can use the GitHub secrets (H5). |
 | P3 | not started | Needs H6 (Google OAuth), H7 (Supabase Auth settings), H8 (Turnstile). |
 | P4 | not started | Needs H9 (VAPID), H10 (Langfuse), H11 (admin). |
 
-**Owner items closed:** H1, H2, H3 (+ paid gateway top-up, auto-reload off), H4 (env vars on Preview), H5 (GitHub Actions secrets), O1 (wording: "estimated emissions difference" with range + caveat; rule 9 rewritten), H12 (Jev approved for P2.5), H6 + H7 (Google OAuth client in Supabase only; anonymous sign-ins + manual linking on; verified live 2026-10-08: anonymous signup 200, Google authorize 302 to accounts.google.com; manual linking to be tested in P3). **Next owner items:** release-1 go-ahead; H8 (Turnstile), H9 (VAPID), H10 (Langfuse).
+**Owner items closed:** H1, H2, H3 (+ paid gateway top-up, auto-reload off), H4 (env vars on Preview), H5 (GitHub Actions secrets), O1 (wording: "estimated emissions difference" with range + caveat; rule 9 rewritten), H12 (Jev approved for P2.5), H6 + H7 (Google OAuth client in Supabase only; anonymous sign-ins + manual linking on; verified live 2026-10-08: anonymous signup 200, Google authorize 302 to accounts.google.com; manual linking to be tested in P3). **Next owner items:** H8 (Turnstile), H9 (VAPID), H10 (Langfuse).
 
 **Live facts (details in `docs/spikes.md`):** model route `gemini-3.5-flash` → `gemini-3.5-flash-lite` → `gemini-3.8-flash` → `anthropic/claude-haiku-5.5` (paid, $0.10/$0.50 per 1M). Jev via gateway: 5/5 router intents, ~300 ms, ~$0.000017/decision. Turn: 4 model steps, ~5–6 s, $0 on Gemini.
 
