@@ -13,11 +13,10 @@ const envSchema = z.object({
   IP_SALT: z.string().min(16).optional(),
 
   // Models (docs/spikes.md live checks, 2026-10-08). MODEL_ROUTE is the failover order, "<provider>:<model>" comma
-  // separated. Free gateway credit cannot use Haiku (403), so the default stays on free Gemini models; add
-  // "ai-gateway:anthropic/claude-haiku-5.5" once paid gateway credit exists.
+  // separated. Haiku (paid gateway credit) is last: cross-provider failover when every Gemini model is down.
   MODEL_ROUTE: z
     .string()
-    .default('gemini-direct:gemini-3.5-flash,gemini-direct:gemini-3.5-flash-lite,gemini-direct:gemini-3.8-flash')
+    .default('gemini-direct:gemini-3.5-flash,gemini-direct:gemini-3.5-flash-lite,gemini-direct:gemini-3.8-flash,ai-gateway:anthropic/claude-haiku-5.5')
     .transform((v, ctx) => {
       const route = v.split(',').map((e) => e.trim()).filter(Boolean).map((e) => {
         const i = e.indexOf(':')

@@ -81,6 +81,11 @@ Format:
 - **NESO in the backtest:** included as `neso_published` (forecast as returned by the API, lead time unknown), labelled as not a fair comparison (spec 5.3 item 7).
 - **backtest_summary.json:** `horizon_bucket` also takes `"all"`. Served from the site itself (`web/public`), so the web client fetches it same-origin.
 
+## 2026-10-08 — CO2 wording for the assistant (O1); paid gateway credit
+- **Wording:** the assistant reports grams as an "estimated emissions difference: about X g (range Y–Z)" with the caveat that it uses average (not marginal) grid intensity and a forecast. "Saved" and "avoided" stay banned: they claim a causal effect the average-intensity method does not support. Forecast pages keep the spec 5.3 wording. AGENTS.md rule 9 rewritten.
+- **Gateway:** owner bought a small paid AI Gateway top-up (auto-reload off) so Haiku 5.5 can be the cross-provider failover and Jev is callable. All spend still counts toward `MONTHLY_BUDGET_USD` ($5) and the kill switch.
+- **Model route:** `gemini-3.5-flash` -> `gemini-3.5-flash-lite` -> `gemini-3.8-flash` -> `anthropic/claude-haiku-5.5` (live latency/quota checks in `docs/spikes.md`).
+
 ## 2026-10-08 — Agent overhaul: backend, Supabase, models, rule changes
 - **Context:** the owner wants an agentic showcase (`docs/agent-prd.md`, `docs/agent-design.md`, `docs/agent-execution-plan.md`). It conflicts with rules written for the static app.
 - **Backend:** Vercel Functions inside `web/` (`web/api/`, server code in `web/agent/`), so the agent imports `optimizer.ts` directly. Forecast pages still read only the published JSON; the JSON contract (7.6) is unchanged.

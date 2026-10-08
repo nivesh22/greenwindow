@@ -50,6 +50,6 @@ A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbo
 - **Supabase** — adopted 2026-10-08 for the assistant (reverses D6; see `docs/decisions.md`). Project `Greenwindow`, ref `sndukjnxdvhrnbtazrlu`. CLI via `npx supabase@2.120.0` (owner logged in on this machine). Never print keys; never read `.env*`.
 
 ## Wording rules worth repeating
-- Never "CO2 saved". Say "estimated difference in average grid intensity".
+- Never "CO2 saved"/"avoided". Say "estimated difference in average grid intensity"; the assistant may say "estimated emissions difference: about X g (range Y–Z)" with the average-vs-marginal caveat (rule 9).
 - Always attribute NESO and Open-Meteo (CC BY 4.0).
 - Report negative results; always show the seasonal-naive benchmark.

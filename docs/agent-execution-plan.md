@@ -232,10 +232,10 @@ Last updated 2026-10-08 (evening).
 | P0 | ✅ done | Rules/docs v0.2, subagents, contracts, Supabase project + migration 0001 applied (`supabase migration list` shows it remote). |
 | P1a | 🟡 almost done | P1a.1–P1a.4 merged into `assistant` (183 tests). P1a.6: `turn.ts` + system prompt wired into `/api/chat`. **J1 works locally end to end** against live Gemini, Supabase and the published forecast: optimizer-exact start, CO2 wording + caveat, $0, ~9 s. Remaining: preview deploy check (env vars in Vercel, S2 streaming, import resolution), then exit. |
 | P1b | not started | Next: grounding check, PlanPanel sync, trace drawer, limits, keepalive, `explain_uncertainty`, region `dub1`. |
-| P2 | not started | Gates on rules + LLM first. Jev (S1): real and listed on the gateway (`typesafe-ai/jev`, $0.042/1M input), not yet called. Needs paid gateway credit or a direct TypeSafe key → owner decision H12 at P2.5. |
+| P2 | not started | Gates on rules + LLM first, then Jev (S1 passed live: 5/5 router intents, ~300 ms, ~$0.000017/call). |
 | P3 | not started | |
 | P4 | not started | |
 
-**Open owner items:** H4 (import `web/.env.local` into Vercel, Preview only), O1 (CO2 wording; tools currently use rule-9 wording), H3b (paid gateway credit for Haiku failover + Jev, before release 1), H12 (Jev).
+**Owner items closed 2026-10-08:** H1, H2, H3 (+ paid top-up, auto-reload off), H4 (Preview), O1 (wording: "estimated emissions difference" with range + caveat, never saved/avoided; rule 9 rewritten). **Open:** H12 (approve Jev for P2.5: live test passed, ~$0.000017/decision).
 
 **Known issues:** `gemini-3.8-flash` free quota is exhausted after a handful of calls (429), so it is last in the route. `gemini-3.5-flash-lite` latency is erratic (7–47 s). The model's first `estimate_co2` call fails and is repaired on retry (to investigate in P1b).
