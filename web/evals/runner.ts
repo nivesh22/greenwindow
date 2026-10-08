@@ -9,7 +9,7 @@ import { FixtureForecastSource } from '../agent/data/forecast_source.js'
 import type { ChoiceBackend } from '../agent/gates/types.js'
 import { HISTORY_MAX, type ChatRequest, type PlanUpdate, type SseEvent, type TraceSummary } from '../agent/harness/events.js'
 import type { ToolResultLike } from '../agent/harness/grounding.js'
-import { buildRouter, createTurnRunner, type TurnDeps } from '../agent/harness/turn.js'
+import { buildRouter, createTurnRunner, type TurnDeps, defaultChoiceBackend } from '../agent/harness/turn.js'
 import { ModelRouter } from '../agent/providers/router.js'
 import { MemoryStore } from '../agent/store/types.js'
 import { buildRegistry } from '../agent/tools/index.js'
@@ -54,8 +54,8 @@ export function loadScenarios(dir: string = SCENARIOS_DIR): Scenario[] {
  * The real gate backend (Jev) for record and live modes. The harness adds it with the gates work (P2.5); until
  * then gates run on their rule fallbacks and nothing is recorded for them. Wire it in here once it exists.
  */
-export function loadChoiceBackend(_config: AgentConfig): ChoiceBackend | null {
-  return null
+export function loadChoiceBackend(config: AgentConfig): ChoiceBackend | null {
+  return defaultChoiceBackend(config) // Jev via the gateway when AI_GATEWAY_API_KEY is set (record/live only)
 }
 
 export interface SpendCap {

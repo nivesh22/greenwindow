@@ -192,7 +192,10 @@ export async function runLoop(input: readonly Msg[], opts: LoopOptions): Promise
 
       budget.assertWithinTotals()
       budget.assertTime()
-      const outcomes = await Promise.all(calls.map((c) => runTool(c, opts)))
+      // Sequential, in the model's order: tools take milliseconds, and estimate_co2/explain_uncertainty depend on the
+      // recommend_window call that precedes them in the same step.
+      const outcomes: Awaited<ReturnType<typeof runTool>>[] = []
+      for (const c of calls) outcomes.push(await runTool(c, opts))
       for (let i = 0; i < calls.length; i++) {
         const call = calls[i]
         const out = outcomes[i]

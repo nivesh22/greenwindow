@@ -155,7 +155,7 @@ describe('turn gates: plan intents (stage 5)', () => {
     expect(r.stop).toBe('final')
     expect(order(r)).toEqual([
       'turn_start', 'gate:guard_in', 'gate:router', 'gate:ask_or_act', 'gate:risk_mode',
-      'tool_start', 'tool_start', 'tool_start', 'tool_end', 'tool_end', 'tool_end', // tools run in parallel
+      'tool_start', 'tool_end', 'tool_start', 'tool_end', 'tool_start', 'tool_end', // tools run sequentially, in call order
       'gate:grounding', 'gate:guard_out', 'answer', 'done',
     ])
     expect(b.calls.map((c) => c.questions)).toEqual([['guard_in', 'router'], ['ask_or_act', 'risk_mode'], ['guard_out']])

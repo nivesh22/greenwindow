@@ -149,11 +149,11 @@ describe('runLoop', () => {
     expect(second.at(-1)).toEqual({ role: 'tool', toolCallId: 'c1', content: '{"tool":"echo","ok":true,"data":{"x":7}}' })
   })
 
-  it('runs the tool calls of one step in parallel, results in call order', async () => {
+  it('runs the tool calls of one step sequentially, in call order', async () => {
     order.length = 0
     h = setup([[ev.call('slow_a', {}, 'a'), ev.call('slow_b', {}, 'b'), ev.finish('tool_calls')], [ev.text('ok'), ev.finish()]])
     const r = await runLoop(user, h.opts)
-    expect(order).toEqual(['a:start', 'b:start', 'b:end', 'a:end'])
+    expect(order).toEqual(['a:start', 'a:end', 'b:start', 'b:end'])
     expect(toolMsgs(r.messages)).toEqual([
       { tool: 'slow_a', ok: true, data: { v: 'a' } },
       { tool: 'slow_b', ok: true, data: { v: 'b' } },
@@ -347,3 +347,4 @@ describe('runLoop', () => {
     expect(h.events).toEqual([])
   })
 })
+

@@ -74,7 +74,10 @@ export function guardInSpec(threshold: number): GateSpec<InputState, GuardInChoi
     },
     rules: guardInRules,
     // Design §6.2: a non-allow choice stands only while P(allow) stays below the threshold.
-    override: (_s, a) => {
+    override: (s, a) => {
+      // Defense in depth: a clear injection/abuse phrase blocks even when Jev says allow.
+      const hard = guardInRules(s)
+      if (a.choice === 'allow' && hard.choice !== 'allow' && hard.confidence >= 0.9) return { ...hard, reason: `${hard.reason} (rule overrides Jev allow)` }
       const pAllow = a.probabilities.allow ?? 0
       return a.choice !== 'allow' && pAllow >= threshold ? { choice: 'allow', confidence: pAllow, reason: `P(allow) ${pAllow.toFixed(2)} >= ${threshold}` } : null
     },
