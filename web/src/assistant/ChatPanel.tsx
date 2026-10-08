@@ -2,6 +2,7 @@ import { useId, useState, type KeyboardEvent } from 'react'
 import type { PanelState, PlanUpdate } from '../../agent/harness/events'
 import { FormattedText } from './FormattedText'
 import { MAX_CHARS, STARTERS } from './flag'
+import { TraceDrawer } from './TraceDrawer'
 import { useChat } from './useChat'
 
 interface Props {
@@ -49,7 +50,7 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
           </div>
         )}
         {chat.messages.map((m) => (
-          <div key={m.id} className={m.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
+          <div key={m.id} className={m.role === 'user' ? 'flex justify-end' : 'flex flex-col items-start'}>
             <div
               className={`max-w-[92%] rounded-2xl px-3 py-2 text-sm break-words ${
                 m.role === 'user' ? 'bg-brand-600 text-white' : 'bg-stone-100 text-stone-900 dark:bg-stone-800 dark:text-stone-100'
@@ -58,6 +59,7 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
               <span className="sr-only">{m.role === 'user' ? 'You: ' : 'Assistant: '}</span>
               <FormattedText text={m.text} />
             </div>
+            {m.role === 'assistant' && m.trace && <TraceDrawer trace={m.trace} />}
           </div>
         ))}
         {chat.busy && (
@@ -70,7 +72,11 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
 
       {unavailable && (
         <div role="alert" className="mt-3 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-100">
-          <p className="font-medium">Assistant unavailable — the planner form below still works.</p>
+          <p className="font-medium">
+            {chat.limit?.kind === 'budget_paused'
+              ? 'Assistant paused for now — the plan panel still works.'
+              : 'Assistant unavailable — the plan panel still works.'}
+          </p>
           <p className="mt-1">{unavailable.message}</p>
         </div>
       )}
