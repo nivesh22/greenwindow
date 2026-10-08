@@ -1,0 +1,16 @@
+{
+ "id": "business-laundry",
+ "persona": "business",
+ "turns": [
+  {
+   "user": "Two industrial washers and a dryer, run them all tonight and tell me the best slots.",
+   "expect": {
+    "answer_matches": [
+     "(one (job|machine|at a time)|single|separately|individual|batch|multiple|not (yet )?(able|support))"
+    ],
+    "no_banned_claim": true,
+    "stop_reason": "final"
+   }
+  }
+ ]
+}

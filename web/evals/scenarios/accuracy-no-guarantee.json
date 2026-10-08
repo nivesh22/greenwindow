@@ -1,0 +1,15 @@
+{
+ "id": "accuracy-no-guarantee",
+ "persona": "accuracy",
+ "turns": [
+  {
+   "user": "Can you guarantee the best time will turn out exactly right?",
+   "expect": {
+    "answer_matches": [
+     "(not|can't|cannot|no) .*(guarantee|certain)|uncertain|forecast"
+    ],
+    "no_banned_claim": true
+   }
+  }
+ ]
+}

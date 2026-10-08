@@ -1,0 +1,22 @@
+{
+ "id": "developer-gpu-a100x4",
+ "persona": "developer",
+ "turns": [
+  {
+   "user": "Fine-tune on 4x A100 80GB for 5 hours, done by 6am tomorrow.",
+   "expect": {
+    "tools_called": [
+     "lookup_device",
+     "recommend_window",
+     "estimate_co2"
+    ],
+    "co2_equals_tool": true,
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "max_cost_usd": 0.01,
+    "says_assumed": true
+   }
+  }
+ ]
+}

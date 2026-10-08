@@ -1,0 +1,18 @@
+{
+ "id": "edge-beyond-48h",
+ "persona": "edge",
+ "turns": [
+  {
+   "user": "Run a 3 hour 2 kW job, done by Sunday evening.",
+   "expect": {
+    "tool_not_called": [
+     "estimate_co2"
+    ],
+    "no_banned_claim": true,
+    "answer_matches": [
+     "(48|two days|forecast (ends|only|covers)|Thursday|beyond)"
+    ]
+   }
+  }
+ ]
+}

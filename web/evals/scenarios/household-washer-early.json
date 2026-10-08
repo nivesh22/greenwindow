@@ -1,0 +1,26 @@
+{
+ "id": "household-washer-early",
+ "persona": "household",
+ "turns": [
+  {
+   "user": "Washing machine, 2 hours at 0.6 kW, done by 6am.",
+   "expect": {
+    "tools_called": [
+     "recommend_window",
+     "estimate_co2"
+    ],
+    "co2_equals_tool": true,
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "max_cost_usd": 0.01,
+    "window_equals_optimizer": {
+     "duration_h": 2,
+     "power_kw": 0.6,
+     "deadline_local": "2026-10-06T06:00",
+     "mode": "expected"
+    }
+   }
+  }
+ ]
+}

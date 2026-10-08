@@ -1,0 +1,16 @@
+{
+ "id": "business-bakery-ovens",
+ "persona": "business",
+ "turns": [
+  {
+   "user": "Bakery with two ovens at 9 kW each, each needs 3 hours before 5am. Schedule both.",
+   "expect": {
+    "answer_matches": [
+     "(one (job|machine|at a time)|single|separately|individual|batch|multiple|not (yet )?(able|support))"
+    ],
+    "no_banned_claim": true,
+    "stop_reason": "final"
+   }
+  }
+ ]
+}

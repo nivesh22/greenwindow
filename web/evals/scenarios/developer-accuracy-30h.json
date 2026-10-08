@@ -1,0 +1,20 @@
+{
+ "id": "developer-accuracy-30h",
+ "persona": "developer",
+ "turns": [
+  {
+   "user": "How accurate is the forecast at 30 hours ahead?",
+   "expect": {
+    "tool_not_called": [
+     "recommend_window",
+     "estimate_co2"
+    ],
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "gates": {
+     "router": "model_accuracy"
+    }
+   }
+  }
+ ]
+}

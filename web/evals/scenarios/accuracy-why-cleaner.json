@@ -1,0 +1,18 @@
+{
+ "id": "accuracy-why-cleaner",
+ "persona": "accuracy",
+ "turns": [
+  {
+   "user": "Why is the grid forecast to be cleaner in the early hours?",
+   "expect": {
+    "tools_called": [
+     "get_forecast"
+    ],
+    "no_banned_claim": true,
+    "gates": {
+     "router": "explain_forecast"
+    }
+   }
+  }
+ ]
+}

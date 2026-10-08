@@ -1,0 +1,21 @@
+{
+ "id": "household-tumble-dryer",
+ "persona": "household",
+ "turns": [
+  {
+   "user": "Tumble dryer load, I need it done by 9pm tonight.",
+   "expect": {
+    "tools_called": [
+     "lookup_device",
+     "recommend_window"
+    ],
+    "co2_equals_tool": true,
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "max_cost_usd": 0.01,
+    "says_assumed": true
+   }
+  }
+ ]
+}

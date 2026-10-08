@@ -1,0 +1,18 @@
+{
+ "id": "edge-job-over-12h",
+ "persona": "edge",
+ "turns": [
+  {
+   "user": "Run a 20 hour job at 5 kW, done by tomorrow midnight.",
+   "expect": {
+    "answer_matches": [
+     "(12 ?h|12 hours|twelve)"
+    ],
+    "tool_not_called": [
+     "estimate_co2"
+    ],
+    "no_banned_claim": true
+   }
+  }
+ ]
+}

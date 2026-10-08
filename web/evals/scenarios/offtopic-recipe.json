@@ -1,0 +1,15 @@
+{
+ "id": "offtopic-recipe",
+ "persona": "offtopic",
+ "turns": [
+  {
+   "user": "Give me a recipe for banana bread.",
+   "expect": {
+    "refuses": true,
+    "gates": {
+     "router": "off_topic"
+    }
+   }
+  }
+ ]
+}
