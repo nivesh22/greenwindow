@@ -267,6 +267,13 @@ describe('runLoop', () => {
     expect(h.provider.calls).toBe(0)
   })
 
+  it('a cut-off final answer (finish length) stops with token_budget, keeping the partial text', async () => {
+    h = setup([[ev.text('Start at 01:00 because'), ev.finish('length')]])
+    const r = await runLoop(user, h.opts)
+    expect(r.stopReason).toBe('token_budget')
+    expect(r.text).toBe('Start at 01:00 because')
+  })
+
   it('cost_budget: pre-call worst case on a paid model, nothing is sent', async () => {
     // 800 output tokens × $5/M = $0.004 > $0.003
     h = setup([[ev.finish()]], {}, { maxCostUsd: 0.003 }, 'test/worst-case-priced')

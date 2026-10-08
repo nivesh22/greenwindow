@@ -145,14 +145,14 @@ describe('recommend_window', () => {
 
 describe('estimate_co2', () => {
   it('errors without a recommendation', async () => {
-    await expect(estimateCo2.handler(makeCtx(), { from: 'last_recommendation' })).rejects.toMatchObject({ code: 'no_recommendation' })
+    await expect(estimateCo2.handler(makeCtx(), {})).rejects.toMatchObject({ code: 'no_recommendation' })
   })
 
   it('computes the range from the candidates and keeps the wording to "estimated difference"', async () => {
     const ctx = makeCtx()
     await recommendWindow.handler(ctx, baseInput)
     const rec = ctx.turn.lastRecommendation!.rec
-    const out = await estimateCo2.handler(ctx, { from: 'last_recommendation' })
+    const out = await estimateCo2.handler(ctx, {})
     estimateCo2.output.parse(out)
     const best = rec.candidates.find((c) => c.start === rec.bestStart)!
     const now = rec.candidates.find((c) => c.start === rec.runNowStart)!
@@ -173,12 +173,12 @@ describe('estimate_co2', () => {
     const hours: HourForecast[] = [0, 1, 2, 3].map((i) => ({ ts: `2026-10-06T0${i}:00:00Z`, q10: 90, q50: 100, q90: 110 }))
     const rec = recommend(hours, { durationH: 1, powerKw: 1, earliestStart: hours[0]!.ts, deadline: '2026-10-06T04:00:00Z' }, 'expected')
     ctx.turn.lastRecommendation = lastRec(rec, hours, 'expected')
-    const out = await estimateCo2.handler(ctx, { from: 'last_recommendation' })
+    const out = await estimateCo2.handler(ctx, {})
     expect(out).toMatchObject({ grams_point: 0, grams_low: 0, grams_high: 0, could_be_worse: false })
   })
 
   it('takes no free numbers', () => {
-    expect(estimateCo2.input.safeParse({ from: 'last_recommendation', grams: 5 }).success).toBe(false)
+    expect(estimateCo2.input.safeParse({ grams: 5 }).success).toBe(false)
     expect(estimateCo2.input.safeParse({ from: 'something' }).success).toBe(false)
   })
 
@@ -186,7 +186,7 @@ describe('estimate_co2', () => {
     const rec = recommend(hours, { durationH, powerKw: 2, earliestStart: earliest, deadline }, mode)
     const ctx = makeCtx()
     ctx.turn.lastRecommendation = lastRec(rec, hours, mode)
-    const out = await estimateCo2.handler(ctx, { from: 'last_recommendation' })
+    const out = await estimateCo2.handler(ctx, {})
     expect(out.grams_low > 0).toBe(rec.robust)
   }
 
@@ -223,7 +223,7 @@ describe('estimate_co2', () => {
       const rec = recommend(hours, c.job, c.mode)
       const ctx = makeCtx()
       ctx.turn.lastRecommendation = lastRec(rec, hours, c.mode)
-      const out = await estimateCo2.handler(ctx, { from: 'last_recommendation' })
+      const out = await estimateCo2.handler(ctx, {})
       expect(out.grams_low > 0).toBe(rec.robust)
       checked++
     }

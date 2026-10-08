@@ -30,7 +30,7 @@ export const estimateCo2 = defineTool({
     'Estimates the difference in emissions (grams CO2, based on average grid intensity) between the recommended window and running at the earliest start, ' +
     'as a point estimate with a low-to-high range. Uses the last recommend_window result only; call recommend_window first. ' +
     'Describe it as an "estimated difference", never as saved or avoided emissions. "could_be_worse" means the range includes the recommendation being worse than running now.',
-  input: z.strictObject({ from: z.literal('last_recommendation') }),
+  input: z.strictObject({}), // no arguments: it always uses this turn's last recommend_window result
   output: outputSchema,
   auth: 'anon',
   sideEffect: false,

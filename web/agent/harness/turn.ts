@@ -37,7 +37,12 @@ export interface TurnInput {
 export function buildRouter(config: AgentConfig): ModelRouter {
   const providers: Partial<Record<'gemini-direct' | 'ai-gateway', ModelProvider>> = {}
   if (config.GEMINI_API_KEY) {
-    providers['gemini-direct'] = new OpenAICompatProvider({ id: 'gemini-direct', baseUrl: config.GEMINI_BASE_URL, apiKey: config.GEMINI_API_KEY })
+    providers['gemini-direct'] = new OpenAICompatProvider({
+      id: 'gemini-direct',
+      baseUrl: config.GEMINI_BASE_URL,
+      apiKey: config.GEMINI_API_KEY,
+      extraBody: config.GEMINI_REASONING_EFFORT === 'off' ? undefined : { reasoning_effort: config.GEMINI_REASONING_EFFORT },
+    })
   }
   if (config.AI_GATEWAY_API_KEY) {
     providers['ai-gateway'] = new OpenAICompatProvider({ id: 'ai-gateway', baseUrl: config.GATEWAY_BASE_URL, apiKey: config.AI_GATEWAY_API_KEY })

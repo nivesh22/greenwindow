@@ -34,3 +34,14 @@ describe('real Gemini stream', () => {
     expect(wire).toMatchObject({ tool_calls: [{ extra_content: { google: { thought_signature: expect.any(String) } } }] })
   })
 })
+
+it('counts reasoning tokens (total - prompt) as output when completion_tokens leaves them out', () => {
+  const p = new ChatStreamParser(malformed, () => 'id')
+  const line = 'data: ' + JSON.stringify({ choices: [{ delta: { content: 'Hi' }, finish_reason: 'stop', index: 0 }], usage: { prompt_tokens: 21, completion_tokens: 4, total_tokens: 137 } })
+  const evs = [...p.push(`${line}
+
+data: [DONE]
+
+`), ...p.end()]
+  expect(evs).toContainEqual({ type: 'usage', inputTokens: 21, outputTokens: 116, cachedInputTokens: 0 })
+})

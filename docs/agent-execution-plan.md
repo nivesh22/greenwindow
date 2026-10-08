@@ -238,4 +238,8 @@ Last updated 2026-10-08 (evening).
 
 **Owner items closed 2026-10-08:** H1, H2, H3 (+ paid top-up, auto-reload off), H4 (Preview), O1 (wording: "estimated emissions difference" with range + caveat, never saved/avoided; rule 9 rewritten). **Open:** H12 (approve Jev for P2.5: live test passed, ~$0.000017/decision).
 
-**Known issues:** `gemini-3.8-flash` free quota is exhausted after a handful of calls (429), so it is last in the route. `gemini-3.5-flash-lite` latency is erratic (7–47 s). The model's first `estimate_co2` call fails and is repaired on retry (to investigate in P1b).
+**Known issues / fixed on the preview (2026-10-08):**
+- Fixed: Vercel 500 (Node ESM needs `.js` extensions on relative imports; guard test added).
+- Fixed: answers cut off mid-sentence. Gemini's reasoning tokens count against `max_tokens` (live check: 112 of 120 tokens spent thinking). Cap raised to 2048, `reasoning_effort: low` sent to Gemini, reasoning tokens counted as output, and a `finish_reason: length` answer is now a `token_budget` stop, never shown as complete. The finish reason is recorded on every LLM span.
+- Fixed: `estimate_co2` takes no arguments (the model kept passing the wrong literal), saving one step per turn. Turns: 4 steps, ~5–6 s.
+- Open: free-tier rate limits. `gemini-3.5-flash` hits per-minute 429s after a few quick calls (flash-lite takes over); `gemini-3.8-flash` daily quota is tiny. Haiku (paid) is the last backstop. Watch the failover rate once Ops exists.

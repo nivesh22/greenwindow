@@ -2,7 +2,7 @@
 // here; turn.ts sends it as one `answer` event after grounding).
 import { z } from 'zod'
 import { AllProvidersFailed, type LlmCallRecord, type ModelRouter } from '../providers/router.js'
-import type { Msg, ToolCall } from '../providers/types.js'
+import type { FinishReason, Msg, ToolCall } from '../providers/types.js'
 import { ATTR, type Tracer } from '../telemetry/tracer.js'
 import type { ToolCtx, ToolDef, ToolRegistry } from '../tools/registry.js'
 import { ToolUserError } from '../tools/registry.js'
@@ -145,10 +145,12 @@ export async function runLoop(input: readonly Msg[], opts: LoopOptions): Promise
       let text = ''
       const calls: ToolCall[] = []
       let usage: { inputTokens: number; outputTokens: number; cachedInputTokens: number } | null = null
+      let finish: FinishReason | null = null
       for (const e of routed.events) {
         if (e.type === 'text') text += e.delta
         else if (e.type === 'tool_call') calls.push(e.call)
         else if (e.type === 'usage') usage = e
+        else if (e.type === 'finish') finish = e.reason
       }
       const estimated = usage === null
       const u = usage ?? {
@@ -176,13 +178,15 @@ export async function runLoop(input: readonly Msg[], opts: LoopOptions): Promise
             [ATTR.outputTokens]: u.outputTokens,
             [ATTR.costUsd]: cost,
             [ATTR.usageEstimated]: estimated,
+            'gen_ai.response.finish_reasons': [finish ?? 'unknown'],
           },
         })
       }
 
       lastText = text
       messages.push(calls.length > 0 ? { role: 'assistant', content: text, toolCalls: calls } : { role: 'assistant', content: text })
-      if (calls.length === 0) return result('final', null)
+      // A cut-off answer (Gemini's reasoning tokens count against max_tokens) is never presented as complete.
+      if (calls.length === 0) return finish === 'length' ? result('token_budget', 'output truncated (finish_reason length)') : result('final', null)
 
       budget.assertWithinTotals()
       budget.assertTime()

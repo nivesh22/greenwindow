@@ -14,6 +14,8 @@ export interface OpenAICompatConfig {
   baseUrl: string // e.g. https://generativelanguage.googleapis.com/v1beta/openai (no trailing /chat/completions)
   apiKey: string
   headers?: Record<string, string>
+  /** Extra provider-specific body fields (e.g. Gemini `reasoning_effort`), verified in docs/spikes.md. */
+  extraBody?: Record<string, unknown>
   /** Injectable for tests. Defaults to globalThis.fetch. */
   fetch?: typeof fetch
   /** Generates ids for tool calls that arrive without one. */
@@ -124,6 +126,7 @@ const chunkSchema = z.object({
     .object({
       prompt_tokens: z.number().nonnegative().nullish(),
       completion_tokens: z.number().nonnegative().nullish(),
+      total_tokens: z.number().nonnegative().nullish(),
       prompt_tokens_details: z.object({ cached_tokens: z.number().nonnegative().nullish() }).nullish(),
     })
     .nullish(),
@@ -241,7 +244,8 @@ export class ChatStreamParser {
       this.usage = {
         type: 'usage',
         inputTokens: u.prompt_tokens ?? 0,
-        outputTokens: u.completion_tokens ?? 0,
+        // Gemini leaves reasoning tokens out of completion_tokens but bills them and counts them against max_tokens.
+        outputTokens: Math.max(u.completion_tokens ?? 0, (u.total_tokens ?? 0) - (u.prompt_tokens ?? 0)),
         cachedInputTokens: u.prompt_tokens_details?.cached_tokens ?? 0,
       }
     }
@@ -306,7 +310,7 @@ export class OpenAICompatProvider implements ModelProvider {
           ...this.cfg.headers,
           authorization: `Bearer ${this.cfg.apiKey}`,
         },
-        body: JSON.stringify(buildRequestBody(req)),
+        body: JSON.stringify({ ...buildRequestBody(req), ...this.cfg.extraBody }),
         signal,
       })
     } catch (e) {

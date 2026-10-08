@@ -29,6 +29,7 @@ const envSchema = z.object({
       return route as { provider: 'gemini-direct' | 'ai-gateway'; model: string }[]
     }),
   CHEAP_MODEL: z.string().default('gemini-3.5-flash-lite'),
+  GEMINI_REASONING_EFFORT: z.enum(['low', 'medium', 'high', 'off']).default('low'),
   GEMINI_BASE_URL: z.string().url().default('https://generativelanguage.googleapis.com/v1beta/openai'),
   GATEWAY_BASE_URL: z.string().url().default('https://ai-gateway.vercel.sh/v1'),
   DATA_BASE_URL: z.string().url().default('https://raw.githubusercontent.com/nivesh22/greenwindow/data/app_data'),
@@ -38,7 +39,7 @@ const envSchema = z.object({
   // Per-turn budgets (design §5.3).
   MAX_STEPS: num(6),
   MAX_INPUT_TOKENS: num(40_000),
-  MAX_OUTPUT_TOKENS: num(800),
+  MAX_OUTPUT_TOKENS: num(2048), // includes Gemini reasoning tokens (docs/spikes.md)
   MAX_TURN_COST_USD: num(0.01),
   TURN_WALL_MS: num(45_000),
   TOOL_TIMEOUT_MS: num(5_000),
