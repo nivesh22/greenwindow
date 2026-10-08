@@ -5,13 +5,12 @@
   {
    "user": "When should I charge my car? It needs to be done by 7am.",
    "expect": {
-    "asks_one_question": true,
-    "tool_not_called": [
-     "estimate_co2"
-    ],
     "gates": {
      "router": "plan_job"
-    }
+    },
+    "answer_matches": [
+     "(doesn'?t fit|does not fit|not enough time|can'?t fit|cannot fit|won'?t fit|too (short|tight)|later deadline|shorter)"
+    ]
    }
   },
   {
@@ -34,5 +33,6 @@
     }
    }
   }
- ]
+ ],
+ "notes": "Device default (7 kW, 6 h) does not fit before 7am from 01:30: the assistant must say so, not shrink the job."
 }

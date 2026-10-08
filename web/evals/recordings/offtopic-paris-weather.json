@@ -1,0 +1,44 @@
+{
+ "version": 1,
+ "scenario_id": "offtopic-paris-weather",
+ "turns": [
+  {
+   "model_calls": [],
+   "gate_calls": [
+    {
+     "fingerprint": "88531a648efd1798e68a1593da4bf3e88fba4b465aafdf1f510a481c7b5c4ba3",
+     "result": {
+      "choice": "off_topic",
+      "confidence": 1,
+      "probabilities": {
+       "off_topic": 1,
+       "abuse": 0,
+       "injection": 0,
+       "allow": 0
+      },
+      "costUsd": 0.0000273
+     }
+    },
+    {
+     "fingerprint": "694c8d2b5db9127465b5d8e5b79c3ac6b41d7ce82fb6981b02ca3a9c8eaf4a76",
+     "result": {
+      "choice": "off_topic",
+      "confidence": 1,
+      "probabilities": {
+       "model_accuracy": 0,
+       "plan_job": 0,
+       "impact_history": 0,
+       "plan_batch": 0,
+       "smalltalk": 0,
+       "profile_update": 0,
+       "off_topic": 1,
+       "explain_forecast": 0,
+       "recurring": 0
+      },
+      "costUsd": 0.000031416
+     }
+    }
+   ]
+  }
+ ]
+}

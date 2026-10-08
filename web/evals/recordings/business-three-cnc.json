@@ -1,0 +1,474 @@
+{
+ "version": 1,
+ "scenario_id": "business-three-cnc",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "88c09ee3929adfde767e6f35d3735268a16655199aad1b55fe76d6282601eb79",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01PdL9idu3uQTQQpQjaMPHFo",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 4, \"power_kw\": 2, \"deadline_local\": \"2026-10-06T18:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"CNC machine 1\"}"
+       }
+      },
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01Hu28ahxgnsGAyEuUx9fcna",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 4, \"power_kw\": 2, \"deadline_local\": \"2026-10-06T18:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"CNC machine 2\"}"
+       }
+      },
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01U8FVzM6jg4emJ3sjMRd3n5",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 4, \"power_kw\": 2, \"deadline_local\": \"2026-10-06T18:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"CNC machine 3\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2871,
+       "outputTokens": 867,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "16f4e6a150187de56f75df1a80dd1892b6b0cd5bdcc0b4278adf69171411b70a",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_015TEQxYAKGRB8rbXfmEzMVm",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4422,
+       "outputTokens": 193,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "308ba168a27ed4eede63219e8e4dcdeceaab287a4a98aaa5f2862b30ea9d0dab",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "All"
+      },
+      {
+       "type": "text",
+       "delta": " three C"
+      },
+      {
+       "type": "text",
+       "delta": "NC j"
+      },
+      {
+       "type": "text",
+       "delta": "obs get"
+      },
+      {
+       "type": "text",
+       "delta": " the same recommendation: start"
+      },
+      {
+       "type": "text",
+       "delta": " at **11:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": " (Tue 6 "
+      },
+      {
+       "type": "text",
+       "delta": "Oct)** and finish by"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "15:00 BST,"
+      },
+      {
+       "type": "text",
+       "delta": " before"
+      },
+      {
+       "type": "text",
+       "delta": " your"
+      },
+      {
+       "type": "text",
+       "delta": " 18:00 deadline"
+      },
+      {
+       "type": "text",
+       "delta": ". That"
+      },
+      {
+       "type": "text",
+       "delta": " is"
+      },
+      {
+       "type": "text",
+       "delta": " an"
+      },
+      {
+       "type": "text",
+       "delta": " average of"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "164.5 gCO2"
+      },
+      {
+       "type": "text",
+       "delta": "/kWh vers"
+      },
+      {
+       "type": "text",
+       "delta": "us 194.5 if"
+      },
+      {
+       "type": "text",
+       "delta": " started"
+      },
+      {
+       "type": "text",
+       "delta": " now at"
+      },
+      {
+       "type": "text",
+       "delta": " 02:00 BST,"
+      },
+      {
+       "type": "text",
+       "delta": " about"
+      },
+      {
+       "type": "text",
+       "delta": " 15% lower.\n\n-"
+      },
+      {
+       "type": "text",
+       "delta": " The recommendation is **not"
+      },
+      {
+       "type": "text",
+       "delta": " robust**, so the"
+      },
+      {
+       "type": "text",
+       "delta": " forecast g"
+      },
+      {
+       "type": "text",
+       "delta": "ap could sh"
+      },
+      {
+       "type": "text",
+       "delta": "rink with"
+      },
+      {
+       "type": "text",
+       "delta": " new"
+      },
+      {
+       "type": "text",
+       "delta": " data.\n- Est"
+      },
+      {
+       "type": "text",
+       "delta": "imated difference for one machine"
+      },
+      {
+       "type": "text",
+       "delta": ": about"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "240 g CO2 l"
+      },
+      {
+       "type": "text",
+       "delta": "ower, with"
+      },
+      {
+       "type": "text",
+       "delta": " a range of -195 g to"
+      },
+      {
+       "type": "text",
+       "delta": " +"
+      },
+      {
+       "type": "text",
+       "delta": "661 g. The range includes"
+      },
+      {
+       "type": "text",
+       "delta": " running"
+      },
+      {
+       "type": "text",
+       "delta": " now being"
+      },
+      {
+       "type": "text",
+       "delta": " better, so this is not"
+      },
+      {
+       "type": "text",
+       "delta": " a"
+      },
+      {
+       "type": "text",
+       "delta": " guaranteed gain."
+      },
+      {
+       "type": "text",
+       "delta": " The tool only est"
+      },
+      {
+       "type": "text",
+       "delta": "imates for"
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " last job it"
+      },
+      {
+       "type": "text",
+       "delta": " checked, so tre"
+      },
+      {
+       "type": "text",
+       "delta": "at this"
+      },
+      {
+       "type": "text",
+       "delta": " as one machine's figure,"
+      },
+      {
+       "type": "text",
+       "delta": " not the total"
+      },
+      {
+       "type": "text",
+       "delta": " for"
+      },
+      {
+       "type": "text",
+       "delta": " all"
+      },
+      {
+       "type": "text",
+       "delta": " three.\n- Running all three"
+      },
+      {
+       "type": "text",
+       "delta": " together"
+      },
+      {
+       "type": "text",
+       "delta": " dra"
+      },
+      {
+       "type": "text",
+       "delta": "ws 6 kW for"
+      },
+      {
+       "type": "text",
+       "delta": " those"
+      },
+      {
+       "type": "text",
+       "delta": " 4 hours. If"
+      },
+      {
+       "type": "text",
+       "delta": " you'"
+      },
+      {
+       "type": "text",
+       "delta": "d rather stag"
+      },
+      {
+       "type": "text",
+       "delta": "ger them, I"
+      },
+      {
+       "type": "text",
+       "delta": " can check other"
+      },
+      {
+       "type": "text",
+       "delta": " start"
+      },
+      {
+       "type": "text",
+       "delta": " times."
+      },
+      {
+       "type": "text",
+       "delta": "\n\nThese"
+      },
+      {
+       "type": "text",
+       "delta": " fig"
+      },
+      {
+       "type": "text",
+       "delta": "ures ass"
+      },
+      {
+       "type": "text",
+       "delta": "ume 2"
+      },
+      {
+       "type": "text",
+       "delta": " kW and"
+      },
+      {
+       "type": "text",
+       "delta": " 4 hours per machine"
+      },
+      {
+       "type": "text",
+       "delta": ", as"
+      },
+      {
+       "type": "text",
+       "delta": " you g"
+      },
+      {
+       "type": "text",
+       "delta": "ave."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4667,
+       "outputTokens": 587,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "46c2013d4d94d71fd66a579258f6b058899fa262fea5a465c07d14785d354d9b",
+     "result": {
+      "choice": "plan_batch",
+      "confidence": 0.98,
+      "probabilities": {
+       "profile_update": 0,
+       "explain_forecast": 0,
+       "recurring": 0,
+       "plan_batch": 0.98,
+       "off_topic": 0,
+       "impact_history": 0,
+       "plan_job": 0.02,
+       "model_accuracy": 0,
+       "smalltalk": 0
+      },
+      "costUsd": 0.000032046
+     }
+    },
+    {
+     "fingerprint": "17a803f6548cbfe9d1b84bb6e9a1a020c3525d620119cc33522c4ead7dffe2bd",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.98,
+      "probabilities": {
+       "allow": 0.98,
+       "off_topic": 0.01,
+       "injection": 0.01,
+       "abuse": 0
+      },
+      "costUsd": 0.00002793
+     }
+    },
+    {
+     "fingerprint": "6416e798580bfb7ce608ab1e24628176af2eacb99bd221ac5ea874275f445ece",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000025284
+     }
+    },
+    {
+     "fingerprint": "c5df81912d0ad9b8c872e2b73283fdc871734e236f1406d3f96b4d0e38aa40f2",
+     "result": {
+      "choice": "act",
+      "confidence": 0.91,
+      "probabilities": {
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "act": 0.93,
+       "ask_duration": 0,
+       "ask_clarify": 0.07
+      },
+      "costUsd": 0.000026838
+     }
+    },
+    {
+     "fingerprint": "c9e5f523caec230636ef6dc111fcca008b14b98d89b5967a03714a96cf23d245",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.94,
+      "probabilities": {
+       "pass": 0.95,
+       "ungrounded_number": 0.03,
+       "overclaim_co2": 0.02,
+       "unsafe": 0
+      },
+      "costUsd": 0.000075348
+     }
+    }
+   ]
+  }
+ ]
+}

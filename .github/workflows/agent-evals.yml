@@ -1,19 +1,10 @@
 name: agent-evals
 
 on:
+  # No path filters: this is a required check on main, so it must run on every PR (it takes ~1 minute, no spend).
   pull_request:
-    paths:
-      - "web/agent/**"
-      - "web/api/**"
-      - "web/evals/**"
-      - ".github/workflows/agent-evals.yml"
   push:
     branches: [main, assistant]
-    paths:
-      - "web/agent/**"
-      - "web/api/**"
-      - "web/evals/**"
-      - ".github/workflows/agent-evals.yml"
   workflow_dispatch:
     inputs:
       budget_usd:
@@ -43,6 +34,7 @@ jobs:
       - name: Replay evals
         env:
           EVAL_MODE: replay
+          EVAL_REQUIRE_RECORDINGS: "1"
         run: npx vitest run --config evals/vitest.config.ts
       - name: Summary
         if: always()

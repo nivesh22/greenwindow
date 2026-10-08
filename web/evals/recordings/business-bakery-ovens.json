@@ -1,0 +1,530 @@
+{
+ "version": 1,
+ "scenario_id": "business-bakery-ovens",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "721128f6fd00cfd27126aca5a0fbeddf09fa15de1acda5a8419886c0cc8f8058",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_017pCrXY1B9BLDgYoYxwtCg7",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 3, \"power_kw\": 9, \"deadline_local\": \"2026-10-06T05:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"Bakery oven 1\"}"
+       }
+      },
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01KEJM4bs1thmupUwQL4Jf5D",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 3, \"power_kw\": 9, \"deadline_local\": \"2026-10-06T05:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"Bakery oven 2\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2868,
+       "outputTokens": 716,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "dd7a978562d453f117136f47f6d571ab258c45c9f088eda97f34fec38bfa4a63",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01DgPbAT7DXvkXzMft58BTPd",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01Uj93P3dTLWKediJL4U8N8s",
+        "name": "explain_uncertainty",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3903,
+       "outputTokens": 622,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "68ae8c18518d843120f006b9cab9fafa9e8cbc90fc44e6903606af296546ebeb",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "**Both"
+      },
+      {
+       "type": "text",
+       "delta": " ovens:"
+      },
+      {
+       "type": "text",
+       "delta": " start"
+      },
+      {
+       "type": "text",
+       "delta": " now"
+      },
+      {
+       "type": "text",
+       "delta": ", 02:00–05:"
+      },
+      {
+       "type": "text",
+       "delta": "00 BST ("
+      },
+      {
+       "type": "text",
+       "delta": "Tue 6 O"
+      },
+      {
+       "type": "text",
+       "delta": "ct).** This is the only sl"
+      },
+      {
+       "type": "text",
+       "delta": "ot that fits before"
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " 5am deadline, since"
+      },
+      {
+       "type": "text",
+       "delta": " each o"
+      },
+      {
+       "type": "text",
+       "delta": "ven needs the"
+      },
+      {
+       "type": "text",
+       "delta": " full 3 hours."
+      },
+      {
+       "type": "text",
+       "delta": "\n\n-"
+      },
+      {
+       "type": "text",
+       "delta": " Each oven dra"
+      },
+      {
+       "type": "text",
+       "delta": "ws 9"
+      },
+      {
+       "type": "text",
+       "delta": " kW for"
+      },
+      {
+       "type": "text",
+       "delta": " 3"
+      },
+      {
+       "type": "text",
+       "delta": " hours ("
+      },
+      {
+       "type": "text",
+       "delta": "27 kWh), so "
+      },
+      {
+       "type": "text",
+       "delta": "18 kW and"
+      },
+      {
+       "type": "text",
+       "delta": " 54 kWh comb"
+      },
+      {
+       "type": "text",
+       "delta": "ined while"
+      },
+      {
+       "type": "text",
+       "delta": " both run.\n- The"
+      },
+      {
+       "type": "text",
+       "delta": " forecast average is "
+      },
+      {
+       "type": "text",
+       "delta": "190.7 gCO2"
+      },
+      {
+       "type": "text",
+       "delta": "/kWh,"
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " same as"
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " best"
+      },
+      {
+       "type": "text",
+       "delta": " al"
+      },
+      {
+       "type": "text",
+       "delta": "ternative, so there is no est"
+      },
+      {
+       "type": "text",
+       "delta": "imated difference from"
+      },
+      {
+       "type": "text",
+       "delta": " sh"
+      },
+      {
+       "type": "text",
+       "delta": "ifting. The est"
+      },
+      {
+       "type": "text",
+       "delta": "imated difference is "
+      },
+      {
+       "type": "text",
+       "delta": "0 g.\n- This is"
+      },
+      {
+       "type": "text",
+       "delta": " not a"
+      },
+      {
+       "type": "text",
+       "delta": " robust result"
+      },
+      {
+       "type": "text",
+       "delta": ". The forecast b"
+      },
+      {
+       "type": "text",
+       "delta": "ands overlap, and N"
+      },
+      {
+       "type": "text",
+       "delta": "ESO's own forecast for"
+      },
+      {
+       "type": "text",
+       "delta": " this window aver"
+      },
+      {
+       "type": "text",
+       "delta": "ages 178.3 gC"
+      },
+      {
+       "type": "text",
+       "delta": "O2/kWh."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4470,
+       "outputTokens": 550,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    },
+    {
+     "fingerprint": "0851bd28c71fc3d7fb3fcd4ebf5510eb8f675d829751e5c428c47a47035408f4",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "**Both ovens: start"
+      },
+      {
+       "type": "text",
+       "delta": " at 02:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": " ("
+      },
+      {
+       "type": "text",
+       "delta": "Tue 6 O"
+      },
+      {
+       "type": "text",
+       "delta": "ct)"
+      },
+      {
+       "type": "text",
+       "delta": " and finish by"
+      },
+      {
+       "type": "text",
+       "delta": " 05:00 BST**"
+      },
+      {
+       "type": "text",
+       "delta": ", the "
+      },
+      {
+       "type": "text",
+       "delta": "5"
+      },
+      {
+       "type": "text",
+       "delta": "am deadline."
+      },
+      {
+       "type": "text",
+       "delta": " Each oven need"
+      },
+      {
+       "type": "text",
+       "delta": "s 3 hours at"
+      },
+      {
+       "type": "text",
+       "delta": " 9 kW and u"
+      },
+      {
+       "type": "text",
+       "delta": "ses 27 kWh."
+      },
+      {
+       "type": "text",
+       "delta": "\n\n- The forecast average for"
+      },
+      {
+       "type": "text",
+       "delta": " this window is 190.7 "
+      },
+      {
+       "type": "text",
+       "delta": "gCO2/kWh"
+      },
+      {
+       "type": "text",
+       "delta": ","
+      },
+      {
+       "type": "text",
+       "delta": " the same as running"
+      },
+      {
+       "type": "text",
+       "delta": " now,"
+      },
+      {
+       "type": "text",
+       "delta": " so the"
+      },
+      {
+       "type": "text",
+       "delta": " estimated difference is 0"
+      },
+      {
+       "type": "text",
+       "delta": " g.\n- This is not"
+      },
+      {
+       "type": "text",
+       "delta": " a robust result. The forec"
+      },
+      {
+       "type": "text",
+       "delta": "ast bands overlap, and"
+      },
+      {
+       "type": "text",
+       "delta": " NESO's own forecast"
+      },
+      {
+       "type": "text",
+       "delta": " for this window averages 178."
+      },
+      {
+       "type": "text",
+       "delta": "3 gCO2/k"
+      },
+      {
+       "type": "text",
+       "delta": "Wh.\n- Estim"
+      },
+      {
+       "type": "text",
+       "delta": "ated differ"
+      },
+      {
+       "type": "text",
+       "delta": "ences are"
+      },
+      {
+       "type": "text",
+       "delta": " based on the grid's average car"
+      },
+      {
+       "type": "text",
+       "delta": "bon intensity, not a"
+      },
+      {
+       "type": "text",
+       "delta": " measured or guaranteed"
+      },
+      {
+       "type": "text",
+       "delta": " change."
+      },
+      {
+       "type": "text",
+       "delta": " Shifting a job does not nec"
+      },
+      {
+       "type": "text",
+       "delta": "essarily change the grid's"
+      },
+      {
+       "type": "text",
+       "delta": " marginal emissions by the"
+      },
+      {
+       "type": "text",
+       "delta": " same amount, and the forec"
+      },
+      {
+       "type": "text",
+       "delta": "ast can be wrong."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2987,
+       "outputTokens": 596,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "1e94478c4cce5cbf991c5ba9538e8ccb219f71a638fba8296eb3fe13f1d0f347",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.99,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027804
+     }
+    },
+    {
+     "fingerprint": "14808890f193a124c9370ea94ea031212d97cbaf9f6da5c4d6ad278188233e8d",
+     "result": {
+      "choice": "plan_batch",
+      "confidence": 0.74,
+      "probabilities": {
+       "profile_update": 0,
+       "explain_forecast": 0,
+       "recurring": 0,
+       "plan_batch": 0.77,
+       "off_topic": 0,
+       "impact_history": 0,
+       "model_accuracy": 0,
+       "plan_job": 0.23,
+       "smalltalk": 0
+      },
+      "costUsd": 0.00003192
+     }
+    },
+    {
+     "fingerprint": "a5fdc661c6a3418c882296f45fd81dca2f611a88f206408977569169eb0a346d",
+     "result": {
+      "choice": "act",
+      "confidence": 0.94,
+      "probabilities": {
+       "act": 0.95,
+       "ask_duration": 0,
+       "ask_power": 0.01,
+       "ask_deadline": 0,
+       "ask_clarify": 0.04
+      },
+      "costUsd": 0.000027804
+     }
+    },
+    {
+     "fingerprint": "664037865e03feda31e791f688265a5da52fd27b96ad27f0b352fafe89152f5a",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "cautious": 0,
+       "expected": 1
+      },
+      "costUsd": 0.00002625
+     }
+    },
+    {
+     "fingerprint": "881f1315bc22c5618e66dd49a4c25e1b290c901a311b7cb1f9af2a2d016135a4",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.93,
+      "probabilities": {
+       "pass": 0.95,
+       "ungrounded_number": 0.05,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000065562
+     }
+    }
+   ]
+  }
+ ]
+}

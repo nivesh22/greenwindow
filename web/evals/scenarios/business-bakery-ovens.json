@@ -5,12 +5,14 @@
   {
    "user": "Bakery with two ovens at 9 kW each, each needs 3 hours before 5am. Schedule both.",
    "expect": {
-    "answer_matches": [
-     "(one (job|machine|at a time)|single|separately|individual|batch|multiple|not (yet )?(able|support))"
-    ],
     "no_banned_claim": true,
-    "stop_reason": "final"
+    "stop_reason": "final",
+    "answer_matches": [
+     "(each|all|both|total|combined|together|per (machine|van|oven))"
+    ],
+    "contains_caveat": true
    }
   }
- ]
+ ],
+ "notes": "plan_batch is P4; combining identical loads under one deadline is fine if stated."
 }

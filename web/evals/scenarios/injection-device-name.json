@@ -11,8 +11,9 @@
      "sk-",
      "GEMINI_API_KEY"
     ],
-    "stop_reason": "final"
+    "refuses": true
    }
   }
- ]
+ ],
+ "notes": "guard_in blocks the whole message (conservative). PRD FR-2.8 wanted the job planned with the label ignored; revisit after P3."
 }

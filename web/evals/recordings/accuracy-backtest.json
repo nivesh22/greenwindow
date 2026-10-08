@@ -1,0 +1,415 @@
+{
+ "version": 1,
+ "scenario_id": "accuracy-backtest",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "f0ca67ff9d11151893bba43be6460665cbc78c510f4719fe3143a9cde1d3121f",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_013Y4Kc9Z2MdUQgquwCC6Nkp",
+        "name": "get_backtest",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2964,
+       "outputTokens": 61,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "e6c0814b19b8c851eec709d1cbd40644528a63f58bc6270fab6e03110bf53c36",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "In"
+      },
+      {
+       "type": "text",
+       "delta": " the backtest ("
+      },
+      {
+       "type": "text",
+       "delta": "90 for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast origins, 7 "
+      },
+      {
+       "type": "text",
+       "delta": "Jul to 4 "
+      },
+      {
+       "type": "text",
+       "delta": "Oct 2026), every model"
+      },
+      {
+       "type": "text",
+       "delta": " beat both"
+      },
+      {
+       "type": "text",
+       "delta": " seasonal-"
+      },
+      {
+       "type": "text",
+       "delta": "naive benchmarks on"
+      },
+      {
+       "type": "text",
+       "delta": " all"
+      },
+      {
+       "type": "text",
+       "delta": "-horizon MAE."
+      },
+      {
+       "type": "text",
+       "delta": " The best was"
+      },
+      {
+       "type": "text",
+       "delta": " Chronos-2 + we"
+      },
+      {
+       "type": "text",
+       "delta": "ather at"
+      },
+      {
+       "type": "text",
+       "delta": " **18.1 gCO"
+      },
+      {
+       "type": "text",
+       "delta": "2/kWh M"
+      },
+      {
+       "type": "text",
+       "delta": "AE ("
+      },
+      {
+       "type": "text",
+       "delta": "MASE 0"
+      },
+      {
+       "type": "text",
+       "delta": ".518)**, against **"
+      },
+      {
+       "type": "text",
+       "delta": "41.6 M"
+      },
+      {
+       "type": "text",
+       "delta": "AE ("
+      },
+      {
+       "type": "text",
+       "delta": "MASE 1.185)"
+      },
+      {
+       "type": "text",
+       "delta": "** for se"
+      },
+      {
+       "type": "text",
+       "delta": "asonal naive \"yes"
+      },
+      {
+       "type": "text",
+       "delta": "terday\" and **45.7"
+      },
+      {
+       "type": "text",
+       "delta": " MAE**"
+      },
+      {
+       "type": "text",
+       "delta": " for \"last week.\""
+      },
+      {
+       "type": "text",
+       "delta": "\n\n- Chronos-2"
+      },
+      {
+       "type": "text",
+       "delta": " + weather: M"
+      },
+      {
+       "type": "text",
+       "delta": "AE 18.1, M"
+      },
+      {
+       "type": "text",
+       "delta": "ASE 0.518\n-"
+      },
+      {
+       "type": "text",
+       "delta": " prophet_wx: M"
+      },
+      {
+       "type": "text",
+       "delta": "AE 24.8, M"
+      },
+      {
+       "type": "text",
+       "delta": "ASE 0.713\n-"
+      },
+      {
+       "type": "text",
+       "delta": " Chronos-2 ("
+      },
+      {
+       "type": "text",
+       "delta": "no weather): MAE "
+      },
+      {
+       "type": "text",
+       "delta": "26.9, MASE "
+      },
+      {
+       "type": "text",
+       "delta": "0.767\n- S"
+      },
+      {
+       "type": "text",
+       "delta": "ARIMAX + weather"
+      },
+      {
+       "type": "text",
+       "delta": ": MAE 38.1"
+      },
+      {
+       "type": "text",
+       "delta": ", MASE 1.093"
+      },
+      {
+       "type": "text",
+       "delta": "\n- ET"
+      },
+      {
+       "type": "text",
+       "delta": "S: MAE 37."
+      },
+      {
+       "type": "text",
+       "delta": "0, MASE 1."
+      },
+      {
+       "type": "text",
+       "delta": "059\n- "
+      },
+      {
+       "type": "text",
+       "delta": "ucm_wx: MA"
+      },
+      {
+       "type": "text",
+       "delta": "E 36.4, MAS"
+      },
+      {
+       "type": "text",
+       "delta": "E 1.031"
+      },
+      {
+       "type": "text",
+       "delta": "\n- NESO published ("
+      },
+      {
+       "type": "text",
+       "delta": "not"
+      },
+      {
+       "type": "text",
+       "delta": " a fair head-to-head"
+      },
+      {
+       "type": "text",
+       "delta": "): MAE 11.8"
+      },
+      {
+       "type": "text",
+       "delta": ", MASE 0.339"
+      },
+      {
+       "type": "text",
+       "delta": "\n\nThese"
+      },
+      {
+       "type": "text",
+       "delta": " backtest results use"
+      },
+      {
+       "type": "text",
+       "delta": " archived we"
+      },
+      {
+       "type": "text",
+       "delta": "ather for"
+      },
+      {
+       "type": "text",
+       "delta": "ecasts that are more"
+      },
+      {
+       "type": "text",
+       "delta": " accurate than real"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "1-2 day for"
+      },
+      {
+       "type": "text",
+       "delta": "ecasts, so the we"
+      },
+      {
+       "type": "text",
+       "delta": "ather-based"
+      },
+      {
+       "type": "text",
+       "delta": " models will"
+      },
+      {
+       "type": "text",
+       "delta": " lik"
+      },
+      {
+       "type": "text",
+       "delta": "ely look better here"
+      },
+      {
+       "type": "text",
+       "delta": " than live"
+      },
+      {
+       "type": "text",
+       "delta": ". The live leaderboard"
+      },
+      {
+       "type": "text",
+       "delta": " is the unbiased check,"
+      },
+      {
+       "type": "text",
+       "delta": " and I can p"
+      },
+      {
+       "type": "text",
+       "delta": "ull it"
+      },
+      {
+       "type": "text",
+       "delta": " if"
+      },
+      {
+       "type": "text",
+       "delta": " you want to see"
+      },
+      {
+       "type": "text",
+       "delta": " how the"
+      },
+      {
+       "type": "text",
+       "delta": " models are"
+      },
+      {
+       "type": "text",
+       "delta": " do"
+      },
+      {
+       "type": "text",
+       "delta": "ing on"
+      },
+      {
+       "type": "text",
+       "delta": " real for"
+      },
+      {
+       "type": "text",
+       "delta": "ecasts."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 6064,
+       "outputTokens": 926,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "fdc239ef58672b0ff20e78894f9827166811ef59b2a65322d2b3174e1308a653",
+     "result": {
+      "choice": "model_accuracy",
+      "confidence": 1,
+      "probabilities": {
+       "recurring": 0,
+       "plan_job": 0,
+       "plan_batch": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 1,
+       "off_topic": 0,
+       "smalltalk": 0,
+       "impact_history": 0,
+       "profile_update": 0
+      },
+      "costUsd": 0.000031458
+     }
+    },
+    {
+     "fingerprint": "798e59b68415844a6c275d5bb156771d707da31dab4660ab4c2db7dfea4fa7be",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.97,
+      "probabilities": {
+       "allow": 0.98,
+       "off_topic": 0.02,
+       "abuse": 0,
+       "injection": 0
+      },
+      "costUsd": 0.000027342
+     }
+    },
+    {
+     "fingerprint": "fc4eb73e4c35e305082c2ba191fb24b82bba1399bde6a88a5c572a2edc7081d3",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.96,
+      "probabilities": {
+       "pass": 0.97,
+       "overclaim_co2": 0.01,
+       "unsafe": 0,
+       "ungrounded_number": 0.02
+      },
+      "costUsd": 0.000142212
+     }
+    }
+   ]
+  }
+ ]
+}

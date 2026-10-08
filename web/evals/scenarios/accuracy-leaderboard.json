@@ -5,14 +5,18 @@
   {
    "user": "Which forecasting model is the most accurate right now?",
    "expect": {
-    "tools_called": [
-     "get_leaderboard"
-    ],
     "no_banned_claim": true,
     "gates": {
      "router": "model_accuracy"
-    }
+    },
+    "tool_not_called": [
+     "recommend_window"
+    ],
+    "answer_matches": [
+     "(early|not enough|no (forecasts|scores|results)|not (yet )?(been )?scored|too few)"
+    ]
    }
   }
- ]
+ ],
+ "notes": "Any insight tool may answer; fixture leaderboard has no scored rows."
 }

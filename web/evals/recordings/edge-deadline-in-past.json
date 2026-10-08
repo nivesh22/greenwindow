@@ -1,0 +1,338 @@
+{
+ "version": 1,
+ "scenario_id": "edge-deadline-in-past",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "9f075c6e594fd3142cc86f8ffacb1cb60ffdcd1c853f6f786ebb60dee6dccf04",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "That"
+      },
+      {
+       "type": "text",
+       "delta": " de"
+      },
+      {
+       "type": "text",
+       "delta": "adline has already passed."
+      },
+      {
+       "type": "text",
+       "delta": " Midnight last night was"
+      },
+      {
+       "type": "text",
+       "delta": " 00"
+      },
+      {
+       "type": "text",
+       "delta": ":00 on"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "6 October, and it is now"
+      },
+      {
+       "type": "text",
+       "delta": " 01:30 BST on"
+      },
+      {
+       "type": "text",
+       "delta": " Tu"
+      },
+      {
+       "type": "text",
+       "delta": "esday 6 October,"
+      },
+      {
+       "type": "text",
+       "delta": " so I can't sch"
+      },
+      {
+       "type": "text",
+       "delta": "edule a 4-hour"
+      },
+      {
+       "type": "text",
+       "delta": ","
+      },
+      {
+       "type": "text",
+       "delta": " 7 kW charge to"
+      },
+      {
+       "type": "text",
+       "delta": " fin"
+      },
+      {
+       "type": "text",
+       "delta": "ish by then"
+      },
+      {
+       "type": "text",
+       "delta": ".\n\nWould"
+      },
+      {
+       "type": "text",
+       "delta": " you like me to plan for"
+      },
+      {
+       "type": "text",
+       "delta": " one"
+      },
+      {
+       "type": "text",
+       "delta": " of these inst"
+      },
+      {
+       "type": "text",
+       "delta": "ead?\n- **Midn"
+      },
+      {
+       "type": "text",
+       "delta": "ight tonight** (end"
+      },
+      {
+       "type": "text",
+       "delta": " of"
+      },
+      {
+       "type": "text",
+       "delta": " Tue"
+      },
+      {
+       "type": "text",
+       "delta": " 6"
+      },
+      {
+       "type": "text",
+       "delta": " October, 00:00 "
+      },
+      {
+       "type": "text",
+       "delta": "BST on "
+      },
+      {
+       "type": "text",
+       "delta": "7 October), which"
+      },
+      {
+       "type": "text",
+       "delta": " le"
+      },
+      {
+       "type": "text",
+       "delta": "aves about 22 hours"
+      },
+      {
+       "type": "text",
+       "delta": " for the"
+      },
+      {
+       "type": "text",
+       "delta": " 4-hour charge."
+      },
+      {
+       "type": "text",
+       "delta": "\n- **A different"
+      },
+      {
+       "type": "text",
+       "delta": " deadline** of"
+      },
+      {
+       "type": "text",
+       "delta": " your choos"
+      },
+      {
+       "type": "text",
+       "delta": "ing."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2860,
+       "outputTokens": 625,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    },
+    {
+     "fingerprint": "9bc229bf3c072f0c77be42c1e6e3290f2b43288d7f7681dc5994581ef3fffc13",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "That"
+      },
+      {
+       "type": "text",
+       "delta": " deadline has already passed,"
+      },
+      {
+       "type": "text",
+       "delta": " so I can't schedule a"
+      },
+      {
+       "type": "text",
+       "delta": " 4-hour, 7"
+      },
+      {
+       "type": "text",
+       "delta": " kW charge to"
+      },
+      {
+       "type": "text",
+       "delta": " finish by"
+      },
+      {
+       "type": "text",
+       "delta": " then"
+      },
+      {
+       "type": "text",
+       "delta": ". If"
+      },
+      {
+       "type": "text",
+       "delta": " you give"
+      },
+      {
+       "type": "text",
+       "delta": " me a new deadline, I"
+      },
+      {
+       "type": "text",
+       "delta": " can find"
+      },
+      {
+       "type": "text",
+       "delta": " the l"
+      },
+      {
+       "type": "text",
+       "delta": "owest-carbon window for"
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " charge. Or,"
+      },
+      {
+       "type": "text",
+       "delta": " if you want, I can plan"
+      },
+      {
+       "type": "text",
+       "delta": " for the next midnight, which"
+      },
+      {
+       "type": "text",
+       "delta": " is tonight."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 1322,
+       "outputTokens": 499,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "64667fbe21ded7596958bdfd5faa9302c9c0d49c59ca8545d0bad7fab7236380",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.96,
+      "probabilities": {
+       "allow": 0.97,
+       "off_topic": 0,
+       "injection": 0.03,
+       "abuse": 0
+      },
+      "costUsd": 0.000027636
+     }
+    },
+    {
+     "fingerprint": "d92f474ba469b9437a1664e107d21d441f66fa5b5b7a18348ff5cdbc362f5522",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "smalltalk": 0,
+       "recurring": 0,
+       "profile_update": 0,
+       "plan_job": 1,
+       "plan_batch": 0,
+       "model_accuracy": 0,
+       "explain_forecast": 0,
+       "impact_history": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031752
+     }
+    },
+    {
+     "fingerprint": "d102315f8052ae20c50f4496d40a7e1bb6c399571ad548cee5990b0441674721",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000024906
+     }
+    },
+    {
+     "fingerprint": "e139a329e6d4919cd2db4c86f14da541ad62cf3540845846586b0c859aa541d5",
+     "result": {
+      "choice": "ask_clarify",
+      "confidence": 0.37,
+      "probabilities": {
+       "act": 0.49,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0.01,
+       "ask_clarify": 0.5
+      },
+      "costUsd": 0.00002646
+     }
+    },
+    {
+     "fingerprint": "829bd56de037e35135c5569daa84d3a2401c70b52ee6f3ea3bdf1b643a1c1e2e",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.47,
+      "probabilities": {
+       "pass": 0.6,
+       "ungrounded_number": 0.39,
+       "overclaim_co2": 0.01,
+       "unsafe": 0
+      },
+      "costUsd": 0.000023772
+     }
+    }
+   ]
+  }
+ ]
+}

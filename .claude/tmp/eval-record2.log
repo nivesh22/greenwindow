@@ -1,0 +1,10 @@
+
+ RUN  v5.0.3 E:/Time series/web
+
+
+ Test Files  1 passed (1)
+      Tests  51 passed (51)
+   Start at  15:33:49
+   Duration  341.97s (tests 100%)
+
+exit 0

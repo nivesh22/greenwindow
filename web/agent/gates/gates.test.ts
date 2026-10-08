@@ -120,7 +120,7 @@ describe('ask_or_act rules', () => {
 
 describe('risk_mode rules', () => {
   const rule = (m: string, panel: PanelState | null = null) => riskModeRules(planState('plan_job', m, [], panel))
-  it.each(['It must be done by 7', "it's critical", "can't be late", 'no risk please', 'I want the lowest risk'])('cautious: %s', (m) =>
+  it.each(['no risk please', 'I want the lowest risk', "make sure it's cleaner", 'plan for the worst case'])('cautious: %s', (m) =>
     expect(rule(m).choice).toBe('cautious'),
   )
   it('flexible wording -> expected, even with a cautious panel', () => expect(rule("I'm flexible", PANEL).choice).toBe('expected'))
@@ -190,7 +190,7 @@ describe('decidePair / decideOne', () => {
     const ps = planState('plan_job', 'When should I charge my EV? It must be done by 7am.', [], null)
     const b = new FakeChoiceBackend({ ask_or_act: answer('ask_power', 0.59), risk_mode: answer('expected', 0.64) })
     const [a, m] = await decidePair(env(b), AOA, RM, ps, planJevState(ps), sig())
-    expect([a.choice, a.source, m.choice, m.source]).toEqual(['act', 'rules', 'cautious', 'rules'])
+    expect([a.choice, a.source, m.choice, m.source]).toEqual(['act', 'rules', 'expected', 'rules']) // a deadline is not a risk signal
     const b2 = new FakeChoiceBackend({ ask_or_act: answer('ask_power', 0.6), risk_mode: answer('expected', 0.65) })
     const [a2, m2] = await decidePair(env(b2), AOA, RM, ps, planJevState(ps), sig())
     expect([a2.choice, a2.source, m2.choice, m2.source]).toEqual(['ask_power', 'jev', 'expected', 'jev'])
@@ -243,4 +243,9 @@ describe('guard_in defense in depth', () => {
     const r = spec.override?.(s, { choice: 'allow', confidence: 0.99, probabilities: { allow: 0.99 } } as never)
     expect(r?.choice).toBe('injection')
   })
+})
+
+describe('risk_mode: deadlines are not risk signals', () => {
+  it.each(['It must be done by 7', "it's critical it finishes by 6", "can't be late for work"])('expected: %s', (m) =>
+    expect(riskModeRules(planState('plan_job', m, [], null)).choice).toBe('expected'))
 })

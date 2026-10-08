@@ -275,6 +275,9 @@ export async function guardOutStage(
 }
 
 /** Facts the model needs and must not guess: the clock, the forecast run and freshness, and the scope. */
+/** Fixed scope facts the assistant may quote without a tool (the grounding check allows them too). */
+const SCOPE_FACTS = 'Great Britain national grid, 48-hour forecast, jobs of 1 to 12 hours, 80% forecast band (10th to 90th percentile).'
+
 async function factsBlock(data: ForecastSource, nowMs: number, panel: ChatRequest['panel_state']): Promise<string> {
   const lines = [`Now: ${toIso(nowMs)} UTC (${formatDateTime(toIso(nowMs))} in London).`]
   try {
@@ -390,7 +393,9 @@ export function createTurnRunner(deps: TurnDeps): (input: TurnInput, emit: (ev: 
       recordGate(route, Object.keys(routerSpec(0).options))
       intent = route.choice
       if (guard.choice === 'injection' || guard.choice === 'abuse') return finishTurn(REFUSAL, 'guard_blocked')
-      if (guard.choice === 'off_topic' || route.choice === 'off_topic') return finishTurn(SCOPE_REPLY, 'final')
+      // guard_in's off_topic only wins when the router finds no domain intent (Jev does not know our model names:
+      // "Compare Chronos and Prophet" was screened off_topic while routed to model_accuracy).
+      if (route.choice === 'off_topic' || (guard.choice === 'off_topic' && route.choice === 'smalltalk')) return finishTurn(SCOPE_REPLY, 'final')
       if (route.choice === 'smalltalk') return finishTurn(smalltalkReply(request.message), 'final')
 
       // Stage 5 (plan intents): ask_or_act ∥ risk_mode, one backend call.
@@ -443,7 +448,7 @@ export function createTurnRunner(deps: TurnDeps): (input: TurnInput, emit: (ev: 
     // X4: the answer is sent once, after the grounding gate. Numbers the user wrote are allowed too.
     // Allowed number sources besides this turn's tools: what the user wrote, and earlier answers (each was
     // grounded when sent; a forged history can only affect the sender's own conversation).
-    const userTexts = [...request.history.map((h) => h.content), request.message]
+    const userTexts = [...request.history.map((h) => h.content), request.message, facts, SCOPE_FACTS]
     const grounded = await groundAnswer(result, {
       loop: loopOpts,
       userTexts,

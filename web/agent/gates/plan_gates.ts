@@ -72,7 +72,9 @@ export function askOrActSpec(threshold: number): GateSpec<PlanState, AskOrActCho
 
 const EXPLICIT_CAUTIOUS = /\b(cautious|conservative|safe) (mode|option|plan|setting)\b|\buse cautious\b|\bbe cautious\b|\bplay it safe\b/i
 const EXPLICIT_EXPECTED = /\b(expected|median|typical|average)[- ](mode|case|forecast)\b|\buse expected\b/i
-const CAUTIOUS_HINTS = /\b(must|critical|essential|can'?t be late|cannot be late|mustn'?t be late|no risk|lowest risk|least risk|low risk|guarantee\w*|definitely|absolutely|have to finish|has to finish|need it done|without fail|important)\b/i
+// Cautious = plan on the high (q90) forecast so the carbon benefit holds even if the forecast is off. Deadline urgency
+// ("must be done by 7am") is NOT a risk signal: the deadline is a hard constraint in both modes.
+const CAUTIOUS_HINTS = /\b(no risk|lowest risk|least risk|low risk|risk[- ]averse|guarantee\w*|be sure|make sure it'?s (cleaner|greener|lower)|certain(ly)? (cleaner|greener|lower)|worst case|confident)\b/i
 const FLEXIBLE_HINTS = /\b(flexible|no rush|whenever|don'?t mind|not fussed|any ?time|relaxed)\b/i
 
 /** The mode the user explicitly asked for in this message, if any. It wins over Jev and the rules. */
@@ -96,11 +98,14 @@ export function riskModeSpec(threshold: number): GateSpec<PlanState, RiskModeCho
     name: 'risk_mode',
     threshold,
     instructions:
-      'Choose how to plan the job given the user\'s wording in `message` and `recent_conversation`. ' +
-      '`planner_panel_mode` is the user\'s current default.',
+      'Choose how to plan around FORECAST UNCERTAINTY in carbon intensity, from the user\'s wording in `message` and ' +
+      '`recent_conversation`. `planner_panel_mode` is the user\'s current default. A deadline ("must be done by 7am", ' +
+      '"has to finish before work") is a hard constraint in both modes and is NOT a reason to choose cautious.',
     options: {
-      expected: 'Plan on the expected (median) forecast: the user is flexible or did not stress that the job must finish on time.',
-      cautious: 'Plan for a bad case: the user stresses it must finish, is critical, cannot be late, or wants the lowest risk.',
+      expected: 'Plan on the expected (median) forecast. The default, including when the user only states a deadline.',
+      cautious:
+        'Plan on the high end of the forecast so the lower-carbon benefit holds even if the forecast is wrong: the user ' +
+        'asks for certainty or low risk about the carbon outcome, or for a cautious/conservative plan.',
     },
     rules: riskModeRules,
     override: (s, a) => {

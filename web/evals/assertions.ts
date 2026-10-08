@@ -108,6 +108,8 @@ export async function evaluateTurn(expect: Expect, o: TurnOutcome, ref: Optimize
     const display = (r?.data as { display?: { point?: unknown } } | undefined)?.display
     const point = typeof display?.point === 'string' ? normalize(display.point) : null
     if (!point) out.push(fail('co2_equals_tool', 'estimate_co2 was not called successfully'))
+    // A zero difference (best window = run now) may be stated in words instead of "0 g".
+    else if (point === '0 g') out.push(check('co2_equals_tool', answer.includes(point) || /\bno (estimated )?(co2 |emissions? )?difference\b|\bsame as (running|starting|charging) now\b/i.test(answer), 'answer states neither 0 g nor that there is no difference'))
     else out.push(check('co2_equals_tool', answer.includes(point), `answer does not contain the tool figure "${point}"`))
   }
   if (expect.contains_caveat) {

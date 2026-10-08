@@ -1,0 +1,406 @@
+{
+ "version": 1,
+ "scenario_id": "developer-gpu-4090",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "c91653b581789596df6be4d7a97f83466dafca8ff1e14064624b1afc5a77a448",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01MnwvZTN6TzPKGVjggXmEAd",
+        "name": "lookup_device",
+        "argsJson": "{\"gpu\": {\"type\": \"RTX 4090\", \"count\": 1}}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2860,
+       "outputTokens": 212,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "728d5aed024632e89a39ce7e50fdf04b3d8ce58d17a4db093a52f1b63527d1ae",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01SSwuwkz325DLoFGz8HutSQ",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 3, \"power_kw\": 0.84, \"deadline_local\": \"2026-10-06T23:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"RTX 4090 job\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3095,
+       "outputTokens": 270,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "1a20c731a9ca7fa28b5b0c1573b984845f6ad953876894aaaf82bfa421885f2d",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01FF8LrKJumMNt4tP8ZJciWy",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3601,
+       "outputTokens": 29,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "063f8ac1b4696b445a8a454b472c1d0a3f0da627f84dd45fb2c99a92142a9183",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "**Best"
+      },
+      {
+       "type": "text",
+       "delta": " start:"
+      },
+      {
+       "type": "text",
+       "delta": " Tue 6 O"
+      },
+      {
+       "type": "text",
+       "delta": "ct, 12:00 B"
+      },
+      {
+       "type": "text",
+       "delta": "ST**"
+      },
+      {
+       "type": "text",
+       "delta": ", finishing 15:00"
+      },
+      {
+       "type": "text",
+       "delta": " BST, well"
+      },
+      {
+       "type": "text",
+       "delta": " before your"
+      },
+      {
+       "type": "text",
+       "delta": " 23:00 deadline"
+      },
+      {
+       "type": "text",
+       "delta": ". The forecast average there"
+      },
+      {
+       "type": "text",
+       "delta": " is "
+      },
+      {
+       "type": "text",
+       "delta": "163 gCO2/k"
+      },
+      {
+       "type": "text",
+       "delta": "Wh, against"
+      },
+      {
+       "type": "text",
+       "delta": " 191"
+      },
+      {
+       "type": "text",
+       "delta": " if"
+      },
+      {
+       "type": "text",
+       "delta": " you "
+      },
+      {
+       "type": "text",
+       "delta": "ran now"
+      },
+      {
+       "type": "text",
+       "delta": " at 02:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": ", a"
+      },
+      {
+       "type": "text",
+       "delta": " 14.5% l"
+      },
+      {
+       "type": "text",
+       "delta": "ower average. The job"
+      },
+      {
+       "type": "text",
+       "delta": " uses 2"
+      },
+      {
+       "type": "text",
+       "delta": ".52 kWh."
+      },
+      {
+       "type": "text",
+       "delta": "\n\n- **Not"
+      },
+      {
+       "type": "text",
+       "delta": " robust:** the for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertainty could er"
+      },
+      {
+       "type": "text",
+       "delta": "ase the g"
+      },
+      {
+       "type": "text",
+       "delta": "ain, so treat this"
+      },
+      {
+       "type": "text",
+       "delta": " as a mod"
+      },
+      {
+       "type": "text",
+       "delta": "est improvement rather than a"
+      },
+      {
+       "type": "text",
+       "delta": " sure one.\n- **"
+      },
+      {
+       "type": "text",
+       "delta": "Estimated difference:** about"
+      },
+      {
+       "type": "text",
+       "delta": " 70 g C"
+      },
+      {
+       "type": "text",
+       "delta": "O2 ("
+      },
+      {
+       "type": "text",
+       "delta": "range"
+      },
+      {
+       "type": "text",
+       "delta": " -66 g"
+      },
+      {
+       "type": "text",
+       "delta": " to "
+      },
+      {
+       "type": "text",
+       "delta": "200 g)."
+      },
+      {
+       "type": "text",
+       "delta": " The range includ"
+      },
+      {
+       "type": "text",
+       "delta": "es running now"
+      },
+      {
+       "type": "text",
+       "delta": " being"
+      },
+      {
+       "type": "text",
+       "delta": " better"
+      },
+      {
+       "type": "text",
+       "delta": ", so the"
+      },
+      {
+       "type": "text",
+       "delta": " t"
+      },
+      {
+       "type": "text",
+       "delta": "ool says this"
+      },
+      {
+       "type": "text",
+       "delta": " could be worse.\n-"
+      },
+      {
+       "type": "text",
+       "delta": " Power of"
+      },
+      {
+       "type": "text",
+       "delta": " 0.84 kW is"
+      },
+      {
+       "type": "text",
+       "delta": " an assumed"
+      },
+      {
+       "type": "text",
+       "delta": " typical figure for an RT"
+      },
+      {
+       "type": "text",
+       "delta": "X 4090 (450 "
+      },
+      {
+       "type": "text",
+       "delta": "W G"
+      },
+      {
+       "type": "text",
+       "delta": "PU plus c"
+      },
+      {
+       "type": "text",
+       "delta": "ooling and host"
+      },
+      {
+       "type": "text",
+       "delta": " overhead); t"
+      },
+      {
+       "type": "text",
+       "delta": "ell me if your set"
+      },
+      {
+       "type": "text",
+       "delta": "up differs."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3842,
+       "outputTokens": 596,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "06817b7b1143c7641aa03455780960693fb23d2bb1ff4c7cb2facd9ca856a136",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027636
+     }
+    },
+    {
+     "fingerprint": "255d814089743c01a2afba79e07f97d19563f2ae929d9f44644853d5064ba12c",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 1,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031752
+     }
+    },
+    {
+     "fingerprint": "476e823ad1b1ce4ba38f2a6bd80263e4057b8dce64ff2c42179f628e5b293e9e",
+     "result": {
+      "choice": "act",
+      "confidence": 1,
+      "probabilities": {
+       "act": 1,
+       "ask_duration": 0,
+       "ask_clarify": 0,
+       "ask_power": 0,
+       "ask_deadline": 0
+      },
+      "costUsd": 0.000028308
+     }
+    },
+    {
+     "fingerprint": "779c65c31c9c04b7505290e937317f24c0fa57b02a2234ec81e4817dbb064a53",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000026754
+     }
+    },
+    {
+     "fingerprint": "54a7304e8daca78b866268da6505813edeec4856a341ae0b75312e7dadcb5696",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.98,
+      "probabilities": {
+       "pass": 0.99,
+       "ungrounded_number": 0.01,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000054768
+     }
+    }
+   ]
+  }
+ ]
+}

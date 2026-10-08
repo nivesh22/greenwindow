@@ -81,6 +81,12 @@ Format:
 - **NESO in the backtest:** included as `neso_published` (forecast as returned by the API, lead time unknown), labelled as not a fair comparison (spec 5.3 item 7).
 - **backtest_summary.json:** `horizon_bucket` also takes `"all"`. Served from the site itself (`web/public`), so the web client fetches it same-origin.
 
+## 2026-10-08 — Risk mode meaning; eval-driven fixes
+- **Risk mode:** "cautious" plans on the high (q90) forecast so the lower-carbon benefit holds if the forecast is off. A deadline ("must be done by 7am") is a hard constraint in both modes and is no longer a cautious signal. Corrects PRD FR-3.4 / design §6.2 wording ("it really must finish" -> cautious), which conflated deadline urgency with forecast risk; the live evals showed it changing recommendations.
+- **Prompt v3:** deadlines and job sizes belong to the user; never move, shorten or resize to make a job fit; say it does not fit and offer options.
+- **Gates:** guard_in "off_topic" only ends the turn when the router also finds no domain intent. Grounding allows scope facts (48 h, 1-12 h, 80% band). Regeneration never mentions an earlier draft.
+- **Evals:** recordings committed (`web/evals/recordings`, ~0.4 MB, scanned for secrets); CI replay requires them (`EVAL_REQUIRE_RECORDINGS=1`) and has no path filters so it can be a required check. Re-record after any prompt/tool/gate change: `EVAL_MODE=record` (~6 min, ~$0.07).
+
 ## 2026-10-08 — Release 1; P2 gate backend
 - **Release 1:** `assistant` merged to `main` (5a89238); production `/api/health` and a live chat turn verified, CI green.
 - **Gates (plan X10):** Jev (`typesafe-ai/jev` via AI Gateway, approved by the owner) is the primary backend for all decision gates; each gate has deterministic rules as fallback (timeout, error, low confidence). The design's Flash-Lite classifier is dropped from the hot path because of its erratic latency and Gemini free-tier quotas.

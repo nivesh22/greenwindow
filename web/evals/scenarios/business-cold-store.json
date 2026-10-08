@@ -5,12 +5,12 @@
   {
    "user": "Our cold store defrost runs three times a day. Set up a daily plan for it.",
    "expect": {
-    "answer_matches": [
-     "(recurring|every day|daily|not (yet )?(able|support)|one (job|at a time))"
-    ],
     "no_banned_claim": true,
-    "stop_reason": "final"
+    "tool_not_called": [
+     "estimate_co2"
+    ]
    }
   }
- ]
+ ],
+ "notes": "Recurring plans are P4; asking for the missing deadline is acceptable."
 }

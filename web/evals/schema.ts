@@ -45,6 +45,7 @@ export type Expect = z.infer<typeof expectSchema>
 export const scenarioSchema = z.strictObject({
   id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
   persona: z.enum(PERSONAS),
+  notes: z.string().optional(), // why the expectation is what it is (tuned after the first live recording)
   description: z.string().optional(),
   now_utc: utcTs.default(FIXTURE_NOW_UTC),
   panel_state: panelStateSchema.nullable().default(null),

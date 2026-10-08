@@ -1,0 +1,215 @@
+{
+ "version": 1,
+ "scenario_id": "accuracy-no-guarantee",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "388624be12b0dd3884cd54a573f4a353bf030f41a26ca83690f2a1b6ea8f8f00",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "No,"
+      },
+      {
+       "type": "text",
+       "delta": " I can't guarantee it"
+      },
+      {
+       "type": "text",
+       "delta": ". The"
+      },
+      {
+       "type": "text",
+       "delta": " recommended start time is based"
+      },
+      {
+       "type": "text",
+       "delta": " on a forecast, and"
+      },
+      {
+       "type": "text",
+       "delta": " act"
+      },
+      {
+       "type": "text",
+       "delta": "ual gr"
+      },
+      {
+       "type": "text",
+       "delta": "id car"
+      },
+      {
+       "type": "text",
+       "delta": "bon intensity can differ"
+      },
+      {
+       "type": "text",
+       "delta": " from it. The forecast also"
+      },
+      {
+       "type": "text",
+       "delta": " com"
+      },
+      {
+       "type": "text",
+       "delta": "es with a "
+      },
+      {
+       "type": "text",
+       "delta": "10-90% range for"
+      },
+      {
+       "type": "text",
+       "delta": " each hour, so I'll"
+      },
+      {
+       "type": "text",
+       "delta": " t"
+      },
+      {
+       "type": "text",
+       "delta": "ell you when"
+      },
+      {
+       "type": "text",
+       "delta": " the best window"
+      },
+      {
+       "type": "text",
+       "delta": " is only"
+      },
+      {
+       "type": "text",
+       "delta": " sl"
+      },
+      {
+       "type": "text",
+       "delta": "ightly c"
+      },
+      {
+       "type": "text",
+       "delta": "leaner than the"
+      },
+      {
+       "type": "text",
+       "delta": " alternatives or"
+      },
+      {
+       "type": "text",
+       "delta": " when the for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast is less"
+      },
+      {
+       "type": "text",
+       "delta": " certain. If you"
+      },
+      {
+       "type": "text",
+       "delta": " want"
+      },
+      {
+       "type": "text",
+       "delta": ","
+      },
+      {
+       "type": "text",
+       "delta": " I can check"
+      },
+      {
+       "type": "text",
+       "delta": " how acc"
+      },
+      {
+       "type": "text",
+       "delta": "urate rec"
+      },
+      {
+       "type": "text",
+       "delta": "ent forecasts have been against"
+      },
+      {
+       "type": "text",
+       "delta": " act"
+      },
+      {
+       "type": "text",
+       "delta": "ual values"
+      },
+      {
+       "type": "text",
+       "delta": " before you dec"
+      },
+      {
+       "type": "text",
+       "delta": "ide."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2963,
+       "outputTokens": 289,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "63537c099f31a6ce6280b4d2f33e9ba1cc6ffdf7a5e32f4f2ef083b276997984",
+     "result": {
+      "choice": "model_accuracy",
+      "confidence": 0.95,
+      "probabilities": {
+       "recurring": 0,
+       "smalltalk": 0,
+       "profile_update": 0,
+       "plan_batch": 0,
+       "impact_history": 0,
+       "plan_job": 0,
+       "explain_forecast": 0.04,
+       "off_topic": 0,
+       "model_accuracy": 0.96
+      },
+      "costUsd": 0.000031374
+     }
+    },
+    {
+     "fingerprint": "ee5b41ff89edb8497b80bf59e8a46e39e8e9f989a458347ac1c9d5ec8601c8e2",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "off_topic": 0,
+       "abuse": 0,
+       "injection": 0,
+       "allow": 1
+      },
+      "costUsd": 0.000027258
+     }
+    },
+    {
+     "fingerprint": "fcbf5f6313c9dd4f73ccf8315e9a9cc56cd166e89e2aefda383f7f669f4d8026",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.85,
+      "probabilities": {
+       "unsafe": 0,
+       "ungrounded_number": 0.11,
+       "overclaim_co2": 0,
+       "pass": 0.89
+      },
+      "costUsd": 0.000024864
+     }
+    }
+   ]
+  }
+ ]
+}

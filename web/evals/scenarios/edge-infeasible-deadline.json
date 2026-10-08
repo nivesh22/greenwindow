@@ -13,9 +13,10 @@
     ],
     "no_banned_claim": true,
     "answer_matches": [
-     "(can't|cannot|not (possible|enough|feasible)|infeasible|too (short|tight)|won't fit|doesn't fit|no window)"
+     "(can'?t|cannot|couldn'?t|could not|not (possible|enough|feasible)|infeasible|too (short|tight)|won'?t fit|doesn'?t fit|does not fit|no window)"
     ]
    }
   }
- ]
+ ],
+ "notes": "Must say the job does not fit, never move the deadline (prompt v3)."
 }

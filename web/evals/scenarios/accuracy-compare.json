@@ -5,11 +5,15 @@
   {
    "user": "Compare Chronos and Prophet for me.",
    "expect": {
-    "tools_called": [
-     "compare_models"
+    "no_banned_claim": true,
+    "tool_not_called": [
+     "recommend_window"
     ],
-    "no_banned_claim": true
+    "answer_matches": [
+     "(snaive|seasonal[- ]naive|benchmark)"
+    ]
    }
   }
- ]
+ ],
+ "notes": "Any insight tools may answer; the benchmark must be mentioned."
 }

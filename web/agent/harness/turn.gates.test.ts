@@ -217,7 +217,7 @@ describe('turn gates: plan intents (stage 5)', () => {
     expect(r.stop).toBe('final')
     expect(r.answer).toBe(ANSWER_A)
     expect(r.trace.gates.every((g) => g.source === 'rules')).toBe(true)
-    expect(seenRiskMode).toBe('cautious') // "must" -> cautious by rule
+    expect(seenRiskMode).toBe('expected') // a deadline ("must be done by 7am") is not a risk signal
     expect(r.store.spans.find((s) => s.name === 'guard_in')?.attrs['gw.gate.reason']).toMatch(/^jev failed \(timeout\)/)
   })
 })

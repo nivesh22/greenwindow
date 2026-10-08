@@ -1,0 +1,386 @@
+{
+ "version": 1,
+ "scenario_id": "household-tumble-dryer",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "c0060cd8ef3e2f7d9628773d9d59bebfbe3e8f072e9468106d2c04e721831609",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01FFPm8vuiGB3CP7CfQ5EX3X",
+        "name": "lookup_device",
+        "argsJson": "{\"query\": \"tumble dryer\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2854,
+       "outputTokens": 159,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "19967166d609a0fd03304cd62706281945b5245e10ddb29510ebcce9379778dc",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01NUCQpanUZ4u7Py8z8CHJNh",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 2, \"power_kw\": 2.5, \"deadline_local\": \"2026-10-06T21:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"Tumble dryer load\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3106,
+       "outputTokens": 282,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "4c4e168f8640aa9e61d711947b9c149813b54f9ad659a7d05ade8f69e8fe20ef",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01MJPjWJZpcD6bpnQvfZzpKW",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3600,
+       "outputTokens": 29,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "624e1388488d0b95d972d31902dba4cbf4cb10ce9d8cd9037b69d53755b55ef7",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "**Rec"
+      },
+      {
+       "type": "text",
+       "delta": "ommended: start at 12:"
+      },
+      {
+       "type": "text",
+       "delta": "00 BST today"
+      },
+      {
+       "type": "text",
+       "delta": " ("
+      },
+      {
+       "type": "text",
+       "delta": "Tue 6 O"
+      },
+      {
+       "type": "text",
+       "delta": "ct), finishing "
+      },
+      {
+       "type": "text",
+       "delta": "14:00 BST**"
+      },
+      {
+       "type": "text",
+       "delta": ", well"
+      },
+      {
+       "type": "text",
+       "delta": " before your"
+      },
+      {
+       "type": "text",
+       "delta": " 21:00 deadline"
+      },
+      {
+       "type": "text",
+       "delta": ". Running"
+      },
+      {
+       "type": "text",
+       "delta": " now at"
+      },
+      {
+       "type": "text",
+       "delta": " 02:00 BST would"
+      },
+      {
+       "type": "text",
+       "delta": " have a hig"
+      },
+      {
+       "type": "text",
+       "delta": "her average intensity ("
+      },
+      {
+       "type": "text",
+       "delta": "188 v"
+      },
+      {
+       "type": "text",
+       "delta": "s 162 gCO2"
+      },
+      {
+       "type": "text",
+       "delta": "/kWh), a"
+      },
+      {
+       "type": "text",
+       "delta": " 14"
+      },
+      {
+       "type": "text",
+       "delta": "% dif"
+      },
+      {
+       "type": "text",
+       "delta": "ference.\n\n- The"
+      },
+      {
+       "type": "text",
+       "delta": " estimated difference is "
+      },
+      {
+       "type": "text",
+       "delta": "129 g CO2 ("
+      },
+      {
+       "type": "text",
+       "delta": "range"
+      },
+      {
+       "type": "text",
+       "delta": " -133 g"
+      },
+      {
+       "type": "text",
+       "delta": " to 379 g). The range"
+      },
+      {
+       "type": "text",
+       "delta": " includ"
+      },
+      {
+       "type": "text",
+       "delta": "es running"
+      },
+      {
+       "type": "text",
+       "delta": " now"
+      },
+      {
+       "type": "text",
+       "delta": " being better"
+      },
+      {
+       "type": "text",
+       "delta": ", so this could"
+      },
+      {
+       "type": "text",
+       "delta": " be worse.\n- This rec"
+      },
+      {
+       "type": "text",
+       "delta": "ommendation is **not robust"
+      },
+      {
+       "type": "text",
+       "delta": "**"
+      },
+      {
+       "type": "text",
+       "delta": " to forecast error,"
+      },
+      {
+       "type": "text",
+       "delta": " so the g"
+      },
+      {
+       "type": "text",
+       "delta": "ain"
+      },
+      {
+       "type": "text",
+       "delta": " is u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertain."
+      },
+      {
+       "type": "text",
+       "delta": "\n- I"
+      },
+      {
+       "type": "text",
+       "delta": " assumed a 2.5"
+      },
+      {
+       "type": "text",
+       "delta": " kW d"
+      },
+      {
+       "type": "text",
+       "delta": "ryer running"
+      },
+      {
+       "type": "text",
+       "delta": " for 2 hours (typ"
+      },
+      {
+       "type": "text",
+       "delta": "ical values"
+      },
+      {
+       "type": "text",
+       "delta": ", not your mach"
+      },
+      {
+       "type": "text",
+       "delta": "ine). T"
+      },
+      {
+       "type": "text",
+       "delta": "ell me your"
+      },
+      {
+       "type": "text",
+       "delta": " d"
+      },
+      {
+       "type": "text",
+       "delta": "ryer's power and c"
+      },
+      {
+       "type": "text",
+       "delta": "ycle length and"
+      },
+      {
+       "type": "text",
+       "delta": " I'll rec"
+      },
+      {
+       "type": "text",
+       "delta": "alculate."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3837,
+       "outputTokens": 453,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "fbfb02c81f1b68b7de77dce49a660ed32e22ce4cf4bfe2b7d00f816240ae49b9",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "profile_update": 0,
+       "off_topic": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "explain_forecast": 0,
+       "plan_batch": 0,
+       "recurring": 0,
+       "smalltalk": 0,
+       "plan_job": 1
+      },
+      "costUsd": 0.0000315
+     }
+    },
+    {
+     "fingerprint": "ce934dcbd6092c12adc5ebdc33416acb231978b60f0b29eef19c2d7820cada11",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "abuse": 0,
+       "off_topic": 0,
+       "injection": 0
+      },
+      "costUsd": 0.000027384
+     }
+    },
+    {
+     "fingerprint": "f1d27576089034dfa7da38d13037d734446bb791f9fe43c023840eecbe434096",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "cautious": 0,
+       "expected": 1
+      },
+      "costUsd": 0.000026418
+     }
+    },
+    {
+     "fingerprint": "425079a6be570ff212c6bd07eeae5737bb99163bc066f21e9db70453829ee395",
+     "result": {
+      "choice": "act",
+      "confidence": 1,
+      "probabilities": {
+       "act": 1,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "ask_clarify": 0
+      },
+      "costUsd": 0.000027972
+     }
+    },
+    {
+     "fingerprint": "9b5cff204ffae0dcba3125837c51ebcd74d7a14d01520c423d28ab960a011e8a",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.99,
+      "probabilities": {
+       "pass": 0.99,
+       "ungrounded_number": 0.01,
+       "unsafe": 0,
+       "overclaim_co2": 0
+      },
+      "costUsd": 0.000052332
+     }
+    }
+   ]
+  }
+ ]
+}
