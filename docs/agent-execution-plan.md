@@ -230,8 +230,8 @@ Last updated 2026-10-08 (evening).
 | Phase | State | Notes |
 |-------|-------|-------|
 | P0 | ✅ done | Rules/docs v0.2, subagents, contracts, Supabase project + migration 0001 applied (`supabase migration list` shows it remote). |
-| P1a | 🟡 almost done | P1a.1–P1a.4 merged into `assistant` (183 tests). P1a.6: `turn.ts` + system prompt wired into `/api/chat`. **J1 works locally end to end** against live Gemini, Supabase and the published forecast: optimizer-exact start, CO2 wording + caveat, $0, ~9 s. Remaining: preview deploy check (env vars in Vercel, S2 streaming, import resolution), then exit. |
-| P1b | not started | Next: grounding check, PlanPanel sync, trace drawer, limits, keepalive, `explain_uncertainty`, region `dub1`. |
+| P1a | ✅ done 2026-10-08 | P1a.1–P1a.4 merged into `assistant` (183 tests). P1a.6: `turn.ts` + system prompt wired into `/api/chat`. **J1 works locally end to end** against live Gemini, Supabase and the published forecast: optimizer-exact start, CO2 wording + caveat, $0, ~9 s. Preview verified by the owner (J1 answered end to end on the `assistant` preview). |
+| P1b | 🟡 in progress (agents started 2026-10-08) | Next: grounding check, PlanPanel sync, trace drawer, limits, keepalive, `explain_uncertainty`, region `dub1`. |
 | P2 | not started | Gates on rules + LLM first, then Jev (S1 passed live: 5/5 router intents, ~300 ms, ~$0.000017/call). |
 | P3 | not started | |
 | P4 | not started | |

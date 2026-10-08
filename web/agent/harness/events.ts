@@ -68,6 +68,8 @@ export const traceSummarySchema = z.object({
       model: z.string(),
       provider: z.string(),
       failover: z.boolean(),
+      failover_reason: z.string().nullable().default(null), // why the previous model was abandoned
+      finish_reason: z.string().nullable().default(null), // provider finish reason (stop, tool_calls, length, ...)
       tokens_in: z.number().int().nonnegative(),
       tokens_out: z.number().int().nonnegative(),
       cost_usd: z.number().nonnegative(),
