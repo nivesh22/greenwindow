@@ -1,0 +1,6 @@
+data: {"choices":[{"delta":{"role":"assistant","tool_calls":[{"extra_content":{"google":{"thought_signature":"EmAKXgFpFH0ToOvwHf9B+ATxgzvF/+WZ1UerJ8layUhl9pisDJKcn/qdHC1DjYBSp0YR9xPG3+a/CZMcwjercugNxl0NwTMi/unEJAem36H5mRPE8rJChYVKrehB2dd+0sY="}},"function":{"arguments":"{\"deadline_local\":\"2026-10-09T07:00\",\"duration_h\":6,\"power_kw\":7}","name":"recommend_window"},"id":"call_1484200","type":"function"}]},"index":0}],"created":1791491497,"id":"ov3HarSZGPTTqtsP0eTfqQo","model":"models/gemini-3.5-flash-lite","object":"chat.completion.chunk","usage":{"completion_tokens":45,"prompt_tokens":118,"total_tokens":163}}
+
+data: {"choices":[{"delta":{"role":"assistant"},"finish_reason":"stop","index":0}],"created":1791491497,"id":"ov3HarSZGPTTqtsP0eTfqQo","model":"models/gemini-3.5-flash-lite","object":"chat.completion.chunk","usage":{"completion_tokens":45,"prompt_tokens":118,"total_tokens":163}}
+
+data: [DONE]
+

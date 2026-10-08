@@ -14,7 +14,7 @@ the plan's §1 amendments win over the PRD/design. When the spec and your assump
 6. The forecast pages fetch only the published JSON files (spec 7.6) with plain GETs and no custom headers. The assistant UI may also call the app's own `/api/*` endpoints. No page performs model inference in the browser.
 7. Only LLM (and, if approved, Jev) usage may cost money, capped by `MONTHLY_BUDGET_USD` (default $5) with a kill switch. Everything else stays on free tiers (Vercel Hobby, Supabase, Langfuse Hobby, Turnstile). Server secrets live only in Vercel env vars and GitHub Actions secrets, never in the repo, in `VITE_*` variables, or in chat. Never read `.env*` files. Never create paid resources or change the stack without asking.
 8. Never commit raw API payloads or model weights.
-9. UI copy must not say "CO2 saved". Use "estimated difference in average grid intensity" (spec 5.3).
+9. Never say CO2 was "saved" or "avoided". Forecast pages say "estimated difference in average grid intensity" (spec 5.3). The assistant may give grams only as an "estimated emissions difference" with its q10–q90 range and the caveat that it uses average (not marginal) grid intensity and a forecast (decision 2026-10-08, O1).
 10. No new dependencies without recording the reason in `docs/decisions.md`.
 11. Front end: TypeScript strict mode, no `any`. Validate every fetched JSON with zod. Never assume a field exists.
 12. Never change the JSON contract (spec 7.6) on one side only. Update the schemas, the exporter, and the shared fixtures together, and bump `schema_version` for breaking changes.
