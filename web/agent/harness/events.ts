@@ -67,6 +67,8 @@ export const traceSummarySchema = z.object({
     z.object({
       model: z.string(),
       provider: z.string(),
+      ok: z.boolean().default(true), // false: this attempt failed and the router moved on
+      error: z.string().nullable().default(null), // error kind of a failed attempt (rate_limit, timeout, ...)
       failover: z.boolean(),
       failover_reason: z.string().nullable().default(null), // why the previous model was abandoned
       finish_reason: z.string().nullable().default(null), // provider finish reason (stop, tool_calls, length, ...)

@@ -119,6 +119,8 @@ export class Tracer {
         llm.push({
           model: str(a[ATTR.requestModel], s.name),
           provider: str(a[ATTR.system], 'unknown'),
+          ok: s.status === 'ok',
+          error: s.status === 'ok' ? null : str(a[ATTR.error], 'error'),
           failover: a[ATTR.failover] === true,
           failover_reason: typeof a[ATTR.failoverReason] === 'string' ? (a[ATTR.failoverReason] as string) : null,
           finish_reason: Array.isArray(a['gen_ai.response.finish_reasons']) ? String(a['gen_ai.response.finish_reasons'][0]) : null,

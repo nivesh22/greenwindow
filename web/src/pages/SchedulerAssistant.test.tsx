@@ -169,7 +169,7 @@ describe('TraceDrawer', () => {
             { name: 'get_forecast', args: {}, ok: false, ms: 3, summary: 'boom' },
           ],
           llm_calls: [
-            { model: 'gemini-x', provider: 'google', failover: true, failover_reason: 'timeout', finish_reason: 'stop', tokens_in: 100, tokens_out: 20, cost_usd: 0.00123456, ms: 800 },
+            { model: 'gemini-x', provider: 'google', ok: true, error: null, failover: true, failover_reason: 'timeout', finish_reason: 'stop', tokens_in: 100, tokens_out: 20, cost_usd: 0.00123456, ms: 800 },
           ],
           totals: { steps: 2, tokens_in: 100, tokens_out: 20, cost_usd: 0.00123456, ms: 900 },
           prompt_version: 'v7',

@@ -81,6 +81,11 @@ Format:
 - **NESO in the backtest:** included as `neso_published` (forecast as returned by the API, lead time unknown), labelled as not a fair comparison (spec 5.3 item 7).
 - **backtest_summary.json:** `horizon_bucket` also takes `"all"`. Served from the site itself (`web/public`), so the web client fetches it same-origin.
 
+## 2026-10-08 — Release 1; P2 gate backend
+- **Release 1:** `assistant` merged to `main` (5a89238); production `/api/health` and a live chat turn verified, CI green.
+- **Gates (plan X10):** Jev (`typesafe-ai/jev` via AI Gateway, approved by the owner) is the primary backend for all decision gates; each gate has deterministic rules as fallback (timeout, error, low confidence). The design's Flash-Lite classifier is dropped from the hot path because of its erratic latency and Gemini free-tier quotas.
+- **Evals (X11):** replay recordings are produced by one live run by the orchestrator and committed; CI replays them with no network or spend.
+
 ## 2026-10-08 — Function region dub1
 - Vercel Functions run in Dublin (`"regions": ["dub1"]` in `web/vercel.json`; Hobby allows a single region, https://vercel.com/docs/functions/configuring-functions/region). The default `iad1` was ~80 ms per Supabase round trip from eu-west-1 (Ireland); a turn makes 2–4 database calls. Static files still come from the CDN edge.
 
