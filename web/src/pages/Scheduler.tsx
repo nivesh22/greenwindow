@@ -6,7 +6,7 @@ import { useDataFile } from '../data/hooks'
 import { fmtMass } from '../lib/format'
 import { HOUR_MS, formatDateTime, fromLocalInput, toIso, toLocalInput, toMs } from '../lib/time'
 import { InfeasibleJobError, InvalidJobError, recommend, type HourForecast, type Mode, type Recommendation } from '../scheduler/optimizer'
-import { forecastModels, pickDefault } from './Home'
+import { forecastModels, pickDefault } from '../data/models'
 
 interface FormState { duration: string; power: string; earliest: string; deadline: string; mode: Mode }
 

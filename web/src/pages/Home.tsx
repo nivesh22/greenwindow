@@ -4,21 +4,9 @@ import { ForecastChart } from '../components/ForecastChart'
 import { ModelPicker } from '../components/ModelPicker'
 import { ErrorPanel, Loading } from '../components/Status'
 import { useDataFile } from '../data/hooks'
-import type { LatestForecast, Meta, ModelInfo } from '../data/schemas'
+import { forecastModels, pickDefault } from '../data/models'
 import { fmtIntensity } from '../lib/format'
 import { formatDateTime } from '../lib/time'
-
-export const DEFAULT_MODEL = 'chronos2_cov'
-
-/** Models that have a series in this run and publish quantiles (NESO is shown separately). */
-export function forecastModels(meta: Meta, fc: LatestForecast): ModelInfo[] {
-  const inRun = new Set(fc.series.map((s) => s.model))
-  return meta.models.filter((m) => m.name !== 'neso' && inRun.has(m.name))
-}
-
-export function pickDefault(models: ModelInfo[]): string {
-  return (models.find((m) => m.name === DEFAULT_MODEL) ?? models[0])?.name ?? ''
-}
 
 export function Home({ now = Date.now() }: { now?: number }) {
   const meta = useDataFile('meta')

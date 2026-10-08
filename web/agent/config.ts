@@ -1,0 +1,75 @@
+// Tunable numbers and IDs (design §1 "Fixed vs tunable"). Parsed from env with zod defaults; fails fast on bad
+// values. Secrets are read here and nowhere else; never log this object.
+import { z } from 'zod'
+
+const num = (d: number) => z.coerce.number().finite().default(d)
+
+const envSchema = z.object({
+  // Secrets (server-only). Optional here so unit tests run without them; the API handler asserts what it needs.
+  GEMINI_API_KEY: z.string().min(1).optional(),
+  AI_GATEWAY_API_KEY: z.string().min(1).optional(),
+  SUPABASE_URL: z.string().url().optional(),
+  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1).optional(),
+  IP_SALT: z.string().min(16).optional(),
+
+  // Models. IDs from docs/spikes.md (2026-10-08); confirmed live in S3/S4 before use.
+  PRIMARY_MODEL: z.string().default('gemini-3.8-flash'),
+  CHEAP_MODEL: z.string().default('gemini-3.5-flash-lite'),
+  FALLBACK_MODEL: z.string().default('anthropic/claude-haiku-5.5'),
+  GEMINI_BASE_URL: z.string().url().default('https://generativelanguage.googleapis.com/v1beta/openai'),
+  GATEWAY_BASE_URL: z.string().url().default('https://ai-gateway.vercel.sh/v1'),
+  DATA_BASE_URL: z.string().url().default('https://raw.githubusercontent.com/nivesh22/greenwindow/data/app_data'),
+
+  // Per-turn budgets (design §5.3).
+  MAX_STEPS: num(6),
+  MAX_INPUT_TOKENS: num(40_000),
+  MAX_OUTPUT_TOKENS: num(800),
+  MAX_TURN_COST_USD: num(0.01),
+  TURN_WALL_MS: num(45_000),
+  TOOL_TIMEOUT_MS: num(5_000),
+  FIRST_TOKEN_TIMEOUT_MS: num(6_000),
+
+  // Spend and limits (design §10–11).
+  MONTHLY_BUDGET_USD: num(5),
+  ANON_MESSAGE_CAP: num(3),
+  USER_DAILY_CAP: num(20),
+  IP_HOURLY_CAP: num(20),
+  GLOBAL_DAILY_CAP: num(300),
+})
+
+export type AgentConfig = z.infer<typeof envSchema>
+
+export function loadConfig(env: Record<string, string | undefined> = process.env): AgentConfig {
+  return envSchema.parse(env)
+}
+
+export interface Price {
+  inUsdPerMTok: number
+  outUsdPerMTok: number
+  cachedInUsdPerMTok: number
+  free: boolean // free tier: costs $0 but requests are counted (FR-10.4)
+}
+
+/**
+ * Price table, checked 2026-10-08. Gemini is used on the free tier (no billing on the key). The gateway's listed
+ * Haiku 5.5 price was unverified (docs/spikes.md S4), so a conservative $1/$5 is used until confirmed live: it
+ * makes the kill switch trip early, never late. Unknown models are priced at the most expensive entry.
+ */
+export const PRICES: Record<string, Price> = {
+  'gemini-3.8-flash': { inUsdPerMTok: 0, outUsdPerMTok: 0, cachedInUsdPerMTok: 0, free: true },
+  'gemini-3.5-flash-lite': { inUsdPerMTok: 0, outUsdPerMTok: 0, cachedInUsdPerMTok: 0, free: true },
+  'anthropic/claude-haiku-5.5': { inUsdPerMTok: 1, outUsdPerMTok: 5, cachedInUsdPerMTok: 0.1, free: false },
+}
+export const PRICES_CHECKED = '2026-10-08'
+
+const WORST: Price = { inUsdPerMTok: 1, outUsdPerMTok: 5, cachedInUsdPerMTok: 1, free: false }
+
+export function priceOf(model: string): Price {
+  return PRICES[model] ?? WORST
+}
+
+export function costUsd(model: string, inputTokens: number, outputTokens: number, cachedInputTokens = 0): number {
+  const p = priceOf(model)
+  const uncached = Math.max(0, inputTokens - cachedInputTokens)
+  return (uncached * p.inUsdPerMTok + cachedInputTokens * p.cachedInUsdPerMTok + outputTokens * p.outUsdPerMTok) / 1e6
+}

@@ -6,10 +6,13 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   test: {
-    environment: 'jsdom',
     globals: true,
-    setupFiles: ['./src/test/setup.ts'],
     env: { TZ: 'UTC' },
+    projects: [
+      { extends: true, test: { name: 'app', include: ['src/**/*.test.{ts,tsx}'], environment: 'jsdom', setupFiles: ['./src/test/setup.ts'] } },
+      // Server-side agent code: Node environment, no network (ScriptedProvider and fixtures only).
+      { extends: true, test: { name: 'agent', include: ['agent/**/*.test.ts', 'api/**/*.test.ts'], environment: 'node' } },
+    ],
   },
   build: {
     chunkSizeWarningLimit: 900, // budget is 400 KB gzipped (spec 10.5), checked separately
