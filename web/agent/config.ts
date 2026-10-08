@@ -46,6 +46,21 @@ const envSchema = z.object({
   TOOL_TIMEOUT_MS: num(5_000),
   FIRST_TOKEN_TIMEOUT_MS: num(15_000), // whole-call wait for the first stream event; Gemini may send one chunk at the end
 
+  // Decision gates (design §6, plan X10): Jev via the gateway first, deterministic rules on timeout/error/low
+  // confidence. Thresholds are the minimum Jev confidence for its answer to stand (design §6.2).
+  GATES_ENABLED: z
+    .enum(['true', 'false', '1', '0'])
+    .default('true')
+    .transform((v) => v === 'true' || v === '1'),
+  JEV_MODEL: z.string().default('typesafe-ai/jev'),
+  JEV_URL: z.string().url().default('https://ai-gateway.vercel.sh/typesafe/v1/systemone'),
+  GATE_TIMEOUT_MS: num(1200),
+  GATE_GUARD_IN_MIN: num(0.5), // non-allow also needs P(allow) < this
+  GATE_ROUTER_MIN: num(0.55),
+  GATE_ASK_OR_ACT_MIN: num(0.6),
+  GATE_RISK_MODE_MIN: num(0.65),
+  GATE_GUARD_OUT_MIN: num(0.6), // a non-pass at or above this regenerates once
+
   // Spend and limits (design §10–11).
   MONTHLY_BUDGET_USD: num(5),
   ANON_MESSAGE_CAP: num(3),

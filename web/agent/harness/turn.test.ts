@@ -73,7 +73,8 @@ async function run(
   const store = new MemoryStore()
   let id = 0
   const runner = createTurnRunner({
-    config: loadConfig({ TOOL_TIMEOUT_MS: '200', ...opts.env }),
+    // These tests cover the loop and grounding; the gates are tested in turn.gates.test.ts.
+    config: loadConfig({ TOOL_TIMEOUT_MS: '200', GATES_ENABLED: 'false', ...opts.env }),
     store, data: noData, registry: REGISTRY, router, newId: () => `id${++id}`,
   })
   const request: ChatRequest = {
