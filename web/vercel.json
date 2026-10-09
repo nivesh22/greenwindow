@@ -10,6 +10,18 @@
   },
   "rewrites": [
     {
+      "source": "/api/plans",
+      "destination": "/api/user/plans"
+    },
+    {
+      "source": "/api/push/subscribe",
+      "destination": "/api/user/push-subscribe"
+    },
+    {
+      "source": "/api/reminders",
+      "destination": "/api/user/reminders"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

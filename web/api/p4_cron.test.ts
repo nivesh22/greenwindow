@@ -4,9 +4,9 @@ import { secretsEqual } from './_lib/cron.js'
 import { CRON_SECRET, cronReq, errCode, makeDeps, NOW, OTHER, USER } from './_lib/p4_testing.js'
 import { addDays, computeStarts, londonDate, weekdayOf } from './_lib/recurring.js'
 import { avgActual, NO_ACTUALS_NOTE, realize } from './_lib/ledger.js'
-import { createLedgerCronHandler } from './cron/ledger.js'
-import { createRecurringCronHandler } from './cron/recurring.js'
-import { BUDGET_MS, createRemindersCronHandler, processReminders } from './cron/reminders.js'
+import { createLedgerCronHandler } from './_routes/cron_ledger.js'
+import { createRecurringCronHandler } from './_routes/cron_recurring.js'
+import { BUDGET_MS, createRemindersCronHandler, processReminders } from './_routes/cron_reminders.js'
 
 const HOUR = 3_600_000
 const payload = (startUtc: string) => ({ title: 'Time to run', body: 'Dishwasher', url: '/scheduler', startUtc })

@@ -8,13 +8,13 @@ import { clearAuthCache } from './_lib/auth.js'
 import type { ApiDeps } from './_lib/deps.js'
 import { deleteLangfuseTraces } from './_lib/langfuse_delete.js'
 import { ADMIN, ANON, authFetch, errCode, makeDeps, NOW, OTHER, req, TURN, USER } from './_lib/p4_testing.js'
-import { createOpsHandler } from './admin/ops.js'
-import { createTraceHandler } from './admin/trace.js'
+import { createOpsHandler } from './_routes/admin_ops.js'
+import { createTraceHandler } from './_routes/admin_trace.js'
 import { createFeedbackHandler } from './feedback.js'
 import { createDeleteMeHandler } from './me/delete.js'
-import { createPlansHandler } from './plans.js'
-import { createSubscribeHandler } from './push/subscribe.js'
-import { createRemindersHandler, MAX_AHEAD_MS } from './reminders.js'
+import { createPlansHandler } from './_routes/plans.js'
+import { createSubscribeHandler } from './_routes/push_subscribe.js'
+import { createRemindersHandler, MAX_AHEAD_MS } from './_routes/reminders.js'
 
 beforeEach(() => clearAuthCache())
 
