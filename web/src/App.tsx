@@ -1,5 +1,5 @@
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { makeQueryClient } from './data/hooks'
@@ -8,6 +8,9 @@ import { Backtest } from './pages/Backtest'
 import { Home } from './pages/Home'
 import { Leaderboard } from './pages/Leaderboard'
 import { Scheduler } from './pages/Scheduler'
+
+const Settings = lazy(() => import('./pages/Settings').then((m) => ({ default: m.Settings })))
+const Privacy = lazy(() => import('./pages/Privacy').then((m) => ({ default: m.Privacy })))
 
 export function AppRoutes() {
   return (
@@ -18,6 +21,22 @@ export function AppRoutes() {
         <Route path="/leaderboard" element={<Leaderboard />} />
         <Route path="/backtest" element={<Backtest />} />
         <Route path="/about" element={<About />} />
+        <Route
+          path="/settings"
+          element={
+            <Suspense fallback={<p role="status">Loading…</p>}>
+              <Settings />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/privacy"
+          element={
+            <Suspense fallback={<p role="status">Loading…</p>}>
+              <Privacy />
+            </Suspense>
+          }
+        />
         <Route path="*" element={<p>Page not found.</p>} />
       </Routes>
     </Layout>
