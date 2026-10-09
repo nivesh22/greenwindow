@@ -1,8 +1,10 @@
-// Vercel Hobby allows 12 Functions per deployment when there is no framework: every file in api/ is one Function
-// (https://vercel.com/docs/functions/runtimes#functions-created-per-deployment, checked 2026-10-09). The P4 endpoints
-// therefore share three dispatcher Functions — api/user/[action].ts, api/cron/[job].ts, api/admin/[view].ts — and
-// the handlers live in api/_routes/ (underscore folders are not deployed as Functions). Public URLs are unchanged:
-// vercel.json rewrites /api/plans, /api/push/subscribe and /api/reminders to /api/user/<action>.
+// Vercel Hobby allows 12 Functions per deployment when there is no framework: every file in api/ is one Function,
+// test files included (https://vercel.com/docs/functions/runtimes#functions-created-per-deployment, checked
+// 2026-10-09). The P4 endpoints therefore share three plain dispatcher Functions — api/user.ts, api/cron.ts,
+// api/admin.ts — and the handlers live in api/_routes/ (underscore folders are not deployed). Public URLs are
+// unchanged: vercel.json rewrites /api/plans, /api/push/subscribe, /api/reminders, /api/cron/:job and
+// /api/admin/:view to /api/<group>?route=<name>. (Rewriting to dynamic [param] files fell through to the SPA
+// rewrite on the preview, so the dispatchers are plain files.)
 
 export type Handler = { fetch: (request: Request) => Promise<Response> }
 
@@ -11,7 +13,11 @@ export type Handler = { fetch: (request: Request) => Promise<Response> }
  * either): '/api/push/subscribe' and '/api/user/push-subscribe' both give 'push-subscribe'.
  */
 export function routeName(url: string, group: 'user' | 'cron' | 'admin'): string | null {
-  const path = new URL(url).pathname.replace(/\/+$/, '')
+  const u0 = new URL(url)
+  // Rewritten form: /api/<group>?route=<name> (vercel.json). Vercel may also pass the public path; both work.
+  const q = u0.searchParams.get('route')
+  if (u0.pathname.replace(/\/+$/, '') === `/api/${group}` && q !== null) return /^[a-z-]+$/.test(q) ? q : null
+  const path = u0.pathname.replace(/\/+$/, '')
   const m = path.match(/^\/api\/(.+)$/)
   if (!m) return null
   const rest = m[1]!

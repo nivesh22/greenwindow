@@ -14,6 +14,14 @@ describe('routeName', () => {
     ['/api/user/reminders/', 'reminders'],
   ])('user %s -> %s', (p, name) => expect(routeName(U(p), 'user')).toBe(name))
 
+  it('reads the rewritten ?route= form and keeps other query params', () => {
+    expect(routeName(U('/api/user?route=plans&id=7'), 'user')).toBe('plans')
+    expect(routeName(U('/api/cron?route=ledger'), 'cron')).toBe('ledger')
+    expect(routeName(U('/api/admin?route=trace&turn_id=x'), 'admin')).toBe('trace')
+    expect(routeName(U('/api/admin?route=../x'), 'admin')).toBeNull()
+    expect(routeName(U('/api/user?route=plans'), 'admin')).toBeNull()
+  })
+
   it('maps cron and admin paths', () => {
     expect(routeName(U('/api/cron/reminders'), 'cron')).toBe('reminders')
     expect(routeName(U('/api/admin/trace?turn_id=x'), 'admin')).toBe('trace')
