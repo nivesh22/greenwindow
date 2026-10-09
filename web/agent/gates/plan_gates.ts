@@ -77,6 +77,11 @@ const EXPLICIT_EXPECTED = /\b(expected|median|typical|average)[- ](mode|case|for
 const CAUTIOUS_HINTS = /\b(no risk|lowest risk|least risk|low risk|risk[- ]averse|guarantee\w*|be sure|make sure it'?s (cleaner|greener|lower)|certain(ly)? (cleaner|greener|lower)|worst case|confident)\b/i
 const FLEXIBLE_HINTS = /\b(flexible|no rush|whenever|don'?t mind|not fussed|any ?time|relaxed)\b/i
 
+/** Risk wording in the message (explicit mode, or clear low-risk / flexible wording), else null. Beats a saved profile default. */
+export function messageRiskSignal(message: string): RiskModeChoice | null {
+  return explicitMode(message) ?? (CAUTIOUS_HINTS.test(message) ? 'cautious' : FLEXIBLE_HINTS.test(message) ? 'expected' : null)
+}
+
 /** The mode the user explicitly asked for in this message, if any. It wins over Jev and the rules. */
 export function explicitMode(message: string): RiskModeChoice | null {
   if (EXPLICIT_CAUTIOUS.test(message)) return 'cautious'

@@ -107,8 +107,9 @@ function getShared(config: AgentConfig): typeof shared {
   if (!config.SUPABASE_URL || !config.SUPABASE_SERVICE_ROLE_KEY || !config.GEMINI_API_KEY) return null
   const store = new SupabaseStore({ url: config.SUPABASE_URL, key: config.SUPABASE_SERVICE_ROLE_KEY })
   const data = new HttpForecastSource({ baseUrl: config.DATA_BASE_URL, backtestBaseUrl: config.BACKTEST_BASE_URL })
-  const runTurn = createTurnRunner({ config, store, data, registry: buildRegistry(), router: buildRouter(config) })
-  shared = { store, users: new SupabaseUserStore({ url: config.SUPABASE_URL, key: config.SUPABASE_SERVICE_ROLE_KEY }), runTurn, config }
+  const users = new SupabaseUserStore({ url: config.SUPABASE_URL, key: config.SUPABASE_SERVICE_ROLE_KEY })
+  const runTurn = createTurnRunner({ config, store, users, data, registry: buildRegistry(), router: buildRouter(config) })
+  shared = { store, users, runTurn, config }
   return shared
 }
 

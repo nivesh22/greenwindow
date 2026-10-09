@@ -2,7 +2,7 @@
 // precedence with a profile default, history trimming under the context cap, the rolling summary, and the impact
 // ledger row built from this turn's tool results. Pure helpers; turn.ts wires them to the UserStore.
 import { z } from 'zod'
-import { explicitMode } from '../gates/plan_gates.js'
+import { messageRiskSignal } from '../gates/plan_gates.js'
 import type { ModelProvider, Msg } from '../providers/types.js'
 import type { Device, NewImpactRow, Profile, StoredMessage } from '../store/user_types.js'
 import { estimateMessagesTokens } from './budget.js'
@@ -56,7 +56,7 @@ export function resolveRiskMode(a: {
     if (a.gate) return { mode: a.gate, source: 'gate' }
     return a.panel ? { mode: a.panel.mode, source: 'panel' } : { mode: 'expected', source: 'default' }
   }
-  const explicit = explicitMode(a.message)
+  const explicit = messageRiskSignal(a.message)
   if (explicit) return { mode: explicit, source: 'explicit' }
   if (a.panel?.edited_by_user) return { mode: a.panel.mode, source: 'panel_edited' }
   return { mode: a.profileDefault, source: 'profile_default' }
