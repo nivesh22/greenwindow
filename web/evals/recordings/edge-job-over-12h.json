@@ -1,0 +1,218 @@
+{
+ "version": 1,
+ "scenario_id": "edge-job-over-12h",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "164f3c1f1181d47fab591c50ca58376d85057d3792025279156722d8b261cb70",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "I can't pl"
+      },
+      {
+       "type": "text",
+       "delta": "an a 20-hour job"
+      },
+      {
+       "type": "text",
+       "delta": ": G"
+      },
+      {
+       "type": "text",
+       "delta": "reenWindow only handles"
+      },
+      {
+       "type": "text",
+       "delta": " jobs of 1 to"
+      },
+      {
+       "type": "text",
+       "delta": " 12 hours."
+      },
+      {
+       "type": "text",
+       "delta": " Options"
+      },
+      {
+       "type": "text",
+       "delta": ":"
+      },
+      {
+       "type": "text",
+       "delta": "\n\n-"
+      },
+      {
+       "type": "text",
+       "delta": " Split it into two run"
+      },
+      {
+       "type": "text",
+       "delta": "s of up to 12 h"
+      },
+      {
+       "type": "text",
+       "delta": "ours each, and I'"
+      },
+      {
+       "type": "text",
+       "delta": "ll plan each one against"
+      },
+      {
+       "type": "text",
+       "delta": " your"
+      },
+      {
+       "type": "text",
+       "delta": " de"
+      },
+      {
+       "type": "text",
+       "delta": "adline.\n- Pl"
+      },
+      {
+       "type": "text",
+       "delta": "an a single"
+      },
+      {
+       "type": "text",
+       "delta": " run"
+      },
+      {
+       "type": "text",
+       "delta": " of 12 hours or less"
+      },
+      {
+       "type": "text",
+       "delta": ", if"
+      },
+      {
+       "type": "text",
+       "delta": " that"
+      },
+      {
+       "type": "text",
+       "delta": " cov"
+      },
+      {
+       "type": "text",
+       "delta": "ers what"
+      },
+      {
+       "type": "text",
+       "delta": " you need.\n\nTell me"
+      },
+      {
+       "type": "text",
+       "delta": " which you'd like,"
+      },
+      {
+       "type": "text",
+       "delta": " and I'll check"
+      },
+      {
+       "type": "text",
+       "delta": " the 5 kW power"
+      },
+      {
+       "type": "text",
+       "delta": " and the de"
+      },
+      {
+       "type": "text",
+       "delta": "adline."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2859,
+       "outputTokens": 340,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "9f944c44f13e3579b5ac62a7115227c6cf1c62265715bdd4e4595958b9ea719b",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.99,
+      "probabilities": {
+       "abuse": 0,
+       "off_topic": 0,
+       "allow": 0.99,
+       "injection": 0.01
+      },
+      "costUsd": 0.00002751
+     }
+    },
+    {
+     "fingerprint": "f38034567f6e0122f9413f18cc3314d5f210cf2387f7f5d592f88b0670ea04c6",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 1,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031626
+     }
+    },
+    {
+     "fingerprint": "c7e3a2eb234778f66709c41574855eb9d7114f01b6da092bb1989d3ef685ac60",
+     "result": {
+      "choice": "act",
+      "confidence": 0.64,
+      "probabilities": {
+       "ask_deadline": 0.03,
+       "ask_clarify": 0.26,
+       "act": 0.71,
+       "ask_duration": 0,
+       "ask_power": 0
+      },
+      "costUsd": 0.000026376
+     }
+    },
+    {
+     "fingerprint": "ea29309cfab2ad9cdee5a9bcdbda9bee4d49ae6c327c5ec8e443509eb9da732f",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000024822
+     }
+    },
+    {
+     "fingerprint": "9d1e06d7382b0bbeac29535fd640a0b7e91a4cab510a45f00d410d72e14795d8",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.69,
+      "probabilities": {
+       "overclaim_co2": 0,
+       "ungrounded_number": 0.22,
+       "pass": 0.77,
+       "unsafe": 0.01
+      },
+      "costUsd": 0.000025158
+     }
+    }
+   ]
+  }
+ ]
+}

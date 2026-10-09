@@ -1,0 +1,358 @@
+{
+ "version": 1,
+ "scenario_id": "household-battery",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "a089a7ce632ce7bc8e690a5515ff75cd92ae3e643ca40d79d0cfaa24db15ae2d",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01LeK8JqZHZdN5iQcSQwoEQs",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 3, \"power_kw\": 3, \"deadline_local\": \"2026-10-06T23:00\", \"label\": \"Home battery charge\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2860,
+       "outputTokens": 281,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "a53685b5d5cec61f41dc8c040cb55755c5e9765c1057a86d5bf7d3212a591497",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01QfY6BZuyvGXG9bVFV9UnSC",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3324,
+       "outputTokens": 61,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "ca034007c64c4a080eef17c4499f8a24acc0de57b407c8bb0fa5d4c01c44272b",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Char"
+      },
+      {
+       "type": "text",
+       "delta": "ging from"
+      },
+      {
+       "type": "text",
+       "delta": " **12:00 to"
+      },
+      {
+       "type": "text",
+       "delta": " 15:00 BST today"
+      },
+      {
+       "type": "text",
+       "delta": "** is"
+      },
+      {
+       "type": "text",
+       "delta": " for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast to be"
+      },
+      {
+       "type": "text",
+       "delta": " cleaner than star"
+      },
+      {
+       "type": "text",
+       "delta": "ting now at"
+      },
+      {
+       "type": "text",
+       "delta": " 02:00 BST:"
+      },
+      {
+       "type": "text",
+       "delta": " an"
+      },
+      {
+       "type": "text",
+       "delta": " average of 163 gCO"
+      },
+      {
+       "type": "text",
+       "delta": "2/kWh vers"
+      },
+      {
+       "type": "text",
+       "delta": "us 191,"
+      },
+      {
+       "type": "text",
+       "delta": " about 15"
+      },
+      {
+       "type": "text",
+       "delta": "% lower. The"
+      },
+      {
+       "type": "text",
+       "delta": " plan cov"
+      },
+      {
+       "type": "text",
+       "delta": "ers 9 kWh and"
+      },
+      {
+       "type": "text",
+       "delta": " fin"
+      },
+      {
+       "type": "text",
+       "delta": "ishes well"
+      },
+      {
+       "type": "text",
+       "delta": " before your"
+      },
+      {
+       "type": "text",
+       "delta": " 23:00 deadline"
+      },
+      {
+       "type": "text",
+       "delta": ".\n\n-"
+      },
+      {
+       "type": "text",
+       "delta": " This"
+      },
+      {
+       "type": "text",
+       "delta": " recommendation is **not rob"
+      },
+      {
+       "type": "text",
+       "delta": "ust**, so the for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertainty is"
+      },
+      {
+       "type": "text",
+       "delta": " large rel"
+      },
+      {
+       "type": "text",
+       "delta": "ative to the"
+      },
+      {
+       "type": "text",
+       "delta": " difference."
+      },
+      {
+       "type": "text",
+       "delta": "\n- The estimated difference"
+      },
+      {
+       "type": "text",
+       "delta": " is 249 g C"
+      },
+      {
+       "type": "text",
+       "delta": "O2,"
+      },
+      {
+       "type": "text",
+       "delta": " with a range"
+      },
+      {
+       "type": "text",
+       "delta": " of -235 g to 715"
+      },
+      {
+       "type": "text",
+       "delta": " g. The"
+      },
+      {
+       "type": "text",
+       "delta": " range includ"
+      },
+      {
+       "type": "text",
+       "delta": "es the"
+      },
+      {
+       "type": "text",
+       "delta": " option"
+      },
+      {
+       "type": "text",
+       "delta": " being"
+      },
+      {
+       "type": "text",
+       "delta": " worse than"
+      },
+      {
+       "type": "text",
+       "delta": " char"
+      },
+      {
+       "type": "text",
+       "delta": "ging now, and"
+      },
+      {
+       "type": "text",
+       "delta": " the fig"
+      },
+      {
+       "type": "text",
+       "delta": "ure is based"
+      },
+      {
+       "type": "text",
+       "delta": " on average"
+      },
+      {
+       "type": "text",
+       "delta": " intensity, so"
+      },
+      {
+       "type": "text",
+       "delta": " it may not match"
+      },
+      {
+       "type": "text",
+       "delta": " the real"
+      },
+      {
+       "type": "text",
+       "delta": " change"
+      },
+      {
+       "type": "text",
+       "delta": "."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3565,
+       "outputTokens": 534,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "a5ec6c01d9d9b7f68dd80a615eb40dc03265dc669a1483a4c8a287c78193da8f",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "injection": 0,
+       "off_topic": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027594
+     }
+    },
+    {
+     "fingerprint": "e2224e5f68e6c5f51859522087be75ddf627478320270e119873d5f130289d1e",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "profile_update": 0,
+       "off_topic": 0,
+       "recurring": 0,
+       "plan_batch": 0,
+       "smalltalk": 0,
+       "plan_job": 1,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "explain_forecast": 0
+      },
+      "costUsd": 0.00003171
+     }
+    },
+    {
+     "fingerprint": "add9076907f3d797553ddf144fdc2c64872ad711380e788b68b90fa7cf647b6a",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000026124
+     }
+    },
+    {
+     "fingerprint": "4059ee968a1c30ab829258030fb3e2198fc6f79cd17337523de7df9523e50fc9",
+     "result": {
+      "choice": "act",
+      "confidence": 1,
+      "probabilities": {
+       "ask_duration": 0,
+       "ask_deadline": 0,
+       "act": 1,
+       "ask_clarify": 0,
+       "ask_power": 0
+      },
+      "costUsd": 0.000027678
+     }
+    },
+    {
+     "fingerprint": "d966a91e0a6950cb8a6bf287f7175a7fc520e19031012a2e99ff36dbd1847bbc",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "unsafe": 0,
+       "pass": 1,
+       "overclaim_co2": 0,
+       "ungrounded_number": 0
+      },
+      "costUsd": 0.00004767
+     }
+    }
+   ]
+  }
+ ]
+}

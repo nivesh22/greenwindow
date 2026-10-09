@@ -1,0 +1,16 @@
+{
+ "id": "household-power-assumption",
+ "persona": "household",
+ "turns": [
+  {
+   "user": "I want to run the dishwasher tonight. What power do you assume for it?",
+   "expect": {
+    "tools_called": [
+     "lookup_device"
+    ],
+    "says_assumed": true,
+    "no_banned_claim": true
+   }
+  }
+ ]
+}

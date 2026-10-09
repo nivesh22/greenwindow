@@ -1,0 +1,194 @@
+{
+ "version": 1,
+ "scenario_id": "business-laundry",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "5ab027128ebc1c5e7559b3fbdea94412fce2c8807135d5d31e8969422929c4aa",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "What"
+      },
+      {
+       "type": "text",
+       "delta": " time do"
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " three mach"
+      },
+      {
+       "type": "text",
+       "delta": "ines need to be"
+      },
+      {
+       "type": "text",
+       "delta": " finished by t"
+      },
+      {
+       "type": "text",
+       "delta": "onight? Once"
+      },
+      {
+       "type": "text",
+       "delta": " I"
+      },
+      {
+       "type": "text",
+       "delta": " have"
+      },
+      {
+       "type": "text",
+       "delta": " that, I'll look"
+      },
+      {
+       "type": "text",
+       "delta": " up typ"
+      },
+      {
+       "type": "text",
+       "delta": "ical power and run"
+      },
+      {
+       "type": "text",
+       "delta": " length"
+      },
+      {
+       "type": "text",
+       "delta": " for an"
+      },
+      {
+       "type": "text",
+       "delta": " industrial washer and a"
+      },
+      {
+       "type": "text",
+       "delta": " dryer, and find the best"
+      },
+      {
+       "type": "text",
+       "delta": " sl"
+      },
+      {
+       "type": "text",
+       "delta": "ots."
+      },
+      {
+       "type": "text",
+       "delta": " Those"
+      },
+      {
+       "type": "text",
+       "delta": " fig"
+      },
+      {
+       "type": "text",
+       "delta": "ures will"
+      },
+      {
+       "type": "text",
+       "delta": " be assumptions you can override"
+      },
+      {
+       "type": "text",
+       "delta": "."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2860,
+       "outputTokens": 385,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "f980e81426ee9f553d453aa32601b8f0ff241d3c42aad889a8ceaae33cd4619b",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027552
+     }
+    },
+    {
+     "fingerprint": "0ffd0efbe25620029c2451882d3449d2b13dcd22f238957f9fe5be5ada29458b",
+     "result": {
+      "choice": "plan_batch",
+      "confidence": 1,
+      "probabilities": {
+       "smalltalk": 0,
+       "plan_job": 0,
+       "model_accuracy": 0,
+       "recurring": 0,
+       "impact_history": 0,
+       "explain_forecast": 0,
+       "profile_update": 0,
+       "off_topic": 0,
+       "plan_batch": 1
+      },
+      "costUsd": 0.000031668
+     }
+    },
+    {
+     "fingerprint": "4ed9c40ede04a9184f2b0b2494781a87e902268456a72c75f2340cfd9d4e315e",
+     "result": {
+      "choice": "act",
+      "confidence": 0.7,
+      "probabilities": {
+       "act": 0.75,
+       "ask_duration": 0.02,
+       "ask_power": 0.02,
+       "ask_deadline": 0.01,
+       "ask_clarify": 0.2
+      },
+      "costUsd": 0.000027762
+     }
+    },
+    {
+     "fingerprint": "453b73e525dc3362ce4b6d638d0442be6b0535eb0cf05f350459d33c0c12d311",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000026208
+     }
+    },
+    {
+     "fingerprint": "8937cae7da3e7a07eb8da10a61e3802ef340ec0a6a82bc587c6f6843533001e2",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.97,
+      "probabilities": {
+       "pass": 0.98,
+       "ungrounded_number": 0.02,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000023184
+     }
+    }
+   ]
+  }
+ ]
+}

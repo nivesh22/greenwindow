@@ -1,0 +1,120 @@
+{
+ "version": 1,
+ "scenario_id": "business-cold-store",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "33fd5063828da3988eadb0f23119e1ca6861782667e196c2251591d0377e7a6b",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Got it,"
+      },
+      {
+       "type": "text",
+       "delta": " a cold store defrost on"
+      },
+      {
+       "type": "text",
+       "delta": " three c"
+      },
+      {
+       "type": "text",
+       "delta": "ycles a day. By when does"
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " first def"
+      },
+      {
+       "type": "text",
+       "delta": "rost cycle need to be"
+      },
+      {
+       "type": "text",
+       "delta": " finished?"
+      },
+      {
+       "type": "usage",
+       "inputTokens": 1091,
+       "outputTokens": 264,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "eca1388e44ef397f96c2bdf8c89aa1348790743b8be279d08eb66f8457a807d7",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.99,
+      "probabilities": {
+       "allow": 0.99,
+       "injection": 0.01,
+       "abuse": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000027552
+     }
+    },
+    {
+     "fingerprint": "85a7e65acca9cd939a1411c701c944a4b3561dc197f9ef5b88777e1fcded1510",
+     "result": {
+      "choice": "recurring",
+      "confidence": 0.99,
+      "probabilities": {
+       "plan_job": 0.01,
+       "plan_batch": 0,
+       "recurring": 0.99,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031668
+     }
+    },
+    {
+     "fingerprint": "ed11a07fbd11d44fbe51ad4e66326d21b423d4a572225688c36a280306566d3c",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000023478
+     }
+    },
+    {
+     "fingerprint": "777480ce4d73d3d0a23d2e559c272df6028572db7b9cc8343d3d11ea243079a5",
+     "result": {
+      "choice": "ask_duration",
+      "confidence": 0.34,
+      "probabilities": {
+       "act": 0.01,
+       "ask_power": 0.15,
+       "ask_clarify": 0.28,
+       "ask_duration": 0.47,
+       "ask_deadline": 0.09
+      },
+      "costUsd": 0.000025032
+     }
+    }
+   ]
+  }
+ ]
+}

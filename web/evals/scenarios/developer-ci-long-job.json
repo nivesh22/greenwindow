@@ -1,0 +1,26 @@
+{
+ "id": "developer-ci-long-job",
+ "persona": "developer",
+ "turns": [
+  {
+   "user": "CI runner job, 11 hours at 0.3 kW, finish by 8pm tomorrow.",
+   "expect": {
+    "tools_called": [
+     "recommend_window",
+     "estimate_co2"
+    ],
+    "co2_equals_tool": true,
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "max_cost_usd": 0.01,
+    "window_equals_optimizer": {
+     "duration_h": 11,
+     "power_kw": 0.3,
+     "deadline_local": "2026-10-07T20:00",
+     "mode": "expected"
+    }
+   }
+  }
+ ]
+}

@@ -38,7 +38,7 @@ describe('Tracer', () => {
     expect(sum.gates).toEqual([{ gate: 'router', choice: 'plan_job', confidence: 0.9, source: 'llm', latency_ms: 40 }])
     expect(sum.tools).toEqual([{ name: 'get_forecast', args: { h: 1 }, ok: false, ms: 10, summary: 'timeout' }])
     expect(sum.llm_calls).toEqual([
-      { model: 'm', provider: 'ai-gateway', failover: true, failover_reason: null, finish_reason: null, tokens_in: 120, tokens_out: 30, cost_usd: 0.001, ms: 300 },
+      { model: 'm', provider: 'ai-gateway', ok: true, error: null, failover: true, failover_reason: null, finish_reason: null, tokens_in: 120, tokens_out: 30, cost_usd: 0.001, ms: 300 },
     ])
     expect(sum.totals).toEqual({ steps: 2, tokens_in: 120, tokens_out: 30, cost_usd: 0.001, ms: 350 })
   })

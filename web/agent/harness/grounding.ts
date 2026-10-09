@@ -240,6 +240,6 @@ export function regenerateInstruction(violations: readonly Violation[]): string 
   if (nums.length > 0) parts.push(`Your answer contained figures that are not in the tool results: ${nums.join(', ')}.`)
   if (banned.length > 0) parts.push(`It used wording that is not allowed: ${banned.join(', ')} (never say CO2 was saved or avoided).`)
   if (caveat) parts.push('It gave an emissions figure without the caveat that it is an estimate based on average grid intensity.')
-  parts.push('Rewrite it using only figures from the tool results, keeping the required caveat. Do not call tools.')
+  parts.push('Write the final answer to the user again from scratch, using only figures from the tool results and keeping the required caveat. Do not call tools, and do not mention an earlier draft or a correction.')
   return parts.join(' ')
 }

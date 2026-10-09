@@ -1,0 +1,354 @@
+{
+ "version": 1,
+ "scenario_id": "developer-etl-server",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "45ec8bce0b9ce058e63f09713a30ae6408f26b827f692fb23fff92669c5065b4",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01HAkewvnr3QRWTNK6GcWkfZ",
+        "name": "lookup_device",
+        "argsJson": "{\"query\": \"1U server\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2860,
+       "outputTokens": 191,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "c51d11a39efa759d289bdb08868ad4f7f522c44ce10384faf463d848984f4656",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_017rY1fSAtJjCgbEJ45J9W2U",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 2, \"power_kw\": 0.5, \"deadline_local\": \"2026-10-06T06:00\", \"label\": \"Nightly ETL on 1U server\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3013,
+       "outputTokens": 300,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "84b21c9bf3d85b8b0ececc47aa6bffb37f3b116a7e41c24b85bdaeb5dbb60ff7",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_011qx2DJrq5fMfLzqs7AsZsH",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3469,
+       "outputTokens": 91,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "0d300a2238074ab1b2e06bf747580cfb10136e999e8f09969884a82d1972eab1",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "The"
+      },
+      {
+       "type": "text",
+       "delta": " best"
+      },
+      {
+       "type": "text",
+       "delta": " start"
+      },
+      {
+       "type": "text",
+       "delta": " is **"
+      },
+      {
+       "type": "text",
+       "delta": "now,"
+      },
+      {
+       "type": "text",
+       "delta": " Tue 6 O"
+      },
+      {
+       "type": "text",
+       "delta": "ct, 02:00 B"
+      },
+      {
+       "type": "text",
+       "delta": "ST**, so"
+      },
+      {
+       "type": "text",
+       "delta": " there"
+      },
+      {
+       "type": "text",
+       "delta": "'s"
+      },
+      {
+       "type": "text",
+       "delta": " no for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast ben"
+      },
+      {
+       "type": "text",
+       "delta": "efit in"
+      },
+      {
+       "type": "text",
+       "delta": " waiting. The for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast average"
+      },
+      {
+       "type": "text",
+       "delta": " is 188 gCO2"
+      },
+      {
+       "type": "text",
+       "delta": "/kWh both"
+      },
+      {
+       "type": "text",
+       "delta": " now"
+      },
+      {
+       "type": "text",
+       "delta": " and in"
+      },
+      {
+       "type": "text",
+       "delta": " the best window, and the rec"
+      },
+      {
+       "type": "text",
+       "delta": "ommendation is not robust."
+      },
+      {
+       "type": "text",
+       "delta": " The"
+      },
+      {
+       "type": "text",
+       "delta": " job"
+      },
+      {
+       "type": "text",
+       "delta": " would"
+      },
+      {
+       "type": "text",
+       "delta": " finish by"
+      },
+      {
+       "type": "text",
+       "delta": " 04:00 BST,"
+      },
+      {
+       "type": "text",
+       "delta": " two"
+      },
+      {
+       "type": "text",
+       "delta": " hours before your"
+      },
+      {
+       "type": "text",
+       "delta": " 06"
+      },
+      {
+       "type": "text",
+       "delta": ":00 B"
+      },
+      {
+       "type": "text",
+       "delta": "ST deadline.\n\nI"
+      },
+      {
+       "type": "text",
+       "delta": " ass"
+      },
+      {
+       "type": "text",
+       "delta": "umed 0.5 k"
+      },
+      {
+       "type": "text",
+       "delta": "W for a gener"
+      },
+      {
+       "type": "text",
+       "delta": "ic 1U server under"
+      },
+      {
+       "type": "text",
+       "delta": " load; t"
+      },
+      {
+       "type": "text",
+       "delta": "ell me the"
+      },
+      {
+       "type": "text",
+       "delta": " actual dra"
+      },
+      {
+       "type": "text",
+       "delta": "w if you know"
+      },
+      {
+       "type": "text",
+       "delta": " it. The estimated difference"
+      },
+      {
+       "type": "text",
+       "delta": " is 0 g, so there"
+      },
+      {
+       "type": "text",
+       "delta": " is n"
+      },
+      {
+       "type": "text",
+       "delta": "othing to gain from r"
+      },
+      {
+       "type": "text",
+       "delta": "escheduling t"
+      },
+      {
+       "type": "text",
+       "delta": "onight."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3719,
+       "outputTokens": 275,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "8c185f0531d85de811e74c9c03ce89057677577f6c9b4b526bed1c2611eda95e",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.89,
+      "probabilities": {
+       "allow": 0.92,
+       "off_topic": 0.07,
+       "injection": 0.01,
+       "abuse": 0
+      },
+      "costUsd": 0.00002772
+     }
+    },
+    {
+     "fingerprint": "0f7f834aa35b7d5da26e5a5fd031c1e2af01f3b7c5a1b38a45ac922409495518",
+     "result": {
+      "choice": "recurring",
+      "confidence": 0.74,
+      "probabilities": {
+       "plan_job": 0.22,
+       "plan_batch": 0,
+       "recurring": 0.77,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0.01
+      },
+      "costUsd": 0.000031836
+     }
+    },
+    {
+     "fingerprint": "907b2a0c1fe4d9c3a8eeafce344dbff8708adbb5ebf537eb69c7623da443dd9d",
+     "result": {
+      "choice": "expected",
+      "confidence": 0.99,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.00002646
+     }
+    },
+    {
+     "fingerprint": "6fd76105caaa8ea64cceb90eabf17f5f65363909c1860afff5b4f3905659ff5a",
+     "result": {
+      "choice": "act",
+      "confidence": 0.99,
+      "probabilities": {
+       "act": 1,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "ask_clarify": 0
+      },
+      "costUsd": 0.000028014
+     }
+    },
+    {
+     "fingerprint": "e58c8a22602208bd32861331fbc477a22c1968e17861fef3b913248f154d7fb7",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.97,
+      "probabilities": {
+       "pass": 0.97,
+       "ungrounded_number": 0.01,
+       "overclaim_co2": 0.02,
+       "unsafe": 0
+      },
+      "costUsd": 0.000046284
+     }
+    }
+   ]
+  }
+ ]
+}

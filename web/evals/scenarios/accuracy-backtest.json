@@ -1,0 +1,15 @@
+{
+ "id": "accuracy-backtest",
+ "persona": "accuracy",
+ "turns": [
+  {
+   "user": "How did the models do in the backtest compared with seasonal naive?",
+   "expect": {
+    "tools_called": [
+     "get_backtest"
+    ],
+    "no_banned_claim": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "id": "business-van-fleet",
+ "persona": "business",
+ "turns": [
+  {
+   "user": "10 delivery vans on 7 kW chargers, each needs 4 hours, all ready by 6am.",
+   "expect": {
+    "no_banned_claim": true,
+    "stop_reason": "final",
+    "answer_matches": [
+     "(each|all|both|total|combined|together|per (machine|van|oven))"
+    ],
+    "contains_caveat": true
+   }
+  }
+ ],
+ "notes": "plan_batch is P4; combining identical loads under one deadline is fine if stated."
+}

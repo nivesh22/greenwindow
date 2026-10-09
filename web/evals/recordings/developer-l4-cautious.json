@@ -1,0 +1,386 @@
+{
+ "version": 1,
+ "scenario_id": "developer-l4-cautious",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "dece237b4f49aee4b075e786f99e5c35f219e9c3c0b415173609a278060d8964",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01V3KDFqgUEgshPbJj6aiSRy",
+        "name": "lookup_device",
+        "argsJson": "{\"gpu\": {\"type\": \"L4\", \"count\": 2}}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2946,
+       "outputTokens": 278,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "9835921af71c29443ffaeeb76b3a48f1c8b4727ac7a3030d0450a9773558874c",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_017sHaqpuoqUpdEdgAra2CqJ",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 3, \"power_kw\": 0.4728, \"deadline_local\": \"2026-10-06T05:00\", \"label\": \"2 x L4 GPU inference batch\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3154,
+       "outputTokens": 317,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "9885f426bcb42d753ecbd27279d4f166bd8520451da81d2a7550808348859daf",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01SZ8zX7ZPszfTUxF6YqbGht",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3629,
+       "outputTokens": 90,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "241df888549cfbd66da7ee48c6a9bc61c5e785ca3df06eaf1ad00edda72c23f9",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "**Run"
+      },
+      {
+       "type": "text",
+       "delta": " now,"
+      },
+      {
+       "type": "text",
+       "delta": " star"
+      },
+      {
+       "type": "text",
+       "delta": "ting "
+      },
+      {
+       "type": "text",
+       "delta": "02:00 BST ("
+      },
+      {
+       "type": "text",
+       "delta": "Tue 6 Oct"
+      },
+      {
+       "type": "text",
+       "delta": "),"
+      },
+      {
+       "type": "text",
+       "delta": " fin"
+      },
+      {
+       "type": "text",
+       "delta": "ishing 05:00 B"
+      },
+      {
+       "type": "text",
+       "delta": "ST.** The job"
+      },
+      {
+       "type": "text",
+       "delta": " f"
+      },
+      {
+       "type": "text",
+       "delta": "its exactly before"
+      },
+      {
+       "type": "text",
+       "delta": " your"
+      },
+      {
+       "type": "text",
+       "delta": " 5am deadline, with"
+      },
+      {
+       "type": "text",
+       "delta": " no sl"
+      },
+      {
+       "type": "text",
+       "delta": "ack.\n\n- The"
+      },
+      {
+       "type": "text",
+       "delta": " for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast average is the"
+      },
+      {
+       "type": "text",
+       "delta": " same wh"
+      },
+      {
+       "type": "text",
+       "delta": "ether you"
+      },
+      {
+       "type": "text",
+       "delta": " start now or"
+      },
+      {
+       "type": "text",
+       "delta": " later ("
+      },
+      {
+       "type": "text",
+       "delta": "190.7 g"
+      },
+      {
+       "type": "text",
+       "delta": "CO2/kWh),"
+      },
+      {
+       "type": "text",
+       "delta": " so there is no estimated dif"
+      },
+      {
+       "type": "text",
+       "delta": "ference in emissions ("
+      },
+      {
+       "type": "text",
+       "delta": "0 g).\n- The rec"
+      },
+      {
+       "type": "text",
+       "delta": "ommendation is **"
+      },
+      {
+       "type": "text",
+       "delta": "not robust**:"
+      },
+      {
+       "type": "text",
+       "delta": " the forecast is u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertain, so the tim"
+      },
+      {
+       "type": "text",
+       "delta": "ing cho"
+      },
+      {
+       "type": "text",
+       "delta": "ice doesn't cl"
+      },
+      {
+       "type": "text",
+       "delta": "early help"
+      },
+      {
+       "type": "text",
+       "delta": ".\n- Energy for"
+      },
+      {
+       "type": "text",
+       "delta": " the run"
+      },
+      {
+       "type": "text",
+       "delta": " is about 1.42"
+      },
+      {
+       "type": "text",
+       "delta": " kWh."
+      },
+      {
+       "type": "text",
+       "delta": " The 0.47"
+      },
+      {
+       "type": "text",
+       "delta": " kW power for"
+      },
+      {
+       "type": "text",
+       "delta": " 2 x"
+      },
+      {
+       "type": "text",
+       "delta": " L4 is"
+      },
+      {
+       "type": "text",
+       "delta": " an assumed"
+      },
+      {
+       "type": "text",
+       "delta": " typical value ("
+      },
+      {
+       "type": "text",
+       "delta": "G"
+      },
+      {
+       "type": "text",
+       "delta": "PU datasheet pl"
+      },
+      {
+       "type": "text",
+       "delta": "us host overhead)."
+      },
+      {
+       "type": "text",
+       "delta": " T"
+      },
+      {
+       "type": "text",
+       "delta": "ell me if your"
+      },
+      {
+       "type": "text",
+       "delta": " set"
+      },
+      {
+       "type": "text",
+       "delta": "up dra"
+      },
+      {
+       "type": "text",
+       "delta": "ws differ"
+      },
+      {
+       "type": "text",
+       "delta": "ently."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3879,
+       "outputTokens": 416,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "f0311fdb0bdb4dd00c93b5e46b8bf6ed626e36f77bed400a616a079c2bc28641",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "explain_forecast": 0,
+       "off_topic": 0,
+       "impact_history": 0,
+       "plan_job": 1,
+       "plan_batch": 0,
+       "smalltalk": 0,
+       "model_accuracy": 0,
+       "profile_update": 0,
+       "recurring": 0
+      },
+      "costUsd": 0.000031794
+     }
+    },
+    {
+     "fingerprint": "cae69aa74e473f17c27af8c2494a46442c4e03fc491d8f14f2a029863cd40f78",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.99,
+      "probabilities": {
+       "off_topic": 0,
+       "abuse": 0,
+       "allow": 0.99,
+       "injection": 0.01
+      },
+      "costUsd": 0.000027678
+     }
+    },
+    {
+     "fingerprint": "598ad14359f2e8e3700d002249361f5a8147c032fe86c160b7fc7c4a737ea9ca",
+     "result": {
+      "choice": "cautious",
+      "confidence": 0.45,
+      "probabilities": {
+       "expected": 0.28,
+       "cautious": 0.72
+      },
+      "costUsd": 0.000026754
+     }
+    },
+    {
+     "fingerprint": "ec0aad96b072546685a2072ca627fb41b81a7a5229fc910c8eb54d8d5dbfcf9b",
+     "result": {
+      "choice": "act",
+      "confidence": 0.99,
+      "probabilities": {
+       "act": 0.99,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "ask_clarify": 0.01
+      },
+      "costUsd": 0.000028308
+     }
+    },
+    {
+     "fingerprint": "868d3b27f4ddf4a97ac16160e583c2b70742c7b0ccbc475f45af0809f4bb37d0",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.89,
+      "probabilities": {
+       "overclaim_co2": 0.04,
+       "pass": 0.92,
+       "unsafe": 0,
+       "ungrounded_number": 0.04
+      },
+      "costUsd": 0.000049896
+     }
+    }
+   ]
+  }
+ ]
+}

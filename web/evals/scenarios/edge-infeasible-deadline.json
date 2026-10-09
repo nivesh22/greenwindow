@@ -1,0 +1,22 @@
+{
+ "id": "edge-infeasible-deadline",
+ "persona": "edge",
+ "turns": [
+  {
+   "user": "7 kW charger for 6 hours, it has to be done by 4am.",
+   "expect": {
+    "tools_called": [
+     "recommend_window"
+    ],
+    "tool_not_called": [
+     "estimate_co2"
+    ],
+    "no_banned_claim": true,
+    "answer_matches": [
+     "(can'?t|cannot|couldn'?t|could not|not (possible|enough|feasible)|infeasible|too (short|tight)|won'?t fit|doesn'?t fit|does not fit|no window)"
+    ]
+   }
+  }
+ ],
+ "notes": "Must say the job does not fit, never move the deadline (prompt v3)."
+}

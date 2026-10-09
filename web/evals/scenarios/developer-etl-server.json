@@ -1,0 +1,21 @@
+{
+ "id": "developer-etl-server",
+ "persona": "developer",
+ "turns": [
+  {
+   "user": "Nightly ETL on a 1U server, 2 hours, must complete before 6am.",
+   "expect": {
+    "tools_called": [
+     "lookup_device",
+     "recommend_window"
+    ],
+    "co2_equals_tool": true,
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "max_steps": 5,
+    "max_cost_usd": 0.01,
+    "says_assumed": true
+   }
+  }
+ ]
+}

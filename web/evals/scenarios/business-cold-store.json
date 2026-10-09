@@ -1,0 +1,16 @@
+{
+ "id": "business-cold-store",
+ "persona": "business",
+ "turns": [
+  {
+   "user": "Our cold store defrost runs three times a day. Set up a daily plan for it.",
+   "expect": {
+    "no_banned_claim": true,
+    "tool_not_called": [
+     "estimate_co2"
+    ]
+   }
+  }
+ ],
+ "notes": "Recurring plans are P4; asking for the missing deadline is acceptable."
+}

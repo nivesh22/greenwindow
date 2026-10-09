@@ -1,0 +1,331 @@
+{
+ "version": 1,
+ "scenario_id": "developer-model-pick-36h",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "f890ef4c4c3421a5cfe30940cc7a504e15627eca895241cc41f53dc3e576bfae",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01MFw5ZXoTUQJK5wrJ3rK68z",
+        "name": "compare_models",
+        "argsJson": "{\"horizon_bucket\": \"25-48\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2962,
+       "outputTokens": 155,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "efce3c873d062e64669983d6e72ee22ec38415258fa6a1fcf9f00a20588ad028",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01AkZkJHQaiWWJobbLztKWHw",
+        "name": "get_backtest",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3181,
+       "outputTokens": 114,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "2983d6c0c02ceba64cd3b3f4aacdf06933dfb2c3cbdb62070e9a26a010e39d83",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "**"
+      },
+      {
+       "type": "text",
+       "delta": "No"
+      },
+      {
+       "type": "text",
+       "delta": " model"
+      },
+      {
+       "type": "text",
+       "delta": " has"
+      },
+      {
+       "type": "text",
+       "delta": " live"
+      },
+      {
+       "type": "text",
+       "delta": " results for the 25-"
+      },
+      {
+       "type": "text",
+       "delta": "48 hour range"
+      },
+      {
+       "type": "text",
+       "delta": " yet, so I can't say"
+      },
+      {
+       "type": "text",
+       "delta": " which one to"
+      },
+      {
+       "type": "text",
+       "delta": " trust from live"
+      },
+      {
+       "type": "text",
+       "delta": " data.** The live"
+      },
+      {
+       "type": "text",
+       "delta": " leaderboard has z"
+      },
+      {
+       "type": "text",
+       "delta": "ero scored forecasts in"
+      },
+      {
+       "type": "text",
+       "delta": " that bucket.\n\nThe"
+      },
+      {
+       "type": "text",
+       "delta": " 90-"
+      },
+      {
+       "type": "text",
+       "delta": "day backtest (July"
+      },
+      {
+       "type": "text",
+       "delta": " to early"
+      },
+      {
+       "type": "text",
+       "delta": " October)"
+      },
+      {
+       "type": "text",
+       "delta": " is the only evidence."
+      },
+      {
+       "type": "text",
+       "delta": " For"
+      },
+      {
+       "type": "text",
+       "delta": " 25-48 hours "
+      },
+      {
+       "type": "text",
+       "delta": "ahead, **"
+      },
+      {
+       "type": "text",
+       "delta": "Chronos-2 +"
+      },
+      {
+       "type": "text",
+       "delta": " weather** had"
+      },
+      {
+       "type": "text",
+       "delta": " the l"
+      },
+      {
+       "type": "text",
+       "delta": "owest MAE among"
+      },
+      {
+       "type": "text",
+       "delta": " the for"
+      },
+      {
+       "type": "text",
+       "delta": "ecasting models at"
+      },
+      {
+       "type": "text",
+       "delta": " 21.8 gCO"
+      },
+      {
+       "type": "text",
+       "delta": "2/kWh."
+      },
+      {
+       "type": "text",
+       "delta": " That"
+      },
+      {
+       "type": "text",
+       "delta": " beats"
+      },
+      {
+       "type": "text",
+       "delta": " both seasonal-"
+      },
+      {
+       "type": "text",
+       "delta": "naive benchmarks:"
+      },
+      {
+       "type": "text",
+       "delta": " y"
+      },
+      {
+       "type": "text",
+       "delta": "esterday (44.7)"
+      },
+      {
+       "type": "text",
+       "delta": " and last week (45.7)."
+      },
+      {
+       "type": "text",
+       "delta": " The backtest u"
+      },
+      {
+       "type": "text",
+       "delta": "ses archived weather that"
+      },
+      {
+       "type": "text",
+       "delta": " is more"
+      },
+      {
+       "type": "text",
+       "delta": " accurate than a real"
+      },
+      {
+       "type": "text",
+       "delta": " for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast, so live"
+      },
+      {
+       "type": "text",
+       "delta": " performance will lik"
+      },
+      {
+       "type": "text",
+       "delta": "ely be worse. N"
+      },
+      {
+       "type": "text",
+       "delta": "ESO's published for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast sc"
+      },
+      {
+       "type": "text",
+       "delta": "ored 11.8 over"
+      },
+      {
+       "type": "text",
+       "delta": "all, but its lead time is"
+      },
+      {
+       "type": "text",
+       "delta": " unknown, so that"
+      },
+      {
+       "type": "text",
+       "delta": " comparison isn't fair"
+      },
+      {
+       "type": "text",
+       "delta": "."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 6281,
+       "outputTokens": 481,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "68e2751c695f063dc8644badc1c2e29a5a2b6bac7461ec3fe103a54431df4a73",
+     "result": {
+      "choice": "model_accuracy",
+      "confidence": 0.98,
+      "probabilities": {
+       "plan_job": 0.01,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0.01,
+       "model_accuracy": 0.98,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031458
+     }
+    },
+    {
+     "fingerprint": "7844cc1822d665855fdc64d323dbdb854239e276743f7b26f37685a174071cbd",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "off_topic": 0,
+       "injection": 0,
+       "allow": 1,
+       "abuse": 0
+      },
+      "costUsd": 0.000027342
+     }
+    },
+    {
+     "fingerprint": "0d93f30e302f9d14656b7dee2933eee62b72072e5e940344cc78596a546fe893",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.8,
+      "probabilities": {
+       "pass": 0.85,
+       "ungrounded_number": 0.14,
+       "overclaim_co2": 0.01,
+       "unsafe": 0
+      },
+      "costUsd": 0.000135702
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,378 @@
+{
+ "version": 1,
+ "scenario_id": "household-dishwasher-default",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "7ca9208fd175591e84fa2aa146104194013aeb89cc5b47fec272c97b586f2dec",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01DuuSrzKRWNVozFMGjdYtUG",
+        "name": "lookup_device",
+        "argsJson": "{\"query\": \"dishwasher\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2861,
+       "outputTokens": 299,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "5c006dab3e04271b20668730b73b5a0a5df938d2ce84ad08c3f5db5d496dfd47",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01CnHneRNW3U31K5jzuTT8To",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 2, \"power_kw\": 1.2, \"deadline_local\": \"2026-10-07T07:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"Dishwasher\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3017,
+       "outputTokens": 285,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "d35aace008ab425846a7f4ccfccbafb3bab12cc9672d561c174b9bbbc249a56f",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01HcMYKoq8L7pfvefmdess9T",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3511,
+       "outputTokens": 67,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "52629ecc9f47a1494e7a94fcad55c57469e4593714a33fe68f77a3b8a3a6a8be",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "**Recommendation: start"
+      },
+      {
+       "type": "text",
+       "delta": " at"
+      },
+      {
+       "type": "text",
+       "delta": " 03"
+      },
+      {
+       "type": "text",
+       "delta": ":00 BST on"
+      },
+      {
+       "type": "text",
+       "delta": " Wed 7 O"
+      },
+      {
+       "type": "text",
+       "delta": "ct, finish"
+      },
+      {
+       "type": "text",
+       "delta": "ing by"
+      },
+      {
+       "type": "text",
+       "delta": " 05:00 BST,"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "ahead of your"
+      },
+      {
+       "type": "text",
+       "delta": " 07:00 deadline"
+      },
+      {
+       "type": "text",
+       "delta": ".**\n\n- The"
+      },
+      {
+       "type": "text",
+       "delta": " forecast average"
+      },
+      {
+       "type": "text",
+       "delta": " is "
+      },
+      {
+       "type": "text",
+       "delta": "158 gCO2/k"
+      },
+      {
+       "type": "text",
+       "delta": "Wh for that"
+      },
+      {
+       "type": "text",
+       "delta": " window, against"
+      },
+      {
+       "type": "text",
+       "delta": " 188 if"
+      },
+      {
+       "type": "text",
+       "delta": " you start"
+      },
+      {
+       "type": "text",
+       "delta": " at "
+      },
+      {
+       "type": "text",
+       "delta": "02:00 BST t"
+      },
+      {
+       "type": "text",
+       "delta": "onight ("
+      },
+      {
+       "type": "text",
+       "delta": "about"
+      },
+      {
+       "type": "text",
+       "delta": " 16%"
+      },
+      {
+       "type": "text",
+       "delta": " lower).\n- This"
+      },
+      {
+       "type": "text",
+       "delta": " is **"
+      },
+      {
+       "type": "text",
+       "delta": "not robust**:"
+      },
+      {
+       "type": "text",
+       "delta": " the forecast u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertainty is"
+      },
+      {
+       "type": "text",
+       "delta": " large enough that the gain"
+      },
+      {
+       "type": "text",
+       "delta": " could dis"
+      },
+      {
+       "type": "text",
+       "delta": "appear.\n- The estim"
+      },
+      {
+       "type": "text",
+       "delta": "ated difference is "
+      },
+      {
+       "type": "text",
+       "delta": "72 g, with a range of"
+      },
+      {
+       "type": "text",
+       "delta": " -70 g to 205 "
+      },
+      {
+       "type": "text",
+       "delta": "g. The range includes running now"
+      },
+      {
+       "type": "text",
+       "delta": " being"
+      },
+      {
+       "type": "text",
+       "delta": " better, so tre"
+      },
+      {
+       "type": "text",
+       "delta": "at the ben"
+      },
+      {
+       "type": "text",
+       "delta": "efit as uncertain."
+      },
+      {
+       "type": "text",
+       "delta": "\n- Assumed"
+      },
+      {
+       "type": "text",
+       "delta": " job"
+      },
+      {
+       "type": "text",
+       "delta": ": d"
+      },
+      {
+       "type": "text",
+       "delta": "ishwasher at"
+      },
+      {
+       "type": "text",
+       "delta": " 1.2 kW for"
+      },
+      {
+       "type": "text",
+       "delta": " 2 hours (typ"
+      },
+      {
+       "type": "text",
+       "delta": "ical UK fig"
+      },
+      {
+       "type": "text",
+       "delta": "ures, so"
+      },
+      {
+       "type": "text",
+       "delta": " change"
+      },
+      {
+       "type": "text",
+       "delta": " them if y"
+      },
+      {
+       "type": "text",
+       "delta": "ours differ)."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3756,
+       "outputTokens": 794,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "33ff3c563bd0342ceac5916c5e455e1d31e8077d20abbdc2ab847b161a362dbd",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 1,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031542
+     }
+    },
+    {
+     "fingerprint": "8ad4f0ce73f7ea4010287c2a885b328b3101274cbf07e9612c2984b167056906",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "off_topic": 0,
+       "injection": 0,
+       "allow": 1,
+       "abuse": 0
+      },
+      "costUsd": 0.000027426
+     }
+    },
+    {
+     "fingerprint": "350bfb29fc99b67f1cb148ea52df7584db85a83d6eac77e1253033be7d0b8d76",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000026124
+     }
+    },
+    {
+     "fingerprint": "892e64ff45dcdf283f7f8108756b531f8d20d9b8aa74a457e2b1f2c47b00bc29",
+     "result": {
+      "choice": "act",
+      "confidence": 1,
+      "probabilities": {
+       "act": 1,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "ask_clarify": 0
+      },
+      "costUsd": 0.000027678
+     }
+    },
+    {
+     "fingerprint": "37ecf0368ea1ce378a841b915a4e0fcb9ce2e7444e62b24073be60020f6d2fe7",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.99,
+      "probabilities": {
+       "unsafe": 0,
+       "overclaim_co2": 0,
+       "pass": 0.99,
+       "ungrounded_number": 0.01
+      },
+      "costUsd": 0.0000504
+     }
+    }
+   ]
+  }
+ ]
+}

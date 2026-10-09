@@ -1,0 +1,116 @@
+{
+ "version": 1,
+ "scenario_id": "developer-unknown-accelerator",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "c66eb9f38be502b489285d9af29cf37f1cec5bf41a974bd03143ed7df54b7277",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Got"
+      },
+      {
+       "type": "text",
+       "delta": " it: 2 TPU"
+      },
+      {
+       "type": "text",
+       "delta": " v5 chips for"
+      },
+      {
+       "type": "text",
+       "delta": " 4 hours, done by"
+      },
+      {
+       "type": "text",
+       "delta": " 8am. What's"
+      },
+      {
+       "type": "text",
+       "delta": " the total power draw of that"
+      },
+      {
+       "type": "text",
+       "delta": " setup in kW?"
+      },
+      {
+       "type": "usage",
+       "inputTokens": 1093,
+       "outputTokens": 202,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "84f3ea2991c01ba06e4a1a5c8715a5227908fb2cb2498456e132e7ae72e005b9",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.99,
+      "probabilities": {
+       "off_topic": 0,
+       "allow": 0.99,
+       "injection": 0.01,
+       "abuse": 0
+      },
+      "costUsd": 0.000027552
+     }
+    },
+    {
+     "fingerprint": "d6816aacead1751554f1c9bba2701c30e90bd3177503b30c5d38f55efd1f8a7f",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "model_accuracy": 0,
+       "profile_update": 0,
+       "plan_job": 1,
+       "off_topic": 0,
+       "explain_forecast": 0,
+       "smalltalk": 0,
+       "recurring": 0,
+       "plan_batch": 0,
+       "impact_history": 0
+      },
+      "costUsd": 0.000031668
+     }
+    },
+    {
+     "fingerprint": "c329eff7367f5d8bdde0f0faaf184980b88fe1f8cf8f4695e3f1d425173bff0e",
+     "result": {
+      "choice": "expected",
+      "confidence": 0.99,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000024486
+     }
+    },
+    {
+     "fingerprint": "651f15f6d87e20626c0dfd8e688adcdf4075d38524600981248241b1bd2f3682",
+     "result": {
+      "choice": "ask_power",
+      "confidence": 0.8,
+      "probabilities": {
+       "act": 0.15,
+       "ask_clarify": 0.01,
+       "ask_deadline": 0,
+       "ask_power": 0.84,
+       "ask_duration": 0
+      },
+      "costUsd": 0.00002604
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,298 @@
+{
+ "version": 1,
+ "scenario_id": "household-heatpump-boost",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "9b5855da3747ea93b5cfd987e56f469e0de6b6a1c98a6a661856d44f4620d162",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_018D69ShG36aJXUuqfbVckBa",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 3, \"power_kw\": 2, \"deadline_local\": \"2026-10-07T17:00\", \"label\": \"Heat pump boost\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2862,
+       "outputTokens": 318,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "6999bdd5d935a14a85b8f43ffddebec66b86d5cdb43cdd95a1f9b69e08c47891",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01GGftNsx147art4VG2FD1HF",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3327,
+       "outputTokens": 29,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "a0e41a31d8d2a97531ad60db8d3c2ec9be09e1b09ec264eb4fb01809643a8027",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Run"
+      },
+      {
+       "type": "text",
+       "delta": " the 3-hour,"
+      },
+      {
+       "type": "text",
+       "delta": " 2 kW he"
+      },
+      {
+       "type": "text",
+       "delta": "at pump boost from **"
+      },
+      {
+       "type": "text",
+       "delta": "Wed 7 Oct"
+      },
+      {
+       "type": "text",
+       "delta": ", 13:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": " to"
+      },
+      {
+       "type": "text",
+       "delta": " 16:00 BST**"
+      },
+      {
+       "type": "text",
+       "delta": ", finishing before your "
+      },
+      {
+       "type": "text",
+       "delta": "17"
+      },
+      {
+       "type": "text",
+       "delta": ":00 de"
+      },
+      {
+       "type": "text",
+       "delta": "adline.\n\n- The"
+      },
+      {
+       "type": "text",
+       "delta": " forecast average"
+      },
+      {
+       "type": "text",
+       "delta": " over"
+      },
+      {
+       "type": "text",
+       "delta": " that"
+      },
+      {
+       "type": "text",
+       "delta": " window is about 55 gC"
+      },
+      {
+       "type": "text",
+       "delta": "O2/kWh, against"
+      },
+      {
+       "type": "text",
+       "delta": " about"
+      },
+      {
+       "type": "text",
+       "delta": " 191 gCO2/"
+      },
+      {
+       "type": "text",
+       "delta": "kWh if you"
+      },
+      {
+       "type": "text",
+       "delta": " started now"
+      },
+      {
+       "type": "text",
+       "delta": " ("
+      },
+      {
+       "type": "text",
+       "delta": "Tue 6 Oct"
+      },
+      {
+       "type": "text",
+       "delta": ", 02:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": ").\n- The recommendation"
+      },
+      {
+       "type": "text",
+       "delta": " is robust to"
+      },
+      {
+       "type": "text",
+       "delta": " forecast error.\n- The"
+      },
+      {
+       "type": "text",
+       "delta": " estimated difference is 817"
+      },
+      {
+       "type": "text",
+       "delta": " g CO2 ("
+      },
+      {
+       "type": "text",
+       "delta": "range"
+      },
+      {
+       "type": "text",
+       "delta": " 385 g to 1."
+      },
+      {
+       "type": "text",
+       "delta": "1 kg). This is based"
+      },
+      {
+       "type": "text",
+       "delta": " on average"
+      },
+      {
+       "type": "text",
+       "delta": " gr"
+      },
+      {
+       "type": "text",
+       "delta": "id intensity, not a"
+      },
+      {
+       "type": "text",
+       "delta": " measured or"
+      },
+      {
+       "type": "text",
+       "delta": " guaranteed change."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3566,
+       "outputTokens": 363,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "10261bdcf4f9ce4728f329e2516e6ec04ff7875d05bfef43dac6208e4a53f0a9",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "profile_update": 0,
+       "off_topic": 0,
+       "plan_batch": 0,
+       "smalltalk": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "plan_job": 1,
+       "recurring": 0,
+       "explain_forecast": 0
+      },
+      "costUsd": 0.000031626
+     }
+    },
+    {
+     "fingerprint": "b1bf2d747d54205811ec7a91747ac8119ea97ff66247aac286016248ba3c8be6",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "abuse": 0,
+       "off_topic": 0,
+       "injection": 0
+      },
+      "costUsd": 0.00002751
+     }
+    },
+    {
+     "fingerprint": "353cdceb056fac74da132b7e9cf56e537da7049f1f3278f4310ad1f03614f84d",
+     "result": {
+      "choice": "expected",
+      "confidence": 0.99,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000025998
+     }
+    },
+    {
+     "fingerprint": "83c0bc3bd1b993aa5480f27f3e93caaa2bda7ef5aa12f8adf353e5887e6ea214",
+     "result": {
+      "choice": "act",
+      "confidence": 0.99,
+      "probabilities": {
+       "act": 0.99,
+       "ask_deadline": 0,
+       "ask_power": 0,
+       "ask_duration": 0,
+       "ask_clarify": 0.01
+      },
+      "costUsd": 0.000027552
+     }
+    },
+    {
+     "fingerprint": "b61c08f01b7abd410c4bee21d5d592222f5646867cbd474cb925103bd67045f8",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.99,
+      "probabilities": {
+       "unsafe": 0,
+       "pass": 0.99,
+       "overclaim_co2": 0,
+       "ungrounded_number": 0.01
+      },
+      "costUsd": 0.000046368
+     }
+    }
+   ]
+  }
+ ]
+}

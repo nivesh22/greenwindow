@@ -6,7 +6,7 @@ import { planUpdateSchema } from '../harness/events.js'
 import { recommend, type HourForecast, type Mode } from '../../src/scheduler/optimizer.js'
 import { CO2_WORDING, estimateCo2 } from './estimate_co2.js'
 import { getForecast } from './get_forecast.js'
-import { buildRegistry, P1_TOOLS } from './index.js'
+import { buildRegistry, TOOLS } from './index.js'
 import { DEVICES, lookupDevice, tokens } from './lookup_device.js'
 import { recommendWindow, toPlanUpdate } from './recommend_window.js'
 import { ToolUserError, type LastRecommendation } from './registry.js'
@@ -294,16 +294,17 @@ describe('lookup_device', () => {
 })
 
 describe('registry', () => {
-  it('registers the P1 tools with strict JSON Schemas and the right intents', () => {
+  it('registers the tools with strict JSON Schemas and the right intents', () => {
     const reg = buildRegistry()
-    expect(P1_TOOLS.map((t) => t.name)).toEqual(['get_forecast', 'recommend_window', 'estimate_co2', 'explain_uncertainty', 'lookup_device'])
-    for (const spec of reg.specs(P1_TOOLS)) {
+    expect(TOOLS.map((t) => t.name)).toEqual(['get_forecast', 'recommend_window', 'estimate_co2', 'explain_uncertainty', 'lookup_device', 'get_leaderboard', 'get_backtest', 'compare_models'])
+    for (const spec of reg.specs(TOOLS)) {
       expect(spec.parameters).toMatchObject({ type: 'object', additionalProperties: false })
       expect(spec.parameters).not.toHaveProperty('$schema')
     }
     const names = (i: Parameters<typeof reg.forIntent>[0]) => reg.forIntent(i).map((t) => t.name)
     expect(names('smalltalk')).toEqual(['get_forecast', 'lookup_device'])
     expect(names('plan_job')).toEqual(['get_forecast', 'recommend_window', 'estimate_co2', 'explain_uncertainty', 'lookup_device'])
-    expect(names('explain_forecast')).toEqual(['get_forecast', 'explain_uncertainty', 'lookup_device'])
+    expect(names('explain_forecast')).toEqual(['get_forecast', 'explain_uncertainty', 'lookup_device', 'get_leaderboard', 'get_backtest', 'compare_models'])
+    expect(names('model_accuracy')).toEqual(['get_forecast', 'lookup_device', 'get_leaderboard', 'get_backtest', 'compare_models'])
   })
 })

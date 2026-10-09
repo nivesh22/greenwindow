@@ -1,0 +1,202 @@
+{
+ "version": 1,
+ "scenario_id": "household-power-assumption",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "3eb8bf2157a2daf31591b2e325304e4bb354da797dd0dda993486003a976376d",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01SCCuhDNQkmezJQKCu9AtQg",
+        "name": "lookup_device",
+        "argsJson": "{\"query\": \"dishwasher\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2855,
+       "outputTokens": 196,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "84a85c2d3035e3ae2fc9299f868ad06427b459217269e05f48ad7a9a8a7342fa",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "I ass"
+      },
+      {
+       "type": "text",
+       "delta": "ume the"
+      },
+      {
+       "type": "text",
+       "delta": " dishwasher dra"
+      },
+      {
+       "type": "text",
+       "delta": "ws **1.2 kW"
+      },
+      {
+       "type": "text",
+       "delta": "** on"
+      },
+      {
+       "type": "text",
+       "delta": " average over"
+      },
+      {
+       "type": "text",
+       "delta": " a **"
+      },
+      {
+       "type": "text",
+       "delta": "2-hour**"
+      },
+      {
+       "type": "text",
+       "delta": " cycle. This is a"
+      },
+      {
+       "type": "text",
+       "delta": " typical UK appliance fig"
+      },
+      {
+       "type": "text",
+       "delta": "ure, not"
+      },
+      {
+       "type": "text",
+       "delta": " a measur"
+      },
+      {
+       "type": "text",
+       "delta": "ement,"
+      },
+      {
+       "type": "text",
+       "delta": " so you can change either"
+      },
+      {
+       "type": "text",
+       "delta": " number"
+      },
+      {
+       "type": "text",
+       "delta": ".\n\nWhat time should"
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " cycle finish by t"
+      },
+      {
+       "type": "text",
+       "delta": "onight?"
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3011,
+       "outputTokens": 256,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "f504bb637f2c344c762ffe61ea1e08e50b9cf287a8c70b97be635545d4c0d469",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "abuse": 0,
+       "off_topic": 0,
+       "injection": 0
+      },
+      "costUsd": 0.000027426
+     }
+    },
+    {
+     "fingerprint": "d691865a87f87accc1edc803aeb1f8c392f284cd2a89f30dd0255f081033a5a9",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 0.98,
+      "probabilities": {
+       "plan_job": 0.98,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0.02,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031542
+     }
+    },
+    {
+     "fingerprint": "297521d8a16801da3230cb3939897dd0c52e67885194e08df6f5bc482cd29710",
+     "result": {
+      "choice": "act",
+      "confidence": 0.96,
+      "probabilities": {
+       "ask_deadline": 0.01,
+       "ask_duration": 0,
+       "ask_clarify": 0.01,
+       "ask_power": 0.01,
+       "act": 0.97
+      },
+      "costUsd": 0.000027552
+     }
+    },
+    {
+     "fingerprint": "4f7e10f79182eb425148ae3e57bddb8ff82089608f9dcf41e5ed1ffcdc54c58d",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000025998
+     }
+    },
+    {
+     "fingerprint": "b846fd12e2b5fe7f56a9fdb4c08af71f3b9a3fb9a69460142692f9688e018205",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.88,
+      "probabilities": {
+       "unsafe": 0,
+       "ungrounded_number": 0.09,
+       "pass": 0.91,
+       "overclaim_co2": 0
+      },
+      "costUsd": 0.00002583
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "developer-unknown-accelerator",
+ "persona": "developer",
+ "turns": [
+  {
+   "user": "Run on 2 TPU v5 chips for 4 hours, done by 8am.",
+   "expect": {
+    "no_banned_claim": true,
+    "stop_reason": "final",
+    "asks_one_question": true
+   }
+  }
+ ],
+ "notes": "TPU v5 is not in the device table: asking for the power draw is the right behaviour."
+}

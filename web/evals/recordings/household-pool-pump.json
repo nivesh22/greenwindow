@@ -1,0 +1,278 @@
+{
+ "version": 1,
+ "scenario_id": "household-pool-pump",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "ffa6296585ffdb9ad9641b94c6b9c5769a9c57a9845932d4a0947b26972fc0f1",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_011T1n3vVN6ptMg8FuoVrJue",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 4, \"power_kw\": 1.1, \"deadline_local\": \"2026-10-07T12:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"Pool pump\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2863,
+       "outputTokens": 319,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "46cb693ea99dc53470bb87e4a65f05df43bc1f2dd427abb4832d437ce14b6233",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01QUqyo6EMfEW5zr4PfPJj43",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3358,
+       "outputTokens": 29,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "0d4e6b13aca5c37c41cbb53fb533bd40f44aa38c36f2f6f9042f5d7dad5deda7",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Run the "
+      },
+      {
+       "type": "text",
+       "delta": "4-hour pool"
+      },
+      {
+       "type": "text",
+       "delta": " pump from **Wed "
+      },
+      {
+       "type": "text",
+       "delta": "7 Oct, 08"
+      },
+      {
+       "type": "text",
+       "delta": ":00 BST** to"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "12:00 BST. This"
+      },
+      {
+       "type": "text",
+       "delta": " is rob"
+      },
+      {
+       "type": "text",
+       "delta": "ust in"
+      },
+      {
+       "type": "text",
+       "delta": " the forecast.\n\n-"
+      },
+      {
+       "type": "text",
+       "delta": " Forecast average intensity is"
+      },
+      {
+       "type": "text",
+       "delta": " about 101 gCO2"
+      },
+      {
+       "type": "text",
+       "delta": "/kWh,"
+      },
+      {
+       "type": "text",
+       "delta": " against"
+      },
+      {
+       "type": "text",
+       "delta": " about 195 if"
+      },
+      {
+       "type": "text",
+       "delta": " you"
+      },
+      {
+       "type": "text",
+       "delta": " started now"
+      },
+      {
+       "type": "text",
+       "delta": " ("
+      },
+      {
+       "type": "text",
+       "delta": "Tue 6 Oct"
+      },
+      {
+       "type": "text",
+       "delta": ", 02:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": ").\n- The estimated dif"
+      },
+      {
+       "type": "text",
+       "delta": "ference is about 411 g C"
+      },
+      {
+       "type": "text",
+       "delta": "O2 for 4.4"
+      },
+      {
+       "type": "text",
+       "delta": " kWh, with a range"
+      },
+      {
+       "type": "text",
+       "delta": " of 105 g"
+      },
+      {
+       "type": "text",
+       "delta": " to 668 g."
+      },
+      {
+       "type": "text",
+       "delta": " This is based"
+      },
+      {
+       "type": "text",
+       "delta": " on average"
+      },
+      {
+       "type": "text",
+       "delta": " grid intensity, so"
+      },
+      {
+       "type": "text",
+       "delta": " it is an estimate, not"
+      },
+      {
+       "type": "text",
+       "delta": " a measured change"
+      },
+      {
+       "type": "text",
+       "delta": "."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3593,
+       "outputTokens": 356,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "a4afa581f68a279252d597b36b7f1105a7c1fa72eaceec59099ebc5ad835008e",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027594
+     }
+    },
+    {
+     "fingerprint": "eae74924b2897dedec70d4ff0b4c4201904454fb33dbac13f09ebc1b347e42f5",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 1,
+       "recurring": 0,
+       "model_accuracy": 0,
+       "explain_forecast": 0,
+       "off_topic": 0,
+       "impact_history": 0,
+       "plan_batch": 0,
+       "smalltalk": 0,
+       "profile_update": 0
+      },
+      "costUsd": 0.00003171
+     }
+    },
+    {
+     "fingerprint": "fd1e5e5027bf3eff5447bfa223065953c270b88ef4eed1cd6d19d052e92d0dc8",
+     "result": {
+      "choice": "expected",
+      "confidence": 0.99,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000026208
+     }
+    },
+    {
+     "fingerprint": "2ab1099b57ca936eed1ae3dd555b8a9036d54e975ff76fd0951183020240d66c",
+     "result": {
+      "choice": "act",
+      "confidence": 0.98,
+      "probabilities": {
+       "act": 0.99,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "ask_clarify": 0.01
+      },
+      "costUsd": 0.000027762
+     }
+    },
+    {
+     "fingerprint": "da170f5648c93de7921b5102d43e666e8ad19df073fc0a3999a64e76a9958f8d",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.99,
+      "probabilities": {
+       "pass": 0.99,
+       "ungrounded_number": 0.01,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000045318
+     }
+    }
+   ]
+  }
+ ]
+}

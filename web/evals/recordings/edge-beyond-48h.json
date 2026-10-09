@@ -1,0 +1,254 @@
+{
+ "version": 1,
+ "scenario_id": "edge-beyond-48h",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "13b04069f2075a7833837e9457aa6a0d00b3ab16ef80de9e5da39c3bc0183cb0",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "S"
+      },
+      {
+       "type": "text",
+       "delta": "unday evening is more"
+      },
+      {
+       "type": "text",
+       "delta": " than 48 hours away,"
+      },
+      {
+       "type": "text",
+       "delta": " and"
+      },
+      {
+       "type": "text",
+       "delta": " the for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast only"
+      },
+      {
+       "type": "text",
+       "delta": " covers the next 48 h"
+      },
+      {
+       "type": "text",
+       "delta": "ours ("
+      },
+      {
+       "type": "text",
+       "delta": "to about Thursday morning"
+      },
+      {
+       "type": "text",
+       "delta": "),"
+      },
+      {
+       "type": "text",
+       "delta": " so I can't find"
+      },
+      {
+       "type": "text",
+       "delta": " a re"
+      },
+      {
+       "type": "text",
+       "delta": "liable low"
+      },
+      {
+       "type": "text",
+       "delta": "-carbon start"
+      },
+      {
+       "type": "text",
+       "delta": " for this job yet."
+      },
+      {
+       "type": "text",
+       "delta": "\n\n- **P"
+      },
+      {
+       "type": "text",
+       "delta": "ick a deadline within the next"
+      },
+      {
+       "type": "text",
+       "delta": " 48 hours."
+      },
+      {
+       "type": "text",
+       "delta": "** Tell"
+      },
+      {
+       "type": "text",
+       "delta": " me a"
+      },
+      {
+       "type": "text",
+       "delta": " time"
+      },
+      {
+       "type": "text",
+       "delta": " before"
+      },
+      {
+       "type": "text",
+       "delta": " Thursday mor"
+      },
+      {
+       "type": "text",
+       "delta": "ning and I'll pl"
+      },
+      {
+       "type": "text",
+       "delta": "an the"
+      },
+      {
+       "type": "text",
+       "delta": " 3-hour,"
+      },
+      {
+       "type": "text",
+       "delta": " 2 "
+      },
+      {
+       "type": "text",
+       "delta": "kW job.\n- **"
+      },
+      {
+       "type": "text",
+       "delta": "Check"
+      },
+      {
+       "type": "text",
+       "delta": " back on"
+      },
+      {
+       "type": "text",
+       "delta": " Saturday.** From then"
+      },
+      {
+       "type": "text",
+       "delta": ","
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " forecast reaches S"
+      },
+      {
+       "type": "text",
+       "delta": "unday evening, and I can"
+      },
+      {
+       "type": "text",
+       "delta": " plan it against"
+      },
+      {
+       "type": "text",
+       "delta": " your"
+      },
+      {
+       "type": "text",
+       "delta": " deadline."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2856,
+       "outputTokens": 1103,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "e32cb7532f782a3c8d5e3ce11f3bc31597b6bf042891d44bcdc23295d817d48a",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "model_accuracy": 0,
+       "profile_update": 0,
+       "plan_job": 1,
+       "off_topic": 0,
+       "explain_forecast": 0,
+       "smalltalk": 0,
+       "plan_batch": 0,
+       "recurring": 0,
+       "impact_history": 0
+      },
+      "costUsd": 0.000031542
+     }
+    },
+    {
+     "fingerprint": "96c928d42595f5e35aa4ae3b4ed08a84803be80da52e961d0e04eba2bf0853f4",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027426
+     }
+    },
+    {
+     "fingerprint": "7d46e5aac4bb9dbc3374065dacf3085c0c215b9b6affd222a9b254e451bf93a8",
+     "result": {
+      "choice": "act",
+      "confidence": 0.64,
+      "probabilities": {
+       "ask_clarify": 0.29,
+       "act": 0.71,
+       "ask_duration": 0,
+       "ask_deadline": 0,
+       "ask_power": 0
+      },
+      "costUsd": 0.00002625
+     }
+    },
+    {
+     "fingerprint": "3c2e6c878e67f086a0fed719ad67260ec648d788bea2d2afe05022b1da242404",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000024696
+     }
+    },
+    {
+     "fingerprint": "bfe40705638780383f0746ad009421b74ee3c9da8f6b579f371cd0da9fbd8882",
+     "result": {
+      "choice": "ungrounded_number",
+      "confidence": 0.36,
+      "probabilities": {
+       "pass": 0.48,
+       "ungrounded_number": 0.52,
+       "unsafe": 0,
+       "overclaim_co2": 0
+      },
+      "costUsd": 0.000025578
+     }
+    }
+   ]
+  }
+ ]
+}

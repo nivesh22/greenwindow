@@ -24,6 +24,7 @@
   "include": [
     "agent",
     "api",
+    "evals",
     "src/scheduler/optimizer.ts",
     "src/lib/time.ts",
     "src/lib/format.ts",

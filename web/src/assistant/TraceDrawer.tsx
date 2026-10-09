@@ -93,6 +93,11 @@ export function TraceDrawer({ trace }: { trace: TraceSummary }) {
                 <li key={i} className="flex flex-wrap items-center gap-x-2 gap-y-1">
                   <span className="font-medium">{c.model}</span>
                   <span>({c.provider})</span>
+                  {!c.ok && (
+                    <span className={`${badge} bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-100`}>
+                      failed{c.error ? `: ${c.error.replace('_', ' ')}` : ''}
+                    </span>
+                  )}
                   {c.failover && (
                     <span className={`${badge} bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-100`}>
                       failover{c.failover_reason ? `: ${c.failover_reason}` : ''}

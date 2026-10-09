@@ -11,7 +11,9 @@ export default defineConfig({
     projects: [
       { extends: true, test: { name: 'app', include: ['src/**/*.test.{ts,tsx}'], environment: 'jsdom', setupFiles: ['./src/test/setup.ts'] } },
       // Server-side agent code: Node environment, no network (ScriptedProvider and fixtures only).
-      { extends: true, test: { name: 'agent', include: ['agent/**/*.test.ts', 'api/**/*.test.ts'], environment: 'node' } },
+      { extends: true, test: { name: 'agent', include: ['agent/**/*.test.ts', 'api/**/*.test.ts', 'evals/unit/**/*.test.ts'], environment: 'node' } },
+      // Golden scenarios (replay mode by default; see web/evals/README or plan X7/X11).
+      { extends: true, test: { name: 'evals', include: ['evals/suite/**/*.test.ts'], environment: 'node' } },
     ],
   },
   build: {

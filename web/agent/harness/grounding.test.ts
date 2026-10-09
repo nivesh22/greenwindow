@@ -161,7 +161,8 @@ describe('checkGrounding: banned claims and caveat', () => {
     expect(msg).toContain('not in the tool results: "190 g", "02:00 BST"')
     expect(msg).toContain('"You saved"')
     expect(msg).toContain('caveat')
-    expect(msg).toContain('Rewrite it using only figures from the tool results')
+    expect(msg).toContain('using only figures from the tool results')
+    expect(msg).toContain('do not mention an earlier draft')
   })
 })
 

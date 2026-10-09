@@ -1,0 +1,283 @@
+{
+ "version": 1,
+ "scenario_id": "accuracy-why-cleaner",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "d5ae4c8f2047448b87520fb8510230ade72e52430ae5043d0eb0c82425d6575e",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01ALPQiArgMUFnJ3nqQ5VcLh",
+        "name": "get_forecast",
+        "argsJson": "{\"hours\": 24}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3176,
+       "outputTokens": 144,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "76e9b1fa054cd222428cd2cada02be91f7d5b7f4e1c145a205e01363780c02dd",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "The early"
+      },
+      {
+       "type": "text",
+       "delta": " hours a"
+      },
+      {
+       "type": "text",
+       "delta": "ren't espec"
+      },
+      {
+       "type": "text",
+       "delta": "ially clean in this for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast. The median run"
+      },
+      {
+       "type": "text",
+       "delta": "s about"
+      },
+      {
+       "type": "text",
+       "delta": " 187 gCO2/"
+      },
+      {
+       "type": "text",
+       "delta": "kWh at 00:00"
+      },
+      {
+       "type": "text",
+       "delta": " UTC, rises"
+      },
+      {
+       "type": "text",
+       "delta": " to about 215 by"
+      },
+      {
+       "type": "text",
+       "delta": " 05:00 UTC"
+      },
+      {
+       "type": "text",
+       "delta": ", then falls to about 161"
+      },
+      {
+       "type": "text",
+       "delta": " around"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "12:00 UTC."
+      },
+      {
+       "type": "text",
+       "delta": " The for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast t"
+      },
+      {
+       "type": "text",
+       "delta": "ool retur"
+      },
+      {
+       "type": "text",
+       "delta": "ned"
+      },
+      {
+       "type": "text",
+       "delta": " only"
+      },
+      {
+       "type": "text",
+       "delta": " UTC timestamps,"
+      },
+      {
+       "type": "text",
+       "delta": " so I can't give London"
+      },
+      {
+       "type": "text",
+       "delta": " clock times. NESO's"
+      },
+      {
+       "type": "text",
+       "delta": " for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast has its"
+      },
+      {
+       "type": "text",
+       "delta": " lowest point near 09:"
+      },
+      {
+       "type": "text",
+       "delta": "00 UTC (96 "
+      },
+      {
+       "type": "text",
+       "delta": "gCO2/kWh"
+      },
+      {
+       "type": "text",
+       "delta": ")."
+      },
+      {
+       "type": "text",
+       "delta": " The tools"
+      },
+      {
+       "type": "text",
+       "delta": " don't say"
+      },
+      {
+       "type": "text",
+       "delta": " what"
+      },
+      {
+       "type": "text",
+       "delta": " drives these"
+      },
+      {
+       "type": "text",
+       "delta": " changes, so I can't expl"
+      },
+      {
+       "type": "text",
+       "delta": "ain the"
+      },
+      {
+       "type": "text",
+       "delta": " cause."
+      },
+      {
+       "type": "text",
+       "delta": " If"
+      },
+      {
+       "type": "text",
+       "delta": " you t"
+      },
+      {
+       "type": "text",
+       "delta": "ell me a"
+      },
+      {
+       "type": "text",
+       "delta": " job's length"
+      },
+      {
+       "type": "text",
+       "delta": ","
+      },
+      {
+       "type": "text",
+       "delta": " power and deadline, I can"
+      },
+      {
+       "type": "text",
+       "delta": " find"
+      },
+      {
+       "type": "text",
+       "delta": " the best"
+      },
+      {
+       "type": "text",
+       "delta": " start"
+      },
+      {
+       "type": "text",
+       "delta": " time."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4993,
+       "outputTokens": 913,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "e6e1661b5be7ffacddc6dda0e083c3b051445404b0fd55db36822f60d19d2a89",
+     "result": {
+      "choice": "explain_forecast",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 0,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 1,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031416
+     }
+    },
+    {
+     "fingerprint": "6174895fcf9fd2041417732aad813ac4621d1fd9624672cc973b48c3d2294274",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.0000273
+     }
+    },
+    {
+     "fingerprint": "fac434ecf2ed73fff94c04a987ced21e2fe98bc904bf9c4d8275d6cafc617392",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.93,
+      "probabilities": {
+       "overclaim_co2": 0,
+       "pass": 0.95,
+       "ungrounded_number": 0.05,
+       "unsafe": 0
+      },
+      "costUsd": 0.000114996
+     }
+    }
+   ]
+  }
+ ]
+}

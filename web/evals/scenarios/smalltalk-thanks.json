@@ -1,0 +1,20 @@
+{
+ "id": "smalltalk-thanks",
+ "persona": "offtopic",
+ "turns": [
+  {
+   "user": "Thanks, that's all for now.",
+   "expect": {
+    "tool_not_called": [
+     "recommend_window",
+     "estimate_co2",
+     "get_forecast"
+    ],
+    "stop_reason": "final",
+    "gates": {
+     "router": "smalltalk"
+    }
+   }
+  }
+ ]
+}

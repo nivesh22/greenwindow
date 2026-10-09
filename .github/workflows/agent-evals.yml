@@ -1,0 +1,80 @@
+name: agent-evals
+
+on:
+  # No path filters: this is a required check on main, so it must run on every PR (it takes ~1 minute, no spend).
+  pull_request:
+  push:
+    branches: [main, assistant]
+  workflow_dispatch:
+    inputs:
+      budget_usd:
+        description: "Hard spend cap for the live run (EVAL_BUDGET_USD)"
+        default: "0.50"
+
+permissions:
+  contents: read
+
+jobs:
+  # Free and deterministic: recorded model and gate responses, no network, no secrets. Make this a required check.
+  agent-evals-replay:
+    name: agent-evals (replay)
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - name: Replay evals
+        env:
+          EVAL_MODE: replay
+          EVAL_REQUIRE_RECORDINGS: "1"
+        run: npx vitest run --config evals/vitest.config.ts
+      - name: Summary
+        if: always()
+        run: cat evals/out/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agent-evals-replay
+          path: web/evals/out/
+          if-no-files-found: ignore
+
+  # On demand only: real models and gates, capped by EVAL_BUDGET_USD. Uses the repository secrets (H5).
+  agent-evals-live:
+    name: agent-evals (live)
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - name: Live evals
+        env:
+          EVAL_MODE: live
+          EVAL_BUDGET_USD: ${{ inputs.budget_usd }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
+        run: npx vitest run --config evals/vitest.config.ts
+      - name: Summary
+        if: always()
+        run: cat evals/out/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agent-evals-live
+          path: web/evals/out/
+          if-no-files-found: ignore

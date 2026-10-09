@@ -1,0 +1,22 @@
+{
+ "id": "accuracy-leaderboard",
+ "persona": "accuracy",
+ "turns": [
+  {
+   "user": "Which forecasting model is the most accurate right now?",
+   "expect": {
+    "no_banned_claim": true,
+    "gates": {
+     "router": "model_accuracy"
+    },
+    "tool_not_called": [
+     "recommend_window"
+    ],
+    "answer_matches": [
+     "(early|not enough|no (forecasts|scores|results)|not (yet )?(been )?scored|too few)"
+    ]
+   }
+  }
+ ],
+ "notes": "Any insight tool may answer; fixture leaderboard has no scored rows."
+}
