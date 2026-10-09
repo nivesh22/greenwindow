@@ -424,7 +424,7 @@ export function createTurnRunner(deps: TurnDeps): (input: TurnInput, emit: (ev: 
       router,
       registry,
       // Ask path: no tools at all (and toolChoice 'none' below), so the model can only ask its one question.
-      tools: ask ? [] : registry.forIntent(intent),
+      tools: ask ? [] : registry.forIntent(intent).filter((t) => t.auth === 'anon'), // P3.5 widens this for signed-in users
       ...(ask ? { toolChoice: 'none' as const } : {}),
       ctx: {
         userId: null,

@@ -2,7 +2,7 @@
 // All need a signed-in user (the loop already answers anonymous callers with sign_in_required; the handlers
 // re-check so they are safe on their own). Realization is lazy (decision 2026-10-09): computed on read.
 import { z } from 'zod'
-import { HOUR_MS, toLocalInput } from '../../src/lib/time.js'
+import { HOUR_MS, formatDateTime } from '../../src/lib/time.js'
 import type { Profile, UserStore } from '../store/user_types.js'
 import { CO2_WORDING } from './estimate_co2.js'
 import { defineTool, ToolUserError, type ToolCtx } from './registry.js'
@@ -203,7 +203,7 @@ export const getImpact = defineTool({
       sums.low += r.estLowG
       sums.high += r.estHighG
       out.push({
-        window_start_london: toLocalInput(Date.parse(r.windowStartUtc)),
+        window_start_london: formatDateTime(r.windowStartUtc),
         duration_h: r.durationH,
         energy_kwh: r.energyKwh,
         est_point_g: Math.round(r.estPointG),

@@ -70,7 +70,7 @@ describe('get_impact', () => {
     expect(byStatus.unavailable).toMatchObject({ realized_g: null, note: 'no actuals' })
     expect(out.realized).toEqual({ count: 1, realized_g: expected, pending: 1, unavailable: 1 })
     expect(out.planned).toEqual({ count: 3, est_point_g: 301, est_low_g: -61, est_high_g: 752 })
-    expect(byStatus.realized!.window_start_london).toBe('2026-10-05T11:00') // BST
+    expect(byStatus.realized!.window_start_london).toBe('Mon 5 Oct, 11:00 BST') // BST
     expect(users.impact.find((r) => r.id === done.id)!.realizedG).toBe(expected)
     expect(users.impact.find((r) => r.realizedNote === 'no actuals')).toBeTruthy()
     expect((await getImpact.handler(ctx, { limit: 20 })).realized.realized_g).toBe(expected)
