@@ -8,6 +8,10 @@ const PROCESSORS: [string, string][] = [
   ['Supabase (EU, Ireland)', 'Stores accounts, conversations and the data below.'],
   ['Vercel', 'Hosts this site and the assistant API.'],
   ['Cloudflare Turnstile', 'Checks that a first-time visitor is human before a guest session starts.'],
+  [
+    'Langfuse (EU)',
+    'Receives a sample of assistant traces for debugging: message text shortened to 500 characters, with e-mail addresses and long numbers removed. Linked to your account ID, not your name or e-mail.',
+  ],
 ]
 
 export function Privacy() {

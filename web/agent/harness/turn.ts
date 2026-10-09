@@ -19,7 +19,8 @@ import { CircuitBreaker } from '../providers/breaker.js'
 import { OpenAICompatProvider } from '../providers/openai_compat.js'
 import { ModelRouter, type RouteEntry } from '../providers/router.js'
 import type { ModelProvider, Msg } from '../providers/types.js'
-import type { Store } from '../store/types.js'
+import type { Store, TurnRecord } from '../store/types.js'
+import type { TraceExporter } from '../telemetry/langfuse.js'
 import type { AuthUser, Device, Profile, StoredMessage, UserStore } from '../store/user_types.js'
 import { ATTR, Tracer } from '../telemetry/tracer.js'
 import { CO2_WORDING } from '../tools/estimate_co2.js'
@@ -51,6 +52,8 @@ export interface TurnDeps {
    * null: no summaries.
    */
   summaryProvider?: ModelProvider | null
+  /** Sampled Langfuse export after the turn is saved (P4.5). Omitted: none. */
+  telemetry?: TraceExporter
   now?: () => number
   newId?: () => string
 }
@@ -385,28 +388,36 @@ export function createTurnRunner(deps: TurnDeps): (input: TurnInput, emit: (ev: 
       emit({ type: 'done', data: { turn_id: turnId, stop_reason: stopReason, trace } })
 
       // Persist after `done` so the user is not kept waiting; failures are logged, never shown.
+      const turnRecord: TurnRecord = {
+        id: turnId,
+        conversationId,
+        userId: auth?.userId ?? null,
+        ipHash,
+        intent,
+        stopReason,
+        promptVersion: PROMPT_VERSION,
+        modelFinal: trace.llm_calls.at(-1)?.model ?? null,
+        tokensIn: trace.totals.tokens_in,
+        tokensOut: trace.totals.tokens_out,
+        costUsd: trace.totals.cost_usd,
+        latencyMs: Math.round(trace.totals.ms),
+        createdAtUtc: toIso(nowMs),
+      }
       try {
-        await store.saveTurn(
-          {
-            id: turnId,
-            conversationId,
-            userId: auth?.userId ?? null,
-            ipHash,
-            intent,
-            stopReason,
-            promptVersion: PROMPT_VERSION,
-            modelFinal: trace.llm_calls.at(-1)?.model ?? null,
-            tokensIn: trace.totals.tokens_in,
-            tokensOut: trace.totals.tokens_out,
-            costUsd: trace.totals.cost_usd,
-            latencyMs: Math.round(trace.totals.ms),
-            createdAtUtc: toIso(nowMs),
-          },
-          tracer.records(),
-        )
+        await store.saveTurn(turnRecord, tracer.records())
         if (trace.totals.cost_usd > 0) await store.addSpend(nowMs, trace.totals.cost_usd, config.MONTHLY_BUDGET_USD)
       } catch (err) {
         console.error('turn persist failed', turnId, err instanceof Error ? err.message : 'unknown')
+      }
+      if (deps.telemetry) {
+        await deps.telemetry.exportTurn({
+          turn: turnRecord,
+          spans: tracer.records(),
+          payloads: tracer.payloads(),
+          userMessage: request.message,
+          answer: text,
+          isAnonymous: auth ? auth.isAnonymous : null,
+        })
       }
       if (mem && users) await persistMemory(users, mem, text)
     }

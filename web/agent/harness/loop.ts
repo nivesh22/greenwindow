@@ -162,7 +162,7 @@ export async function runLoop(input: readonly Msg[], opts: LoopOptions): Promise
       traceFailedCalls(tracer, routed.calls.slice(0, -1), steps, opts.parentSpanId ?? null)
       const ok = routed.calls[routed.calls.length - 1]
       if (ok) {
-        tracer.addSpan({
+        const llmSpan = tracer.addSpan({
           kind: 'llm',
           name: `chat ${routed.model}`,
           parentId: opts.parentSpanId ?? null,
@@ -180,6 +180,10 @@ export async function runLoop(input: readonly Msg[], opts: LoopOptions): Promise
             [ATTR.usageEstimated]: estimated,
             'gen_ai.response.finish_reasons': [finish ?? 'unknown'],
           },
+        })
+        tracer.setPayload(llmSpan.id, {
+          input: { messages: messages.map(toOpenAiMessage), tools: specs.map((t) => t.name) },
+          output: toOpenAiMessage(calls.length > 0 ? { role: 'assistant', content: text, toolCalls: calls } : { role: 'assistant', content: text }),
         })
       }
 
@@ -223,6 +227,19 @@ export async function runLoop(input: readonly Msg[], opts: LoopOptions): Promise
     if (s) return result(s.stop, s.detail)
     throw err
   }
+}
+
+/** OpenAI chat format, which Langfuse renders as a role-labelled conversation with tool-call cards. */
+function toOpenAiMessage(m: Msg): Record<string, unknown> {
+  if (m.role === 'tool') return { role: 'tool', tool_call_id: m.toolCallId ?? null, content: m.content }
+  if (m.toolCalls && m.toolCalls.length > 0) {
+    return {
+      role: m.role,
+      content: m.content,
+      tool_calls: m.toolCalls.map((c) => ({ id: c.id, type: 'function', function: { name: c.name, arguments: c.argsJson } })),
+    }
+  }
+  return { role: m.role, content: m.content }
 }
 
 function llmAttrs(c: LlmCallRecord, step: number): Record<string, unknown> {
@@ -316,6 +333,7 @@ async function runTool(call: ToolCall, opts: LoopOptions): Promise<ToolOutcome> 
   }
   const summary = opts.summarize?.(call.name, valid.data) ?? 'ok'
   span.end({ status: 'ok', attrs: { [ATTR.toolArgs]: parsed.data, [ATTR.toolSummary]: summary } })
+  tracer.setPayload(span.id, { input: parsed.data, output: valid.data })
   end(true, summary)
   if (def.emitsPlan && opts.toPlanUpdate) {
     const plan = planUpdateSchema.safeParse(opts.toPlanUpdate(call.name, valid.data))

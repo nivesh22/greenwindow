@@ -14,6 +14,15 @@ Format:
 
 ---
 
+## 2026-10-09 — Langfuse export (P4.5) and its dependencies
+- **What:** each chat turn is exported to Langfuse Cloud (EU, Hobby, free) as one trace after it is saved to Supabase (`web/agent/telemetry/langfuse.ts`). Supabase stays the source of truth. Built with the Langfuse agent skill (github.com/langfuse/skills, installed at user level) and checked against https://langfuse.com/docs/observability/best-practices.md and the installed SDK types.
+- **Trace shape:** `chat-turn` (`agent`, input = user message, output = answer); gates as `guardrail` (check-input, check-grounding, check-output) or `chain` (route-intent, decide-ask-or-act, choose-risk-mode); one `generate-step` `generation` per model call (OpenAI-format messages, model, tokens, cost; failed attempts at level ERROR); tools as `tool` with args and results, siblings of the generation that asked for them. Session = conversation id, user = Supabase user id, version = prompt version, tags = auth state + intent, environment = `VERCEL_ENV`, release = git sha. Recorded start/end times are kept.
+- **Sampling:** deterministic per turn id at `LANGFUSE_SAMPLE_RATE` (default 0.2); always exported when the stop reason is not `final`, any span failed, a failover happened, grounding regenerated/templated, or a guard blocked. Thumbs feedback becomes a `user_feedback` score; a thumbs-down on an unsampled turn exports that turn first (from Supabase). Hobby quota is 50k units/month; at today's traffic this is far below it.
+- **Privacy:** message text is cut to 500 characters, e-mails and long digit runs are redacted before export; LLM/tool payloads exist only in memory for the export and are never written to Supabase. The privacy page lists Langfuse.
+- **Serverless:** `exportMode: 'immediate'` and `forceFlush()` before the function returns (Langfuse docs: short-lived apps must flush). An isolated tracer provider (`setLangfuseTracerProvider`) so nothing else is exported; an AsyncLocalStorage context manager so `propagateAttributes` works.
+- **New dependencies (exact pins, rule 10):** `@langfuse/tracing`, `@langfuse/otel`, `@langfuse/client` 5.13.1 (latest; client is for scores); `@opentelemetry/api` 1.9.1, `@opentelemetry/core`, `@opentelemetry/sdk-trace-base`, `@opentelemetry/context-async-hooks` 2.12.0, `@opentelemetry/exporter-trace-otlp-http`, `@opentelemetry/otlp-exporter-base` 0.223.0 (peer dependencies of `@langfuse/otel`). Server-side only; the browser bundle does not import them.
+- **Env (Vercel, Preview + Production):** `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_BASE_URL` (`https://cloud.langfuse.com`), optional `LANGFUSE_SAMPLE_RATE`. Without the keys the exporter is a no-op.
+
 ## 2026-10-05 — Project setup
 - Context: Claude Code project initialized with `CLAUDE.md`, `AGENTS.md` (spec Section 12 verbatim), and MCP config.
 - Decision: Configure GitHub and Vercel MCPs only. Supabase is not configured, per spec D6 and 15.1.

@@ -9,6 +9,7 @@ import { verifyAuth } from './_lib/auth.js'
 import { errorBody, ipHash, json, sseResponse } from './_lib/http.js'
 import { HttpForecastSource } from '../agent/data/forecast_source.js'
 import { buildRouter, createTurnRunner } from '../agent/harness/turn.js'
+import { exporterFromEnv } from '../agent/telemetry/langfuse.js'
 import { buildRegistry } from '../agent/tools/index.js'
 import type { TurnRunner } from './_lib/turn_runner.js'
 
@@ -108,7 +109,7 @@ function getShared(config: AgentConfig): typeof shared {
   const store = new SupabaseStore({ url: config.SUPABASE_URL, key: config.SUPABASE_SERVICE_ROLE_KEY })
   const data = new HttpForecastSource({ baseUrl: config.DATA_BASE_URL, backtestBaseUrl: config.BACKTEST_BASE_URL })
   const users = new SupabaseUserStore({ url: config.SUPABASE_URL, key: config.SUPABASE_SERVICE_ROLE_KEY })
-  const runTurn = createTurnRunner({ config, store, users, data, registry: buildRegistry(), router: buildRouter(config) })
+  const runTurn = createTurnRunner({ config, store, users, data, registry: buildRegistry(), router: buildRouter(config), telemetry: exporterFromEnv() })
   shared = { store, users, runTurn, config }
   return shared
 }
