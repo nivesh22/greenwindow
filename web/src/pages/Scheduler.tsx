@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { PanelState, PlanUpdate } from '../../agent/harness/events'
 import { ChatPanel } from '../assistant/ChatPanel'
 import { ASSISTANT_ENABLED } from '../assistant/flag'
+import { PlanActions } from '../assistant/PlanActions'
+import { useAuth } from '../assistant/useAuth'
 import { ForecastChart } from '../components/ForecastChart'
 import { PlanPanel, type FormState } from '../components/PlanPanel'
 import { ErrorPanel, Loading } from '../components/Status'
@@ -28,6 +30,7 @@ export function validateForm(f: FormState, firstMs: number, endMs: number): Part
 }
 
 export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABLED }: { now?: number; assistantEnabled?: boolean }) {
+  const auth = useAuth()
   const meta = useDataFile('meta')
   const fc = useDataFile('latestForecast')
   const [model, setModel] = useState<string | null>(null)
@@ -148,6 +151,15 @@ export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABL
         </div>
       )}
       {result && <RecommendationCard r={result} durationH={Number(state.duration)} />}
+      {result && (
+        <PlanActions
+          startUtc={result.bestStart}
+          endUtc={toIso(toMs(result.bestStart) + Number(state.duration) * HOUR_MS)}
+          label={`GreenWindow: run ${state.duration} h job (${state.power} kW)`}
+          description="Start time with the lowest forecast average grid intensity in your range (an estimate, not a guarantee). Forecast by GreenWindow."
+          signedIn={Boolean(auth.info && !auth.info.isAnonymous)}
+        />
+      )}
       <div className="rounded-2xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900">
         <ForecastChart
           actuals={[]}

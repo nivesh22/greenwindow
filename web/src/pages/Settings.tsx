@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { profileResponseSchema, type ProfileUpdate } from '../../agent/harness/api_schemas'
 import { MODES } from '../../agent/harness/events'
 import { apiFetch, signInWithGoogle, signOut } from '../assistant/auth'
+import { NotificationsSection, PlansSection } from '../assistant/SettingsSections'
 import { useAuth } from '../assistant/useAuth'
 
 interface DeviceRow {
@@ -231,6 +232,9 @@ function SettingsForm({ email }: { email: string | null }) {
           {msg.text}
         </p>
       )}
+
+      <NotificationsSection />
+      <PlansSection />
 
       <section className="space-y-3 rounded-2xl border border-red-300 p-4 dark:border-red-800">
         <h2 className="text-lg font-semibold">Delete my data</h2>

@@ -29,6 +29,11 @@ export function Privacy() {
           <li>Profile: display name, default risk mode and quiet hours, if you set them.</li>
           <li>Devices: names and power ratings you save.</li>
           <li>Plans and impact rows: the job plans the assistant makes and their estimated outcomes.</li>
+          <li>
+            Notifications: if you turn them on, your browser&apos;s push subscription (an endpoint address and encryption keys) and
+            any reminders you set are stored until you turn notifications off, cancel the plan, or delete your data. Calendar
+            files and links are made in your browser; we do not receive them.
+          </li>
           <li>Feedback: thumbs and comments you send.</li>
           <li>Traces: which tools ran, timings and token counts for each assistant turn, used to debug and measure quality.</li>
         </ul>
