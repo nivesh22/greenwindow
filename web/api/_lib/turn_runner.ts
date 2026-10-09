@@ -1,7 +1,8 @@
+import type { AuthUser } from '../../agent/store/user_types.js'
 import type { ChatRequest, SseEvent, TraceSummary } from '../../agent/harness/events.js'
 
 export type TurnRunner = (
-  input: { request: ChatRequest; ipHash: string; nowMs: number; messagesLeft?: number | null; signal: AbortSignal },
+  input: { request: ChatRequest; ipHash: string; nowMs: number; messagesLeft?: number | null; auth?: AuthUser | null; signal: AbortSignal },
   emit: (ev: SseEvent) => void,
 ) => Promise<void>
 
