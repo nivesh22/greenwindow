@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { HISTORY_MAX, type ChatRequest, type PanelState, type PlanUpdate, type StopReason, type TraceSummary } from '../../agent/harness/events'
+import { HISTORY_MAX, type ActionEvent, type ChatRequest, type PanelState, type PlanUpdate, type StopReason, type TraceSummary } from '../../agent/harness/events'
 import { conversationResponseSchema } from '../../agent/harness/api_schemas'
 import { apiFetch, authEnabled, ensureSession, getAuthInfo, getClient, mergeAnonymousIfPending, signInWithGoogle, storeHeldMessage, takeHeldMessage } from './auth'
 import { parseSse } from './sse'
@@ -11,6 +11,7 @@ export interface ChatMessage {
   turnId?: string
   trace?: TraceSummary
   stopReason?: StopReason
+  actions?: ActionEvent[]
 }
 export interface LimitState { kind: string; message: string; signIn: boolean }
 export interface ChatError { code: string; message: string }
@@ -108,6 +109,8 @@ export function useChat(opts: UseChatOptions = {}) {
       client_now_utc: nowUtc(),
     }
     let finished = false
+    let pending: ActionEvent[] = [] // actions that arrive before the answer
+    let answered = false
     try {
       const res = await apiFetch(optsRef.current.endpoint ?? '/api/chat', {
         method: 'POST',
@@ -148,7 +151,21 @@ export function useChat(opts: UseChatOptions = {}) {
           case 'answer': {
             setStatus(null)
             const text = ev.data.text
-            setMessages((m) => [...m, { id: `m${++seq.current}`, role: 'assistant', text }])
+            const actions = pending
+            pending = []
+            answered = true
+            setMessages((m) => [...m, { id: `m${++seq.current}`, role: 'assistant', text, ...(actions.length ? { actions } : {}) }])
+            break
+          }
+          case 'action': {
+            const act = ev.data
+            if (!answered) pending.push(act)
+            else
+              setMessages((m) => {
+                const last = m[m.length - 1]
+                if (!last || last.role !== 'assistant') return m
+                return [...m.slice(0, -1), { ...last, actions: [...(last.actions ?? []), act] }]
+              })
             break
           }
           case 'limit':

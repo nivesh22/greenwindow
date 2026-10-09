@@ -1,5 +1,6 @@
 import { useId, useState, type KeyboardEvent } from 'react'
 import type { PanelState, PlanUpdate } from '../../agent/harness/events'
+import { ChatActions } from './ChatActions'
 import { AccountMenu } from './AccountMenu'
 import { Feedback } from './Feedback'
 import { FormattedText } from './FormattedText'
@@ -68,6 +69,7 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
               <span className="sr-only">{m.role === 'user' ? 'You: ' : 'Assistant: '}</span>
               <FormattedText text={m.text} />
             </div>
+            {m.role === 'assistant' && m.actions && <ChatActions actions={m.actions} />}
             {m.role === 'assistant' && m.trace && <TraceDrawer trace={m.trace} />}
             {m.role === 'assistant' && m.turnId && <Feedback turnId={m.turnId} />}
           </div>

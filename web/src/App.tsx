@@ -10,6 +10,8 @@ import { Leaderboard } from './pages/Leaderboard'
 import { Scheduler } from './pages/Scheduler'
 
 const Settings = lazy(() => import('./pages/Settings').then((m) => ({ default: m.Settings })))
+const Ops = lazy(() => import('./pages/Ops').then((m) => ({ default: m.Ops })))
+const OpsTrace = lazy(() => import('./pages/OpsTrace').then((m) => ({ default: m.OpsTrace })))
 const Privacy = lazy(() => import('./pages/Privacy').then((m) => ({ default: m.Privacy })))
 
 export function AppRoutes() {
@@ -34,6 +36,22 @@ export function AppRoutes() {
           element={
             <Suspense fallback={<p role="status">Loading…</p>}>
               <Privacy />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/ops"
+          element={
+            <Suspense fallback={<p role="status">Loading…</p>}>
+              <Ops />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/ops/trace/:turnId"
+          element={
+            <Suspense fallback={<p role="status">Loading…</p>}>
+              <OpsTrace />
             </Suspense>
           }
         />
