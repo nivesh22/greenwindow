@@ -1,3 +1,4 @@
+import { compareStarts } from './compare_starts.js'
 import { estimateCo2 } from './estimate_co2.js'
 import { explainUncertainty } from './explain_uncertainty.js'
 import { getForecast } from './get_forecast.js'
@@ -13,6 +14,7 @@ export const TOOLS: readonly ToolDef[] = [
   recommendWindow as unknown as ToolDef,
   estimateCo2 as unknown as ToolDef,
   explainUncertainty as unknown as ToolDef,
+  compareStarts as unknown as ToolDef,
   lookupDevice as unknown as ToolDef,
   getLeaderboard as unknown as ToolDef,
   getBacktest as unknown as ToolDef,

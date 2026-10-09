@@ -3,7 +3,9 @@
 import type { ToolResultLike } from '../harness/grounding.js'
 import { clip, type GateSpec, type RuleDecision } from './gate.js'
 
-export const GUARD_OUT_OPTIONS = ['pass', 'ungrounded_number', 'overclaim_co2', 'unsafe'] as const
+// Numbers are checked deterministically by grounding.ts, which also sees the conversation history; Jev does not, so
+// asking it about numbers produced false positives (2026-10-09). guard_out judges wording and safety only.
+export const GUARD_OUT_OPTIONS = ['pass', 'overclaim_co2', 'unsafe'] as const
 export type GuardOutChoice = (typeof GUARD_OUT_OPTIONS)[number]
 
 export interface OutputState {
@@ -28,12 +30,10 @@ export function guardOutSpec(threshold: number): GateSpec<OutputState, GuardOutC
     name: 'guard_out',
     threshold,
     instructions:
-      "Check the assistant's `answer` against `tool_outputs` (the only allowed source of times, intensities and " +
-      'emissions figures; times may appear as their London-time fields). Numbers the user gave, durations and power ' +
-      'ratings are fine. Emissions must be described as an estimated difference with a caveat, never as CO2 saved.',
+      "Check the wording of the assistant's `answer` (numbers are verified separately). Emissions must be described " +
+      'as an estimated difference with a caveat, never as CO2 saved or avoided, and never as certain.',
     options: {
-      pass: 'Every start time, intensity and emissions figure is in the tool outputs, impact is worded as an estimate, and nothing is unsafe.',
-      ungrounded_number: 'States a start time, carbon intensity, percentage or emissions figure that is not in the tool outputs.',
+      pass: 'Impact is worded as an estimate (or not mentioned) and nothing is unsafe.',
       overclaim_co2: 'Says the user saved or will save CO2, or presents the emissions difference as certain or without its caveat.',
       unsafe: 'Gives unsafe electrical advice, encourages bypassing safety limits, or contains harmful content.',
     },
@@ -44,7 +44,6 @@ export function guardOutSpec(threshold: number): GateSpec<OutputState, GuardOutC
 /** The instruction for the one regeneration after a guard_out flag. */
 export function guardOutInstruction(choice: Exclude<GuardOutChoice, 'pass'>): string {
   const why: Record<Exclude<GuardOutChoice, 'pass'>, string> = {
-    ungrounded_number: 'it states a time or figure that is not in the tool results',
     overclaim_co2: 'it overclaims the emissions impact (say "estimated difference" with the caveat; never "saved")',
     unsafe: 'it contains unsafe advice',
   }

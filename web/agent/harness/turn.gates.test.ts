@@ -238,7 +238,7 @@ describe('turn gates: guard_out (stage 7)', () => {
   })
 
   it('flagged again after the rewrite -> templated answer, guard_blocked', async () => {
-    const b = jev({ ...plan, guard_out: answer('ungrounded_number', 0.9) })
+    const b = jev({ ...plan, guard_out: answer('overclaim_co2', 0.9) })
     const r = await run([TOOL_STEP, say(ANSWER_A), say(ANSWER_A)], { backend: b })
     expect([r.answer, r.stop]).toEqual([templatedAnswer(J1_TOOLS), 'guard_blocked'])
   })
@@ -251,14 +251,14 @@ describe('turn gates: guard_out (stage 7)', () => {
   })
 
   it('grounding already used the one rewrite: a guard_out flag goes straight to the template', async () => {
-    const b = jev({ ...plan, guard_out: answer('ungrounded_number', 0.9) })
+    const b = jev({ ...plan, guard_out: answer('overclaim_co2', 0.9) })
     const r = await run([TOOL_STEP, say(ANSWER_A.replace('01:00 BST', '02:00 BST')), say(ANSWER_A)], { backend: b })
     expect(r.provider.calls).toBe(3)
     expect([r.answer, r.stop]).toEqual([templatedAnswer(J1_TOOLS), 'guard_blocked'])
   })
 
   it('a non-pass below 0.6 is treated as pass', async () => {
-    const b = jev({ ...plan, guard_out: answer('ungrounded_number', 0.55) })
+    const b = jev({ ...plan, guard_out: answer('overclaim_co2', 0.55) })
     const r = await run([TOOL_STEP, say(ANSWER_A)], { backend: b })
     expect([r.answer, r.stop, r.provider.calls]).toEqual([ANSWER_A, 'final', 2])
     expect(gateEvents(r).at(-1)).toEqual(['guard_out', 'pass', 'rules'])

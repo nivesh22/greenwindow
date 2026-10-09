@@ -213,8 +213,8 @@ describe('decidePair / decideOne', () => {
   it('guard_out: non-pass >= 0.6 stands; below -> pass (rules)', async () => {
     const os = { text: 'Start at 02:00.', toolResults: [] }
     const spec = guardOutSpec(0.6)
-    const hi = await decideOne(env(new FakeChoiceBackend({ guard_out: answer('ungrounded_number', 0.6) })), spec, os, {}, sig())
-    expect([hi.choice, hi.source]).toEqual(['ungrounded_number', 'jev'])
+    const hi = await decideOne(env(new FakeChoiceBackend({ guard_out: answer('overclaim_co2', 0.6) })), spec, os, {}, sig())
+    expect([hi.choice, hi.source]).toEqual(['overclaim_co2', 'jev'])
     const lo = await decideOne(env(new FakeChoiceBackend({ guard_out: answer('overclaim_co2', 0.55) })), spec, os, {}, sig())
     expect([lo.choice, lo.source]).toEqual(['pass', 'rules'])
     const down = await decideOne(env(new FakeChoiceBackend({ guard_out: new JevError('timeout', 'slow') })), spec, os, {}, sig())

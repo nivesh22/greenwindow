@@ -146,7 +146,7 @@ export const STOP_MESSAGES: Partial<Record<StopReason, string>> = {
 }
 const GENERIC_STOP = STOP_MESSAGES.tool_error ?? ''
 
-export const NO_RELIABLE_ANSWER = "I couldn't produce a reliable answer; the planner form below shows the same numbers."
+export const NO_RELIABLE_ANSWER = "Sorry, I couldn't give a reliable answer to that. Could you rephrase it, or ask me to plan a specific job?"
 
 const toolMessageSchema = z.object({ tool: z.string(), ok: z.boolean(), data: z.unknown().optional(), error: z.unknown().optional() })
 
