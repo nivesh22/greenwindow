@@ -61,7 +61,11 @@ export function Layout({ children }: { children: ReactNode }) {
             Great Britain only. Forecasts are estimates of average grid intensity, not a guarantee.{' '}
             <a className="underline hover:text-stone-800 dark:hover:text-stone-200" href="https://github.com/nivesh22/greenwindow">
               Source on GitHub
-            </a>
+            </a>{' '}
+            ·{' '}
+            <NavLink className="underline hover:text-stone-800 dark:hover:text-stone-200" to="/privacy">
+              Privacy
+            </NavLink>
           </p>
         </div>
       </footer>
