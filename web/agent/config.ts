@@ -46,6 +46,12 @@ const envSchema = z.object({
   TOOL_TIMEOUT_MS: num(5_000),
   FIRST_TOKEN_TIMEOUT_MS: num(15_000), // whole-call wait for the first stream event; Gemini may send one chunk at the end
 
+  // Server-side memory (design §5.5, FR-2.7). The initial context (system + facts + summary + last 8 messages) is
+  // trimmed to CONTEXT_MAX_TOKENS; a rolling summary is made after the turn when more than SUMMARY_TRIGGER_MESSAGES
+  // stored messages are not covered by the newest summary.
+  CONTEXT_MAX_TOKENS: num(12_000),
+  SUMMARY_TRIGGER_MESSAGES: num(16),
+
   // Decision gates (design §6, plan X10): Jev via the gateway first, deterministic rules on timeout/error/low
   // confidence. Thresholds are the minimum Jev confidence for its answer to stand (design §6.2).
   GATES_ENABLED: z
