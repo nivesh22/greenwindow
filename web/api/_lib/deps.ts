@@ -13,11 +13,21 @@ export interface UsageApi {
   anonMessagesUsed(userId: string): Promise<number>
 }
 
+/** Environment values the handlers read (names only here; values come from Vercel env vars). */
+export interface ApiEnv {
+  TURNSTILE_SECRET?: string
+  VITE_SUPABASE_ANON_KEY?: string
+  /** Optional Langfuse credentials, used by /api/me/delete to remove the caller's traces. */
+  LANGFUSE_PUBLIC_KEY?: string
+  LANGFUSE_SECRET_KEY?: string
+  LANGFUSE_BASE_URL?: string
+}
+
 export interface ApiDeps {
   users: UserStore & { reassignCounted?: (from: string, to: string) => Promise<number> }
   usage: UsageApi
   config: AgentConfig
-  env: { TURNSTILE_SECRET?: string; VITE_SUPABASE_ANON_KEY?: string }
+  env: ApiEnv
   fetch: typeof fetch
   now: () => number
 }
@@ -32,7 +42,7 @@ export function isConfigured(config: AgentConfig): boolean {
   return Boolean(config.SUPABASE_URL && config.SUPABASE_SERVICE_ROLE_KEY)
 }
 
-export function authenticate(request: Request, deps: ApiDeps): Promise<AuthUser | null> {
+export function authenticate(request: Request, deps: Pick<ApiDeps, 'config' | 'fetch' | 'now' | 'env'>): Promise<AuthUser | null> {
   return verifyAuth(request, deps.config, deps.fetch, deps.now, deps.env.VITE_SUPABASE_ANON_KEY)
 }
 
@@ -65,7 +75,13 @@ export function getApiDeps(): ApiDeps | null {
     users: store,
     usage: store,
     config,
-    env: { TURNSTILE_SECRET: process.env.TURNSTILE_SECRET, VITE_SUPABASE_ANON_KEY: process.env.VITE_SUPABASE_ANON_KEY },
+    env: {
+      TURNSTILE_SECRET: process.env.TURNSTILE_SECRET,
+      VITE_SUPABASE_ANON_KEY: process.env.VITE_SUPABASE_ANON_KEY,
+      LANGFUSE_PUBLIC_KEY: process.env.LANGFUSE_PUBLIC_KEY,
+      LANGFUSE_SECRET_KEY: process.env.LANGFUSE_SECRET_KEY,
+      LANGFUSE_BASE_URL: process.env.LANGFUSE_BASE_URL,
+    },
     fetch: (input, init) => fetch(input, init),
     now: Date.now,
   }
