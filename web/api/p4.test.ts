@@ -356,6 +356,22 @@ describe('POST /api/feedback -> Langfuse', () => {
     expect(scored[0]!.loaded!.turn.id).toBe(TURN)
   })
 
+  it("never loads another user's turn for Langfuse (no export, no score data)", async () => {
+    const { deps } = userDeps()
+    const loaded: (TurnExport | null)[] = []
+    const exporter: TraceExporter = {
+      exportTurn: async () => false,
+      scoreFeedback: async (f) => {
+        loaded.push(await f.load())
+      },
+    }
+    const someoneElse = { ...trace, turn: { ...trace.turn, userId: '00000000-0000-4000-8000-00000000beef' } }
+    const h = createFeedbackHandler(deps, { exporter, ops: { turnTrace: async () => someoneElse } })
+    const r = await h(req('/api/feedback', 'POST', 'anon', { turn_id: TURN, rating: -1 }))
+    expect(r.status).toBe(200)
+    expect(loaded).toEqual([null])
+  })
+
   it('does not call Langfuse when saving fails, and a failing or hanging exporter does not fail or delay the response', async () => {
     const { deps, users } = userDeps()
     let calls = 0

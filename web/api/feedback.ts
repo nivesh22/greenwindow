@@ -24,23 +24,27 @@ export interface FeedbackExtras {
 
 const NO_EXTRAS: FeedbackExtras = { exporter: NOOP_EXPORTER, ops: null }
 
-/** Maps the stored turn to what the Langfuse exporter needs. Payloads (LLM I/O) are not stored, so the map is empty. */
-export function loader(ops: Pick<OpsStore, 'turnTrace'> | null, turnId: string): () => Promise<TurnExport | null> {
+/**
+ * Maps the stored turn to what the Langfuse exporter needs. Payloads (LLM I/O) are not stored, so the map is empty.
+ * Only the caller's own turns: a rating on someone else's turn id must not export or score that turn.
+ */
+export function loader(ops: Pick<OpsStore, 'turnTrace'> | null, turnId: string, callerId: string): () => Promise<TurnExport | null> {
   return async () => {
     if (!ops) return null
     const t = await ops.turnTrace(turnId)
-    if (!t) return null
+    if (!t || t.turn.userId !== callerId) return null
     return { turn: t.turn, spans: t.spans, payloads: new Map(), userMessage: t.userMessage ?? '', answer: t.answer ?? '', isAnonymous: t.isAnonymous }
   }
 }
 
-async function scoreWithTimeout(extras: FeedbackExtras, f: { turnId: string; rating: 1 | -1; comment: string | null }): Promise<void> {
+async function scoreWithTimeout(extras: FeedbackExtras, f: { turnId: string; rating: 1 | -1; comment: string | null; callerId: string }): Promise<void> {
   let timer: ReturnType<typeof setTimeout> | undefined
   const timeout = new Promise<void>((resolve) => {
     timer = setTimeout(resolve, extras.waitMs ?? LANGFUSE_WAIT_MS)
   })
   try {
-    await Promise.race([extras.exporter.scoreFeedback({ ...f, load: loader(extras.ops, f.turnId) }), timeout])
+    const { callerId, ...score } = f
+    await Promise.race([extras.exporter.scoreFeedback({ ...score, load: loader(extras.ops, f.turnId, callerId) }), timeout])
   } catch {
     // scoreFeedback never throws; this also covers a misbehaving exporter.
   } finally {
@@ -60,7 +64,7 @@ export function createFeedbackHandler(deps: ApiDeps, extras: FeedbackExtras = NO
     } catch {
       return json(503, errorBody('store_unavailable', 'Could not save feedback right now.'))
     }
-    await scoreWithTimeout(extras, { turnId: body.turn_id, rating: body.rating, comment: body.comment })
+    await scoreWithTimeout(extras, { turnId: body.turn_id, rating: body.rating, comment: body.comment, callerId: auth.userId })
     return json(200, { ok: true })
   }
 }

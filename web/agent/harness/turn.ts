@@ -24,7 +24,8 @@ import type { TraceExporter } from '../telemetry/langfuse.js'
 import type { AuthUser, Device, Profile, StoredMessage, UserStore } from '../store/user_types.js'
 import { ATTR, Tracer } from '../telemetry/tracer.js'
 import { CO2_WORDING } from '../tools/estimate_co2.js'
-import { toPlanUpdate } from '../tools/index.js'
+import { toAction, toPlanUpdate } from '../tools/index.js'
+import type { PlanStore } from '../store/plan_types.js'
 import type { ToolRegistry } from '../tools/registry.js'
 import type { RecommendWindowOutput } from '../tools/recommend_window.js'
 import { formatDateTime, toIso } from '../../src/lib/time.js'
@@ -47,6 +48,8 @@ export interface TurnDeps {
   choiceBackend?: ChoiceBackend | null
   /** User data (P3). With `TurnInput.auth`, history, profile and the impact ledger are server-side. */
   users?: UserStore | null
+  /** Plans, push subscriptions, reminders (P4). Omitted: the P4 user tools answer `not_available`. */
+  plans?: PlanStore | null
   /**
    * Provider for the rolling-summary call (CHEAP_MODEL). Omitted: the router's gemini-direct provider, if any.
    * null: no summaries.
@@ -552,6 +555,7 @@ export function createTurnRunner(deps: TurnDeps): (input: TurnInput, emit: (ev: 
         data,
         store,
         ...(users ? { users } : {}),
+        ...(deps.plans ? { plans: deps.plans } : {}),
         riskMode,
         turn: { lastRecommendation: null },
         signal: budget.signal,
@@ -562,6 +566,7 @@ export function createTurnRunner(deps: TurnDeps): (input: TurnInput, emit: (ev: 
       toolTimeoutMs: config.TOOL_TIMEOUT_MS,
       temperature: 0,
       toPlanUpdate: (name, output) => (name === 'recommend_window' ? toPlanUpdate(output as RecommendWindowOutput) : null),
+      toAction,
       now,
     }
     const result = await runLoop(messages, loopOpts)
