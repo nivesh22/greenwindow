@@ -1,5 +1,6 @@
-// Guard: Vercel Hobby deploys at most 12 Functions when there is no framework, one per file in api/ (files and folders
-// starting with "_" are not Functions). Going over fails the whole deployment. See api/_lib/dispatch.ts.
+// Guard: Vercel Hobby deploys at most 12 Functions when there is no framework. Vercel counts EVERY .ts/.js file in api/
+// outside "_" files and folders, test files included (2026-10-09: 11 handlers + 5 tests failed the deploy with
+// exceeded_serverless_functions_per_deployment). Keep tests in api/_tests/. See api/_lib/dispatch.ts.
 import { readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { expect, it } from 'vitest'
@@ -11,7 +12,7 @@ function functions(dir: string): string[] {
     if (n.startsWith('_')) return []
     const p = join(dir, n)
     if (statSync(p).isDirectory()) return functions(p)
-    return /\.(ts|js)$/.test(n) && !/\.(test|local)\.ts$/.test(n) ? [p] : []
+    return /\.(ts|js)$/.test(n) ? [p] : []
   })
 }
 
