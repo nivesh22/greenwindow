@@ -3,6 +3,7 @@ import { explainUncertainty } from './explain_uncertainty.js'
 import { getForecast } from './get_forecast.js'
 import { compareModels, getBacktest, getLeaderboard } from './insight.js'
 import { lookupDevice } from './lookup_device.js'
+import { getImpact, getProfile, updateProfile } from './memory.js'
 import { recommendWindow } from './recommend_window.js'
 import { ToolRegistry, type ToolDef } from './registry.js'
 
@@ -16,6 +17,9 @@ export const TOOLS: readonly ToolDef[] = [
   getLeaderboard as unknown as ToolDef,
   getBacktest as unknown as ToolDef,
   compareModels as unknown as ToolDef,
+  getProfile as unknown as ToolDef,
+  updateProfile as unknown as ToolDef,
+  getImpact as unknown as ToolDef,
 ]
 
 export function buildRegistry(): ToolRegistry {

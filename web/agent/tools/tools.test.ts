@@ -296,14 +296,14 @@ describe('lookup_device', () => {
 describe('registry', () => {
   it('registers the tools with strict JSON Schemas and the right intents', () => {
     const reg = buildRegistry()
-    expect(TOOLS.map((t) => t.name)).toEqual(['get_forecast', 'recommend_window', 'estimate_co2', 'explain_uncertainty', 'lookup_device', 'get_leaderboard', 'get_backtest', 'compare_models'])
+    expect(TOOLS.map((t) => t.name)).toEqual(['get_forecast', 'recommend_window', 'estimate_co2', 'explain_uncertainty', 'lookup_device', 'get_leaderboard', 'get_backtest', 'compare_models', 'get_profile', 'update_profile', 'get_impact'])
     for (const spec of reg.specs(TOOLS)) {
       expect(spec.parameters).toMatchObject({ type: 'object', additionalProperties: false })
       expect(spec.parameters).not.toHaveProperty('$schema')
     }
     const names = (i: Parameters<typeof reg.forIntent>[0]) => reg.forIntent(i).map((t) => t.name)
     expect(names('smalltalk')).toEqual(['get_forecast', 'lookup_device'])
-    expect(names('plan_job')).toEqual(['get_forecast', 'recommend_window', 'estimate_co2', 'explain_uncertainty', 'lookup_device'])
+    expect(names('plan_job')).toEqual(['get_forecast', 'recommend_window', 'estimate_co2', 'explain_uncertainty', 'lookup_device', 'get_profile'])
     expect(names('explain_forecast')).toEqual(['get_forecast', 'explain_uncertainty', 'lookup_device', 'get_leaderboard', 'get_backtest', 'compare_models'])
     expect(names('model_accuracy')).toEqual(['get_forecast', 'lookup_device', 'get_leaderboard', 'get_backtest', 'compare_models'])
   })
