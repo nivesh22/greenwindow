@@ -5,117 +5,161 @@
   {
    "model_calls": [
     {
-     "fingerprint": "f80cf251976fab795eb0ea01430ed131e190ee31c920d6c81c649af1a81333ea",
+     "fingerprint": "0f0bfd40616baca29d9f399e86aa96f1221be1da021c3ad0e40a6a68289555b5",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "I"
+       "delta": "I can't plan a"
       },
       {
        "type": "text",
-       "delta": " can't plan a"
+       "delta": " 20-hour job as"
       },
       {
        "type": "text",
-       "delta": " 20-hour job,"
+       "delta": " one run,"
       },
       {
        "type": "text",
-       "delta": " because"
+       "delta": " because my lim"
       },
       {
        "type": "text",
-       "delta": " I"
+       "delta": "it is 12 hours per"
       },
       {
        "type": "text",
-       "delta": " only hand"
+       "delta": " job. I"
       },
       {
        "type": "text",
-       "delta": "le jobs of 1 "
+       "delta": " won"
       },
       {
        "type": "text",
-       "delta": "to 12 hours."
+       "delta": "'t shorten it for you."
       },
       {
        "type": "text",
-       "delta": " Here"
+       "delta": "\n\nOptions"
       },
       {
        "type": "text",
-       "delta": " are two"
+       "delta": ":\n- **Split it"
       },
       {
        "type": "text",
-       "delta": " options:\n\n- **Pl"
+       "delta": "** into two jobs, such"
       },
       {
        "type": "text",
-       "delta": "an a single"
+       "delta": " as "
       },
       {
        "type": "text",
-       "delta": " 12-hour run**"
+       "delta": "12 hours and 8 "
       },
       {
        "type": "text",
-       "delta": " at 5 kW, fin"
+       "delta": "hours at"
       },
       {
        "type": "text",
-       "delta": "ishing by tomorrow"
+       "delta": " 5 kW, each"
       },
       {
        "type": "text",
-       "delta": " midnight.\n- **"
+       "delta": " with"
       },
       {
        "type": "text",
-       "delta": "Split the job**"
+       "delta": " its"
       },
       {
        "type": "text",
-       "delta": " into two runs ("
+       "delta": " own window"
       },
       {
        "type": "text",
-       "delta": "for example "
+       "delta": " before t"
       },
       {
        "type": "text",
-       "delta": "12 hours pl"
+       "delta": "omorrow midnight."
       },
       {
        "type": "text",
-       "delta": "us 8 hours), and"
+       "delta": " I'"
       },
       {
        "type": "text",
-       "delta": " I"
+       "delta": "d plan them"
       },
       {
        "type": "text",
-       "delta": "'"
+       "delta": " independently,"
       },
       {
        "type": "text",
-       "delta": "ll plan each one within"
+       "delta": " so"
       },
       {
        "type": "text",
-       "delta": " the deadline.\n\nWhich"
+       "delta": " their"
       },
       {
        "type": "text",
-       "delta": " would you like?"
+       "delta": " run"
+      },
+      {
+       "type": "text",
+       "delta": " times could overlap.\n-"
+      },
+      {
+       "type": "text",
+       "delta": " **Run a"
+      },
+      {
+       "type": "text",
+       "delta": " 12-hour port"
+      },
+      {
+       "type": "text",
+       "delta": "ion** inst"
+      },
+      {
+       "type": "text",
+       "delta": "ead of the full 20 h"
+      },
+      {
+       "type": "text",
+       "delta": "ours, if that"
+      },
+      {
+       "type": "text",
+       "delta": " su"
+      },
+      {
+       "type": "text",
+       "delta": "its your needs.\n\nWhich"
+      },
+      {
+       "type": "text",
+       "delta": " would"
+      },
+      {
+       "type": "text",
+       "delta": " you like"
+      },
+      {
+       "type": "text",
+       "delta": "?"
       },
       {
        "type": "usage",
-       "inputTokens": 3450,
-       "outputTokens": 544,
+       "inputTokens": 4119,
+       "outputTokens": 531,
        "cachedInputTokens": 0
       },
       {
@@ -126,20 +170,6 @@
     }
    ],
    "gate_calls": [
-    {
-     "fingerprint": "9f944c44f13e3579b5ac62a7115227c6cf1c62265715bdd4e4595958b9ea719b",
-     "result": {
-      "choice": "allow",
-      "confidence": 0.99,
-      "probabilities": {
-       "allow": 0.99,
-       "off_topic": 0,
-       "injection": 0.01,
-       "abuse": 0
-      },
-      "costUsd": 0.00002751
-     }
-    },
     {
      "fingerprint": "f38034567f6e0122f9413f18cc3314d5f210cf2387f7f5d592f88b0670ea04c6",
      "result": {
@@ -160,6 +190,35 @@
      }
     },
     {
+     "fingerprint": "9f944c44f13e3579b5ac62a7115227c6cf1c62265715bdd4e4595958b9ea719b",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.99,
+      "probabilities": {
+       "allow": 0.99,
+       "off_topic": 0,
+       "injection": 0.01,
+       "abuse": 0
+      },
+      "costUsd": 0.00002751
+     }
+    },
+    {
+     "fingerprint": "e77ca6961d0362a15303640d975a8874b0ee60c6dcd13bf397da05d5db94a8f9",
+     "result": {
+      "choice": "act",
+      "confidence": 0.82,
+      "probabilities": {
+       "act": 0.86,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0.07,
+       "ask_clarify": 0.07
+      },
+      "costUsd": 0.000028224
+     }
+    },
+    {
      "fingerprint": "ea29309cfab2ad9cdee5a9bcdbda9bee4d49ae6c327c5ec8e443509eb9da732f",
      "result": {
       "choice": "expected",
@@ -172,31 +231,16 @@
      }
     },
     {
-     "fingerprint": "e77ca6961d0362a15303640d975a8874b0ee60c6dcd13bf397da05d5db94a8f9",
-     "result": {
-      "choice": "act",
-      "confidence": 0.79,
-      "probabilities": {
-       "act": 0.83,
-       "ask_duration": 0,
-       "ask_power": 0,
-       "ask_deadline": 0.11,
-       "ask_clarify": 0.06
-      },
-      "costUsd": 0.000028224
-     }
-    },
-    {
-     "fingerprint": "8adbb430bd880f1c3b175dcf80f7b000a8865bfda53a67fe9962d23eecbeed8e",
+     "fingerprint": "567a7b82e2481897d89d6874661651aeac3730d75c331fa91f6582ab64871eaa",
      "result": {
       "choice": "pass",
-      "confidence": 0.98,
+      "confidence": 0.97,
       "probabilities": {
-       "pass": 0.99,
+       "pass": 0.98,
        "overclaim_co2": 0,
-       "unsafe": 0.01
+       "unsafe": 0.02
       },
-      "costUsd": 0.000021966
+      "costUsd": 0.000022974
      }
     }
    ]

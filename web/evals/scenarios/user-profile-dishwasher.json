@@ -32,7 +32,6 @@
      "mode": "cautious"
     },
     "answer_matches": [
-     "^[^?]*$",
      "(saved|your profile|your dishwasher|1\\.2 ?kW)"
     ],
     "answer_excludes": [

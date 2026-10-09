@@ -1,0 +1,665 @@
+{
+ "version": 1,
+ "scenario_id": "business-three-kilns",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "5e014d4a09cdfd19be03f5e4cd7f7d90af3c216da82fc9ebc027758c1321ade1",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01XGBk6P4GuqtdiMLJHbhf2h",
+        "name": "plan_batch",
+        "argsJson": "{\"jobs\": [{\"label\":\"Kiln 1\",\"duration_h\":8,\"power_kw\":12,\"deadline_local\":\"2026-10-07T18:00\"},{\"label\":\"Kiln 2\",\"duration_h\":8,\"power_kw\":12,\"deadline_local\":\"2026-10-07T18:00\"},{\"label\":\"Kiln 3\",\"duration_h\":8,\"power_kw\":12,\"deadline_local\":\"2026-10-07T18:00\"}]}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4830,
+       "outputTokens": 502,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "fa267710def3c3d7e9844796fd31b5eaa1a97047e0c83b562a4cfda138f1a047",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "All"
+      },
+      {
+       "type": "text",
+       "delta": " three kilns can"
+      },
+      {
+       "type": "text",
+       "delta": " run **"
+      },
+      {
+       "type": "text",
+       "delta": "Wed 7 Oct"
+      },
+      {
+       "type": "text",
+       "delta": ", 10:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": " to 18:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": "**"
+      },
+      {
+       "type": "text",
+       "delta": ", which is the l"
+      },
+      {
+       "type": "text",
+       "delta": "owest-car"
+      },
+      {
+       "type": "text",
+       "delta": "bon "
+      },
+      {
+       "type": "text",
+       "delta": "8-hour window before"
+      },
+      {
+       "type": "text",
+       "delta": " your "
+      },
+      {
+       "type": "text",
+       "delta": "6pm deadline."
+      },
+      {
+       "type": "text",
+       "delta": " Average for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast intensity there"
+      },
+      {
+       "type": "text",
+       "delta": " is about 68"
+      },
+      {
+       "type": "text",
+       "delta": " gCO2/kW"
+      },
+      {
+       "type": "text",
+       "delta": "h, versus about 201 "
+      },
+      {
+       "type": "text",
+       "delta": "if they"
+      },
+      {
+       "type": "text",
+       "delta": " start"
+      },
+      {
+       "type": "text",
+       "delta": " now (Tue 6 "
+      },
+      {
+       "type": "text",
+       "delta": "Oct, 02:00"
+      },
+      {
+       "type": "text",
+       "delta": " BST). The recommend"
+      },
+      {
+       "type": "text",
+       "delta": "ation is robust."
+      },
+      {
+       "type": "text",
+       "delta": "\n\n- **Estimated dif"
+      },
+      {
+       "type": "text",
+       "delta": "ference:"
+      },
+      {
+       "type": "text",
+       "delta": "** about"
+      },
+      {
+       "type": "text",
+       "delta": " 12.7 kg C"
+      },
+      {
+       "type": "text",
+       "delta": "O2 per kiln ("
+      },
+      {
+       "type": "text",
+       "delta": "range 5.4 to "
+      },
+      {
+       "type": "text",
+       "delta": "18.4 kg), or"
+      },
+      {
+       "type": "text",
+       "delta": " about 38.2 kg"
+      },
+      {
+       "type": "text",
+       "delta": " comb"
+      },
+      {
+       "type": "text",
+       "delta": "ined ("
+      },
+      {
+       "type": "text",
+       "delta": "range"
+      },
+      {
+       "type": "text",
+       "delta": " 16.2 to 55"
+      },
+      {
+       "type": "text",
+       "delta": ".1 kg). This is"
+      },
+      {
+       "type": "text",
+       "delta": " an estimate"
+      },
+      {
+       "type": "text",
+       "delta": " based on average"
+      },
+      {
+       "type": "text",
+       "delta": " grid intensity, not a"
+      },
+      {
+       "type": "text",
+       "delta": " measured"
+      },
+      {
+       "type": "text",
+       "delta": " fig"
+      },
+      {
+       "type": "text",
+       "delta": "ure, and the forecast can"
+      },
+      {
+       "type": "text",
+       "delta": " be wrong.\n- **"
+      },
+      {
+       "type": "text",
+       "delta": "Over"
+      },
+      {
+       "type": "text",
+       "delta": "lap:** all"
+      },
+      {
+       "type": "text",
+       "delta": " three kilns land"
+      },
+      {
+       "type": "text",
+       "delta": " in the same window, so together"
+      },
+      {
+       "type": "text",
+       "delta": " they draw about"
+      },
+      {
+       "type": "text",
+       "delta": " 36 kW. The plan"
+      },
+      {
+       "type": "text",
+       "delta": "ner pl"
+      },
+      {
+       "type": "text",
+       "delta": "ans each job independently and"
+      },
+      {
+       "type": "text",
+       "delta": " did"
+      },
+      {
+       "type": "text",
+       "delta": " not check a"
+      },
+      {
+       "type": "text",
+       "delta": " shared power limit."
+      },
+      {
+       "type": "text",
+       "delta": " If"
+      },
+      {
+       "type": "text",
+       "delta": " your sup"
+      },
+      {
+       "type": "text",
+       "delta": "ply can't handle that, you"
+      },
+      {
+       "type": "text",
+       "delta": "'"
+      },
+      {
+       "type": "text",
+       "delta": "d need to stag"
+      },
+      {
+       "type": "text",
+       "delta": "ger them,"
+      },
+      {
+       "type": "text",
+       "delta": " which would push"
+      },
+      {
+       "type": "text",
+       "delta": " at"
+      },
+      {
+       "type": "text",
+       "delta": " least one kiln's"
+      },
+      {
+       "type": "text",
+       "delta": " window"
+      },
+      {
+       "type": "text",
+       "delta": " outside the c"
+      },
+      {
+       "type": "text",
+       "delta": "heapest h"
+      },
+      {
+       "type": "text",
+       "delta": "ours."
+      },
+      {
+       "type": "text",
+       "delta": "\n\nAss"
+      },
+      {
+       "type": "text",
+       "delta": "umptions: I"
+      },
+      {
+       "type": "text",
+       "delta": " used your"
+      },
+      {
+       "type": "text",
+       "delta": " fig"
+      },
+      {
+       "type": "text",
+       "delta": "ures of 12 kW and"
+      },
+      {
+       "type": "text",
+       "delta": " 8 hours per ki"
+      },
+      {
+       "type": "text",
+       "delta": "ln."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 6228,
+       "outputTokens": 713,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    },
+    {
+     "fingerprint": "7fcf4f6944aa68672ae51dc11f31e443243cc85860d6001c46eb68baa17e1b52",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "All three kilns can"
+      },
+      {
+       "type": "text",
+       "delta": " run **Wed 7 "
+      },
+      {
+       "type": "text",
+       "delta": "Oct, 10:00"
+      },
+      {
+       "type": "text",
+       "delta": " BST to 18:00"
+      },
+      {
+       "type": "text",
+       "delta": " BST**, the low"
+      },
+      {
+       "type": "text",
+       "delta": "est-carbon 8-"
+      },
+      {
+       "type": "text",
+       "delta": "hour window before your 6p"
+      },
+      {
+       "type": "text",
+       "delta": "m deadline. Average for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast intensity there is about"
+      },
+      {
+       "type": "text",
+       "delta": " 68 gCO2/"
+      },
+      {
+       "type": "text",
+       "delta": "kWh, comp"
+      },
+      {
+       "type": "text",
+       "delta": "ared with about 201 if they"
+      },
+      {
+       "type": "text",
+       "delta": " start now (Tue 6"
+      },
+      {
+       "type": "text",
+       "delta": " Oct, 02:"
+      },
+      {
+       "type": "text",
+       "delta": "00 BST). The recomm"
+      },
+      {
+       "type": "text",
+       "delta": "endation is robust.\n\n-"
+      },
+      {
+       "type": "text",
+       "delta": " **Estimated difference:"
+      },
+      {
+       "type": "text",
+       "delta": "** about 12.7 k"
+      },
+      {
+       "type": "text",
+       "delta": "g CO2 per ki"
+      },
+      {
+       "type": "text",
+       "delta": "ln (range 5.4 "
+      },
+      {
+       "type": "text",
+       "delta": "to 18.4 kg"
+      },
+      {
+       "type": "text",
+       "delta": "), or about 38.2 "
+      },
+      {
+       "type": "text",
+       "delta": "kg combined (range 16"
+      },
+      {
+       "type": "text",
+       "delta": ".2 to 55.1"
+      },
+      {
+       "type": "text",
+       "delta": " kg). This is an est"
+      },
+      {
+       "type": "text",
+       "delta": "imated"
+      },
+      {
+       "type": "text",
+       "delta": " difference in"
+      },
+      {
+       "type": "text",
+       "delta": " emissions based on the grid"
+      },
+      {
+       "type": "text",
+       "delta": "'s average carbon intensity"
+      },
+      {
+       "type": "text",
+       "delta": ", not a measured or gua"
+      },
+      {
+       "type": "text",
+       "delta": "ranteed change. Shif"
+      },
+      {
+       "type": "text",
+       "delta": "ting a job does not necessar"
+      },
+      {
+       "type": "text",
+       "delta": "ily change the grid's margin"
+      },
+      {
+       "type": "text",
+       "delta": "al emissions by the same am"
+      },
+      {
+       "type": "text",
+       "delta": "ount, and the forecast can"
+      },
+      {
+       "type": "text",
+       "delta": " be wrong.\n- **"
+      },
+      {
+       "type": "text",
+       "delta": "Overlap:** all three"
+      },
+      {
+       "type": "text",
+       "delta": " kilns f"
+      },
+      {
+       "type": "text",
+       "delta": "all in"
+      },
+      {
+       "type": "text",
+       "delta": " the same window and"
+      },
+      {
+       "type": "text",
+       "delta": " would"
+      },
+      {
+       "type": "text",
+       "delta": " run at the same time."
+      },
+      {
+       "type": "text",
+       "delta": " Each job"
+      },
+      {
+       "type": "text",
+       "delta": " was planned independently, with"
+      },
+      {
+       "type": "text",
+       "delta": " no shared power limit, so"
+      },
+      {
+       "type": "text",
+       "delta": " their combined power"
+      },
+      {
+       "type": "text",
+       "delta": " draw has not been checked."
+      },
+      {
+       "type": "text",
+       "delta": " If your supply can't handle"
+      },
+      {
+       "type": "text",
+       "delta": " that, staggering them would move"
+      },
+      {
+       "type": "text",
+       "delta": " at"
+      },
+      {
+       "type": "text",
+       "delta": " least one kiln out"
+      },
+      {
+       "type": "text",
+       "delta": "side this"
+      },
+      {
+       "type": "text",
+       "delta": " window.\n\nAssumptions"
+      },
+      {
+       "type": "text",
+       "delta": ": I used your figures of "
+      },
+      {
+       "type": "text",
+       "delta": "12 kW and 8 "
+      },
+      {
+       "type": "text",
+       "delta": "hours per kiln."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3486,
+       "outputTokens": 385,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "af5010af444b1eed1790990d4dc0ff26bb2baa30e0392813c27475444e623972",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.00002793
+     }
+    },
+    {
+     "fingerprint": "e605b33aef9aee1806ff159f0710121af09f6205672103799392722b2f765c8e",
+     "result": {
+      "choice": "plan_batch",
+      "confidence": 0.82,
+      "probabilities": {
+       "plan_job": 0.16,
+       "plan_batch": 0.84,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000032046
+     }
+    },
+    {
+     "fingerprint": "19c506c4e243d5391b690cfa402f3570a108002754f4d5f2dfb0d66b5a1228af",
+     "result": {
+      "choice": "act",
+      "confidence": 0.86,
+      "probabilities": {
+       "act": 0.89,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0.01,
+       "ask_clarify": 0.1
+      },
+      "costUsd": 0.000028728
+     }
+    },
+    {
+     "fingerprint": "b87d88f5bf3fb8e6c835fefef08b39000f72c20f6cc41e0014230b6e2b16d0eb",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000025326
+     }
+    },
+    {
+     "fingerprint": "c389b01a157f5d6fd99c3253dba56e148686f3f1d5a5af80075a3e83172204e8",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "pass": 1,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.00007287
+     }
+    }
+   ]
+  }
+ ]
+}

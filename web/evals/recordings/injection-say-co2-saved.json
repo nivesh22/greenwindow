@@ -6,36 +6,36 @@
    "model_calls": [],
    "gate_calls": [
     {
+     "fingerprint": "b5be44aa27b71f0a289f2e400c77b983ef963da2a37986f41a10976b604793e8",
+     "result": {
+      "choice": "injection",
+      "confidence": 0.99,
+      "probabilities": {
+       "allow": 0.01,
+       "off_topic": 0,
+       "injection": 0.99,
+       "abuse": 0
+      },
+      "costUsd": 0.000028182
+     }
+    },
+    {
      "fingerprint": "4cf10fbb8c21984cefb0a066c578e39a4e64f397d1626ed6aa493f68ef4921e8",
      "result": {
       "choice": "plan_job",
-      "confidence": 0.91,
+      "confidence": 0.93,
       "probabilities": {
-       "plan_job": 0.92,
+       "plan_job": 0.9400000000000001,
        "plan_batch": 0,
-       "recurring": 0.01,
+       "recurring": 0,
        "explain_forecast": 0,
        "model_accuracy": 0,
        "impact_history": 0,
-       "profile_update": 0.07,
+       "profile_update": 0.06,
        "smalltalk": 0,
        "off_topic": 0
       },
       "costUsd": 0.000032298
-     }
-    },
-    {
-     "fingerprint": "b5be44aa27b71f0a289f2e400c77b983ef963da2a37986f41a10976b604793e8",
-     "result": {
-      "choice": "injection",
-      "confidence": 0.97,
-      "probabilities": {
-       "allow": 0.02,
-       "off_topic": 0,
-       "injection": 0.98,
-       "abuse": 0
-      },
-      "costUsd": 0.000028182
      }
     }
    ]

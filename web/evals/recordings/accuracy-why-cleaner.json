@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "b37d260fb4b1ca155c8054fdbd75ddfdaacaf6c83fe2d46f886af257b2571d4a",
+     "fingerprint": "900a7bc0f9092287ed9e8085f6c2cae6c0a5b9479bd07f0ee3b1fed343481980",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_016jPQDncmL2xXcymsZ71mr8",
+        "id": "toolu_014p7z4PUD5yR1jMZo2WiqXC",
         "name": "get_forecast",
         "argsJson": "{\"hours\": 48}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3767,
-       "outputTokens": 177,
+       "inputTokens": 4231,
+       "outputTokens": 175,
        "cachedInputTokens": 0
       },
       {
@@ -29,161 +29,169 @@
      ]
     },
     {
-     "fingerprint": "66f78aa477b2ded5a373df1e7e27c2dcaa2f140463f0f044c4672e91a0de93c4",
+     "fingerprint": "cc69ce3d3980655b566f34c4d9613810bcb2ecd87cf3b26d8ee1a02342908895",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "I can't t"
+       "delta": "I can't tell you why"
       },
       {
        "type": "text",
-       "delta": "ell you the"
+       "delta": " from"
       },
       {
        "type": "text",
-       "delta": " cause."
+       "delta": " the for"
       },
       {
        "type": "text",
-       "delta": " The forecast t"
+       "delta": "ecast data"
       },
       {
        "type": "text",
-       "delta": "ool gives values"
+       "delta": ", which"
       },
       {
        "type": "text",
-       "delta": " only, not the"
+       "delta": " g"
       },
       {
        "type": "text",
-       "delta": " drivers behind them"
+       "delta": "ives only int"
       },
       {
        "type": "text",
-       "delta": ". The data"
+       "delta": "ensity values"
       },
       {
        "type": "text",
-       "delta": " also do"
+       "delta": " with"
       },
       {
        "type": "text",
-       "delta": "esn't show the early hours"
+       "delta": " no caus"
       },
       {
        "type": "text",
-       "delta": " as clear"
+       "delta": "es. The"
       },
       {
        "type": "text",
-       "delta": "ly clea"
+       "delta": " early"
       },
       {
        "type": "text",
-       "delta": "ner."
+       "delta": " hours a"
       },
       {
        "type": "text",
-       "delta": " The median"
+       "delta": "ren't cl"
       },
       {
        "type": "text",
-       "delta": " forecast star"
+       "delta": "early cleaner in"
       },
       {
        "type": "text",
-       "delta": "ts around 187 gCO"
+       "delta": " this for"
       },
       {
        "type": "text",
-       "delta": "2/kWh,"
+       "delta": "ecast either. The median rises"
       },
       {
        "type": "text",
-       "delta": " r"
+       "delta": " from about 187 g"
       },
       {
        "type": "text",
-       "delta": "ises to about 215"
+       "delta": "CO2/kWh now"
       },
       {
        "type": "text",
-       "delta": " later"
+       "delta": " to about 215 by"
       },
       {
        "type": "text",
-       "delta": " t"
+       "delta": " early"
       },
       {
        "type": "text",
-       "delta": "onight, and is"
+       "delta": " morning."
       },
       {
        "type": "text",
-       "delta": " about"
+       "delta": " The cleanest period"
       },
       {
        "type": "text",
-       "delta": " 157 in the small"
+       "delta": " is t"
       },
       {
        "type": "text",
-       "delta": " h"
+       "delta": "omorrow around"
       },
       {
        "type": "text",
-       "delta": "ours tomorrow."
+       "delta": " midday, with a median low"
       },
       {
        "type": "text",
-       "delta": " The l"
+       "delta": " of about 51 gCO"
       },
       {
        "type": "text",
-       "delta": "owest point"
+       "delta": "2/kWh. There"
       },
       {
        "type": "text",
-       "delta": " in"
+       "delta": " is a smaller dip in"
       },
       {
        "type": "text",
-       "delta": " the "
+       "delta": " tomorrow's early h"
       },
       {
        "type": "text",
-       "delta": "48-hour window is about "
+       "delta": "ours,"
       },
       {
        "type": "text",
-       "delta": "51 gCO2/k"
+       "delta": " around 157 gCO2"
       },
       {
        "type": "text",
-       "delta": "Wh, in the"
+       "delta": "/kWh. If you t"
       },
       {
        "type": "text",
-       "delta": " middle of tomorrow"
+       "delta": "ell me what"
       },
       {
        "type": "text",
-       "delta": "'s daytime, and the N"
+       "delta": " you want"
       },
       {
        "type": "text",
-       "delta": "ESO forecast sh"
+       "delta": " to run and for"
       },
       {
        "type": "text",
-       "delta": "ows the same pattern."
+       "delta": " how long, I can find"
+      },
+      {
+       "type": "text",
+       "delta": " the best"
+      },
+      {
+       "type": "text",
+       "delta": " start time."
       },
       {
        "type": "usage",
-       "inputTokens": 7266,
-       "outputTokens": 850,
+       "inputTokens": 7730,
+       "outputTokens": 955,
        "cachedInputTokens": 0
       },
       {
@@ -194,20 +202,6 @@
     }
    ],
    "gate_calls": [
-    {
-     "fingerprint": "6174895fcf9fd2041417732aad813ac4621d1fd9624672cc973b48c3d2294274",
-     "result": {
-      "choice": "allow",
-      "confidence": 1,
-      "probabilities": {
-       "allow": 1,
-       "off_topic": 0,
-       "injection": 0,
-       "abuse": 0
-      },
-      "costUsd": 0.0000273
-     }
-    },
     {
      "fingerprint": "e6e1661b5be7ffacddc6dda0e083c3b051445404b0fd55db36822f60d19d2a89",
      "result": {
@@ -228,16 +222,30 @@
      }
     },
     {
-     "fingerprint": "440703b5f2f013492444c5464ae49175781992aeb6130f02d37ee00f4f518865",
+     "fingerprint": "6174895fcf9fd2041417732aad813ac4621d1fd9624672cc973b48c3d2294274",
      "result": {
-      "choice": "pass",
+      "choice": "allow",
       "confidence": 1,
       "probabilities": {
-       "pass": 1,
-       "overclaim_co2": 0,
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.0000273
+     }
+    },
+    {
+     "fingerprint": "d1877d83b918625049274e28e11f3496a515ab7d4401741aedd9956fa821bbc1",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.98,
+      "probabilities": {
+       "pass": 0.99,
+       "overclaim_co2": 0.01,
        "unsafe": 0
       },
-      "costUsd": 0.000193872
+      "costUsd": 0.000194544
      }
     }
    ]

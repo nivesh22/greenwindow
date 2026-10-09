@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "f1ef911487a5c3bccb8ee9dd8b0aefbee9f77c1a64ce391295b05fee69657e14",
+     "fingerprint": "573fa862bcdec6bed6ff26ea7d672aa4782d72f8e22dd98f2edda07db1d2e3e0",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_014iYNgQUt2HK5UNSaQb3yqP",
+        "id": "toolu_01QenwALTYhxGNYo79khvX1K",
         "name": "get_backtest",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3122,
-       "outputTokens": 108,
+       "inputTokens": 3586,
+       "outputTokens": 61,
        "cachedInputTokens": 0
       },
       {
@@ -29,7 +29,7 @@
      ]
     },
     {
-     "fingerprint": "00cdf4f7fff49054afcfbb56e46845235c5ae8dc230bddd4ab5b8040ab160f38",
+     "fingerprint": "4d33c4c2a441566cd740bc115db4fcb9a810d10b8566d469133aee788adce488",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
@@ -38,71 +38,59 @@
       },
       {
        "type": "text",
-       "delta": " the backtest over"
+       "delta": " the backtest ("
       },
       {
        "type": "text",
-       "delta": " 90 for"
+       "delta": "90 for"
       },
       {
        "type": "text",
-       "delta": "ecast origins, every model"
+       "delta": "ecast origins, 7 "
       },
       {
        "type": "text",
-       "delta": " beat both se"
+       "delta": "Jul to 4 "
       },
       {
        "type": "text",
-       "delta": "asonal-"
+       "delta": "Oct 2026), every model"
       },
       {
        "type": "text",
-       "delta": "naive benchmarks on"
+       "delta": " beat both seasonal-"
       },
       {
        "type": "text",
-       "delta": " M"
+       "delta": "naive benchmarks over"
       },
       {
        "type": "text",
-       "delta": "AE."
+       "delta": "all. Seasonal na"
       },
       {
        "type": "text",
-       "delta": " Chronos-2 +"
+       "delta": "ive \""
       },
       {
        "type": "text",
-       "delta": " weather was best"
+       "delta": "yesterday\" had"
       },
       {
        "type": "text",
-       "delta": " at 18.1 gC"
+       "delta": " an MAE of 41."
       },
       {
        "type": "text",
-       "delta": "O2/kWh, against"
+       "delta": "6 gCO2/"
       },
       {
        "type": "text",
-       "delta": " 41.6 for seas"
+       "delta": "kWh and \"last week\""
       },
       {
        "type": "text",
-       "delta": "onal naive ("
-      },
-      {
-       "type": "text",
-       "delta": "yesterday) and 45"
-      },
-      {
-       "type": "text",
-       "delta": ".7 for seasonal"
-      },
-      {
-       "type": "text",
-       "delta": " naive (last week).\n\n-"
+       "delta": " had 45.7.\n\n-"
       },
       {
        "type": "text",
@@ -114,155 +102,115 @@
       },
       {
        "type": "text",
-       "delta": " 18.1, MASE"
+       "delta": " 18.1, the"
       },
       {
        "type": "text",
-       "delta": " 0.518"
+       "delta": " best non"
       },
       {
        "type": "text",
-       "delta": "\n- **"
+       "delta": "-N"
       },
       {
        "type": "text",
-       "delta": "Prophet +"
+       "delta": "ESO model ("
       },
       {
        "type": "text",
-       "delta": " weather:** MAE "
+       "delta": "MASE 0.518)"
       },
       {
        "type": "text",
-       "delta": "24.8,"
+       "delta": "\n- **pr"
       },
       {
        "type": "text",
-       "delta": " MASE 0.713"
+       "delta": "ophet_wx:** M"
       },
       {
        "type": "text",
-       "delta": "\n- **Chronos-2"
+       "delta": "AE 24.8 "
       },
       {
        "type": "text",
-       "delta": " (no weather):** M"
+       "delta": "(MASE 0.713"
       },
       {
        "type": "text",
-       "delta": "AE 26.9, M"
+       "delta": ")\n- **Chronos"
       },
       {
        "type": "text",
-       "delta": "ASE 0.767\n-"
+       "delta": "-2 (no"
       },
       {
        "type": "text",
-       "delta": " **Seasonal naive"
+       "delta": " weather):** MAE "
       },
       {
        "type": "text",
-       "delta": " (yesterday):** M"
+       "delta": "26.9 (MASE"
       },
       {
        "type": "text",
-       "delta": "AE 41.6, M"
+       "delta": " 0.767)\n- **"
       },
       {
        "type": "text",
-       "delta": "ASE 1.185\n-"
+       "delta": "S"
       },
       {
        "type": "text",
-       "delta": " **Seasonal naive"
+       "delta": "ARIMAX + weather"
       },
       {
        "type": "text",
-       "delta": " (last week):** MAE"
+       "delta": ":** MAE 38."
       },
       {
        "type": "text",
-       "delta": " 45.7, MASE"
+       "delta": "1 (MASE 1"
       },
       {
        "type": "text",
-       "delta": " 1.300"
+       "delta": ".093), the"
       },
       {
        "type": "text",
-       "delta": "\n\nThe backtest u"
+       "delta": " closest to the"
       },
       {
        "type": "text",
-       "delta": "ses archived weather for"
+       "delta": " benchmark\n- **N"
       },
       {
        "type": "text",
-       "delta": "ecasts that are more"
+       "delta": "ESO published"
       },
       {
        "type": "text",
-       "delta": " accurate than real"
+       "delta": " for"
       },
       {
        "type": "text",
-       "delta": " "
+       "delta": "ecast:** MAE "
       },
       {
        "type": "text",
-       "delta": "1–2-day-ah"
+       "delta": "11.8 "
       },
       {
        "type": "text",
-       "delta": "ead forecasts, so the"
+       "delta": "(MASE 0.339"
       },
       {
        "type": "text",
-       "delta": " weather-based models will"
+       "delta": "), but its"
       },
       {
        "type": "text",
-       "delta": " lik"
-      },
-      {
-       "type": "text",
-       "delta": "ely look"
-      },
-      {
-       "type": "text",
-       "delta": " better"
-      },
-      {
-       "type": "text",
-       "delta": " here"
-      },
-      {
-       "type": "text",
-       "delta": " than they will live. The NES"
-      },
-      {
-       "type": "text",
-       "delta": "O published for"
-      },
-      {
-       "type": "text",
-       "delta": "ecast ("
-      },
-      {
-       "type": "text",
-       "delta": "MAE 11.8)"
-      },
-      {
-       "type": "text",
-       "delta": " has"
-      },
-      {
-       "type": "text",
-       "delta": " an"
-      },
-      {
-       "type": "text",
-       "delta": " unknown lead time,"
+       "delta": " lead time is unknown,"
       },
       {
        "type": "text",
@@ -274,27 +222,59 @@
       },
       {
        "type": "text",
-       "delta": "parison."
+       "delta": "parison.\n\nThe backtest"
       },
       {
        "type": "text",
-       "delta": " The live leaderboard is"
+       "delta": " u"
       },
       {
        "type": "text",
-       "delta": " the un"
+       "delta": "ses archived weather for"
       },
       {
        "type": "text",
-       "delta": "biased check,"
+       "delta": "ecasts that are more"
       },
       {
        "type": "text",
-       "delta": " and I can"
+       "delta": " accurate than a real"
       },
       {
        "type": "text",
-       "delta": " p"
+       "delta": " 1–2 day ah"
+      },
+      {
+       "type": "text",
+       "delta": "ead for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast, so the"
+      },
+      {
+       "type": "text",
+       "delta": " weather-based"
+      },
+      {
+       "type": "text",
+       "delta": " models prob"
+      },
+      {
+       "type": "text",
+       "delta": "ably look better here than they will live"
+      },
+      {
+       "type": "text",
+       "delta": ". The live leaderboard"
+      },
+      {
+       "type": "text",
+       "delta": " is the unbiased check,"
+      },
+      {
+       "type": "text",
+       "delta": " and I can p"
       },
       {
        "type": "text",
@@ -302,16 +282,36 @@
       },
       {
        "type": "text",
-       "delta": " you want it"
+       "delta": " you want"
       },
       {
        "type": "text",
-       "delta": "."
+       "delta": " to"
+      },
+      {
+       "type": "text",
+       "delta": " see how the models are"
+      },
+      {
+       "type": "text",
+       "delta": " doing on"
+      },
+      {
+       "type": "text",
+       "delta": " current"
+      },
+      {
+       "type": "text",
+       "delta": " for"
+      },
+      {
+       "type": "text",
+       "delta": "ecasts."
       },
       {
        "type": "usage",
-       "inputTokens": 6222,
-       "outputTokens": 721,
+       "inputTokens": 6686,
+       "outputTokens": 675,
        "cachedInputTokens": 0
       },
       {
@@ -322,20 +322,6 @@
     }
    ],
    "gate_calls": [
-    {
-     "fingerprint": "798e59b68415844a6c275d5bb156771d707da31dab4660ab4c2db7dfea4fa7be",
-     "result": {
-      "choice": "allow",
-      "confidence": 0.96,
-      "probabilities": {
-       "allow": 0.97,
-       "off_topic": 0.03,
-       "injection": 0,
-       "abuse": 0
-      },
-      "costUsd": 0.000027342
-     }
-    },
     {
      "fingerprint": "fdc239ef58672b0ff20e78894f9827166811ef59b2a65322d2b3174e1308a653",
      "result": {
@@ -356,16 +342,30 @@
      }
     },
     {
-     "fingerprint": "640b21ac6a4b467a0fd89564fb81be00be4f98883945a32e3dd1f522ac1ada26",
+     "fingerprint": "798e59b68415844a6c275d5bb156771d707da31dab4660ab4c2db7dfea4fa7be",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.97,
+      "probabilities": {
+       "allow": 0.98,
+       "off_topic": 0.02,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027342
+     }
+    },
+    {
+     "fingerprint": "2ad1004908b1e5198d8df26af0708211399da549631a25cf9591097cb5e76f0e",
      "result": {
       "choice": "pass",
-      "confidence": 0.95,
+      "confidence": 0.98,
       "probabilities": {
-       "pass": 0.97,
-       "overclaim_co2": 0.03,
+       "pass": 0.99,
+       "overclaim_co2": 0.01,
        "unsafe": 0
       },
-      "costUsd": 0.000137046
+      "costUsd": 0.000137004
      }
     }
    ]

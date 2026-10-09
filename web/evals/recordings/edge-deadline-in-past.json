@@ -5,173 +5,177 @@
   {
    "model_calls": [
     {
-     "fingerprint": "50d2d1c8035b652a78d16ba61c88ce9c9def6bad2b7d5feacce4233779b497ee",
+     "fingerprint": "56f0c6c3a85c58de062b5902cabb49653a942e1a3ed51de6f1ac038a7c8c333d",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Midnight last"
+       "delta": "Midnight last night has already pass"
       },
       {
        "type": "text",
-       "delta": " night has"
+       "delta": "ed ("
       },
       {
        "type": "text",
-       "delta": " already passed;"
+       "delta": "it's"
       },
       {
        "type": "text",
-       "delta": " it was"
+       "delta": " "
       },
       {
        "type": "text",
-       "delta": " 00"
+       "delta": "01:30 BST on"
       },
       {
        "type": "text",
-       "delta": ":00 on"
+       "delta": " Tu"
       },
       {
        "type": "text",
-       "delta": " Tuesday "
+       "delta": "esday 6 October), so"
       },
       {
        "type": "text",
-       "delta": "6 October"
+       "delta": " I can't sch"
       },
       {
        "type": "text",
-       "delta": ", and it"
+       "delta": "edule a 4-hour"
       },
       {
        "type": "text",
-       "delta": "'s now 01:30 B"
+       "delta": ","
       },
       {
        "type": "text",
-       "delta": "ST."
+       "delta": " 7 kW job to"
       },
       {
        "type": "text",
-       "delta": " I can't plan a job"
+       "delta": " finish by"
       },
       {
        "type": "text",
-       "delta": " to finish by a"
+       "delta": " then"
       },
       {
        "type": "text",
-       "delta": " deadline that's g"
+       "delta": ".\n\nOptions:\n- **"
       },
       {
        "type": "text",
-       "delta": "one.\n\nWould"
+       "delta": "Mid"
       },
       {
        "type": "text",
-       "delta": " you like to set"
+       "delta": "night tonight**"
       },
       {
        "type": "text",
-       "delta": " a new deadline? For"
+       "delta": " (end"
       },
       {
        "type": "text",
-       "delta": " example:"
+       "delta": " of Tuesday 6"
       },
       {
        "type": "text",
-       "delta": "\n- **Midnight t"
+       "delta": " October),"
       },
       {
        "type": "text",
-       "delta": "onight**"
+       "delta": " so"
       },
       {
        "type": "text",
-       "delta": " (start"
+       "delta": " the"
       },
       {
        "type": "text",
-       "delta": " of"
+       "delta": " job must"
       },
       {
        "type": "text",
-       "delta": " Wed"
+       "delta": " finish by"
       },
       {
        "type": "text",
-       "delta": " 7 October,"
+       "delta": " 00:00 on"
       },
       {
        "type": "text",
-       "delta": " London time), which is within the "
+       "delta": " Wednesday 7 "
       },
       {
        "type": "text",
-       "delta": "48-hour forecast."
+       "delta": "October. I can"
       },
       {
        "type": "text",
-       "delta": "\n-"
+       "delta": " plan that"
       },
       {
        "type": "text",
-       "delta": " Another time"
+       "delta": " now"
       },
       {
        "type": "text",
-       "delta": " you"
+       "delta": ".\n- **A"
       },
       {
        "type": "text",
-       "delta": " cho"
+       "delta": " different"
       },
       {
        "type": "text",
-       "delta": "ose."
+       "delta": " deadline** of"
       },
       {
        "type": "text",
-       "delta": "\n\nOnce"
+       "delta": " your choice, within"
       },
       {
        "type": "text",
-       "delta": " you p"
+       "delta": " the"
       },
       {
        "type": "text",
-       "delta": "ick one"
+       "delta": " next 48 hours."
       },
       {
        "type": "text",
-       "delta": ", I'll find"
+       "delta": "\n- **A shorter job**"
       },
       {
        "type": "text",
-       "delta": " the c"
+       "delta": ", if"
       },
       {
        "type": "text",
-       "delta": "leanest "
+       "delta": " "
       },
       {
        "type": "text",
-       "delta": "4-hour window"
+       "delta": "4 hours is"
       },
       {
        "type": "text",
-       "delta": " for your"
+       "delta": "n't ess"
       },
       {
        "type": "text",
-       "delta": " 7 kW charge."
+       "delta": "ential.\n\nWhich would"
+      },
+      {
+       "type": "text",
+       "delta": " you like?"
       },
       {
        "type": "usage",
-       "inputTokens": 3451,
-       "outputTokens": 444,
+       "inputTokens": 4120,
+       "outputTokens": 651,
        "cachedInputTokens": 0
       },
       {
@@ -181,81 +185,117 @@
      ]
     },
     {
-     "fingerprint": "2cb0ab6b8303645566b119de233f22eecfffe3b0af491a8f2c4b263670278572",
+     "fingerprint": "7702d12300fd1a67ef4c16e3198462d9b02505cec1a00c40d66f45b9aae4a624",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "I can't plan this"
+       "delta": "Mid"
       },
       {
        "type": "text",
-       "delta": " charge for"
+       "delta": "night last"
       },
       {
        "type": "text",
-       "delta": " a deadline that has already pass"
+       "delta": " night has already passed, so I"
       },
       {
        "type": "text",
-       "delta": "ed. Please"
+       "delta": " can't schedule a 4"
       },
       {
        "type": "text",
-       "delta": " give me a new deadline by"
+       "delta": "-hour, 7 k"
       },
       {
        "type": "text",
-       "delta": " which the "
+       "delta": "W char"
       },
       {
        "type": "text",
-       "delta": "4-hour,"
+       "delta": "ge to finish by then"
       },
       {
        "type": "text",
-       "delta": " 7 kW charge should"
+       "delta": ".\n\nHere are your options:"
       },
       {
        "type": "text",
-       "delta": " finish. I"
+       "delta": "\n- **Midnight t"
       },
       {
        "type": "text",
-       "delta": " can"
+       "delta": "onight**:"
       },
       {
        "type": "text",
-       "delta": " only"
+       "delta": " I can plan a"
       },
       {
        "type": "text",
-       "delta": " plan within the next"
+       "delta": " 4-hour,"
       },
       {
        "type": "text",
-       "delta": " 48 hours, so a"
+       "delta": " 7 kW charge to"
       },
       {
        "type": "text",
-       "delta": " deadline in"
+       "delta": " finish by"
       },
       {
        "type": "text",
-       "delta": " that range"
+       "delta": " midnight t"
       },
       {
        "type": "text",
-       "delta": " will work"
+       "delta": "onight.\n- **A different"
       },
       {
        "type": "text",
-       "delta": " best."
+       "delta": " deadline**: give me a"
+      },
+      {
+       "type": "text",
+       "delta": " time within the next 48 h"
+      },
+      {
+       "type": "text",
+       "delta": "ours and I'll plan around"
+      },
+      {
+       "type": "text",
+       "delta": " it"
+      },
+      {
+       "type": "text",
+       "delta": ".\n- **A shorter"
+      },
+      {
+       "type": "text",
+       "delta": " job**: if 4 h"
+      },
+      {
+       "type": "text",
+       "delta": "ours isn't essential, I"
+      },
+      {
+       "type": "text",
+       "delta": " can plan a shorter char"
+      },
+      {
+       "type": "text",
+       "delta": "ge.\n\nWhich would you like"
+      },
+      {
+       "type": "text",
+       "delta": "?"
       },
       {
        "type": "usage",
-       "inputTokens": 1467,
-       "outputTokens": 429,
+       "inputTokens": 1896,
+       "outputTokens": 451,
        "cachedInputTokens": 0
       },
       {
@@ -303,13 +343,13 @@
      "fingerprint": "de77b7e287385a3462bbb46ea4922f3db6dffb42d3cbdd100261eea67205ae6a",
      "result": {
       "choice": "act",
-      "confidence": 0.55,
+      "confidence": 0.59,
       "probabilities": {
-       "act": 0.64,
+       "act": 0.67,
        "ask_duration": 0,
        "ask_power": 0,
-       "ask_deadline": 0.07,
-       "ask_clarify": 0.29
+       "ask_deadline": 0.06,
+       "ask_clarify": 0.27
       },
       "costUsd": 0.000028308
      }
@@ -327,7 +367,7 @@
      }
     },
     {
-     "fingerprint": "31ba64d940fab6774303f919fd4a384b53fe1092d1923f3b0606d50505318f0d",
+     "fingerprint": "b1a4d428e6e77005b7e214506bf341b4e3f18b930d622593d884d48298fd6e88",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -336,7 +376,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.00002058
+      "costUsd": 0.000023016
      }
     }
    ]

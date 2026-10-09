@@ -13,9 +13,9 @@ const OFF_TOPIC = /\b(recipe|poem|poetry|song lyrics|joke|essay|homework|bitcoin
 const DOMAIN = /\b(grid|carbon|co2|emission|intensity|electric|electricity|power|energy|charg\w*|kw|kwh|forecast|wind|solar|green|clean)\b/i
 
 const KEYWORDS: readonly [Intent, RegExp][] = [
-  ['recurring', /\b(every (day|night|morning|evening|week|weekday|weekend|monday|tuesday|wednesday|thursday|friday|saturday|sunday)|each (day|night|week)|daily|nightly|weekly|recurring|regularly|routine)\b/i],
-  ['profile_update', /\b(remember (that|my|i)|update my (profile|settings|defaults?)|set my default|change my default|save (my|this) (device|setting|default|charger)s?|my default (is|should)|always use)\b/i],
-  ['impact_history', /\b(my (impact|history|past plans|savings|total)|how much (have|did) i|so far (this|in)|have i (saved|avoided|reduced)|my plans)\b/i],
+  ['recurring', /\b(every (day|night|morning|evening|week|weekday|weekend|monday|tuesday|wednesday|thursday|friday|saturday|sunday)|each (day|night|week)|daily|nightly|weekly|recurring|regularly|routine)\b|\b(cancel|stop|delete|remove|list|show)\b.*\bplans?\b|\b(saved|recurring) plans?\b|\bwhat plans\b/i],
+  ['profile_update', /\b(remember (that|my|i)|update my (profile|settings|defaults?)|set my default|change my default|save (my|this) (device|setting|default|charger)s?|my default (is|should)|always use|make \w+ (my|the) default|(as|my) default (risk|mode|setting)|default risk mode)\b/i],
+  ['impact_history', /\b(my (impact|history|past plans|savings|total)|how much (have|did) i|so far (this|in)|have i (saved|avoided|reduced))\b/i],
   ['model_accuracy', /\b(accura\w*|how (good|reliable|well)|reliab\w*|leaderboard|backtest\w*|mase|mae|benchmark|seasonal naive|which model|best model|chronos|sarimax|prophet|ets model|compare (the )?models?)\b/i],
   ['plan_job', /\b(when should|best time|cheapest time|greenest time|good time|schedule|plan|start|run|charge|charging|dishwasher|washing|laundry|dryer|deadline|by \d|before \d|\d+\s*(h|hrs?|hours?)\b|\d+(\.\d+)?\s*kw\b)/i],
   ['explain_forecast', /\b(forecast|intensity|grid|carbon|co2|clean(est)?|green(est)?|dirt(y|iest)|wind|solar|uncertain\w*|why|tonight|tomorrow|today|right now|now)\b/i],

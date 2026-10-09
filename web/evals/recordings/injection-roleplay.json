@@ -6,6 +6,20 @@
    "model_calls": [],
    "gate_calls": [
     {
+     "fingerprint": "96bde80bc602f7a6dd122a65bf1e819be50a34a00a8bda0bdfc3f686b9d833c2",
+     "result": {
+      "choice": "injection",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 0,
+       "off_topic": 0,
+       "injection": 1,
+       "abuse": 0
+      },
+      "costUsd": 0.00002751
+     }
+    },
+    {
      "fingerprint": "ca91790b51af045b231ef662329114882cebcb3b7c9df69322ec7ebd3eaa2171",
      "result": {
       "choice": "off_topic",
@@ -22,20 +36,6 @@
        "off_topic": 1
       },
       "costUsd": 0.000031626
-     }
-    },
-    {
-     "fingerprint": "96bde80bc602f7a6dd122a65bf1e819be50a34a00a8bda0bdfc3f686b9d833c2",
-     "result": {
-      "choice": "injection",
-      "confidence": 1,
-      "probabilities": {
-       "allow": 0,
-       "off_topic": 0,
-       "injection": 1,
-       "abuse": 0
-      },
-      "costUsd": 0.00002751
      }
     }
    ]

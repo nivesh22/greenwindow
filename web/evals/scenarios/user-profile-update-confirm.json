@@ -1,25 +1,13 @@
 {
  "id": "user-profile-update-confirm",
  "persona": "household",
- "notes": "FR-6/7: a profile change is confirmed first; \"yes\" saves it with confirm true.",
+ "notes": "FR-7.1: a direct instruction (\"Set my default ... to cautious\") is the user's agreement, so the agent saves with confirm true at once.",
  "user": {
   "signed_in": true
  },
  "turns": [
   {
    "user": "Set my default risk mode to cautious.",
-   "expect": {
-    "tool_not_called": [
-     "update_profile"
-    ],
-    "answer_matches": [
-     "(confirm|shall i|should i|want me to|would you like|go ahead|is that (ok|right)|do you want)"
-    ],
-    "no_banned_claim": true
-   }
-  },
-  {
-   "user": "Yes, do it.",
    "expect": {
     "tools_called": [
      "update_profile"

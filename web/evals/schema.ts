@@ -123,15 +123,20 @@ const modelEventSchema: z.ZodType<ModelEvent> = z.union([
 ])
 
 export const recordedModelCallSchema = z.object({ fingerprint: z.string(), model: z.string(), events: z.array(modelEventSchema) })
-export const recordedGateCallSchema = z.object({
-  fingerprint: z.string(),
-  result: z.object({
-    choice: z.string(),
-    confidence: z.number(),
-    probabilities: z.record(z.string(), z.number()),
-    costUsd: z.number(),
+export const recordedGateCallSchema = z.union([
+  z.object({
+    fingerprint: z.string(),
+    result: z.object({
+      choice: z.string(),
+      confidence: z.number(),
+      probabilities: z.record(z.string(), z.number()),
+      costUsd: z.number(),
+    }),
   }),
-})
+  // A gate call that failed while recording (e.g. a Jev timeout): replay fails it the same way, so the gate's rule
+  // fallback runs exactly as it did live.
+  z.object({ fingerprint: z.string(), error: z.string() }),
+])
 export const recordingSchema = z.object({
   version: z.literal(1),
   scenario_id: z.string(),

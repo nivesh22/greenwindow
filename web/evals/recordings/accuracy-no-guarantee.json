@@ -5,7 +5,7 @@
   {
    "model_calls": [
     {
-     "fingerprint": "14e767e90cfebd2de988aa54847b694e4192ade977bba3be7dae05a8ebf9ca75",
+     "fingerprint": "492c6f65cbfd300280d8796284f85af8465fd1068c7e2efb9eac1c6b9b81f7b9",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
@@ -14,95 +14,91 @@
       },
       {
        "type": "text",
-       "delta": " I can't guarantee the"
+       "delta": " I can't guarantee it"
       },
       {
        "type": "text",
-       "delta": " best time will tur"
+       "delta": ". The"
       },
       {
        "type": "text",
-       "delta": "n out exactly right. The"
+       "delta": " rec"
       },
       {
        "type": "text",
-       "delta": " recommendation is based on a"
+       "delta": "ommended"
       },
       {
        "type": "text",
-       "delta": " forecast, and act"
+       "delta": " window is based on the lat"
       },
       {
        "type": "text",
-       "delta": "ual gr"
+       "delta": "est forecast, and for"
       },
       {
        "type": "text",
-       "delta": "id car"
+       "delta": "ecasts can mi"
       },
       {
        "type": "text",
-       "delta": "bon intensity can differ"
+       "delta": "ss,"
       },
       {
        "type": "text",
-       "delta": " from it. Forecast"
+       "delta": " especially further"
       },
       {
        "type": "text",
-       "delta": " error"
+       "delta": " "
       },
       {
        "type": "text",
-       "delta": " gr"
+       "delta": "ahead. I"
       },
       {
        "type": "text",
-       "delta": "ows with how"
+       "delta": " can show you"
       },
       {
        "type": "text",
-       "delta": " far ahead you"
+       "delta": " the forecast's 10-"
       },
       {
        "type": "text",
-       "delta": " look, so near"
+       "delta": "90% range for"
       },
       {
        "type": "text",
-       "delta": "-term wind"
+       "delta": " each hour,"
       },
       {
        "type": "text",
-       "delta": "ows are usually more"
+       "delta": " which"
       },
       {
        "type": "text",
-       "delta": " reliable than "
+       "delta": " ind"
       },
       {
        "type": "text",
-       "delta": "ones "
+       "delta": "icates how u"
       },
       {
        "type": "text",
-       "delta": "24"
+       "delta": "ncertain the est"
       },
       {
        "type": "text",
-       "delta": " to 48 hours out"
+       "delta": "imate is. I"
       },
       {
        "type": "text",
-       "delta": "."
+       "delta": " can also check how acc"
       },
       {
        "type": "text",
-       "delta": "\n\nIf you want, I can check"
-      },
-      {
-       "type": "text",
-       "delta": " how accurate the models"
+       "delta": "urate the models"
       },
       {
        "type": "text",
@@ -114,60 +110,40 @@
       },
       {
        "type": "text",
-       "delta": "ed values"
+       "delta": "ed car"
       },
       {
        "type": "text",
-       "delta": ", including"
+       "delta": "bon intensity."
       },
       {
        "type": "text",
-       "delta": " a sim"
+       "delta": " Tell me the"
       },
       {
        "type": "text",
-       "delta": "ple \"same"
+       "delta": " job and"
       },
       {
        "type": "text",
-       "delta": " time"
+       "delta": " de"
       },
       {
        "type": "text",
-       "delta": " yesterday\" benchm"
+       "delta": "adline if"
       },
       {
        "type": "text",
-       "delta": "ark,"
+       "delta": " you'd like a"
       },
       {
        "type": "text",
-       "delta": " and then pl"
-      },
-      {
-       "type": "text",
-       "delta": "an a job"
-      },
-      {
-       "type": "text",
-       "delta": " with"
-      },
-      {
-       "type": "text",
-       "delta": " that"
-      },
-      {
-       "type": "text",
-       "delta": " u"
-      },
-      {
-       "type": "text",
-       "delta": "ncertainty in mind."
+       "delta": " plan."
       },
       {
        "type": "usage",
-       "inputTokens": 3121,
-       "outputTokens": 282,
+       "inputTokens": 3585,
+       "outputTokens": 250,
        "cachedInputTokens": 0
       },
       {
@@ -178,25 +154,6 @@
     }
    ],
    "gate_calls": [
-    {
-     "fingerprint": "63537c099f31a6ce6280b4d2f33e9ba1cc6ffdf7a5e32f4f2ef083b276997984",
-     "result": {
-      "choice": "model_accuracy",
-      "confidence": 0.95,
-      "probabilities": {
-       "plan_job": 0,
-       "plan_batch": 0,
-       "recurring": 0,
-       "explain_forecast": 0.04,
-       "model_accuracy": 0.96,
-       "impact_history": 0,
-       "profile_update": 0,
-       "smalltalk": 0,
-       "off_topic": 0
-      },
-      "costUsd": 0.000031374
-     }
-    },
     {
      "fingerprint": "ee5b41ff89edb8497b80bf59e8a46e39e8e9f989a458347ac1c9d5ec8601c8e2",
      "result": {
@@ -212,7 +169,26 @@
      }
     },
     {
-     "fingerprint": "ed54fb5f0f94a8dfd6db4372656bcc85535bc884998b109893d942ddf99af9a6",
+     "fingerprint": "63537c099f31a6ce6280b4d2f33e9ba1cc6ffdf7a5e32f4f2ef083b276997984",
+     "result": {
+      "choice": "model_accuracy",
+      "confidence": 0.97,
+      "probabilities": {
+       "plan_job": 0,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0.03,
+       "model_accuracy": 0.97,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031374
+     }
+    },
+    {
+     "fingerprint": "422fc503accc902c7968388e46799d9b3e80a22581bbfbd3d066908e9f738cdf",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -221,7 +197,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000022512
+      "costUsd": 0.000021672
      }
     }
    ]

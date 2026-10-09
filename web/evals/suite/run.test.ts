@@ -15,7 +15,9 @@ import type { ScenarioResult } from '../schema.js'
 import { recordEvalTrend } from '../trend.js'
 
 const mode = parseMode(process.env.EVAL_MODE)
-const scenarios = loadScenarios()
+// EVAL_ONLY=id1,id2 runs (and, in record mode, re-records) just those scenarios; no trend row for a partial run.
+const only = (process.env.EVAL_ONLY ?? '').split(',').map((s) => s.trim()).filter(Boolean)
+const scenarios = loadScenarios().filter((s) => only.length === 0 || only.includes(s.id))
 const spend: SpendCap = { limitUsd: Number(process.env.EVAL_BUDGET_USD ?? '0.50'), spentUsd: 0 }
 const results: ScenarioResult[] = []
 
@@ -35,6 +37,7 @@ describe(`agent evals (${mode})`, () => {
     const v = verdictOf(suite, { requireRecordings: process.env.EVAL_REQUIRE_RECORDINGS === '1' })
     writeReport(suite, v)
     // FR-9.5: record and live runs add one trend row when the Supabase env is present (replay never writes).
+    if (only.length > 0) return
     const t = await recordEvalTrend(suite, v, process.env)
     if (mode !== 'replay') console.warn(t.written ? 'eval trend row written' : `eval trend row not written: ${t.reason}`)
   })

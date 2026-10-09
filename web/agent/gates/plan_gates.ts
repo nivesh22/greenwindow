@@ -45,7 +45,18 @@ export function planJevState(s: PlanState): Record<string, unknown> {
 // "start at 3am versus 2pm", "now or tomorrow 9am": comparing named start times needs no deadline (compare_starts).
 const COMPARE_STARTS = /\b(vs\.?|versus|compared? (to|with)|or)\b.*\b(\d{1,2}(:\d{2})?\s*(am|pm)|\d{1,2}:\d{2}|now|tonight|tomorrow)\b/i
 
+// Managing saved plans or following up on a plan ("cancel my compressor plan", "what plans do I have", "add it to my
+// calendar", "remind me") is not a new planning question: the tools handle it, so the gate never asks first.
+const PLAN_FOLLOW_UP =
+  /\b(cancel|stop|delete|remove|list|show)\b.*\bplans?\b|\b(my|saved|recurring) plans?\b|\bwhat plans\b|\badd (it|this|that) to (my )?calendar\b|\bremind me\b/i
+
+/** Plan management / follow-through wording (P4): always act. */
+export function isPlanFollowUp(message: string): boolean {
+  return PLAN_FOLLOW_UP.test(message)
+}
+
 export function askOrActRules(s: PlanState): RuleDecision<AskOrActChoice> {
+  if (isPlanFollowUp(s.message)) return { choice: 'act', confidence: 0.9, reason: 'plan management or follow-up' }
   const sl = s.slots
   if (COMPARE_STARTS.test(s.message) && sl.duration_h && (sl.power_kw || sl.device)) {
     return { choice: 'act', confidence: 0.8, reason: 'compares named start times (no deadline needed)' }
@@ -74,6 +85,8 @@ export function askOrActSpec(threshold: number): GateSpec<PlanState, AskOrActCho
       ask_clarify: 'It is unclear what the user wants to run.',
     },
     rules: askOrActRules,
+    override: (s, a) =>
+      a.choice !== 'act' && isPlanFollowUp(s.message) ? { choice: 'act', confidence: 1, reason: 'plan management or follow-up' } : null,
   }
 }
 

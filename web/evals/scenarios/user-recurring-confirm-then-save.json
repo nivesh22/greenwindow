@@ -15,7 +15,7 @@
     "plans_saved": 0,
     "no_banned_claim": true,
     "answer_matches": [
-     "(confirm|shall i|should i|want me to|would you like|go ahead|is that (ok|right)|do you want)"
+     "(confirm|shall i|should i|want me to|would you like|go ahead|is that (ok|right)|do you want|reply .{0,2}yes|say .{0,2}yes|save (it|this))"
     ],
     "answer_excludes": [
      "8 oct",

@@ -1,0 +1,688 @@
+{
+ "version": 1,
+ "scenario_id": "user-recurring-confirm-then-save",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "9becd75642960b5cb03cc3ade258cae5338751f94c2f110a759393aca756eae8",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Here's the"
+      },
+      {
+       "type": "text",
+       "delta": " plan I'd save:"
+      },
+      {
+       "type": "text",
+       "delta": "\n\n- **Job"
+      },
+      {
+       "type": "text",
+       "delta": ":** Compressor,"
+      },
+      {
+       "type": "text",
+       "delta": " 5 kW, "
+      },
+      {
+       "type": "text",
+       "delta": "3 hours\n- **"
+      },
+      {
+       "type": "text",
+       "delta": "Days:** Mon"
+      },
+      {
+       "type": "text",
+       "delta": "day to"
+      },
+      {
+       "type": "text",
+       "delta": " Friday\n- **Window"
+      },
+      {
+       "type": "text",
+       "delta": ":** start"
+      },
+      {
+       "type": "text",
+       "delta": " no"
+      },
+      {
+       "type": "text",
+       "delta": " earlier than 09:00"
+      },
+      {
+       "type": "text",
+       "delta": " and fin"
+      },
+      {
+       "type": "text",
+       "delta": "ish by 17:00 U"
+      },
+      {
+       "type": "text",
+       "delta": "K time"
+      },
+      {
+       "type": "text",
+       "delta": " (so the start"
+      },
+      {
+       "type": "text",
+       "delta": " fal"
+      },
+      {
+       "type": "text",
+       "delta": "ls between 09:00 and"
+      },
+      {
+       "type": "text",
+       "delta": " 14:00)\n- **"
+      },
+      {
+       "type": "text",
+       "delta": "Risk mode:** exp"
+      },
+      {
+       "type": "text",
+       "delta": "ected (median"
+      },
+      {
+       "type": "text",
+       "delta": " forecast), unless you want"
+      },
+      {
+       "type": "text",
+       "delta": " cautious ("
+      },
+      {
+       "type": "text",
+       "delta": "plan"
+      },
+      {
+       "type": "text",
+       "delta": "ned for a bad case)"
+      },
+      {
+       "type": "text",
+       "delta": "\n\nEach"
+      },
+      {
+       "type": "text",
+       "delta": " mor"
+      },
+      {
+       "type": "text",
+       "delta": "ning I"
+      },
+      {
+       "type": "text",
+       "delta": "'d"
+      },
+      {
+       "type": "text",
+       "delta": " pick the l"
+      },
+      {
+       "type": "text",
+       "delta": "owest-car"
+      },
+      {
+       "type": "text",
+       "delta": "bon "
+      },
+      {
+       "type": "text",
+       "delta": "3-hour start in"
+      },
+      {
+       "type": "text",
+       "delta": " that window,"
+      },
+      {
+       "type": "text",
+       "delta": " based"
+      },
+      {
+       "type": "text",
+       "delta": " on the forecast available"
+      },
+      {
+       "type": "text",
+       "delta": " then. Do you want re"
+      },
+      {
+       "type": "text",
+       "delta": "minders before"
+      },
+      {
+       "type": "text",
+       "delta": " each run?"
+      },
+      {
+       "type": "text",
+       "delta": " Re"
+      },
+      {
+       "type": "text",
+       "delta": "ply \""
+      },
+      {
+       "type": "text",
+       "delta": "yes\" to save"
+      },
+      {
+       "type": "text",
+       "delta": " this"
+      },
+      {
+       "type": "text",
+       "delta": " plan as"
+      },
+      {
+       "type": "text",
+       "delta": " described"
+      },
+      {
+       "type": "text",
+       "delta": ", or t"
+      },
+      {
+       "type": "text",
+       "delta": "ell me what to"
+      },
+      {
+       "type": "text",
+       "delta": " change."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5433,
+       "outputTokens": 499,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    },
+    {
+     "fingerprint": "e758f86ef981533739added0ed2f79adbf5534709330f6022bbdee43a3b92231",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "I"
+      },
+      {
+       "type": "text",
+       "delta": " can set up this"
+      },
+      {
+       "type": "text",
+       "delta": " rec"
+      },
+      {
+       "type": "text",
+       "delta": "urring plan for"
+      },
+      {
+       "type": "text",
+       "delta": " a **"
+      },
+      {
+       "type": "text",
+       "delta": "5 kW compressor running"
+      },
+      {
+       "type": "text",
+       "delta": " for 3 hours on"
+      },
+      {
+       "type": "text",
+       "delta": " we"
+      },
+      {
+       "type": "text",
+       "delta": "ekdays ("
+      },
+      {
+       "type": "text",
+       "delta": "Monday to Friday)"
+      },
+      {
+       "type": "text",
+       "delta": "**, finished by **"
+      },
+      {
+       "type": "text",
+       "delta": "17:00**"
+      },
+      {
+       "type": "text",
+       "delta": " and"
+      },
+      {
+       "type": "text",
+       "delta": " not"
+      },
+      {
+       "type": "text",
+       "delta": " star"
+      },
+      {
+       "type": "text",
+       "delta": "ting before **09"
+      },
+      {
+       "type": "text",
+       "delta": ":00**"
+      },
+      {
+       "type": "text",
+       "delta": " UK time. Each morning"
+      },
+      {
+       "type": "text",
+       "delta": " I"
+      },
+      {
+       "type": "text",
+       "delta": "'d find"
+      },
+      {
+       "type": "text",
+       "delta": " the lowest-carbon"
+      },
+      {
+       "type": "text",
+       "delta": " 3-hour start in that"
+      },
+      {
+       "type": "text",
+       "delta": " window, using the lat"
+      },
+      {
+       "type": "text",
+       "delta": "est forecast,"
+      },
+      {
+       "type": "text",
+       "delta": " and the times"
+      },
+      {
+       "type": "text",
+       "delta": " would"
+      },
+      {
+       "type": "text",
+       "delta": " be quoted in"
+      },
+      {
+       "type": "text",
+       "delta": " London time. The tim"
+      },
+      {
+       "type": "text",
+       "delta": "ing is a"
+      },
+      {
+       "type": "text",
+       "delta": " rec"
+      },
+      {
+       "type": "text",
+       "delta": "ommendation based on a forec"
+      },
+      {
+       "type": "text",
+       "delta": "ast, so"
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " actual sa"
+      },
+      {
+       "type": "text",
+       "delta": "ving is"
+      },
+      {
+       "type": "text",
+       "delta": "n't guaranteed."
+      },
+      {
+       "type": "text",
+       "delta": "\n\nReply \"yes\""
+      },
+      {
+       "type": "text",
+       "delta": " to save this plan,"
+      },
+      {
+       "type": "text",
+       "delta": " or tell me what to change,"
+      },
+      {
+       "type": "text",
+       "delta": " such as the risk mode ("
+      },
+      {
+       "type": "text",
+       "delta": "exp"
+      },
+      {
+       "type": "text",
+       "delta": "ected or cautious)."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 1873,
+       "outputTokens": 567,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "8b8ed9a8a879af9f6291320dd87ef2b8244c1865531ebcf6927f22305396d2dd",
+     "result": {
+      "choice": "recurring",
+      "confidence": 0.99,
+      "probabilities": {
+       "plan_job": 0.01,
+       "plan_batch": 0,
+       "recurring": 0.99,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000032088
+     }
+    },
+    {
+     "fingerprint": "139e86afc4334fe4848aee731a3f3370a0d85a8749f87c1e85ccc56796acd734",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027972
+     }
+    },
+    {
+     "fingerprint": "6ab8c159afa7291f2dcb35382e769f4dd9adb515d4269a2dd8df1b97ed3e93c4",
+     "result": {
+      "choice": "act",
+      "confidence": 0.87,
+      "probabilities": {
+       "act": 0.9,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "ask_clarify": 0.1
+      },
+      "costUsd": 0.00002877
+     }
+    },
+    {
+     "fingerprint": "219929083b1a30923365b5be942e7e6b91402209f7a8e572cea61a7e89ea2fa3",
+     "result": {
+      "choice": "expected",
+      "confidence": 0.86,
+      "probabilities": {
+       "expected": 0.93,
+       "cautious": 0.07
+      },
+      "costUsd": 0.000025368
+     }
+    },
+    {
+     "fingerprint": "975ff473fa0ad7cb2cbd11ed927b95e469b23a24998f01412b954aae64b0ec90",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.76,
+      "probabilities": {
+       "pass": 0.84,
+       "overclaim_co2": 0.16,
+       "unsafe": 0
+      },
+      "costUsd": 0.00002352
+     }
+    }
+   ]
+  },
+  {
+   "model_calls": [
+    {
+     "fingerprint": "0f01313ee70695fe7e05d5f2229cb8abb42b08cfcf23d26e4e4601ffc75eaeea",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_0128yndEWdSTPffQFczCMdsZ",
+        "name": "save_recurring_plan",
+        "argsJson": "{\"label\": \"Compressor\", \"days\": [\"mon\", \"tue\", \"wed\", \"thu\", \"fri\"], \"window_from\": \"09:00\", \"window_to\": \"17:00\", \"duration_h\": 3, \"power_kw\": 5, \"remind\": false, \"confirm\": true}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5631,
+       "outputTokens": 349,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "cb0efea41d6f6f4087288de095600049d36b69d91b5c35d9df0d78c8e2c138ab",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Your rec"
+      },
+      {
+       "type": "text",
+       "delta": "urring pl"
+      },
+      {
+       "type": "text",
+       "delta": "an is saved:"
+      },
+      {
+       "type": "text",
+       "delta": " a"
+      },
+      {
+       "type": "text",
+       "delta": " 5 kW compressor"
+      },
+      {
+       "type": "text",
+       "delta": " running"
+      },
+      {
+       "type": "text",
+       "delta": " for 3 hours on we"
+      },
+      {
+       "type": "text",
+       "delta": "ekdays, finished by "
+      },
+      {
+       "type": "text",
+       "delta": "17:00 and not star"
+      },
+      {
+       "type": "text",
+       "delta": "ting before 09:00,"
+      },
+      {
+       "type": "text",
+       "delta": " using the expected ("
+      },
+      {
+       "type": "text",
+       "delta": "median for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast) ris"
+      },
+      {
+       "type": "text",
+       "delta": "k mode."
+      },
+      {
+       "type": "text",
+       "delta": " Reminders are off"
+      },
+      {
+       "type": "text",
+       "delta": ".\n\nThe next run"
+      },
+      {
+       "type": "text",
+       "delta": " is plan"
+      },
+      {
+       "type": "text",
+       "delta": "ned for **Tue 6"
+      },
+      {
+       "type": "text",
+       "delta": " Oct, 12:"
+      },
+      {
+       "type": "text",
+       "delta": "00 BST**. Start"
+      },
+      {
+       "type": "text",
+       "delta": " times are recalculated from each"
+      },
+      {
+       "type": "text",
+       "delta": " new forecast, so they can"
+      },
+      {
+       "type": "text",
+       "delta": " change."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 6149,
+       "outputTokens": 179,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "bf5da5381fea7d77253ecc6d7fd3ca7e1bfae7d8341fd53fdfba985ac625a34f",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000035028
+     }
+    },
+    {
+     "fingerprint": "8a4fdf2a57e16b6f4094f8546ddf26f3f2da102256f15658a837875426ff5eaa",
+     "result": {
+      "choice": "recurring",
+      "confidence": 0.91,
+      "probabilities": {
+       "plan_job": 0.06,
+       "plan_batch": 0,
+       "recurring": 0.92,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0.02,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000039144
+     }
+    },
+    {
+     "fingerprint": "ea262f43fc5a203c18c8924a9d673f6793c7d4d5158aebf608cef8a65629412e",
+     "result": {
+      "choice": "act",
+      "confidence": 0.96,
+      "probabilities": {
+       "act": 0.97,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "ask_clarify": 0.03
+      },
+      "costUsd": 0.000035826
+     }
+    },
+    {
+     "fingerprint": "14883e75bc4bd1bb4cf158bbc86feeb559efe16207627b54c1ace9400196ac48",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000032424
+     }
+    },
+    {
+     "fingerprint": "4d822c582da73549ed3e77ea859dd6ceb0c825d986cff5839e8eab331cf2ebd2",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "pass": 1,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000032172
+     }
+    }
+   ]
+  }
+ ]
+}

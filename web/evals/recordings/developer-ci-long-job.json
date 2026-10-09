@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "f8af71d4f263eda058741b366248aa6b31b781c2fafd429fed70d7d43ec56452",
+     "fingerprint": "94ea76454019ee0442eb09a5eb7e77c59ca22e24649f2f4415aa2fd9f3836826",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01D6M4pXMQMTNjjuox6ifXjc",
+        "id": "toolu_01Hh5hF1DfUCPbtp7qaxA2Pt",
         "name": "recommend_window",
-        "argsJson": "{\"duration_h\": 11, \"power_kw\": 0.3, \"deadline_local\": \"2026-10-07T20:00\", \"label\": \"CI runner job\"}"
+        "argsJson": "{\"duration_h\": 11, \"power_kw\": 0.3, \"deadline_local\": \"2026-10-07T20:00\", \"label\": \"CI runner job\", \"earliest_local\": \"2026-10-06T02:00\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3456,
-       "outputTokens": 320,
+       "inputTokens": 4125,
+       "outputTokens": 337,
        "cachedInputTokens": 0
       },
       {
@@ -29,20 +29,20 @@
      ]
     },
     {
-     "fingerprint": "b257cc136de86b22ba247774a63c3fc9bc982e1b263e81f1984618639266bf89",
+     "fingerprint": "a1572b43d062b29b72caff55fa8518d9c62d02cfa72d4ad7a4fb322388020d0a",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01B5huvYE1NwLEyWhRKB9nWh",
+        "id": "toolu_01EBwprX48FJkrJc8QQkYLwD",
         "name": "estimate_co2",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3925,
+       "inputTokens": 4628,
        "outputTokens": 29,
        "cachedInputTokens": 0
       },
@@ -53,76 +53,108 @@
      ]
     },
     {
-     "fingerprint": "17fc91430bb88e2c0a5ed6d937225966121dd80240452e5a5729e12ef2a7fd37",
+     "fingerprint": "8ae400a7e00b295cc959b05af26d43a65322e98b0fe158f431ad460b1f8c7ae1",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "**Best"
+       "delta": "The"
       },
       {
        "type": "text",
-       "delta": " start:"
+       "delta": " best window"
       },
       {
        "type": "text",
-       "delta": " Wed 7 O"
+       "delta": " for"
       },
       {
        "type": "text",
-       "delta": "ct, 09:00 B"
+       "delta": " your 11-hour,"
       },
       {
        "type": "text",
-       "delta": "ST**"
+       "delta": " 0.3 "
       },
       {
        "type": "text",
-       "delta": ", finishing at"
+       "delta": "kW CI run"
       },
       {
        "type": "text",
-       "delta": " 20:00 BST,"
+       "delta": "ner job"
       },
       {
        "type": "text",
-       "delta": " the"
+       "delta": " is **Wed 7 "
       },
       {
        "type": "text",
-       "delta": " deadline.\n\n- Average"
+       "delta": "Oct, 09:00"
       },
       {
        "type": "text",
-       "delta": " forecast intensity over"
+       "delta": " BST to 8"
       },
       {
        "type": "text",
-       "delta": " the run"
+       "delta": ":00 P"
       },
       {
        "type": "text",
-       "delta": " is"
+       "delta": "M BST**, which is the"
       },
       {
        "type": "text",
-       "delta": " about 77 gCO2"
+       "delta": " lat"
       },
       {
        "type": "text",
-       "delta": "/kWh, against"
+       "delta": "est start"
       },
       {
        "type": "text",
-       "delta": " about"
+       "delta": " that"
       },
       {
        "type": "text",
-       "delta": " 192 if"
+       "delta": " still me"
       },
       {
        "type": "text",
-       "delta": " you start now ("
+       "delta": "ets your deadline.\n\n-"
+      },
+      {
+       "type": "text",
+       "delta": " The forecast average over"
+      },
+      {
+       "type": "text",
+       "delta": " that"
+      },
+      {
+       "type": "text",
+       "delta": " window is about 77 gC"
+      },
+      {
+       "type": "text",
+       "delta": "O2"
+      },
+      {
+       "type": "text",
+       "delta": "/kWh, vers"
+      },
+      {
+       "type": "text",
+       "delta": "us about 192 gCO"
+      },
+      {
+       "type": "text",
+       "delta": "2/kWh if you "
+      },
+      {
+       "type": "text",
+       "delta": "ran it now ("
       },
       {
        "type": "text",
@@ -134,31 +166,15 @@
       },
       {
        "type": "text",
-       "delta": "ST)."
+       "delta": "ST).\n- The est"
       },
       {
        "type": "text",
-       "delta": " That is ro"
+       "delta": "imated difference is **"
       },
       {
        "type": "text",
-       "delta": "ughly 60% lower."
-      },
-      {
-       "type": "text",
-       "delta": "\n-"
-      },
-      {
-       "type": "text",
-       "delta": " Est"
-      },
-      {
-       "type": "text",
-       "delta": "imated difference:"
-      },
-      {
-       "type": "text",
-       "delta": " **381 g C"
+       "delta": "381 g C"
       },
       {
        "type": "text",
@@ -170,19 +186,19 @@
       },
       {
        "type": "text",
-       "delta": " to 593 g) for "
+       "delta": " to 593 g) for the"
       },
       {
        "type": "text",
-       "delta": "3.3 kWh."
+       "delta": " 3.3 kWh"
       },
       {
        "type": "text",
-       "delta": " This is an estimated difference"
+       "delta": " job. This is an estimated"
       },
       {
        "type": "text",
-       "delta": " based on average"
+       "delta": " difference based on average"
       },
       {
        "type": "text",
@@ -190,28 +206,76 @@
       },
       {
        "type": "text",
-       "delta": " measured or guaranteed"
+       "delta": " measured or"
       },
       {
        "type": "text",
-       "delta": " change."
+       "delta": " guaranteed change."
       },
       {
        "type": "text",
-       "delta": "\n- The recommendation is"
+       "delta": "\n- The rec"
       },
       {
        "type": "text",
-       "delta": " robust to"
+       "delta": "ommendation is robust to"
       },
       {
        "type": "text",
-       "delta": " forecast error."
+       "delta": " forecast error.\n\nI used"
+      },
+      {
+       "type": "text",
+       "delta": " your"
+      },
+      {
+       "type": "text",
+       "delta": " 11-hour du"
+      },
+      {
+       "type": "text",
+       "delta": "ration and 0.3 k"
+      },
+      {
+       "type": "text",
+       "delta": "W power"
+      },
+      {
+       "type": "text",
+       "delta": " as given. I can"
+      },
+      {
+       "type": "text",
+       "delta": " add"
+      },
+      {
+       "type": "text",
+       "delta": " this"
+      },
+      {
+       "type": "text",
+       "delta": " to your"
+      },
+      {
+       "type": "text",
+       "delta": " calendar or"
+      },
+      {
+       "type": "text",
+       "delta": " comp"
+      },
+      {
+       "type": "text",
+       "delta": "are other"
+      },
+      {
+       "type": "text",
+       "delta": " start times if you want."
       },
       {
        "type": "usage",
-       "inputTokens": 4168,
-       "outputTokens": 341,
+       "inputTokens": 4871,
+       "outputTokens": 454,
        "cachedInputTokens": 0
       },
       {
@@ -256,21 +320,6 @@
      }
     },
     {
-     "fingerprint": "8efd2ff5d54432373b067b96a392a1ecc49187c8aeeaf3a433e2a284817602cc",
-     "result": {
-      "choice": "act",
-      "confidence": 0.85,
-      "probabilities": {
-       "act": 0.88,
-       "ask_duration": 0,
-       "ask_power": 0,
-       "ask_deadline": 0.05,
-       "ask_clarify": 0.07
-      },
-      "costUsd": 0.000028602
-     }
-    },
-    {
      "fingerprint": "aa71dead4dce3f68a6eb208c4af58f7ad00dfb1e5d16b82bfc661c9cdc5774f8",
      "result": {
       "choice": "expected",
@@ -283,7 +332,22 @@
      }
     },
     {
-     "fingerprint": "e5555f93ca320950d9b9479accfd84a43d2f7d91a8cba3584c5ffbaa88c4ab8c",
+     "fingerprint": "8efd2ff5d54432373b067b96a392a1ecc49187c8aeeaf3a433e2a284817602cc",
+     "result": {
+      "choice": "act",
+      "confidence": 0.86,
+      "probabilities": {
+       "act": 0.89,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0.03,
+       "ask_clarify": 0.08
+      },
+      "costUsd": 0.000028602
+     }
+    },
+    {
+     "fingerprint": "5d4a1a0f4284c5fa08559dcf630a5ebdfc378a714f2fc9e6b1f3310889db888b",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -292,7 +356,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000044646
+      "costUsd": 0.000047124
      }
     }
    ]

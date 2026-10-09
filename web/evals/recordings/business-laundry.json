@@ -5,65 +5,213 @@
   {
    "model_calls": [
     {
-     "fingerprint": "6c9e0ae60232c6f10038ebd9c913d796a938f5265f4f762a7d3c0b705341d0dd",
+     "fingerprint": "b1dc3c978e7aee66508160cd2b9c4899d09db7b9af6c909844dc4d967ad5c1da",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01CkmxeSGJB6taCS5ozoKBZ4",
+        "name": "lookup_device",
+        "argsJson": "{\"query\": \"industrial washer\"}"
+       }
+      },
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01Kmg5UvEbQrDPamN5AzpNhx",
+        "name": "lookup_device",
+        "argsJson": "{\"query\": \"industrial dryer\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4821,
+       "outputTokens": 491,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "e2fa538f0064ab3f5118655a874da0c85b0144100f05178db996c886e7372d33",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_012HqAihG1gADTGdgE1uSwR6",
+        "name": "lookup_device",
+        "argsJson": "{\"query\": \"washing machine\"}"
+       }
+      },
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01SRL2Esop84JJU9xU4xKrth",
+        "name": "lookup_device",
+        "argsJson": "{\"query\": \"tumble dryer\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5043,
+       "outputTokens": 256,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "0a6211f178470ed58fd2b7e38c8b6efd3f9aaf37111fbd1bd96e042e0bb79411",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "What"
+       "delta": "I"
       },
       {
        "type": "text",
-       "delta": " time should all"
+       "delta": " can pl"
       },
       {
        "type": "text",
-       "delta": " three fin"
+       "delta": "an these, but I need one"
       },
       {
        "type": "text",
-       "delta": "ish by tonight?"
+       "delta": " th"
       },
       {
        "type": "text",
-       "delta": " Once I have"
+       "delta": "ing first"
       },
       {
        "type": "text",
-       "delta": " that, I'll use typical"
+       "delta": ": **"
       },
       {
        "type": "text",
-       "delta": " figures for indust"
+       "delta": "what time must all three finish by"
       },
       {
        "type": "text",
-       "delta": "rial washers and dryers"
+       "delta": "?** It"
       },
       {
        "type": "text",
-       "delta": " (you"
+       "delta": "'s now 01:30 on"
       },
       {
        "type": "text",
-       "delta": " can override"
+       "delta": " Tuesday "
       },
       {
        "type": "text",
-       "delta": " them) to"
+       "delta": "6 October, so \"ton"
       },
       {
        "type": "text",
-       "delta": " find the best start"
+       "delta": "ight\" could"
       },
       {
        "type": "text",
-       "delta": " times."
+       "delta": " mean early"
+      },
+      {
+       "type": "text",
+       "delta": " this"
+      },
+      {
+       "type": "text",
+       "delta": " morning or late"
+      },
+      {
+       "type": "text",
+       "delta": " tonight.\n\nI'm"
+      },
+      {
+       "type": "text",
+       "delta": " using typ"
+      },
+      {
+       "type": "text",
+       "delta": "ical dom"
+      },
+      {
+       "type": "text",
+       "delta": "estic ratings because"
+      },
+      {
+       "type": "text",
+       "delta": " I"
+      },
+      {
+       "type": "text",
+       "delta": " don't have industrial fig"
+      },
+      {
+       "type": "text",
+       "delta": "ures."
+      },
+      {
+       "type": "text",
+       "delta": " Tell me your"
+      },
+      {
+       "type": "text",
+       "delta": " machines' power"
+      },
+      {
+       "type": "text",
+       "delta": " and run"
+      },
+      {
+       "type": "text",
+       "delta": " times if you have"
+      },
+      {
+       "type": "text",
+       "delta": " them:\n- Washing"
+      },
+      {
+       "type": "text",
+       "delta": " machine: 0.5 "
+      },
+      {
+       "type": "text",
+       "delta": "kW, 2 h"
+      },
+      {
+       "type": "text",
+       "delta": "ours (assumed)\n-"
+      },
+      {
+       "type": "text",
+       "delta": " Tumble dryer:"
+      },
+      {
+       "type": "text",
+       "delta": " 2.5 kW,"
+      },
+      {
+       "type": "text",
+       "delta": " 2 hours (assum"
+      },
+      {
+       "type": "text",
+       "delta": "ed)"
       },
       {
        "type": "usage",
-       "inputTokens": 3451,
-       "outputTokens": 421,
+       "inputTokens": 5496,
+       "outputTokens": 668,
        "cachedInputTokens": 0
       },
       {
@@ -123,19 +271,19 @@
      "fingerprint": "9be173d2514d068e9400649753d77a645498ec292fe469c07d755d7e198b32c3",
      "result": {
       "choice": "act",
-      "confidence": 0.87,
+      "confidence": 0.85,
       "probabilities": {
-       "act": 0.9,
+       "act": 0.88,
        "ask_duration": 0.01,
        "ask_power": 0.01,
-       "ask_deadline": 0.01,
-       "ask_clarify": 0.07
+       "ask_deadline": 0.02,
+       "ask_clarify": 0.08
       },
       "costUsd": 0.00002961
      }
     },
     {
-     "fingerprint": "6fcb7fda53e2947657da5d30ddf9f9bcba16a00ac8933e709bf2abf1af47ab5f",
+     "fingerprint": "a1c9df948a7e4211834e98420562034d680a3e8a82c4bd1757943d3ca89cfdc9",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -144,7 +292,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000019824
+      "costUsd": 0.000032298
      }
     }
    ]

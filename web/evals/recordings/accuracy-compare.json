@@ -5,29 +5,29 @@
   {
    "model_calls": [
     {
-     "fingerprint": "4165bcc995dedfa24903502d5ed4ba7428f76565725d89033a1e6f4cf4e3f693",
+     "fingerprint": "d380ba0f2fab46a3cf9248851e6e86166a045279c340376ecbd3aabd9ede69d7",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01TSpqXyRYvZeM8kKoBeFPnP",
+        "id": "toolu_01KmjUhpGA1WbJmwdH47Puts",
         "name": "get_leaderboard",
-        "argsJson": "{\"model\": \"chronos\"}"
+        "argsJson": ""
        }
       },
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_014QFgBijzqMn94BMzMQ5WRC",
-        "name": "get_leaderboard",
-        "argsJson": "{\"model\": \"prophet\"}"
+        "id": "toolu_013KFoQPNBbNR9FCUgrFjntK",
+        "name": "get_backtest",
+        "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3117,
-       "outputTokens": 301,
+       "inputTokens": 3581,
+       "outputTokens": 199,
        "cachedInputTokens": 0
       },
       {
@@ -37,116 +37,48 @@
      ]
     },
     {
-     "fingerprint": "9919344725216a08f0a17ccc3feb9b02158b067cbff7a208261b494e20f1f502",
+     "fingerprint": "dd2f5e74c5c78dc3306f3be874478d75180c86994b6e907128a2b22345b0ba12",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "The"
+       "delta": "**"
       },
       {
        "type": "text",
-       "delta": " names"
+       "delta": "Ch"
       },
       {
        "type": "text",
-       "delta": " \""
+       "delta": "ronos-2 loo"
       },
       {
        "type": "text",
-       "delta": "ch"
+       "delta": "ks st"
       },
       {
        "type": "text",
-       "delta": "ronos\" and \"prophet"
+       "delta": "ronger than"
       },
       {
        "type": "text",
-       "delta": "\" aren't val"
+       "delta": " Prophet in the backt"
       },
       {
        "type": "text",
-       "delta": "id model"
+       "delta": "est, but the live check"
       },
       {
        "type": "text",
-       "delta": " IDs here"
+       "delta": " h"
       },
       {
        "type": "text",
-       "delta": ". The"
+       "delta": "asn't started yet.**"
       },
       {
        "type": "text",
-       "delta": " closest mat"
-      },
-      {
-       "type": "text",
-       "delta": "ches are ch"
-      },
-      {
-       "type": "text",
-       "delta": "ronos2_cov, ch"
-      },
-      {
-       "type": "text",
-       "delta": "ronos2_uni and pr"
-      },
-      {
-       "type": "text",
-       "delta": "ophet_wx, so I"
-      },
-      {
-       "type": "text",
-       "delta": "'ll p"
-      },
-      {
-       "type": "text",
-       "delta": "ull those."
-      },
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_01WmuC2mGqMMsusNxgPRFHG2",
-        "name": "get_leaderboard",
-        "argsJson": "{\"model\": \"chronos2_cov\"}"
-       }
-      },
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_01FPM63k2XufRC4YQj38BMtq",
-        "name": "get_leaderboard",
-        "argsJson": "{\"model\": \"chronos2_uni\"}"
-       }
-      },
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_01XjXtzZCBnXVTB3LzfXPGUc",
-        "name": "get_leaderboard",
-        "argsJson": "{\"model\": \"prophet_wx\"}"
-       }
-      },
-      {
-       "type": "usage",
-       "inputTokens": 3528,
-       "outputTokens": 319,
-       "cachedInputTokens": 0
-      },
-      {
-       "type": "finish",
-       "reason": "tool_calls"
-      }
-     ]
-    },
-    {
-     "fingerprint": "a9edbfed6d170376d282b7383982187154077c60b40714f9af348c8341184b80",
-     "model": "anthropic/claude-haiku-5.5",
-     "events": [
-      {
-       "type": "text",
-       "delta": "The"
+       "delta": " The"
       },
       {
        "type": "text",
@@ -154,283 +86,31 @@
       },
       {
        "type": "text",
-       "delta": " scored results y"
+       "delta": " scored forecasts yet"
       },
       {
        "type": "text",
-       "delta": "et,"
+       "delta": " ("
       },
       {
        "type": "text",
-       "delta": " so I'll check the backt"
+       "delta": "n="
       },
       {
        "type": "text",
-       "delta": "est."
-      },
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_01VVYapFpy8TcM3Ua2uHJURk",
-        "name": "get_backtest",
-        "argsJson": "{\"model\": \"chronos2_cov\"}"
-       }
-      },
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_0116tcVN8vqUMwSE2hG3fm5S",
-        "name": "get_backtest",
-        "argsJson": "{\"model\": \"chronos2_uni\"}"
-       }
-      },
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_01BTGWQn6r7UzeBs9VNSppUR",
-        "name": "get_backtest",
-        "argsJson": "{\"model\": \"prophet_wx\"}"
-       }
-      },
-      {
-       "type": "usage",
-       "inputTokens": 4222,
-       "outputTokens": 201,
-       "cachedInputTokens": 0
-      },
-      {
-       "type": "finish",
-       "reason": "tool_calls"
-      }
-     ]
-    },
-    {
-     "fingerprint": "f8b8f0b8b37d85c3c8ed45e7a8880d448513f91dc2e94f76790d6b18935413bc",
-     "model": "anthropic/claude-haiku-5.5",
-     "events": [
-      {
-       "type": "text",
-       "delta": "I m"
+       "delta": "0), so these"
       },
       {
        "type": "text",
-       "delta": "apped \""
+       "delta": " fig"
       },
       {
        "type": "text",
-       "delta": "Chronos\" and \""
+       "delta": "ures come from "
       },
       {
        "type": "text",
-       "delta": "Prophet\" to the"
-      },
-      {
-       "type": "text",
-       "delta": " closest val"
-      },
-      {
-       "type": "text",
-       "delta": "id models"
-      },
-      {
-       "type": "text",
-       "delta": ": **Chronos-2"
-      },
-      {
-       "type": "text",
-       "delta": " + weather** (ch"
-      },
-      {
-       "type": "text",
-       "delta": "ronos2_cov),"
-      },
-      {
-       "type": "text",
-       "delta": " **Chronos-2**"
-      },
-      {
-       "type": "text",
-       "delta": " (chronos2_uni"
-      },
-      {
-       "type": "text",
-       "delta": ")"
-      },
-      {
-       "type": "text",
-       "delta": " and **prophet_wx"
-      },
-      {
-       "type": "text",
-       "delta": "**"
-      },
-      {
-       "type": "text",
-       "delta": ". I couldn't find"
-      },
-      {
-       "type": "text",
-       "delta": " a live score"
-      },
-      {
-       "type": "text",
-       "delta": " for"
-      },
-      {
-       "type": "text",
-       "delta": " any of them yet,"
-      },
-      {
-       "type": "text",
-       "delta": " so this com"
-      },
-      {
-       "type": "text",
-       "delta": "parison u"
-      },
-      {
-       "type": "text",
-       "delta": "ses back"
-      },
-      {
-       "type": "text",
-       "delta": "test results only.\n\n- **"
-      },
-      {
-       "type": "text",
-       "delta": "Chronos-2 +"
-      },
-      {
-       "type": "text",
-       "delta": " weather:** MAE "
-      },
-      {
-       "type": "text",
-       "delta": "18.1 gCO2"
-      },
-      {
-       "type": "text",
-       "delta": "/kWh, "
-      },
-      {
-       "type": "text",
-       "delta": "80% inter"
-      },
-      {
-       "type": "text",
-       "delta": "val coverage 83%."
-      },
-      {
-       "type": "text",
-       "delta": "\n- **pr"
-      },
-      {
-       "type": "text",
-       "delta": "ophet_wx:** M"
-      },
-      {
-       "type": "text",
-       "delta": "AE 24.8 g"
-      },
-      {
-       "type": "text",
-       "delta": "CO2/kWh,"
-      },
-      {
-       "type": "text",
-       "delta": " coverage 65%"
-      },
-      {
-       "type": "text",
-       "delta": ","
-      },
-      {
-       "type": "text",
-       "delta": " so"
-      },
-      {
-       "type": "text",
-       "delta": " its "
-      },
-      {
-       "type": "text",
-       "delta": "80% range is too"
-      },
-      {
-       "type": "text",
-       "delta": " narrow.\n- **"
-      },
-      {
-       "type": "text",
-       "delta": "Chronos-2 (no"
-      },
-      {
-       "type": "text",
-       "delta": " weather):** MAE "
-      },
-      {
-       "type": "text",
-       "delta": "26.9 gCO2"
-      },
-      {
-       "type": "text",
-       "delta": "/kWh, coverage"
-      },
-      {
-       "type": "text",
-       "delta": " 78%."
-      },
-      {
-       "type": "text",
-       "delta": "\n- **Seasonal na"
-      },
-      {
-       "type": "text",
-       "delta": "ive ben"
-      },
-      {
-       "type": "text",
-       "delta": "chmarks:** \"y"
-      },
-      {
-       "type": "text",
-       "delta": "esterday\" ("
-      },
-      {
-       "type": "text",
-       "delta": "snaive_24) MA"
-      },
-      {
-       "type": "text",
-       "delta": "E 41.6 "
-      },
-      {
-       "type": "text",
-       "delta": "and \"last week\" (sna"
-      },
-      {
-       "type": "text",
-       "delta": "ive_168) MAE "
-      },
-      {
-       "type": "text",
-       "delta": "45.7."
-      },
-      {
-       "type": "text",
-       "delta": "\n\nAll three beat both"
-      },
-      {
-       "type": "text",
-       "delta": " benchmarks in"
-      },
-      {
-       "type": "text",
-       "delta": " the back"
-      },
-      {
-       "type": "text",
-       "delta": "test (90"
+       "delta": "90 past"
       },
       {
        "type": "text",
@@ -442,80 +122,176 @@
       },
       {
        "type": "text",
-       "delta": " 7 Jul to"
+       "delta": " where weather in"
       },
       {
        "type": "text",
-       "delta": " 4 Oct 2"
+       "delta": "puts are"
       },
       {
        "type": "text",
-       "delta": "026). Backtest weather"
+       "delta": " optimistic."
       },
       {
        "type": "text",
-       "delta": " is clos"
+       "delta": "\n\n- **Chronos-"
       },
       {
        "type": "text",
-       "delta": "er to re"
+       "delta": "2 + weather:** M"
       },
       {
        "type": "text",
-       "delta": "ality than a real"
+       "delta": "AE 18.1 "
       },
       {
        "type": "text",
-       "delta": " 1–2 "
+       "delta": "gCO2/kWh"
       },
       {
        "type": "text",
-       "delta": "day for"
+       "delta": ", MASE 0.518"
       },
       {
        "type": "text",
-       "delta": "ecast, so these models will"
+       "delta": ", 80% inter"
       },
       {
        "type": "text",
-       "delta": " likely look wor"
+       "delta": "val coverage 83%."
       },
       {
        "type": "text",
-       "delta": "se live. The live leader"
+       "delta": "\n- **Pr"
       },
       {
        "type": "text",
-       "delta": "board has "
+       "delta": "ophet (prophet_w"
       },
       {
        "type": "text",
-       "delta": "0 scored forecasts"
+       "delta": "x):** MAE 24"
       },
       {
        "type": "text",
-       "delta": " so"
+       "delta": ".8 gCO2/"
       },
       {
        "type": "text",
-       "delta": " far, so it"
+       "delta": "kWh, MASE "
       },
       {
        "type": "text",
-       "delta": " can't y"
+       "delta": "0.713, 80% inter"
       },
       {
        "type": "text",
-       "delta": "et confirm which"
+       "delta": "val coverage 65%."
       },
       {
        "type": "text",
-       "delta": " model is better."
+       "delta": "\n- **Ben"
+      },
+      {
+       "type": "text",
+       "delta": "chmark"
+      },
+      {
+       "type": "text",
+       "delta": " ("
+      },
+      {
+       "type": "text",
+       "delta": "seasonal naive, y"
+      },
+      {
+       "type": "text",
+       "delta": "esterday):** MAE"
+      },
+      {
+       "type": "text",
+       "delta": " 41.6 gCO"
+      },
+      {
+       "type": "text",
+       "delta": "2/kWh, MAS"
+      },
+      {
+       "type": "text",
+       "delta": "E 1.185. Both"
+      },
+      {
+       "type": "text",
+       "delta": " models"
+      },
+      {
+       "type": "text",
+       "delta": " beat it."
+      },
+      {
+       "type": "text",
+       "delta": "\n\nProphet's "
+      },
+      {
+       "type": "text",
+       "delta": "65% co"
+      },
+      {
+       "type": "text",
+       "delta": "verage fal"
+      },
+      {
+       "type": "text",
+       "delta": "ls well"
+      },
+      {
+       "type": "text",
+       "delta": " short of the 80% target,"
+      },
+      {
+       "type": "text",
+       "delta": " so its u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertainty "
+      },
+      {
+       "type": "text",
+       "delta": "ranges are too narrow."
+      },
+      {
+       "type": "text",
+       "delta": " Chronos-2 with"
+      },
+      {
+       "type": "text",
+       "delta": " weather also"
+      },
+      {
+       "type": "text",
+       "delta": " be"
+      },
+      {
+       "type": "text",
+       "delta": "at Prophet at"
+      },
+      {
+       "type": "text",
+       "delta": " every horizon in"
+      },
+      {
+       "type": "text",
+       "delta": " the"
+      },
+      {
+       "type": "text",
+       "delta": " backtest."
       },
       {
        "type": "usage",
-       "inputTokens": 8124,
-       "outputTokens": 624,
+       "inputTokens": 6890,
+       "outputTokens": 613,
        "cachedInputTokens": 0
       },
       {
@@ -530,10 +306,10 @@
      "fingerprint": "ec02f663086ec4355c3fd85e78f9a02f05beef259dce45dc08467080bafc2f48",
      "result": {
       "choice": "off_topic",
-      "confidence": 0.91,
+      "confidence": 0.93,
       "probabilities": {
-       "allow": 0.07,
-       "off_topic": 0.93,
+       "allow": 0.05,
+       "off_topic": 0.95,
        "injection": 0,
        "abuse": 0
       },
@@ -544,23 +320,23 @@
      "fingerprint": "07696c2405d75b0cc166feb84d668ca01c8fd365c273e3daec1db569d545d0fa",
      "result": {
       "choice": "model_accuracy",
-      "confidence": 0.94,
+      "confidence": 0.95,
       "probabilities": {
        "plan_job": 0,
        "plan_batch": 0,
        "recurring": 0,
        "explain_forecast": 0,
-       "model_accuracy": 0.95,
+       "model_accuracy": 0.96,
        "impact_history": 0,
        "profile_update": 0,
        "smalltalk": 0,
-       "off_topic": 0.05
+       "off_topic": 0.04
       },
       "costUsd": 0.000031248
      }
     },
     {
-     "fingerprint": "881c6c85579479ab3474969ca28386b2eb46a6c83b74ed659eca3d19094e28ea",
+     "fingerprint": "426b27f8535a63eb8923b378b4a62648d9122b20ad1f8372f0f5f983137f5372",
      "result": {
       "choice": "pass",
       "confidence": 0.98,
@@ -569,7 +345,7 @@
        "overclaim_co2": 0.01,
        "unsafe": 0
       },
-      "costUsd": 0.000134358
+      "costUsd": 0.000135702
      }
     }
    ]

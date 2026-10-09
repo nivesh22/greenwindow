@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "c9fb5a2ee5b7bccff85131b75a7dbd78059b44533e4bbbdd82fb0bd88b0fe7b3",
+     "fingerprint": "0adfbf87527e043c8f3d30f63d98febe03a454c334a6a170a1f461aeccb05613",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01BkG6zk3Es3yqK8VuqTPC7v",
+        "id": "toolu_01PiWdbjxu4c9Ss4v4j2kuC2",
         "name": "lookup_device",
         "argsJson": "{\"query\": \"dishwasher\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3452,
-       "outputTokens": 415,
+       "inputTokens": 4121,
+       "outputTokens": 238,
        "cachedInputTokens": 0
       },
       {
@@ -29,21 +29,21 @@
      ]
     },
     {
-     "fingerprint": "5a61613ad78573b97b6e63d2d76b0b85789948ace0e26aaefe468e6c25bd0cb3",
+     "fingerprint": "b2a5c448043bef7fffade3f18586c326530602b7342c369e7a9a9d50972de13f",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01NtZzZAJfNnGVn2ATKQhTsr",
+        "id": "toolu_01GGdJc5smpy3Zt8JHdrJ3ax",
         "name": "recommend_window",
-        "argsJson": "{\"duration_h\": 2, \"power_kw\": 1.2, \"deadline_local\": \"2026-10-07T07:00\", \"label\": \"Dishwasher\"}"
+        "argsJson": "{\"duration_h\": 2, \"power_kw\": 1.2, \"deadline_local\": \"2026-10-07T07:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"Dishwasher\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3608,
-       "outputTokens": 226,
+       "inputTokens": 4277,
+       "outputTokens": 346,
        "cachedInputTokens": 0
       },
       {
@@ -53,20 +53,20 @@
      ]
     },
     {
-     "fingerprint": "ca960e39ed991fa5526d160182733db75a7dc3b54f67bfe0300a8e847cdee3c5",
+     "fingerprint": "7a4e5f45c25fb4e221caaabf989bde66b7aa04eb540a9d6dbbcf858fb8d1df11",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01AgedAWfNA1mckzfGnzVEKF",
+        "id": "toolu_01UQnu9LdzFjoVWhmCWthDVX",
         "name": "estimate_co2",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4068,
+       "inputTokens": 4771,
        "outputTokens": 29,
        "cachedInputTokens": 0
       },
@@ -77,172 +77,44 @@
      ]
     },
     {
-     "fingerprint": "26be8fab65f31a267db600208e4eb269988d4e6c97c3133352537fd9bbcaeaee",
+     "fingerprint": "64607a55bf8610f8fd4db94cbee663d26d219fb75b328fcd5ad71d68fb70846f",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Running"
+       "delta": "The"
       },
       {
        "type": "text",
-       "delta": " the dishwasher at **"
+       "delta": " best"
       },
       {
        "type": "text",
-       "delta": "3:00am"
+       "delta": " start for"
       },
       {
        "type": "text",
-       "delta": " B"
+       "delta": " your dishwasher is **"
       },
       {
        "type": "text",
-       "delta": "ST on"
+       "delta": "Wed 7 O"
       },
       {
        "type": "text",
-       "delta": " Wed 7 O"
+       "delta": "ct, 03:00 B"
       },
       {
        "type": "text",
-       "delta": "ct** (fin"
+       "delta": "ST**"
       },
       {
        "type": "text",
-       "delta": "ishing 5:00am,"
+       "delta": ", finishing by"
       },
       {
        "type": "text",
-       "delta": " before the 7:"
-      },
-      {
-       "type": "text",
-       "delta": "00am deadline) has"
-      },
-      {
-       "type": "text",
-       "delta": " the lowest forecast average"
-      },
-      {
-       "type": "text",
-       "delta": " int"
-      },
-      {
-       "type": "text",
-       "delta": "ensity, "
-      },
-      {
-       "type": "text",
-       "delta": "158 g"
-      },
-      {
-       "type": "text",
-       "delta": "CO2/kWh,"
-      },
-      {
-       "type": "text",
-       "delta": " vers"
-      },
-      {
-       "type": "text",
-       "delta": "us 188 if"
-      },
-      {
-       "type": "text",
-       "delta": " started"
-      },
-      {
-       "type": "text",
-       "delta": " at"
-      },
-      {
-       "type": "text",
-       "delta": " 2:00am B"
-      },
-      {
-       "type": "text",
-       "delta": "ST Tue 6 "
-      },
-      {
-       "type": "text",
-       "delta": "Oct. That's about 16"
-      },
-      {
-       "type": "text",
-       "delta": "% lower.\n\n-"
-      },
-      {
-       "type": "text",
-       "delta": " **Not"
-      },
-      {
-       "type": "text",
-       "delta": " robust:"
-      },
-      {
-       "type": "text",
-       "delta": "** the forecast u"
-      },
-      {
-       "type": "text",
-       "delta": "ncertainty is w"
-      },
-      {
-       "type": "text",
-       "delta": "ide enough that this"
-      },
-      {
-       "type": "text",
-       "delta": " could be worse than"
-      },
-      {
-       "type": "text",
-       "delta": " running now. The estimated dif"
-      },
-      {
-       "type": "text",
-       "delta": "ference is 72 g ("
-      },
-      {
-       "type": "text",
-       "delta": "range"
-      },
-      {
-       "type": "text",
-       "delta": " -"
-      },
-      {
-       "type": "text",
-       "delta": "70 g"
-      },
-      {
-       "type": "text",
-       "delta": " to 205 g),"
-      },
-      {
-       "type": "text",
-       "delta": " so tre"
-      },
-      {
-       "type": "text",
-       "delta": "at the"
-      },
-      {
-       "type": "text",
-       "delta": " gain as u"
-      },
-      {
-       "type": "text",
-       "delta": "ncertain.\n- **"
-      },
-      {
-       "type": "text",
-       "delta": "Assumptions:** "
-      },
-      {
-       "type": "text",
-       "delta": "1.2 kW for"
+       "delta": " 05:00,"
       },
       {
        "type": "text",
@@ -250,36 +122,188 @@
       },
       {
        "type": "text",
-       "delta": "2 hours (a typical"
+       "delta": "ahead of your"
       },
       {
        "type": "text",
-       "delta": " UK dishwasher c"
+       "delta": " 7am deadline."
       },
       {
        "type": "text",
-       "delta": "ycle, "
+       "delta": " Running it"
       },
       {
        "type": "text",
-       "delta": "2.4 kWh)."
+       "delta": " at"
       },
       {
        "type": "text",
-       "delta": " You can change either"
+       "delta": " 02:00 B"
       },
       {
        "type": "text",
-       "delta": " fig"
+       "delta": "ST t"
       },
       {
        "type": "text",
-       "delta": "ure."
+       "delta": "onight aver"
+      },
+      {
+       "type": "text",
+       "delta": "ages 188"
+      },
+      {
+       "type": "text",
+       "delta": " gCO2/kW"
+      },
+      {
+       "type": "text",
+       "delta": "h, versus 158 at"
+      },
+      {
+       "type": "text",
+       "delta": " 03:00 t"
+      },
+      {
+       "type": "text",
+       "delta": "omorrow, a 16"
+      },
+      {
+       "type": "text",
+       "delta": "% l"
+      },
+      {
+       "type": "text",
+       "delta": "ower average"
+      },
+      {
+       "type": "text",
+       "delta": ".\n\n- **Not"
+      },
+      {
+       "type": "text",
+       "delta": " robust:** the"
+      },
+      {
+       "type": "text",
+       "delta": " for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertainty is large en"
+      },
+      {
+       "type": "text",
+       "delta": "ough that this could"
+      },
+      {
+       "type": "text",
+       "delta": " go"
+      },
+      {
+       "type": "text",
+       "delta": " either way.\n- **Est"
+      },
+      {
+       "type": "text",
+       "delta": "imated difference:** about"
+      },
+      {
+       "type": "text",
+       "delta": " 72 g CO2 "
+      },
+      {
+       "type": "text",
+       "delta": "in favour of wa"
+      },
+      {
+       "type": "text",
+       "delta": "iting, with a range of -"
+      },
+      {
+       "type": "text",
+       "delta": "70 g to 205 g"
+      },
+      {
+       "type": "text",
+       "delta": ". The range includes the recomm"
+      },
+      {
+       "type": "text",
+       "delta": "end"
+      },
+      {
+       "type": "text",
+       "delta": "ation being worse than"
+      },
+      {
+       "type": "text",
+       "delta": " running now, so the"
+      },
+      {
+       "type": "text",
+       "delta": " g"
+      },
+      {
+       "type": "text",
+       "delta": "ain is not"
+      },
+      {
+       "type": "text",
+       "delta": " certain.\n- **Ass"
+      },
+      {
+       "type": "text",
+       "delta": "umptions:** "
+      },
+      {
+       "type": "text",
+       "delta": "1.2 kW for"
+      },
+      {
+       "type": "text",
+       "delta": " 2 hours (typ"
+      },
+      {
+       "type": "text",
+       "delta": "ical UK cycle fig"
+      },
+      {
+       "type": "text",
+       "delta": "ures, which"
+      },
+      {
+       "type": "text",
+       "delta": " you can change if"
+      },
+      {
+       "type": "text",
+       "delta": " your"
+      },
+      {
+       "type": "text",
+       "delta": " dishwasher differ"
+      },
+      {
+       "type": "text",
+       "delta": "s).\n\nWould you like me"
+      },
+      {
+       "type": "text",
+       "delta": " to add this to your calendar"
+      },
+      {
+       "type": "text",
+       "delta": "?"
       },
       {
        "type": "usage",
-       "inputTokens": 4313,
-       "outputTokens": 405,
+       "inputTokens": 5016,
+       "outputTokens": 487,
        "cachedInputTokens": 0
       },
       {
@@ -351,16 +375,16 @@
      }
     },
     {
-     "fingerprint": "d1acfc46241cdac87c1bebce716b3fcaf204ed2611b7c6994004a13855422578",
+     "fingerprint": "3b8ca3652808f9d499893cc23da289a49d2f51c3e2662534e1b22f6ca82058d7",
      "result": {
       "choice": "pass",
-      "confidence": 0.94,
+      "confidence": 0.92,
       "probabilities": {
-       "pass": 0.96,
-       "overclaim_co2": 0.04,
+       "pass": 0.95,
+       "overclaim_co2": 0.05,
        "unsafe": 0
       },
-      "costUsd": 0.000047208
+      "costUsd": 0.0000483
      }
     }
    ]

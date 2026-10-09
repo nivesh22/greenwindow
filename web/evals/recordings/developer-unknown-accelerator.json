@@ -5,37 +5,49 @@
   {
    "model_calls": [
     {
-     "fingerprint": "09892bb7ac434d5804c88e555ca03c41ac52945818ade66bc04dc53361f56487",
+     "fingerprint": "bf1a89991ec5d0ebbce52e607cda1c6fc9ef9f896df2c87dce24f99846735f3f",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Got it: 4 h"
+       "delta": "Got it: 4"
       },
       {
        "type": "text",
-       "delta": "ours,"
+       "delta": " hours, done"
       },
       {
        "type": "text",
-       "delta": " done by 8am. What"
+       "delta": " by 8am. What"
       },
       {
        "type": "text",
-       "delta": " device is"
+       "delta": " power in"
       },
       {
        "type": "text",
-       "delta": " this, or how much power does it"
+       "delta": " kW does that set"
       },
       {
        "type": "text",
-       "delta": " draw in kW?"
+       "delta": "up draw, or is it a"
+      },
+      {
+       "type": "text",
+       "delta": " specific device I"
+      },
+      {
+       "type": "text",
+       "delta": " should"
+      },
+      {
+       "type": "text",
+       "delta": " look up?"
       },
       {
        "type": "usage",
-       "inputTokens": 1251,
-       "outputTokens": 145,
+       "inputTokens": 1670,
+       "outputTokens": 132,
        "cachedInputTokens": 0
       },
       {
@@ -80,6 +92,21 @@
      }
     },
     {
+     "fingerprint": "d26b3b143044dff56642d43aa01f73485c1492c249c38ba89c173d9d9619b812",
+     "result": {
+      "choice": "ask_power",
+      "confidence": 0.96,
+      "probabilities": {
+       "act": 0.03,
+       "ask_duration": 0,
+       "ask_power": 0.97,
+       "ask_deadline": 0,
+       "ask_clarify": 0
+      },
+      "costUsd": 0.000027888
+     }
+    },
+    {
      "fingerprint": "c329eff7367f5d8bdde0f0faaf184980b88fe1f8cf8f4695e3f1d425173bff0e",
      "result": {
       "choice": "expected",
@@ -89,21 +116,6 @@
        "cautious": 0
       },
       "costUsd": 0.000024486
-     }
-    },
-    {
-     "fingerprint": "d26b3b143044dff56642d43aa01f73485c1492c249c38ba89c173d9d9619b812",
-     "result": {
-      "choice": "ask_power",
-      "confidence": 0.95,
-      "probabilities": {
-       "act": 0.04,
-       "ask_duration": 0,
-       "ask_power": 0.96,
-       "ask_deadline": 0,
-       "ask_clarify": 0
-      },
-      "costUsd": 0.000027888
      }
     }
    ]

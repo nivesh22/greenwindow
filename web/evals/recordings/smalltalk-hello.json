@@ -6,20 +6,6 @@
    "model_calls": [],
    "gate_calls": [
     {
-     "fingerprint": "505f9018f6f70f4306d13a0c4fdcf04aedaf2d7bd70471dd63f957b587c9476c",
-     "result": {
-      "choice": "allow",
-      "confidence": 1,
-      "probabilities": {
-       "allow": 1,
-       "off_topic": 0,
-       "injection": 0,
-       "abuse": 0
-      },
-      "costUsd": 0.00002688
-     }
-    },
-    {
      "fingerprint": "5f4838aa4aa730a717d37629ef2731109aa6949340075dd4b9e1ce3ff078daf1",
      "result": {
       "choice": "smalltalk",
@@ -36,6 +22,20 @@
        "off_topic": 0
       },
       "costUsd": 0.000030996
+     }
+    },
+    {
+     "fingerprint": "505f9018f6f70f4306d13a0c4fdcf04aedaf2d7bd70471dd63f957b587c9476c",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.00002688
      }
     }
    ]

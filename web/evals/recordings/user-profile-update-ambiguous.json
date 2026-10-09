@@ -1,0 +1,362 @@
+{
+ "version": 1,
+ "scenario_id": "user-profile-update-ambiguous",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "0d3cdd7c06e105d1af5cb20433f7d14d7a1160c013a65d4c4cc23cd2f5840c94",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Underst"
+      },
+      {
+       "type": "text",
+       "delta": "ood. I'll fav"
+      },
+      {
+       "type": "text",
+       "delta": "our cautious pl"
+      },
+      {
+       "type": "text",
+       "delta": "ans, which means"
+      },
+      {
+       "type": "text",
+       "delta": " picking wind"
+      },
+      {
+       "type": "text",
+       "delta": "ows that st"
+      },
+      {
+       "type": "text",
+       "delta": "ay low"
+      },
+      {
+       "type": "text",
+       "delta": "-carbon even if"
+      },
+      {
+       "type": "text",
+       "delta": " the forecast sh"
+      },
+      {
+       "type": "text",
+       "delta": "ifts,"
+      },
+      {
+       "type": "text",
+       "delta": " and I'll t"
+      },
+      {
+       "type": "text",
+       "delta": "ell you how"
+      },
+      {
+       "type": "text",
+       "delta": " rob"
+      },
+      {
+       "type": "text",
+       "delta": "ust each rec"
+      },
+      {
+       "type": "text",
+       "delta": "ommendation is.\n\nWould"
+      },
+      {
+       "type": "text",
+       "delta": " you like me"
+      },
+      {
+       "type": "text",
+       "delta": " to save \""
+      },
+      {
+       "type": "text",
+       "delta": "cautious\" as your default for"
+      },
+      {
+       "type": "text",
+       "delta": " future plans? That"
+      },
+      {
+       "type": "text",
+       "delta": " only works if you're signed in"
+      },
+      {
+       "type": "text",
+       "delta": ", and I'"
+      },
+      {
+       "type": "text",
+       "delta": "ll make the change only"
+      },
+      {
+       "type": "text",
+       "delta": " once"
+      },
+      {
+       "type": "text",
+       "delta": " you conf"
+      },
+      {
+       "type": "text",
+       "delta": "irm. What would you like to"
+      },
+      {
+       "type": "text",
+       "delta": " plan first"
+      },
+      {
+       "type": "text",
+       "delta": ":"
+      },
+      {
+       "type": "text",
+       "delta": " what device"
+      },
+      {
+       "type": "text",
+       "delta": " or"
+      },
+      {
+       "type": "text",
+       "delta": " job,"
+      },
+      {
+       "type": "text",
+       "delta": " ro"
+      },
+      {
+       "type": "text",
+       "delta": "ughly how long it"
+      },
+      {
+       "type": "text",
+       "delta": " runs, and by"
+      },
+      {
+       "type": "text",
+       "delta": " when it need"
+      },
+      {
+       "type": "text",
+       "delta": "s to finish?"
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3087,
+       "outputTokens": 401,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "d51a305045e0ae1b5197bcd86138fcb87eac5c61c9297abfae278881e4c49cbe",
+     "result": {
+      "choice": "profile_update",
+      "confidence": 0.88,
+      "probabilities": {
+       "plan_job": 0.04,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0.01,
+       "model_accuracy": 0.01,
+       "impact_history": 0,
+       "profile_update": 0.89,
+       "smalltalk": 0.04,
+       "off_topic": 0.01
+      },
+      "costUsd": 0.000031374
+     }
+    },
+    {
+     "fingerprint": "f9b164a2b9695a46e96a35bf31bce1c9ca475b4fcb20a1b950cb7aae62d80ff4",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.97,
+      "probabilities": {
+       "allow": 0.98,
+       "off_topic": 0.02,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027258
+     }
+    },
+    {
+     "fingerprint": "fd1cbe6b9ace06128070f75797788bbb01e94789299113c6f4654128a00f1e8a",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "pass": 1,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000022512
+     }
+    }
+   ]
+  },
+  {
+   "model_calls": [
+    {
+     "fingerprint": "ec18650e6bcac866a6f59f2c2f3562092f4da9ca75e9721c2fecc03eaf28d376",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01Ch16io1KAAfRFvB6ghx2pB",
+        "name": "update_profile",
+        "argsJson": "{\"confirm\": true, \"risk_default\": \"cautious\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3240,
+       "outputTokens": 159,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "c6d854c741c3260fd88e5dda9c164630ba0433edd98f52c76f1d9dc40fd2f230",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Your default risk mode is now"
+      },
+      {
+       "type": "text",
+       "delta": " **cautious**, so future"
+      },
+      {
+       "type": "text",
+       "delta": " plans will fav"
+      },
+      {
+       "type": "text",
+       "delta": "our windows that stay low-"
+      },
+      {
+       "type": "text",
+       "delta": "carbon even if the forec"
+      },
+      {
+       "type": "text",
+       "delta": "ast shifts.\n\nWhat would"
+      },
+      {
+       "type": "text",
+       "delta": " you like to plan? T"
+      },
+      {
+       "type": "text",
+       "delta": "ell me the device"
+      },
+      {
+       "type": "text",
+       "delta": " or job, ro"
+      },
+      {
+       "type": "text",
+       "delta": "ughly how long it runs,"
+      },
+      {
+       "type": "text",
+       "delta": " and the"
+      },
+      {
+       "type": "text",
+       "delta": " time"
+      },
+      {
+       "type": "text",
+       "delta": " you"
+      },
+      {
+       "type": "text",
+       "delta": " need it finished by."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3384,
+       "outputTokens": 81,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "4f269523b0ad0a64e2c54bfeb6c583db27c8a4573521154e4823f643e72d328c",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.92,
+      "probabilities": {
+       "allow": 0.94,
+       "off_topic": 0,
+       "injection": 0.06,
+       "abuse": 0
+      },
+      "costUsd": 0.000033348
+     }
+    },
+    {
+     "fingerprint": "a2dc4c88c46623e2dafaa56d8ebc40db8027088a15778f97304de7a370ad9718",
+     "result": {
+      "choice": "profile_update",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 0,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 1,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000037464
+     }
+    },
+    {
+     "fingerprint": "fe05c078495857ebcbee84cdc8c96f42fdfbadd59749136c74eb3c6a304abc28",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.92,
+      "probabilities": {
+       "pass": 0.95,
+       "overclaim_co2": 0.05,
+       "unsafe": 0
+      },
+      "costUsd": 0.000022218
+     }
+    }
+   ]
+  }
+ ]
+}

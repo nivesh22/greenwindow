@@ -335,7 +335,18 @@ export async function guardOutStage(
 /** Fixed scope facts the assistant may quote without a tool (the grounding check allows them too). */
 const SCOPE_FACTS = 'Great Britain national grid, 48-hour forecast, jobs of 1 to 12 hours, 80% forecast band (10th to 90th percentile).'
 
-async function factsBlock(data: ForecastSource, nowMs: number, panel: ChatRequest['panel_state'], profile: string | null): Promise<string> {
+/** Told to the model when the caller is not a signed-in Google user, so it can explain why saving is unavailable. */
+export const GUEST_FACT =
+  'The user is a guest (not signed in with Google). Saving recurring plans, reminders, settings and devices needs Google ' +
+  'sign-in: when they ask for one of those, plan what you can and say they can sign in to save it.'
+
+async function factsBlock(
+  data: ForecastSource,
+  nowMs: number,
+  panel: ChatRequest['panel_state'],
+  profile: string | null,
+  signedIn: boolean,
+): Promise<string> {
   const lines = [`Now: ${toIso(nowMs)} UTC (${formatDateTime(toIso(nowMs))} in London).`]
   try {
     const [meta, latest] = await Promise.all([data.meta(), data.latest()])
@@ -349,6 +360,7 @@ async function factsBlock(data: ForecastSource, nowMs: number, panel: ChatReques
   }
   lines.push('Scope: Great Britain national average, 48-hour horizon, jobs of 1 to 12 whole hours.')
   if (profile) lines.push(profile)
+  if (!signedIn) lines.push(GUEST_FACT)
   if (panel) lines.push(`Planner panel (JSON, may have been edited by the user): ${JSON.stringify(panel)}`)
   return lines.join('\n')
 }
@@ -495,7 +507,7 @@ export function createTurnRunner(deps: TurnDeps): (input: TurnInput, emit: (ev: 
     const stage4 = config.GATES_ENABLED
       ? decidePair(gateEnv, guardInSpec(config.GATE_GUARD_IN_MIN), routerSpec(config.GATE_ROUTER_MIN), inState, inputJevState(inState), budget.signal)
       : null
-    const [facts, gates4] = await Promise.all([factsBlock(data, nowMs, request.panel_state, profile), stage4])
+    const [facts, gates4] = await Promise.all([factsBlock(data, nowMs, request.panel_state, profile, auth !== null && !auth.isAnonymous), stage4])
 
     let gateRisk: Mode | null = null
     let ask: Exclude<AskChoice, 'act'> | null = null

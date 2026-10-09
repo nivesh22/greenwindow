@@ -1,0 +1,376 @@
+{
+ "version": 1,
+ "scenario_id": "user-cancel-plan",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "8610f9ae3e344de7d7396babc06bb28d0f5d25366432002d394b17839ebbaced",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01MEhpBSVrRKdCuzFUVvCTRC",
+        "name": "list_plans",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5408,
+       "outputTokens": 165,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "b8866d33a29629d585e2f8e3dd94c3936185b421db5eb4b96fd2ce0bb2650399",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "I found one sa"
+      },
+      {
+       "type": "text",
+       "delta": "ved plan that"
+      },
+      {
+       "type": "text",
+       "delta": " matches:"
+      },
+      {
+       "type": "text",
+       "delta": " **Compressor**"
+      },
+      {
+       "type": "text",
+       "delta": ", running"
+      },
+      {
+       "type": "text",
+       "delta": " Mon-"
+      },
+      {
+       "type": "text",
+       "delta": "Fri in"
+      },
+      {
+       "type": "text",
+       "delta": " the 09:00-17:"
+      },
+      {
+       "type": "text",
+       "delta": "00 window for 3 h"
+      },
+      {
+       "type": "text",
+       "delta": "ours at 5 kW ("
+      },
+      {
+       "type": "text",
+       "delta": "expected"
+      },
+      {
+       "type": "text",
+       "delta": " mode, no"
+      },
+      {
+       "type": "text",
+       "delta": " reminders).\n\nDo"
+      },
+      {
+       "type": "text",
+       "delta": " you want me to cancel it"
+      },
+      {
+       "type": "text",
+       "delta": "? Re"
+      },
+      {
+       "type": "text",
+       "delta": "ply \""
+      },
+      {
+       "type": "text",
+       "delta": "yes\" to confirm."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5592,
+       "outputTokens": 201,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "c88585865e810ee4ffd50460e7c6a645369316f8d854214db978ffd314ccab7e",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027006
+     }
+    },
+    {
+     "fingerprint": "e8e869a3f36e823a81e387e6af811dd364ff0a892c1a71da712016edaf9d6643",
+     "result": {
+      "choice": "recurring",
+      "confidence": 0.56,
+      "probabilities": {
+       "plan_job": 0.01,
+       "plan_batch": 0,
+       "recurring": 0.61,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0.38,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031122
+     }
+    },
+    {
+     "fingerprint": "a91aa2ec13c5baac0512d9d26232f611a98fd345a837396da5b7e4703574f449",
+     "result": {
+      "choice": "ask_clarify",
+      "confidence": 0.69,
+      "probabilities": {
+       "act": 0.04,
+       "ask_duration": 0.04,
+       "ask_power": 0.04,
+       "ask_deadline": 0.13,
+       "ask_clarify": 0.75
+      },
+      "costUsd": 0.000026334
+     }
+    },
+    {
+     "fingerprint": "89a1c14167b097035e22fddf619f455ac03233f3cf1ac5bc3ea38a264a3aa16c",
+     "result": {
+      "choice": "expected",
+      "confidence": 0.98,
+      "probabilities": {
+       "expected": 0.99,
+       "cautious": 0.01
+      },
+      "costUsd": 0.000022932
+     }
+    },
+    {
+     "fingerprint": "96a4135d67f91b5f0fda380922d577eaa974334f5afc58d66c01bbd58aa49573",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "overclaim_co2": 0,
+       "pass": 1,
+       "unsafe": 0
+      },
+      "costUsd": 0.000026544
+     }
+    }
+   ]
+  },
+  {
+   "model_calls": [
+    {
+     "fingerprint": "2756b80fe581647c936c32a4f87ab74e79382c3105211274f4494a3266d1c650",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01S7D6KgK9iFWcReDTP86EVp",
+        "name": "list_plans",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5514,
+       "outputTokens": 244,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "4fbc4faf24a92e53765a66eba70e3e6e9e4b1a20b4b94f5028abef5f71076e82",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_015JTAJNj5EqSRQ2BJCJsefo",
+        "name": "cancel_plan",
+        "argsJson": "{\"plan_id\": \"00000000-0000-4000-9000-000000000001\", \"confirm\": true}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5698,
+       "outputTokens": 131,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "fd3587cb4a57f195e53fb16d5ed3b0a80d319dad21d0acd6ae1ef91eccfd28c3",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Your recurring **"
+      },
+      {
+       "type": "text",
+       "delta": "Compressor** plan ("
+      },
+      {
+       "type": "text",
+       "delta": "Mon-Fri,"
+      },
+      {
+       "type": "text",
+       "delta": " 09:00-17:00"
+      },
+      {
+       "type": "text",
+       "delta": ", 3 hours at "
+      },
+      {
+       "type": "text",
+       "delta": "5 kW) is canc"
+      },
+      {
+       "type": "text",
+       "delta": "elled,"
+      },
+      {
+       "type": "text",
+       "delta": " and any pending reminders for"
+      },
+      {
+       "type": "text",
+       "delta": " it are c"
+      },
+      {
+       "type": "text",
+       "delta": "ancelled too."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5871,
+       "outputTokens": 67,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "388d6703a5fc1b84465c774d9c723b4a940ff98f85b4c743eab11512d80b6eb8",
+     "result": {
+      "choice": "recurring",
+      "confidence": 0.76,
+      "probabilities": {
+       "plan_job": 0.12,
+       "plan_batch": 0,
+       "recurring": 0.79,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0.09,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000035532
+     }
+    },
+    {
+     "fingerprint": "f4937bef76e844fe18e0d163e8797ee2837e3b63c8ea7a431ad9093a2004f891",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000031416
+     }
+    },
+    {
+     "fingerprint": "5b9dcfdf0bf12d896298977964287f47bccaf6fe63c6ffa002c0980f29f005a9",
+     "result": {
+      "choice": "ask_clarify",
+      "confidence": 0.14,
+      "probabilities": {
+       "act": 0.3,
+       "ask_duration": 0.11,
+       "ask_power": 0.03,
+       "ask_deadline": 0.25,
+       "ask_clarify": 0.31
+      },
+      "costUsd": 0.000030744
+     }
+    },
+    {
+     "fingerprint": "153954024f9e342569e591814ef81b5c15b707c7640c38ef49de3a319c31a7a2",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000027342
+     }
+    },
+    {
+     "fingerprint": "e6f2d2d24c592ac372ef6eb8ce5775a85a857df151bb032586cc1d12719a2f7a",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "overclaim_co2": 0,
+       "pass": 1,
+       "unsafe": 0
+      },
+      "costUsd": 0.000028812
+     }
+    }
+   ]
+  }
+ ]
+}

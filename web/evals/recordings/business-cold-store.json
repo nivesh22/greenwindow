@@ -5,45 +5,53 @@
   {
    "model_calls": [
     {
-     "fingerprint": "867a8ce3ee3ad4738f58117b594a1384322c37605f8dd0f2dfa4d2692a58b73b",
+     "fingerprint": "d11ac61ad3ffab9572c70b0134cdf7e024884424f6d7151e2e48d25b0d8fb17d",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Got"
+       "delta": "Got it,"
       },
       {
        "type": "text",
-       "delta": " it,"
+       "delta": " a cold store defrost that"
       },
       {
        "type": "text",
-       "delta": " three def"
+       "delta": " runs three times a day. What"
       },
       {
        "type": "text",
-       "delta": "rost cycles a day for"
+       "delta": " ex"
       },
       {
        "type": "text",
-       "delta": " your"
+       "delta": "actly should I"
       },
       {
        "type": "text",
-       "delta": " cold store. By"
+       "delta": " pl"
       },
       {
        "type": "text",
-       "delta": " when must each c"
+       "delta": "an,"
       },
       {
        "type": "text",
-       "delta": "ycle finish?"
+       "delta": " and by what"
+      },
+      {
+       "type": "text",
+       "delta": " time must each run"
+      },
+      {
+       "type": "text",
+       "delta": " be finished?"
       },
       {
        "type": "usage",
-       "inputTokens": 1249,
-       "outputTokens": 244,
+       "inputTokens": 1668,
+       "outputTokens": 288,
        "cachedInputTokens": 0
       },
       {
@@ -91,10 +99,10 @@
      "fingerprint": "ed11a07fbd11d44fbe51ad4e66326d21b423d4a572225688c36a280306566d3c",
      "result": {
       "choice": "expected",
-      "confidence": 1,
+      "confidence": 0.98,
       "probabilities": {
-       "expected": 1,
-       "cautious": 0
+       "expected": 0.99,
+       "cautious": 0.01
       },
       "costUsd": 0.000023478
      }
@@ -103,13 +111,13 @@
      "fingerprint": "9798d635cff782e7c75b8b1e6ea69417927eee968f62caf76dd704102e9fa5d4",
      "result": {
       "choice": "ask_duration",
-      "confidence": 0.24,
+      "confidence": 0.25,
       "probabilities": {
        "act": 0.01,
-       "ask_duration": 0.39,
-       "ask_power": 0.13,
-       "ask_deadline": 0.39,
-       "ask_clarify": 0.08
+       "ask_duration": 0.39999999999999997,
+       "ask_power": 0.09,
+       "ask_deadline": 0.4,
+       "ask_clarify": 0.1
       },
       "costUsd": 0.00002688
      }

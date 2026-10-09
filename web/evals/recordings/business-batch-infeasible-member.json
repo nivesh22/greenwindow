@@ -1,0 +1,389 @@
+{
+ "version": 1,
+ "scenario_id": "business-batch-infeasible-member",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "a20c4591362135f94cb3598bd60b04b09f476b2dafeb98c94e5b90e248708377",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01DJ4XbWrV3vdoUQigdVgEji",
+        "name": "plan_batch",
+        "argsJson": "{\"jobs\": [{\"label\":\"Dishwasher cycle\",\"duration_h\":2,\"power_kw\":1.2,\"deadline_local\":\"2026-10-07T07:00\"},{\"label\":\"Van charge\",\"duration_h\":6,\"power_kw\":7,\"deadline_local\":\"2026-10-06T04:00\"}]}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4867,
+       "outputTokens": 493,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "9404c8bf07f5d81c84d606f4aff9a6e6d26aa2a35224564966c81c0460cdeb38",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "**D"
+      },
+      {
+       "type": "text",
+       "delta": "ishwasher cycle ("
+      },
+      {
+       "type": "text",
+       "delta": "1.2 kW, "
+      },
+      {
+       "type": "text",
+       "delta": "2 h): start"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "03:00 B"
+      },
+      {
+       "type": "text",
+       "delta": "ST, Wed 7 "
+      },
+      {
+       "type": "text",
+       "delta": "Oct, ending 05"
+      },
+      {
+       "type": "text",
+       "delta": ":00 BST.** That"
+      },
+      {
+       "type": "text",
+       "delta": " window"
+      },
+      {
+       "type": "text",
+       "delta": " aver"
+      },
+      {
+       "type": "text",
+       "delta": "ages 158 gCO2"
+      },
+      {
+       "type": "text",
+       "delta": "/kWh,"
+      },
+      {
+       "type": "text",
+       "delta": " against"
+      },
+      {
+       "type": "text",
+       "delta": " 188 if"
+      },
+      {
+       "type": "text",
+       "delta": " you"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "ran it now ("
+      },
+      {
+       "type": "text",
+       "delta": "02:00 BST,"
+      },
+      {
+       "type": "text",
+       "delta": " Tue 6 Oct"
+      },
+      {
+       "type": "text",
+       "delta": "). The estimated difference is"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "72 g, with a range of"
+      },
+      {
+       "type": "text",
+       "delta": " -70 g to 205 "
+      },
+      {
+       "type": "text",
+       "delta": "g, so it"
+      },
+      {
+       "type": "text",
+       "delta": " could be worse than"
+      },
+      {
+       "type": "text",
+       "delta": " running now. The rec"
+      },
+      {
+       "type": "text",
+       "delta": "ommendation is not robust,"
+      },
+      {
+       "type": "text",
+       "delta": " so the"
+      },
+      {
+       "type": "text",
+       "delta": " g"
+      },
+      {
+       "type": "text",
+       "delta": "ain is u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertain. The"
+      },
+      {
+       "type": "text",
+       "delta": " 1"
+      },
+      {
+       "type": "text",
+       "delta": ".2 kW and 2"
+      },
+      {
+       "type": "text",
+       "delta": " h fig"
+      },
+      {
+       "type": "text",
+       "delta": "ures are the"
+      },
+      {
+       "type": "text",
+       "delta": " ones you gave me"
+      },
+      {
+       "type": "text",
+       "delta": ".\n\n**Van charge ("
+      },
+      {
+       "type": "text",
+       "delta": "7 kW, 6 "
+      },
+      {
+       "type": "text",
+       "delta": "h): not"
+      },
+      {
+       "type": "text",
+       "delta": " plan"
+      },
+      {
+       "type": "text",
+       "delta": "ned.** Your 4am"
+      },
+      {
+       "type": "text",
+       "delta": " deadline t"
+      },
+      {
+       "type": "text",
+       "delta": "onight is about 2.5"
+      },
+      {
+       "type": "text",
+       "delta": " hours away, so a "
+      },
+      {
+       "type": "text",
+       "delta": "6-hour char"
+      },
+      {
+       "type": "text",
+       "delta": "ge can"
+      },
+      {
+       "type": "text",
+       "delta": "'t fin"
+      },
+      {
+       "type": "text",
+       "delta": "ish in"
+      },
+      {
+       "type": "text",
+       "delta": " time. You could:"
+      },
+      {
+       "type": "text",
+       "delta": "\n- **Shorten the"
+      },
+      {
+       "type": "text",
+       "delta": " charge to"
+      },
+      {
+       "type": "text",
+       "delta": " 2 hours** to"
+      },
+      {
+       "type": "text",
+       "delta": " fit before 4am t"
+      },
+      {
+       "type": "text",
+       "delta": "onight.\n- **Move"
+      },
+      {
+       "type": "text",
+       "delta": " the deadline to 4am"
+      },
+      {
+       "type": "text",
+       "delta": " Wed 7 O"
+      },
+      {
+       "type": "text",
+       "delta": "ct**"
+      },
+      {
+       "type": "text",
+       "delta": ", which is within the for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast,"
+      },
+      {
+       "type": "text",
+       "delta": " and"
+      },
+      {
+       "type": "text",
+       "delta": " I"
+      },
+      {
+       "type": "text",
+       "delta": "'ll plan the full"
+      },
+      {
+       "type": "text",
+       "delta": " 6 "
+      },
+      {
+       "type": "text",
+       "delta": "hours.\n\nTell me"
+      },
+      {
+       "type": "text",
+       "delta": " which you'd like."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5676,
+       "outputTokens": 866,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "38cb0e0967597782b9a9bf71f90c6369a207b21da291706fc3ed79291c2b0c9e",
+     "result": {
+      "choice": "plan_batch",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 0,
+       "plan_batch": 1,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000033012
+     }
+    },
+    {
+     "fingerprint": "b2db86dd80efcaea17459e72aa7bf52556d7b4e69fbfe5580252994188248995",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000028896
+     }
+    },
+    {
+     "fingerprint": "57a4bd69c0b2064295898003add736ff2ef819e545f05669f8bd199a67978bd6",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.00002751
+     }
+    },
+    {
+     "fingerprint": "cdf527bc6b149d500a31e1cf2427a9ebfed4e6c966d7d03da1ef8126c9a66661",
+     "result": {
+      "choice": "act",
+      "confidence": 0.81,
+      "probabilities": {
+       "act": 0.85,
+       "ask_duration": 0.04,
+       "ask_power": 0.05,
+       "ask_deadline": 0.03,
+       "ask_clarify": 0.03
+      },
+      "costUsd": 0.000030912
+     }
+    },
+    {
+     "fingerprint": "580823a545758cceaa8773940323f5b1b7a623c7fc106f1b5cfe6b37078c6f0e",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "pass": 1,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000051744
+     }
+    }
+   ]
+  }
+ ]
+}

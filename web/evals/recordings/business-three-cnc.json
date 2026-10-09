@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "45b591a89463b734147093f95e86aec8eb95735086a131e0c28f4cc7072db13f",
+     "fingerprint": "9db1cbe15dc344d2684cf0cbdfe62aef4cbd5a076ca570281474e0cefbf22eed",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_012gigu5Wp4mLiednpiFf7Ns",
-        "name": "recommend_window",
-        "argsJson": "{\"duration_h\": 4, \"power_kw\": 2, \"deadline_local\": \"2026-10-06T18:00\", \"label\": \"CNC machine (1 of 3)\"}"
+        "id": "toolu_01Gji9wRUyaQ1enork4Thqvr",
+        "name": "plan_batch",
+        "argsJson": "{\"jobs\": [{\"label\":\"CNC machine 1\",\"duration_h\":4,\"power_kw\":2,\"deadline_local\":\"2026-10-06T18:00\"},{\"label\":\"CNC machine 2\",\"duration_h\":4,\"power_kw\":2,\"deadline_local\":\"2026-10-06T18:00\"},{\"label\":\"CNC machine 3\",\"duration_h\":4,\"power_kw\":2,\"deadline_local\":\"2026-10-06T18:00\"}]}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3462,
-       "outputTokens": 455,
+       "inputTokens": 4832,
+       "outputTokens": 313,
        "cachedInputTokens": 0
       },
       {
@@ -29,308 +29,32 @@
      ]
     },
     {
-     "fingerprint": "fff6df1bb82a63e3cf1d589a574fd29ffebd6aeaa8a624b08213403631e124a3",
-     "model": "anthropic/claude-haiku-5.5",
-     "events": [
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_01LdsUEJfBHhs5QYnLpLCPbd",
-        "name": "estimate_co2",
-        "argsJson": ""
-       }
-      },
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_01B1vDJYvh4YHzLuiQww3wsG",
-        "name": "explain_uncertainty",
-        "argsJson": ""
-       }
-      },
-      {
-       "type": "usage",
-       "inputTokens": 3928,
-       "outputTokens": 356,
-       "cachedInputTokens": 0
-      },
-      {
-       "type": "finish",
-       "reason": "tool_calls"
-      }
-     ]
-    },
-    {
-     "fingerprint": "94607e193b69d15f8c1c7c828d8f05f3030674ebe7e5e927b2ac603ed3809337",
+     "fingerprint": "1fa5798f3d795edc17ab466e16dda65c34945f9ba7af62cb69d066d67f2df7a6",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "For"
+       "delta": "All"
       },
       {
        "type": "text",
-       "delta": " each C"
+       "delta": " three "
       },
       {
        "type": "text",
-       "delta": "NC machine ("
+       "delta": "4-hour,"
       },
       {
        "type": "text",
-       "delta": "2"
+       "delta": " 2 "
       },
       {
        "type": "text",
-       "delta": " kW, 4 h"
+       "delta": "kW j"
       },
       {
        "type": "text",
-       "delta": "ours, fin"
-      },
-      {
-       "type": "text",
-       "delta": "ish"
-      },
-      {
-       "type": "text",
-       "delta": "ing by 6p"
-      },
-      {
-       "type": "text",
-       "delta": "m),"
-      },
-      {
-       "type": "text",
-       "delta": " the l"
-      },
-      {
-       "type": "text",
-       "delta": "owest-"
-      },
-      {
-       "type": "text",
-       "delta": "car"
-      },
-      {
-       "type": "text",
-       "delta": "bon start"
-      },
-      {
-       "type": "text",
-       "delta": " is **Tue 6 "
-      },
-      {
-       "type": "text",
-       "delta": "Oct, 11:00"
-      },
-      {
-       "type": "text",
-       "delta": " BST**, finishing"
-      },
-      {
-       "type": "text",
-       "delta": " 3"
-      },
-      {
-       "type": "text",
-       "delta": "pm."
-      },
-      {
-       "type": "text",
-       "delta": " Running"
-      },
-      {
-       "type": "text",
-       "delta": " now at"
-      },
-      {
-       "type": "text",
-       "delta": " 02:00 BST has"
-      },
-      {
-       "type": "text",
-       "delta": " an"
-      },
-      {
-       "type": "text",
-       "delta": " average intensity of 194."
-      },
-      {
-       "type": "text",
-       "delta": "5 gCO2/k"
-      },
-      {
-       "type": "text",
-       "delta": "Wh, against"
-      },
-      {
-       "type": "text",
-       "delta": " 164.5 for"
-      },
-      {
-       "type": "text",
-       "delta": " the "
-      },
-      {
-       "type": "text",
-       "delta": "11:00 start"
-      },
-      {
-       "type": "text",
-       "delta": ","
-      },
-      {
-       "type": "text",
-       "delta": " a 15% re"
-      },
-      {
-       "type": "text",
-       "delta": "duction.\n\n- **Not"
-      },
-      {
-       "type": "text",
-       "delta": " robust:** the"
-      },
-      {
-       "type": "text",
-       "delta": " for"
-      },
-      {
-       "type": "text",
-       "delta": "ecast bands overlap,"
-      },
-      {
-       "type": "text",
-       "delta": " so the "
-      },
-      {
-       "type": "text",
-       "delta": "11:00 start is"
-      },
-      {
-       "type": "text",
-       "delta": " not clearly cleaner"
-      },
-      {
-       "type": "text",
-       "delta": " than running now. NESO's"
-      },
-      {
-       "type": "text",
-       "delta": " own forecast for that"
-      },
-      {
-       "type": "text",
-       "delta": " window averages 147.6 "
-      },
-      {
-       "type": "text",
-       "delta": "gCO2/kWh"
-      },
-      {
-       "type": "text",
-       "delta": ".\n- **Estimated"
-      },
-      {
-       "type": "text",
-       "delta": " difference per"
-      },
-      {
-       "type": "text",
-       "delta": " machine:** about"
-      },
-      {
-       "type": "text",
-       "delta": " 240 g C"
-      },
-      {
-       "type": "text",
-       "delta": "O2 lower, with a"
-      },
-      {
-       "type": "text",
-       "delta": " range from"
-      },
-      {
-       "type": "text",
-       "delta": " -195 g ("
-      },
-      {
-       "type": "text",
-       "delta": "the"
-      },
-      {
-       "type": "text",
-       "delta": " later"
-      },
-      {
-       "type": "text",
-       "delta": " start could be worse) to "
-      },
-      {
-       "type": "text",
-       "delta": "661 g. This"
-      },
-      {
-       "type": "text",
-       "delta": " is an estimate based on average"
-      },
-      {
-       "type": "text",
-       "delta": " intensity, not a measured"
-      },
-      {
-       "type": "text",
-       "delta": " change.\n- **Ass"
-      },
-      {
-       "type": "text",
-       "delta": "umption"
-      },
-      {
-       "type": "text",
-       "delta": ":** I used"
-      },
-      {
-       "type": "text",
-       "delta": " the same sett"
-      },
-      {
-       "type": "text",
-       "delta": "ings for all"
-      },
-      {
-       "type": "text",
-       "delta": " three machines, so"
-      },
-      {
-       "type": "text",
-       "delta": " the result is ident"
-      },
-      {
-       "type": "text",
-       "delta": "ical for each. I ha"
-      },
-      {
-       "type": "text",
-       "delta": "ven't chec"
-      },
-      {
-       "type": "text",
-       "delta": "ked wh"
-      },
-      {
-       "type": "text",
-       "delta": "ether running them"
-      },
-      {
-       "type": "text",
-       "delta": " one"
-      },
-      {
-       "type": "text",
-       "delta": " after another in"
+       "delta": "obs have"
       },
       {
        "type": "text",
@@ -338,28 +62,220 @@
       },
       {
        "type": "text",
-       "delta": " same window works better, and"
+       "delta": " same best window"
       },
       {
        "type": "text",
-       "delta": " I haven't comb"
+       "delta": ": **11"
       },
       {
        "type": "text",
-       "delta": "ined the three"
+       "delta": ":00 to"
       },
       {
        "type": "text",
-       "delta": " figures into"
+       "delta": " 15:00 BST,"
       },
       {
        "type": "text",
-       "delta": " a total."
+       "delta": " Tue 6 O"
+      },
+      {
+       "type": "text",
+       "delta": "ct**."
+      },
+      {
+       "type": "text",
+       "delta": " Running now ("
+      },
+      {
+       "type": "text",
+       "delta": "02:00 BST) aver"
+      },
+      {
+       "type": "text",
+       "delta": "ages about 195 gCO"
+      },
+      {
+       "type": "text",
+       "delta": "2/kWh, and that"
+      },
+      {
+       "type": "text",
+       "delta": " window averages about 165 "
+      },
+      {
+       "type": "text",
+       "delta": "gCO2/kWh"
+      },
+      {
+       "type": "text",
+       "delta": ".\n\n- **Not robust"
+      },
+      {
+       "type": "text",
+       "delta": ":** the forecast u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertainty is"
+      },
+      {
+       "type": "text",
+       "delta": " w"
+      },
+      {
+       "type": "text",
+       "delta": "ide en"
+      },
+      {
+       "type": "text",
+       "delta": "ough that running"
+      },
+      {
+       "type": "text",
+       "delta": " now could tur"
+      },
+      {
+       "type": "text",
+       "delta": "n out better"
+      },
+      {
+       "type": "text",
+       "delta": ". The estimated difference per"
+      },
+      {
+       "type": "text",
+       "delta": " machine is "
+      },
+      {
+       "type": "text",
+       "delta": "240 g, with a range"
+      },
+      {
+       "type": "text",
+       "delta": " of -195 g to 661"
+      },
+      {
+       "type": "text",
+       "delta": " g."
+      },
+      {
+       "type": "text",
+       "delta": " For"
+      },
+      {
+       "type": "text",
+       "delta": " all three, the combined estim"
+      },
+      {
+       "type": "text",
+       "delta": "ate is 719 g, with"
+      },
+      {
+       "type": "text",
+       "delta": " a range of -586 g to"
+      },
+      {
+       "type": "text",
+       "delta": " 2.0 kg."
+      },
+      {
+       "type": "text",
+       "delta": " This is an estimated difference"
+      },
+      {
+       "type": "text",
+       "delta": " based"
+      },
+      {
+       "type": "text",
+       "delta": " on average"
+      },
+      {
+       "type": "text",
+       "delta": " grid intensity, not a"
+      },
+      {
+       "type": "text",
+       "delta": " guaranteed change."
+      },
+      {
+       "type": "text",
+       "delta": "\n- **Overlap:**"
+      },
+      {
+       "type": "text",
+       "delta": " all three wind"
+      },
+      {
+       "type": "text",
+       "delta": "ows over"
+      },
+      {
+       "type": "text",
+       "delta": "lap complet"
+      },
+      {
+       "type": "text",
+       "delta": "ely."
+      },
+      {
+       "type": "text",
+       "delta": " They"
+      },
+      {
+       "type": "text",
+       "delta": " were planned independently, with"
+      },
+      {
+       "type": "text",
+       "delta": " no shared power limit, so"
+      },
+      {
+       "type": "text",
+       "delta": " together"
+      },
+      {
+       "type": "text",
+       "delta": " they would dra"
+      },
+      {
+       "type": "text",
+       "delta": "w about 6 kW for"
+      },
+      {
+       "type": "text",
+       "delta": " 4 hours."
+      },
+      {
+       "type": "text",
+       "delta": " Check that"
+      },
+      {
+       "type": "text",
+       "delta": " your supply can handle that,"
+      },
+      {
+       "type": "text",
+       "delta": " or stag"
+      },
+      {
+       "type": "text",
+       "delta": "ger the starts if"
+      },
+      {
+       "type": "text",
+       "delta": " it"
+      },
+      {
+       "type": "text",
+       "delta": " can't."
       },
       {
        "type": "usage",
-       "inputTokens": 4490,
-       "outputTokens": 684,
+       "inputTokens": 6248,
+       "outputTokens": 526,
        "cachedInputTokens": 0
       },
       {
@@ -370,6 +286,25 @@
     }
    ],
    "gate_calls": [
+    {
+     "fingerprint": "46c2013d4d94d71fd66a579258f6b058899fa262fea5a465c07d14785d354d9b",
+     "result": {
+      "choice": "plan_batch",
+      "confidence": 0.98,
+      "probabilities": {
+       "plan_job": 0.02,
+       "plan_batch": 0.98,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000032046
+     }
+    },
     {
      "fingerprint": "17a803f6548cbfe9d1b84bb6e9a1a020c3525d620119cc33522c4ead7dffe2bd",
      "result": {
@@ -385,35 +320,16 @@
      }
     },
     {
-     "fingerprint": "46c2013d4d94d71fd66a579258f6b058899fa262fea5a465c07d14785d354d9b",
-     "result": {
-      "choice": "plan_batch",
-      "confidence": 0.97,
-      "probabilities": {
-       "plan_job": 0.03,
-       "plan_batch": 0.97,
-       "recurring": 0,
-       "explain_forecast": 0,
-       "model_accuracy": 0,
-       "impact_history": 0,
-       "profile_update": 0,
-       "smalltalk": 0,
-       "off_topic": 0
-      },
-      "costUsd": 0.000032046
-     }
-    },
-    {
      "fingerprint": "0c7bd38d219560b24af871774f3e8654e287c3e050e8fccf1382563c4a8859c2",
      "result": {
       "choice": "act",
-      "confidence": 0.95,
+      "confidence": 0.96,
       "probabilities": {
-       "act": 0.96,
+       "act": 0.97,
        "ask_duration": 0,
        "ask_power": 0,
        "ask_deadline": 0,
-       "ask_clarify": 0.04
+       "ask_clarify": 0.03
       },
       "costUsd": 0.000028686
      }
@@ -431,16 +347,16 @@
      }
     },
     {
-     "fingerprint": "ef787d99dd2251d2d8da1a60d89a3508e2f690916efd72045503f78013ea5de3",
+     "fingerprint": "4d3c471335ebc7accb735c96c48337603cc231c9fef20d202dc641dcb4c52f6d",
      "result": {
       "choice": "pass",
-      "confidence": 0.97,
+      "confidence": 0.98,
       "probabilities": {
-       "pass": 0.98,
-       "overclaim_co2": 0.02,
+       "pass": 0.99,
+       "overclaim_co2": 0.01,
        "unsafe": 0
       },
-      "costUsd": 0.000055902
+      "costUsd": 0.000075516
      }
     }
    ]
