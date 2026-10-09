@@ -81,6 +81,13 @@ Format:
 - **NESO in the backtest:** included as `neso_published` (forecast as returned by the API, lead time unknown), labelled as not a fair comparison (spec 5.3 item 7).
 - **backtest_summary.json:** `horizon_bucket` also takes `"all"`. Served from the site itself (`web/public`), so the web client fetches it same-origin.
 
+## 2026-10-09 — P3 contracts: user data, auth, browser dependencies
+- **Migration 0003** (`users_memory`): profiles, devices, conversations, messages, summaries, impact ledger, feedback, admins. Every user-owned row cascades from `auth.users`, and `turns.user_id` now references it too, so deleting the auth user deletes the user's data and traces (FR-7.4). RLS on all tables; owners may only SELECT their rows; all writes go through the server.
+- **Server auth:** access tokens are verified with one call to Supabase Auth `GET /auth/v1/user` (design S5 fallback), cached briefly; no JWT library.
+- **Impact ledger:** realized values are filled lazily when `get_impact` runs (from the published observations), so P3 needs no cron job or cron secret. Retention (90 days, idle anonymous users after 30 days) runs as a pg_cron SQL job if available on the free plan (verify), else in the 6-hourly pipeline.
+- **New dependency `@supabase/supabase-js`** (browser only): anonymous sign-in, Google OAuth with PKCE, `linkIdentity`, session refresh. Hand-writing the OAuth/PKCE flow would be riskier.
+- **Third-party script: Cloudflare Turnstile** (`challenges.cloudflare.com`) loads only when the chat is first used, before creating an anonymous session (H8). Exception to AGENTS.md rule 6, which covers data fetches; recorded here.
+
 ## 2026-10-08 — Risk mode meaning; eval-driven fixes
 - **Risk mode:** "cautious" plans on the high (q90) forecast so the lower-carbon benefit holds if the forecast is off. A deadline ("must be done by 7am") is a hard constraint in both modes and is no longer a cautious signal. Corrects PRD FR-3.4 / design §6.2 wording ("it really must finish" -> cautious), which conflated deadline urgency with forecast risk; the live evals showed it changing recommendations.
 - **Prompt v3:** deadlines and job sizes belong to the user; never move, shorten or resize to make a job fit; say it does not fit and offer options.

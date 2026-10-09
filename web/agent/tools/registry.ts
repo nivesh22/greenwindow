@@ -6,6 +6,7 @@ import type { ForecastSource } from '../data/types.js'
 import type { Intent } from '../gates/types.js'
 import type { ToolSpec } from '../providers/types.js'
 import type { Store } from '../store/types.js'
+import type { UserStore } from '../store/user_types.js'
 
 export type Phase = 'P1' | 'P2' | 'P3' | 'P4'
 
@@ -25,6 +26,8 @@ export interface ToolCtx {
   nowMs: number // server clock (frozen in tests/evals)
   data: ForecastSource
   store: Store
+  /** User data (P3). Absent before auth and in tests that don't need it; user tools must check `userId`. */
+  users?: UserStore
   /** Set by the risk_mode gate (P2); recommend_window uses it unless the user explicitly asked otherwise. */
   riskMode: Mode
   /** Mutable per-turn state shared between tools. */
