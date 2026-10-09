@@ -142,7 +142,7 @@ const IMPACT_CAVEAT =
   `${CO2_WORDING.caveat} "Realized" is computed from actual average (not marginal) grid intensity and assumes the user ran the job in the suggested window.`
 
 /** Mean of ci_actual over `durationH` hours from `startMs`; null unless every hour has an actual. */
-function avgActual(byTs: Map<number, number | null>, startMs: number, durationH: number): number | null {
+export function avgActual(byTs: Map<number, number | null>, startMs: number, durationH: number): number | null {
   const n = Math.max(1, Math.ceil(durationH))
   let sum = 0
   for (let i = 0; i < n; i++) {

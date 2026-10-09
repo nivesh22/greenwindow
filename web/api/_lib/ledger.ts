@@ -3,6 +3,7 @@
 // Keep the two in step: memory.ts keeps its helper private (not in this agent's paths), so it is restated here.
 import type { ForecastSource } from '../../agent/data/types.js'
 import type { LedgerStore, PendingImpact } from '../../agent/store/supabase_plans.js'
+import { avgActual } from '../../agent/tools/memory.js'
 import { HOUR_MS } from '../../src/lib/time.js'
 
 export const SETTLE_MS = 2 * HOUR_MS
@@ -10,17 +11,8 @@ export const ACTUALS_WINDOW_MS = 7 * 24 * HOUR_MS
 export const NO_ACTUALS_NOTE = 'no actuals after 7 days'
 const BATCH = 500
 
-/** Mean of ci_actual over `durationH` hours from `startMs`; null unless every hour has an actual. */
-export function avgActual(byTs: Map<number, number | null>, startMs: number, durationH: number): number | null {
-  const n = Math.max(1, Math.ceil(durationH))
-  let sum = 0
-  for (let i = 0; i < n; i++) {
-    const v = byTs.get(startMs + i * HOUR_MS)
-    if (v === null || v === undefined) return null
-    sum += v
-  }
-  return sum / n
-}
+/** Shared with get_impact (one copy of the realization maths). */
+export { avgActual }
 
 export type Realization = { kind: 'realized'; grams: number } | { kind: 'unavailable' } | { kind: 'pending' }
 
