@@ -57,6 +57,10 @@ describe('router rules', () => {
     ['why is carbon intensity high right now', 'explain_forecast'],
     ['what is my impact so far this month', 'impact_history'],
     ['remember that my charger is 11 kW', 'profile_update'],
+    ['Yes, make cautious my default risk mode.', 'profile_update'],
+    ['Cancel my recurring compressor plan.', 'recurring'],
+    ['What plans do I have saved?', 'recurring'],
+    ['show my plans', 'recurring'],
     ['hi', 'smalltalk'],
     ['Thanks!', 'smalltalk'],
     ['write me a poem about cats', 'off_topic'],
@@ -213,8 +217,8 @@ describe('decidePair / decideOne', () => {
   it('guard_out: non-pass >= 0.6 stands; below -> pass (rules)', async () => {
     const os = { text: 'Start at 02:00.', toolResults: [] }
     const spec = guardOutSpec(0.6)
-    const hi = await decideOne(env(new FakeChoiceBackend({ guard_out: answer('ungrounded_number', 0.6) })), spec, os, {}, sig())
-    expect([hi.choice, hi.source]).toEqual(['ungrounded_number', 'jev'])
+    const hi = await decideOne(env(new FakeChoiceBackend({ guard_out: answer('overclaim_co2', 0.6) })), spec, os, {}, sig())
+    expect([hi.choice, hi.source]).toEqual(['overclaim_co2', 'jev'])
     const lo = await decideOne(env(new FakeChoiceBackend({ guard_out: answer('overclaim_co2', 0.55) })), spec, os, {}, sig())
     expect([lo.choice, lo.source]).toEqual(['pass', 'rules'])
     const down = await decideOne(env(new FakeChoiceBackend({ guard_out: new JevError('timeout', 'slow') })), spec, os, {}, sig())
@@ -248,4 +252,11 @@ describe('guard_in defense in depth', () => {
 describe('risk_mode: deadlines are not risk signals', () => {
   it.each(['It must be done by 7', "it's critical it finishes by 6", "can't be late for work"])('expected: %s', (m) =>
     expect(riskModeRules(planState('plan_job', m, [], null)).choice).toBe('expected'))
+})
+
+describe('ask_or_act: comparing named start times', () => {
+  it('acts without a deadline', () => {
+    const ps = planState('plan_job', 'I charge my EV at 7 kW for 4 hours. How much CO2 difference if I start at 3am versus 2pm today?', [], null)
+    expect(askOrActRules(ps).choice).toBe('act')
+  })
 })

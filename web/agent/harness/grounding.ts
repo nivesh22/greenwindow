@@ -191,7 +191,12 @@ export function isGrounded(f: Found, a: Allowed): boolean {
   return near(f.value, a.numbers, f.tol)
 }
 
-const BANNED: RegExp[] = [/\byou(?:'ve| have)? saved\b/i, /\bCO2 saved\b/i]
+// Rule 9 beyond the CO2-proximity check: "the actual saving isn't guaranteed" slipped past it (live eval, 2026-10-09).
+// "savings" is always an impact claim; "saving" is too unless it is about saving something in the app (a plan, a
+// reminder, a setting...) or daylight saving time.
+const SAVING_IMPACT =
+  /(?<!\bdaylight[- ])\bsaving\b(?!\s+(?:(?:the|this|that|your|my|a|it|these|those)\s+)?(?:recurring\s+)?(?:plans?|jobs?|reminders?|settings?|devices?|profile|defaults?|it)\b)/i
+const BANNED: RegExp[] = [/\byou(?:'ve| have)? saved\b/i, /\bCO2 saved\b/i, /(?<!\bdaylight[- ])\bsavings\b/i, SAVING_IMPACT]
 const NEAR_CO2 = /\b(avoided|saving|savings)\b/gi
 const CO2_WORD = /CO2|carbon|emission/i
 const NEAR_CHARS = 60

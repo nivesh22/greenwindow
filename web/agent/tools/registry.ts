@@ -6,6 +6,8 @@ import type { ForecastSource } from '../data/types.js'
 import type { Intent } from '../gates/types.js'
 import type { ToolSpec } from '../providers/types.js'
 import type { Store } from '../store/types.js'
+import type { PlanStore } from '../store/plan_types.js'
+import type { UserStore } from '../store/user_types.js'
 
 export type Phase = 'P1' | 'P2' | 'P3' | 'P4'
 
@@ -25,6 +27,10 @@ export interface ToolCtx {
   nowMs: number // server clock (frozen in tests/evals)
   data: ForecastSource
   store: Store
+  /** User data (P3). Absent before auth and in tests that don't need it; user tools must check `userId`. */
+  users?: UserStore
+  /** Plans, push subscriptions, reminders (P4). Absent in tests that don't need it; user tools must check `userId`. */
+  plans?: PlanStore
   /** Set by the risk_mode gate (P2); recommend_window uses it unless the user explicitly asked otherwise. */
   riskMode: Mode
   /** Mutable per-turn state shared between tools. */
@@ -40,6 +46,7 @@ export interface ToolDef<I extends z.ZodType = z.ZodType, O extends z.ZodType = 
   auth: 'anon' | 'user'
   sideEffect: boolean
   emitsPlan?: boolean // the loop emits plan_update from the output (recommend_window)
+  emitsAction?: boolean // the loop emits an `action` event from the output (P4 follow-through tools)
   phase: Phase
   intents: readonly Intent[] | 'all'
   /** Short status line for the UI, e.g. "Checking the forecast…". */

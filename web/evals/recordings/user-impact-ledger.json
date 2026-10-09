@@ -1,0 +1,214 @@
+{
+ "version": 1,
+ "scenario_id": "user-impact-ledger",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "42b58a5933db7d3713ebc246e17f7c86f5781c382af6d1ab7233a0d37a6ac640",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01UszGMg5VTNQhZ2DiNV4RBr",
+        "name": "get_impact",
+        "argsJson": "{\"limit\": 50}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 2810,
+       "outputTokens": 168,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "949ac29354855a029b44ad4bdb57a59de00336df74acb189dc1da28caa360564",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "Your history"
+      },
+      {
+       "type": "text",
+       "delta": " shows an"
+      },
+      {
+       "type": "text",
+       "delta": " **"
+      },
+      {
+       "type": "text",
+       "delta": "estimated difference of"
+      },
+      {
+       "type": "text",
+       "delta": " 630 g CO2**"
+      },
+      {
+       "type": "text",
+       "delta": " from"
+      },
+      {
+       "type": "text",
+       "delta": " two fin"
+      },
+      {
+       "type": "text",
+       "delta": "ished jobs (Sun"
+      },
+      {
+       "type": "text",
+       "delta": " 4 Oct and"
+      },
+      {
+       "type": "text",
+       "delta": " Mon 5 Oct"
+      },
+      {
+       "type": "text",
+       "delta": "), based on actual average grid"
+      },
+      {
+       "type": "text",
+       "delta": " intensity."
+      },
+      {
+       "type": "text",
+       "delta": " The planned estimate for"
+      },
+      {
+       "type": "text",
+       "delta": " these"
+      },
+      {
+       "type": "text",
+       "delta": " windows was 720 g ("
+      },
+      {
+       "type": "text",
+       "delta": "range 420 to 1,"
+      },
+      {
+       "type": "text",
+       "delta": "000 g).\n\nThis is an"
+      },
+      {
+       "type": "text",
+       "delta": " estimated difference based"
+      },
+      {
+       "type": "text",
+       "delta": " on the grid's average carb"
+      },
+      {
+       "type": "text",
+       "delta": "on intensity, not a meas"
+      },
+      {
+       "type": "text",
+       "delta": "ured or guaranteed change"
+      },
+      {
+       "type": "text",
+       "delta": "."
+      },
+      {
+       "type": "text",
+       "delta": " Shifting a job do"
+      },
+      {
+       "type": "text",
+       "delta": "esn't necessarily change"
+      },
+      {
+       "type": "text",
+       "delta": " mar"
+      },
+      {
+       "type": "text",
+       "delta": "ginal emissions by the same"
+      },
+      {
+       "type": "text",
+       "delta": " amount, and for"
+      },
+      {
+       "type": "text",
+       "delta": "ecasts can be wrong"
+      },
+      {
+       "type": "text",
+       "delta": "."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3261,
+       "outputTokens": 385,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "adaef900eb514023285faefd38ab1a9afb7ea67df173bbafd4f107a7b7613c49",
+     "result": {
+      "choice": "impact_history",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 0,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 1,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031374
+     }
+    },
+    {
+     "fingerprint": "719f5c3a3ae097102152c6391bbf94b74bda18e96b8bdcd49e9913154a17a2a7",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027258
+     }
+    },
+    {
+     "fingerprint": "6835ad0b3f9b19d921702571cddbd10e65002d9a8727dadd40da8694133933cc",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "pass": 1,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000035028
+     }
+    }
+   ]
+  }
+ ]
+}

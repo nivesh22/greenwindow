@@ -1,0 +1,20 @@
+{
+ "id": "user-recurring-anonymous",
+ "persona": "business",
+ "notes": "J5, anonymous: saved plans need an account. The answer says to sign in and nothing is saved.",
+ "turns": [
+  {
+   "user": "Every weekday, find the best 3 hours for my 5 kW compressor, finished by 5pm, not before 9am.",
+   "expect": {
+    "tool_not_called": [
+     "save_recurring_plan"
+    ],
+    "plans_saved": 0,
+    "no_banned_claim": true,
+    "answer_matches": [
+     "(sign(ing)?[- ]in|log(ging)? in|account)"
+    ]
+   }
+  }
+ ]
+}

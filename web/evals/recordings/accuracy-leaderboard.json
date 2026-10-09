@@ -5,13 +5,13 @@
   {
    "model_calls": [
     {
-     "fingerprint": "20e1cea605d6d4077e075d1fcd27b4e0cf583d659f71e399d4181d2491a88bfa",
+     "fingerprint": "f58d06e35c0f0bb918af1d72e43c6318e84c064bc45aa66fbc656f4b794d7081",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01MjBUe7viU2j2VeUNdtFCXm",
+        "id": "toolu_01J8eLa7h584yAhyk8zHvSLt",
         "name": "compare_models",
         "argsJson": "{\"horizon_bucket\": \"1-6\"}"
        }
@@ -19,7 +19,7 @@
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01LDRA1CHbEMQN9A7V9whbRJ",
+        "id": "toolu_01Cw7whgeAbUiLSZMqD52tDz",
         "name": "compare_models",
         "argsJson": "{\"horizon_bucket\": \"7-24\"}"
        }
@@ -27,15 +27,15 @@
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01D6E3g3N8Vq1GpibhNGsCok",
+        "id": "toolu_01PH6PmgafWMAJHxqUSreKNz",
         "name": "compare_models",
         "argsJson": "{\"horizon_bucket\": \"25-48\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 2960,
-       "outputTokens": 255,
+       "inputTokens": 3608,
+       "outputTokens": 296,
        "cachedInputTokens": 0
       },
       {
@@ -45,7 +45,7 @@
      ]
     },
     {
-     "fingerprint": "1a7ac0ba8925c9fac147dace8cbaff82cca8580782d128f13e35722eb6119745",
+     "fingerprint": "5ebb8415649801c3d79fd0e9f1328bea7751f1a0ca2e03b85c4dcc529b08b78e",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
@@ -54,19 +54,11 @@
       },
       {
        "type": "text",
-       "delta": " is"
+       "delta": "'s no live "
       },
       {
        "type": "text",
-       "delta": "n't a live"
-      },
-      {
-       "type": "text",
-       "delta": " acc"
-      },
-      {
-       "type": "text",
-       "delta": "uracy winner yet."
+       "delta": "ranking yet."
       },
       {
        "type": "text",
@@ -74,95 +66,51 @@
       },
       {
        "type": "text",
-       "delta": " of the three"
+       "delta": " of the for"
       },
       {
        "type": "text",
-       "delta": " horizon buckets ("
+       "delta": "ecasting models has scored for"
       },
       {
        "type": "text",
-       "delta": "1-"
+       "delta": "ecasts in"
       },
       {
        "type": "text",
-       "delta": "6 h, 7-24"
+       "delta": " any hor"
       },
       {
        "type": "text",
-       "delta": " h, 25-48 "
+       "delta": "izon bucket (1-"
       },
       {
        "type": "text",
-       "delta": "h) has scored live"
+       "delta": "6,"
       },
       {
        "type": "text",
-       "delta": " forecasts, so I"
+       "delta": " 7-24 or 25"
       },
       {
        "type": "text",
-       "delta": " can't name a most"
+       "delta": "-48 hours), so I"
       },
       {
        "type": "text",
-       "delta": " accurate model or"
+       "delta": " can't name"
       },
       {
        "type": "text",
-       "delta": " qu"
+       "delta": " a most"
       },
       {
        "type": "text",
-       "delta": "ote any error"
+       "delta": " accurate model right"
       },
       {
        "type": "text",
-       "delta": " figures. The le"
-      },
-      {
-       "type": "text",
-       "delta": "aderboard is mar"
-      },
-      {
-       "type": "text",
-       "delta": "ked as early"
-      },
-      {
-       "type": "text",
-       "delta": ","
-      },
-      {
-       "type": "text",
-       "delta": " so this"
-      },
-      {
-       "type": "text",
-       "delta": " should"
-      },
-      {
-       "type": "text",
-       "delta": " f"
-      },
-      {
-       "type": "text",
-       "delta": "ill in"
-      },
-      {
-       "type": "text",
-       "delta": " as forecasts are"
-      },
-      {
-       "type": "text",
-       "delta": " chec"
-      },
-      {
-       "type": "text",
-       "delta": "ked against observed car"
-      },
-      {
-       "type": "text",
-       "delta": "bon intensity.\n\nI"
+       "delta": " now.\n\nI"
       },
       {
        "type": "text",
@@ -170,60 +118,48 @@
       },
       {
        "type": "text",
-       "delta": "ull the"
+       "delta": "ull the backtest results,"
       },
       {
        "type": "text",
-       "delta": " backtest results instead."
+       "delta": " which replay past"
       },
       {
        "type": "text",
-       "delta": " They repl"
+       "delta": " for"
       },
       {
        "type": "text",
-       "delta": "ay past"
+       "delta": "ecas"
       },
       {
        "type": "text",
-       "delta": " forecas"
+       "delta": "ts."
       },
       {
        "type": "text",
-       "delta": "ts, but the"
+       "delta": " They"
       },
       {
        "type": "text",
-       "delta": " back"
+       "delta": " are optimistic about"
       },
       {
        "type": "text",
-       "delta": "test we"
+       "delta": " weather, so they're not a"
       },
       {
        "type": "text",
-       "delta": "ather is optimistic, so"
+       "delta": " direct meas"
       },
       {
        "type": "text",
-       "delta": " they are less"
-      },
-      {
-       "type": "text",
-       "delta": " re"
-      },
-      {
-       "type": "text",
-       "delta": "liable than live"
-      },
-      {
-       "type": "text",
-       "delta": " scores."
+       "delta": "ure of current accuracy."
       },
       {
        "type": "usage",
-       "inputTokens": 3680,
-       "outputTokens": 273,
+       "inputTokens": 4328,
+       "outputTokens": 212,
        "cachedInputTokens": 0
       },
       {
@@ -234,25 +170,6 @@
     }
    ],
    "gate_calls": [
-    {
-     "fingerprint": "5321bac4070e82eae808eaeec5d0efd30aa4a8c5f5594ea51eabe50a0e9cc2f1",
-     "result": {
-      "choice": "model_accuracy",
-      "confidence": 1,
-      "probabilities": {
-       "impact_history": 0,
-       "smalltalk": 0,
-       "profile_update": 0,
-       "off_topic": 0,
-       "model_accuracy": 1,
-       "recurring": 0,
-       "explain_forecast": 0,
-       "plan_batch": 0,
-       "plan_job": 0
-      },
-      "costUsd": 0.00003129
-     }
-    },
     {
      "fingerprint": "a78a2f3459d1930171961031590a4e3d35d23f7fb98f8a7df240d1be8fb8b388",
      "result": {
@@ -268,17 +185,35 @@
      }
     },
     {
-     "fingerprint": "9e2f80090301182fc7b691be8512a623e9a153b5c623cb80fc5cabcb7315bbc1",
+     "fingerprint": "5321bac4070e82eae808eaeec5d0efd30aa4a8c5f5594ea51eabe50a0e9cc2f1",
+     "result": {
+      "choice": "model_accuracy",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 0,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 1,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.00003129
+     }
+    },
+    {
+     "fingerprint": "1a82e03403ad8f533b69bc37d996c25dbdf0e62a77afa37cfd0e4cee6d2847ef",
      "result": {
       "choice": "pass",
       "confidence": 1,
       "probabilities": {
        "pass": 1,
-       "ungrounded_number": 0,
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000039816
+      "costUsd": 0.000035742
      }
     }
    ]

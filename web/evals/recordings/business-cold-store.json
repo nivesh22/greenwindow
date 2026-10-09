@@ -5,45 +5,41 @@
   {
    "model_calls": [
     {
-     "fingerprint": "33fd5063828da3988eadb0f23119e1ca6861782667e196c2251591d0377e7a6b",
+     "fingerprint": "d6ce9ed2602702248953dfd6febbf14318f63f8b5de53124a0a78a44211c3508",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Got it,"
+       "delta": "Got"
       },
       {
        "type": "text",
-       "delta": " a cold store defrost on"
+       "delta": " it, a cold store defr"
       },
       {
        "type": "text",
-       "delta": " three c"
+       "delta": "ost three"
       },
       {
        "type": "text",
-       "delta": "ycles a day. By when does"
+       "delta": " times a day. **By when must"
       },
       {
        "type": "text",
-       "delta": " the"
+       "delta": " each def"
       },
       {
        "type": "text",
-       "delta": " first def"
+       "delta": "rost be"
       },
       {
        "type": "text",
-       "delta": "rost cycle need to be"
-      },
-      {
-       "type": "text",
-       "delta": " finished?"
+       "delta": " finished?**"
       },
       {
        "type": "usage",
-       "inputTokens": 1091,
-       "outputTokens": 264,
+       "inputTokens": 1694,
+       "outputTokens": 501,
        "cachedInputTokens": 0
       },
       {
@@ -54,20 +50,6 @@
     }
    ],
    "gate_calls": [
-    {
-     "fingerprint": "eca1388e44ef397f96c2bdf8c89aa1348790743b8be279d08eb66f8457a807d7",
-     "result": {
-      "choice": "allow",
-      "confidence": 0.99,
-      "probabilities": {
-       "allow": 0.99,
-       "injection": 0.01,
-       "abuse": 0,
-       "off_topic": 0
-      },
-      "costUsd": 0.000027552
-     }
-    },
     {
      "fingerprint": "85a7e65acca9cd939a1411c701c944a4b3561dc197f9ef5b88777e1fcded1510",
      "result": {
@@ -88,6 +70,20 @@
      }
     },
     {
+     "fingerprint": "eca1388e44ef397f96c2bdf8c89aa1348790743b8be279d08eb66f8457a807d7",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.99,
+      "probabilities": {
+       "allow": 0.99,
+       "off_topic": 0,
+       "injection": 0.01,
+       "abuse": 0
+      },
+      "costUsd": 0.000027552
+     }
+    },
+    {
      "fingerprint": "ed11a07fbd11d44fbe51ad4e66326d21b423d4a572225688c36a280306566d3c",
      "result": {
       "choice": "expected",
@@ -100,18 +96,18 @@
      }
     },
     {
-     "fingerprint": "777480ce4d73d3d0a23d2e559c272df6028572db7b9cc8343d3d11ea243079a5",
+     "fingerprint": "9798d635cff782e7c75b8b1e6ea69417927eee968f62caf76dd704102e9fa5d4",
      "result": {
       "choice": "ask_duration",
       "confidence": 0.34,
       "probabilities": {
-       "act": 0.01,
-       "ask_power": 0.15,
-       "ask_clarify": 0.28,
-       "ask_duration": 0.47,
-       "ask_deadline": 0.09
+       "act": 0,
+       "ask_duration": 0.47000000000000003,
+       "ask_power": 0.13,
+       "ask_deadline": 0.29,
+       "ask_clarify": 0.11
       },
-      "costUsd": 0.000025032
+      "costUsd": 0.00002688
      }
     }
    ]

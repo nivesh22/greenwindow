@@ -12,11 +12,22 @@
     "typecheck": "tsc -b"
   },
   "dependencies": {
+    "@langfuse/client": "5.13.1",
+    "@langfuse/otel": "5.13.1",
+    "@langfuse/tracing": "5.13.1",
+    "@opentelemetry/api": "1.9.1",
+    "@opentelemetry/context-async-hooks": "2.12.0",
+    "@opentelemetry/core": "2.12.0",
+    "@opentelemetry/exporter-trace-otlp-http": "0.223.0",
+    "@opentelemetry/otlp-exporter-base": "0.223.0",
+    "@opentelemetry/sdk-trace-base": "2.12.0",
+    "@supabase/supabase-js": "2.117.3",
     "@tanstack/react-query": "5.104.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "7.18.4",
     "recharts": "3.10.1",
+    "web-push": "3.6.7",
     "zod": "4.6.5"
   },
   "devDependencies": {
@@ -27,6 +38,7 @@
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
+    "@types/web-push": "3.6.4",
     "@vitejs/plugin-react": "^6.1.1",
     "jsdom": "29.1.1",
     "oxlint": "^1.81.0",

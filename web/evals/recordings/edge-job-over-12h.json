@@ -5,129 +5,117 @@
   {
    "model_calls": [
     {
-     "fingerprint": "164f3c1f1181d47fab591c50ca58376d85057d3792025279156722d8b261cb70",
+     "fingerprint": "b399f3242bec1eb195de8d11809d6560c088a4fc2acb864771c0164f50eea37d",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "I can't pl"
+       "delta": "The plan"
       },
       {
        "type": "text",
-       "delta": "an a 20-hour job"
+       "delta": "ner only"
       },
       {
        "type": "text",
-       "delta": ": G"
+       "delta": " hand"
       },
       {
        "type": "text",
-       "delta": "reenWindow only handles"
+       "delta": "les jobs of up"
       },
       {
        "type": "text",
-       "delta": " jobs of 1 to"
+       "delta": " to 12 hours, so"
       },
       {
        "type": "text",
-       "delta": " 12 hours."
+       "delta": " I"
       },
       {
        "type": "text",
-       "delta": " Options"
+       "delta": " can't plan a 20-"
       },
       {
        "type": "text",
-       "delta": ":"
+       "delta": "hour job as"
       },
       {
        "type": "text",
-       "delta": "\n\n-"
+       "delta": " one"
       },
       {
        "type": "text",
-       "delta": " Split it into two run"
+       "delta": " run. Here"
       },
       {
        "type": "text",
-       "delta": "s of up to 12 h"
+       "delta": " are two options:\n\n- **"
       },
       {
        "type": "text",
-       "delta": "ours each, and I'"
+       "delta": "Plan a 12-hour"
       },
       {
        "type": "text",
-       "delta": "ll plan each one against"
+       "delta": " job at 5 kW**"
       },
       {
        "type": "text",
-       "delta": " your"
+       "delta": " before t"
       },
       {
        "type": "text",
-       "delta": " de"
+       "delta": "omorrow midnight."
       },
       {
        "type": "text",
-       "delta": "adline.\n- Pl"
+       "delta": "\n- **Split the work"
       },
       {
        "type": "text",
-       "delta": "an a single"
+       "delta": " into sh"
       },
       {
        "type": "text",
-       "delta": " run"
+       "delta": "orter jobs**"
       },
       {
        "type": "text",
-       "delta": " of 12 hours or less"
+       "delta": ", for example a 12-h"
       },
       {
        "type": "text",
-       "delta": ", if"
+       "delta": "our block"
       },
       {
        "type": "text",
-       "delta": " that"
+       "delta": " and an 8-hour block"
       },
       {
        "type": "text",
-       "delta": " cov"
+       "delta": ", and"
       },
       {
        "type": "text",
-       "delta": "ers what"
+       "delta": " plan each one"
       },
       {
        "type": "text",
-       "delta": " you need.\n\nTell me"
+       "delta": " separately.\n\nWhich would you"
       },
       {
        "type": "text",
-       "delta": " which you'd like,"
+       "delta": " like"
       },
       {
        "type": "text",
-       "delta": " and I'll check"
-      },
-      {
-       "type": "text",
-       "delta": " the 5 kW power"
-      },
-      {
-       "type": "text",
-       "delta": " and the de"
-      },
-      {
-       "type": "text",
-       "delta": "adline."
+       "delta": "?"
       },
       {
        "type": "usage",
-       "inputTokens": 2859,
-       "outputTokens": 340,
+       "inputTokens": 4145,
+       "outputTokens": 469,
        "cachedInputTokens": 0
       },
       {
@@ -138,20 +126,6 @@
     }
    ],
    "gate_calls": [
-    {
-     "fingerprint": "9f944c44f13e3579b5ac62a7115227c6cf1c62265715bdd4e4595958b9ea719b",
-     "result": {
-      "choice": "allow",
-      "confidence": 0.99,
-      "probabilities": {
-       "abuse": 0,
-       "off_topic": 0,
-       "allow": 0.99,
-       "injection": 0.01
-      },
-      "costUsd": 0.00002751
-     }
-    },
     {
      "fingerprint": "f38034567f6e0122f9413f18cc3314d5f210cf2387f7f5d592f88b0670ea04c6",
      "result": {
@@ -172,18 +146,32 @@
      }
     },
     {
-     "fingerprint": "c7e3a2eb234778f66709c41574855eb9d7114f01b6da092bb1989d3ef685ac60",
+     "fingerprint": "9f944c44f13e3579b5ac62a7115227c6cf1c62265715bdd4e4595958b9ea719b",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.99,
+      "probabilities": {
+       "allow": 0.99,
+       "off_topic": 0,
+       "injection": 0.01,
+       "abuse": 0
+      },
+      "costUsd": 0.00002751
+     }
+    },
+    {
+     "fingerprint": "e77ca6961d0362a15303640d975a8874b0ee60c6dcd13bf397da05d5db94a8f9",
      "result": {
       "choice": "act",
-      "confidence": 0.64,
+      "confidence": 0.82,
       "probabilities": {
-       "ask_deadline": 0.03,
-       "ask_clarify": 0.26,
-       "act": 0.71,
+       "act": 0.86,
        "ask_duration": 0,
-       "ask_power": 0
+       "ask_power": 0,
+       "ask_deadline": 0.08,
+       "ask_clarify": 0.06
       },
-      "costUsd": 0.000026376
+      "costUsd": 0.000028224
      }
     },
     {
@@ -199,17 +187,16 @@
      }
     },
     {
-     "fingerprint": "9d1e06d7382b0bbeac29535fd640a0b7e91a4cab510a45f00d410d72e14795d8",
+     "fingerprint": "663e4fcf0ae8b756b45bb241f87e5a7aed4216defe03f93a36bbfb8ce4f3b03c",
      "result": {
       "choice": "pass",
-      "confidence": 0.69,
+      "confidence": 1,
       "probabilities": {
+       "pass": 1,
        "overclaim_co2": 0,
-       "ungrounded_number": 0.22,
-       "pass": 0.77,
-       "unsafe": 0.01
+       "unsafe": 0
       },
-      "costUsd": 0.000025158
+      "costUsd": 0.000021924
      }
     }
    ]

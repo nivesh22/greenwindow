@@ -100,6 +100,7 @@ export class ReplayChoiceBackend implements ChoiceBackend {
       throw new Error('replay: gate call not in recording')
     }
     this.used.add(i)
+    if ('error' in hit) throw new Error(`replay: recorded gate failure (${hit.error})`)
     return { ...hit.result, choice: hit.result.choice as C, probabilities: hit.result.probabilities as Partial<Record<C, number>> }
   }
 }
@@ -139,7 +140,14 @@ export class RecordingChoiceBackend implements ChoiceBackend {
     req: { instructions: string; state: Record<string, unknown>; options: Record<C, string> },
     signal: AbortSignal,
   ): Promise<{ choice: C; confidence: number; probabilities: Partial<Record<C, number>>; costUsd: number }> {
-    const out = await this.inner.choose(req, signal)
+    let out: { choice: C; confidence: number; probabilities: Partial<Record<C, number>>; costUsd: number }
+    try {
+      out = await this.inner.choose(req, signal)
+    } catch (err) {
+      // Keep the failure so replay takes the same rule-fallback path (otherwise the call looks "not recorded").
+      this.sink.push({ fingerprint: gateFingerprint(req), error: err instanceof Error ? err.name || 'Error' : 'error' })
+      throw err
+    }
     this.sink.push({
       fingerprint: gateFingerprint(req),
       result: { choice: out.choice, confidence: out.confidence, probabilities: out.probabilities as Record<string, number>, costUsd: out.costUsd },

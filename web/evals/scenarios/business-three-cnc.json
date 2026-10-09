@@ -13,9 +13,12 @@
     "answer_matches": [
      "(each|all|both|total|combined|together|per (machine|van|oven))"
     ],
-    "contains_caveat": true
+    "contains_caveat": true,
+    "tools_called": [
+     "plan_batch"
+    ]
    }
   }
  ],
- "notes": "plan_batch is P4; combining identical loads under one deadline is fine if stated."
+ "notes": "plan_batch (P4): three jobs in one call; combined or per-machine totals are stated."
 }

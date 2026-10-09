@@ -1,0 +1,41 @@
+{
+ "id": "user-reminder-no-push",
+ "persona": "household",
+ "notes": "J6: signed in but notifications are off. No reminder row; the answer tells the user to turn notifications on.",
+ "user": {
+  "signed_in": true,
+  "push_subscription": false
+ },
+ "turns": [
+  {
+   "user": "Charge my EV, 7 kW for 4 hours, ready by 8am.",
+   "expect": {
+    "tools_called": [
+     "recommend_window"
+    ],
+    "window_equals_optimizer": {
+     "duration_h": 4,
+     "power_kw": 7,
+     "deadline_local": "2026-10-06T08:00",
+     "mode": "expected"
+    }
+   }
+  },
+  {
+   "user": "Remind me when it is time to plug in.",
+   "expect": {
+    "tools_called": [
+     "schedule_reminder"
+    ],
+    "actions_emitted": [
+     "push_needed"
+    ],
+    "reminders_created": 0,
+    "answer_matches": [
+     "(notification|turn (it )?on|enable|allow)"
+    ],
+    "no_banned_claim": true
+   }
+  }
+ ]
+}

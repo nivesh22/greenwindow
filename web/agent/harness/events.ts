@@ -101,6 +101,25 @@ export const planUpdateSchema = z.object({
 })
 export type PlanUpdate = z.infer<typeof planUpdateSchema>
 
+/**
+ * Follow-through actions (P4, J6) emitted from tool outputs, so the chat can show buttons: download .ics / open
+ * Google Calendar, "reminder set", "plan saved", or "turn on notifications first".
+ */
+export const actionEventSchema = z.discriminatedUnion('kind', [
+  z.object({
+    kind: z.literal('calendar'),
+    title: z.string().max(120),
+    start_utc: utcTs,
+    end_utc: utcTs,
+    ics: z.string().max(10_000),
+    google_url: z.string().url().max(4000),
+  }),
+  z.object({ kind: z.literal('reminder_set'), reminder_id: z.string(), send_at_utc: utcTs, start_utc: utcTs }),
+  z.object({ kind: z.literal('plan_saved'), plan_id: z.string(), label: z.string(), recurring: z.boolean() }),
+  z.object({ kind: z.literal('push_needed') }),
+])
+export type ActionEvent = z.infer<typeof actionEventSchema>
+
 export const LIMIT_KINDS = ['anon_limit', 'daily_cap', 'rate', 'budget_paused'] as const
 
 /** Every SSE event: `event: <type>\ndata: <json of data>\n\n`. */
@@ -117,6 +136,7 @@ export const sseEventSchema = z.discriminatedUnion('type', [
   }),
   z.object({ type: z.literal('plan_update'), data: planUpdateSchema }),
   z.object({ type: z.literal('answer'), data: z.object({ text: z.string() }) }),
+  z.object({ type: z.literal('action'), data: actionEventSchema }),
   z.object({
     type: z.literal('limit'),
     data: z.object({ kind: z.enum(LIMIT_KINDS), message: z.string(), sign_in: z.boolean() }),

@@ -1,0 +1,513 @@
+{
+ "version": 1,
+ "scenario_id": "business-three-kilns",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "5d1537c98c80347b359da448ec54562a66420257725c29a515686bb1f5a8646f",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01QEVwhcajZDVpUKbP35Lmjg",
+        "name": "plan_batch",
+        "argsJson": "{\"jobs\": [{\"label\": \"Kiln 1\", \"duration_h\": 8, \"power_kw\": 12, \"deadline_local\": \"2026-10-07T18:00\"}, {\"label\": \"Kiln 2\", \"duration_h\": 8, \"power_kw\": 12, \"deadline_local\": \"2026-10-07T18:00\"}, {\"label\": \"Kiln 3\", \"duration_h\": 8, \"power_kw\": 12, \"deadline_local\": \"2026-10-07T18:00\"}]}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4856,
+       "outputTokens": 418,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "5275267554535c06e04b81003b204d50fd493713e1b07ed4dfbc3e96300cbd0f",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "All"
+      },
+      {
+       "type": "text",
+       "delta": " three kilns are"
+      },
+      {
+       "type": "text",
+       "delta": " best started"
+      },
+      {
+       "type": "text",
+       "delta": " at"
+      },
+      {
+       "type": "text",
+       "delta": " **10"
+      },
+      {
+       "type": "text",
+       "delta": ":00 BST on"
+      },
+      {
+       "type": "text",
+       "delta": " Wed 7 O"
+      },
+      {
+       "type": "text",
+       "delta": "ct** and"
+      },
+      {
+       "type": "text",
+       "delta": " will"
+      },
+      {
+       "type": "text",
+       "delta": " finish at "
+      },
+      {
+       "type": "text",
+       "delta": "18:00 BST, me"
+      },
+      {
+       "type": "text",
+       "delta": "eting the deadline. The"
+      },
+      {
+       "type": "text",
+       "delta": " for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast average"
+      },
+      {
+       "type": "text",
+       "delta": " there"
+      },
+      {
+       "type": "text",
+       "delta": " is "
+      },
+      {
+       "type": "text",
+       "delta": "68 gCO2/k"
+      },
+      {
+       "type": "text",
+       "delta": "Wh, compared with 201"
+      },
+      {
+       "type": "text",
+       "delta": " gCO2/kW"
+      },
+      {
+       "type": "text",
+       "delta": "h if they"
+      },
+      {
+       "type": "text",
+       "delta": " started now ("
+      },
+      {
+       "type": "text",
+       "delta": "02:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": " Tue)."
+      },
+      {
+       "type": "text",
+       "delta": " The recommendation is robust"
+      },
+      {
+       "type": "text",
+       "delta": "."
+      },
+      {
+       "type": "text",
+       "delta": "\n\n- **Estimated dif"
+      },
+      {
+       "type": "text",
+       "delta": "ference for all three:"
+      },
+      {
+       "type": "text",
+       "delta": "** 38.2 kg"
+      },
+      {
+       "type": "text",
+       "delta": " C"
+      },
+      {
+       "type": "text",
+       "delta": "O2 (range 16."
+      },
+      {
+       "type": "text",
+       "delta": "2 to 55.1 "
+      },
+      {
+       "type": "text",
+       "delta": "kg)"
+      },
+      {
+       "type": "text",
+       "delta": " vers"
+      },
+      {
+       "type": "text",
+       "delta": "us running now. This is based"
+      },
+      {
+       "type": "text",
+       "delta": " on the grid's average carb"
+      },
+      {
+       "type": "text",
+       "delta": "on intensity, and"
+      },
+      {
+       "type": "text",
+       "delta": " the forecast can be wr"
+      },
+      {
+       "type": "text",
+       "delta": "ong.\n- **Over"
+      },
+      {
+       "type": "text",
+       "delta": "lap:** All three wind"
+      },
+      {
+       "type": "text",
+       "delta": "ows are"
+      },
+      {
+       "type": "text",
+       "delta": " identical, so they would"
+      },
+      {
+       "type": "text",
+       "delta": " dra"
+      },
+      {
+       "type": "text",
+       "delta": "w about"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "36 kW together."
+      },
+      {
+       "type": "text",
+       "delta": " Each job was planned independently,"
+      },
+      {
+       "type": "text",
+       "delta": " and"
+      },
+      {
+       "type": "text",
+       "delta": " I"
+      },
+      {
+       "type": "text",
+       "delta": " ha"
+      },
+      {
+       "type": "text",
+       "delta": "ven't checked whether your sup"
+      },
+      {
+       "type": "text",
+       "delta": "ply can handle that load"
+      },
+      {
+       "type": "text",
+       "delta": "."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 6254,
+       "outputTokens": 625,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    },
+    {
+     "fingerprint": "c4c5bd1a0d9df0b56ed13537588dcec73cfbf8c78ddd2dc5de2b816145fada76",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "All"
+      },
+      {
+       "type": "text",
+       "delta": " three kilns are best"
+      },
+      {
+       "type": "text",
+       "delta": " started at **10:00 B"
+      },
+      {
+       "type": "text",
+       "delta": "ST on Wed 7 "
+      },
+      {
+       "type": "text",
+       "delta": "Oct** and will finish"
+      },
+      {
+       "type": "text",
+       "delta": " at 18:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": ", meeting your"
+      },
+      {
+       "type": "text",
+       "delta": " de"
+      },
+      {
+       "type": "text",
+       "delta": "adline. The forecast car"
+      },
+      {
+       "type": "text",
+       "delta": "bon intensity there is "
+      },
+      {
+       "type": "text",
+       "delta": "68 gCO2/k"
+      },
+      {
+       "type": "text",
+       "delta": "Wh on"
+      },
+      {
+       "type": "text",
+       "delta": " average, comp"
+      },
+      {
+       "type": "text",
+       "delta": "ared with 201 gCO"
+      },
+      {
+       "type": "text",
+       "delta": "2/kWh if they started"
+      },
+      {
+       "type": "text",
+       "delta": " now at"
+      },
+      {
+       "type": "text",
+       "delta": " 02:00 BST on"
+      },
+      {
+       "type": "text",
+       "delta": " Tue 6 O"
+      },
+      {
+       "type": "text",
+       "delta": "ct. The recommendation is"
+      },
+      {
+       "type": "text",
+       "delta": " robust.\n\n- **Est"
+      },
+      {
+       "type": "text",
+       "delta": "imated difference for"
+      },
+      {
+       "type": "text",
+       "delta": " all three:** 38.2"
+      },
+      {
+       "type": "text",
+       "delta": " kg CO2 ("
+      },
+      {
+       "type": "text",
+       "delta": "range 16.2 to "
+      },
+      {
+       "type": "text",
+       "delta": "55.1 kg)"
+      },
+      {
+       "type": "text",
+       "delta": " compared with running now. This is"
+      },
+      {
+       "type": "text",
+       "delta": " an estimated difference based"
+      },
+      {
+       "type": "text",
+       "delta": " on the grid's average carb"
+      },
+      {
+       "type": "text",
+       "delta": "on intensity, not a meas"
+      },
+      {
+       "type": "text",
+       "delta": "ured or guaranteed change"
+      },
+      {
+       "type": "text",
+       "delta": ", and the forecast can be"
+      },
+      {
+       "type": "text",
+       "delta": " wrong.\n- **"
+      },
+      {
+       "type": "text",
+       "delta": "Overlap:** All three wind"
+      },
+      {
+       "type": "text",
+       "delta": "ows are identical."
+      },
+      {
+       "type": "text",
+       "delta": " Each job was planned independently"
+      },
+      {
+       "type": "text",
+       "delta": " with"
+      },
+      {
+       "type": "text",
+       "delta": " no shared power limit, so"
+      },
+      {
+       "type": "text",
+       "delta": " I haven't checked whether"
+      },
+      {
+       "type": "text",
+       "delta": " your supply can handle running"
+      },
+      {
+       "type": "text",
+       "delta": " them"
+      },
+      {
+       "type": "text",
+       "delta": " together."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 3400,
+       "outputTokens": 266,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "af5010af444b1eed1790990d4dc0ff26bb2baa30e0392813c27475444e623972",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.00002793
+     }
+    },
+    {
+     "fingerprint": "e605b33aef9aee1806ff159f0710121af09f6205672103799392722b2f765c8e",
+     "result": {
+      "choice": "plan_batch",
+      "confidence": 0.82,
+      "probabilities": {
+       "plan_job": 0.16,
+       "plan_batch": 0.84,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000032046
+     }
+    },
+    {
+     "fingerprint": "b87d88f5bf3fb8e6c835fefef08b39000f72c20f6cc41e0014230b6e2b16d0eb",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000025326
+     }
+    },
+    {
+     "fingerprint": "19c506c4e243d5391b690cfa402f3570a108002754f4d5f2dfb0d66b5a1228af",
+     "result": {
+      "choice": "act",
+      "confidence": 0.84,
+      "probabilities": {
+       "act": 0.87,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0.01,
+       "ask_clarify": 0.12
+      },
+      "costUsd": 0.000028728
+     }
+    },
+    {
+     "fingerprint": "8e455ed02b7bbe828a124d80878ddbf472d8ad5437c93ff7ab5d11bf435517e8",
+     "result": {
+      "choice": "pass",
+      "confidence": 0.98,
+      "probabilities": {
+       "pass": 0.99,
+       "overclaim_co2": 0.01,
+       "unsafe": 0
+      },
+      "costUsd": 0.00006909
+     }
+    }
+   ]
+  }
+ ]
+}

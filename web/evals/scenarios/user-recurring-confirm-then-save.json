@@ -1,0 +1,63 @@
+{
+ "id": "user-recurring-confirm-then-save",
+ "persona": "business",
+ "notes": "J5, signed in: first turn must ask to confirm and save nothing; \"yes\" saves with confirm true. the fixture forecast ends on 8 Oct 01:00 BST, so no time on 8 Oct or later may be promised.",
+ "user": {
+  "signed_in": true
+ },
+ "turns": [
+  {
+   "user": "Every weekday, find the best 3 hours for my 5 kW compressor, finished by 5pm, not before 9am.",
+   "expect": {
+    "gates": {
+     "router": "recurring"
+    },
+    "plans_saved": 0,
+    "no_banned_claim": true,
+    "answer_matches": [
+     "(confirm|shall i|should i|want me to|would you like|go ahead|is that (ok|right)|do you want|reply .{0,2}yes|say .{0,2}yes|save (it|this))"
+    ],
+    "answer_excludes": [
+     "8 oct",
+     "9 oct",
+     "10 oct"
+    ]
+   }
+  },
+  {
+   "user": "Yes, save the recurring compressor plan.",
+   "expect": {
+    "tools_called": [
+     "save_recurring_plan"
+    ],
+    "tool_args": {
+     "save_recurring_plan": {
+      "confirm": true,
+      "duration_h": 3,
+      "power_kw": 5,
+      "window_from": "09:00",
+      "window_to": "17:00",
+      "days": [
+       "mon",
+       "tue",
+       "wed",
+       "thu",
+       "fri"
+      ]
+     }
+    },
+    "actions_emitted": [
+     "plan_saved"
+    ],
+    "plans_saved": 1,
+    "no_banned_claim": true,
+    "answer_excludes": [
+     "8 oct",
+     "9 oct",
+     "10 oct"
+    ],
+    "stop_reason": "final"
+   }
+  }
+ ]
+}

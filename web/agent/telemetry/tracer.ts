@@ -35,6 +35,12 @@ export interface SpanEnd {
   costUsd?: number
 }
 
+/** Export-only detail of a span (see Tracer.setPayload). */
+export interface SpanPayload {
+  input?: unknown
+  output?: unknown
+}
+
 export interface SpanHandle {
   readonly id: string
   /** Ends the span once; later calls return the first record unchanged. */
@@ -55,6 +61,7 @@ export class Tracer {
   private readonly newId: () => string
   private readonly startedAtMs: number
   private readonly spans: SpanRecord[] = []
+  private readonly payloadById = new Map<string, SpanPayload>()
 
   constructor(opts: TracerOptions) {
     this.turnId = opts.turnId
@@ -93,6 +100,18 @@ export class Tracer {
 
   records(): SpanRecord[] {
     return [...this.spans]
+  }
+
+  /**
+   * Full input/output of a span (LLM messages, tool args/results) for the Langfuse export only. Never written to
+   * Supabase, which keeps the compact attrs.
+   */
+  setPayload(spanId: string, p: SpanPayload): void {
+    this.payloadById.set(spanId, { ...this.payloadById.get(spanId), ...p })
+  }
+
+  payloads(): ReadonlyMap<string, SpanPayload> {
+    return this.payloadById
   }
 
   summary(opts: { promptVersion: string; steps: number }): TraceSummary {

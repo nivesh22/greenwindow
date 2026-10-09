@@ -1,0 +1,26 @@
+{
+ "id": "user-profile-update-confirm",
+ "persona": "household",
+ "notes": "FR-7.1: a direct instruction (\"Set my default ... to cautious\") is the user's agreement, so the agent saves with confirm true at once.",
+ "user": {
+  "signed_in": true
+ },
+ "turns": [
+  {
+   "user": "Set my default risk mode to cautious.",
+   "expect": {
+    "tools_called": [
+     "update_profile"
+    ],
+    "tool_args": {
+     "update_profile": {
+      "confirm": true,
+      "risk_default": "cautious"
+     }
+    },
+    "no_banned_claim": true,
+    "stop_reason": "final"
+   }
+  }
+ ]
+}

@@ -14,6 +14,21 @@ Format:
 
 ---
 
+## 2026-10-09 — P4 follow-through: web-push, cron via pg_net, calendar
+- **web-push 3.6.7** (+ `@types/web-push` 3.6.4, dev), exact pins: sends VAPID-signed Web Push from `/api/cron/reminders`. Mature, the standard Node implementation of RFC 8030/8291/8292; no paid service. Keys: `VITE_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (H9).
+- **Cron:** Supabase `pg_cron` + `pg_net` call `/api/cron/{reminders,recurring,ledger}` with `x-cron-secret` read from Vault (`greenwindow_app_url`, `greenwindow_cron_secret`); jobs are no-ops until both secrets exist. The reminders job only calls the app when a reminder is due. Migration 0005.
+- **Calendar:** `.ics` (RFC 5545) built in the browser/tool, plus a Google Calendar template link; the link format has no Google reference (spike S7), so the .ics is the dependable path.
+- **Recurring plans** never promise a slot beyond the forecast horizon (48 h): `next_start_utc` is recomputed each morning after the 06:17 pipeline run.
+
+## 2026-10-09 — Langfuse export (P4.5) and its dependencies
+- **What:** each chat turn is exported to Langfuse Cloud (EU, Hobby, free) as one trace after it is saved to Supabase (`web/agent/telemetry/langfuse.ts`). Supabase stays the source of truth. Built with the Langfuse agent skill (github.com/langfuse/skills, installed at user level) and checked against https://langfuse.com/docs/observability/best-practices.md and the installed SDK types.
+- **Trace shape:** `chat-turn` (`agent`, input = user message, output = answer); gates as `guardrail` (check-input, check-grounding, check-output) or `chain` (route-intent, decide-ask-or-act, choose-risk-mode); one `generate-step` `generation` per model call (OpenAI-format messages, model, tokens, cost; failed attempts at level ERROR); tools as `tool` with args and results, siblings of the generation that asked for them. Session = conversation id, user = Supabase user id, version = prompt version, tags = auth state + intent, environment = `VERCEL_ENV`, release = git sha. Recorded start/end times are kept.
+- **Sampling:** deterministic per turn id at `LANGFUSE_SAMPLE_RATE` (default 0.2); always exported when the stop reason is not `final`, any span failed, a failover happened, grounding regenerated/templated, or a guard blocked. Thumbs feedback becomes a `user_feedback` score; a thumbs-down on an unsampled turn exports that turn first (from Supabase). Hobby quota is 50k units/month; at today's traffic this is far below it.
+- **Privacy:** message text is cut to 500 characters, e-mails and long digit runs are redacted before export; LLM/tool payloads exist only in memory for the export and are never written to Supabase. The privacy page lists Langfuse.
+- **Serverless:** `exportMode: 'immediate'` and `forceFlush()` before the function returns (Langfuse docs: short-lived apps must flush). An isolated tracer provider (`setLangfuseTracerProvider`) so nothing else is exported; an AsyncLocalStorage context manager so `propagateAttributes` works.
+- **New dependencies (exact pins, rule 10):** `@langfuse/tracing`, `@langfuse/otel`, `@langfuse/client` 5.13.1 (latest; client is for scores); `@opentelemetry/api` 1.9.1, `@opentelemetry/core`, `@opentelemetry/sdk-trace-base`, `@opentelemetry/context-async-hooks` 2.12.0, `@opentelemetry/exporter-trace-otlp-http`, `@opentelemetry/otlp-exporter-base` 0.223.0 (peer dependencies of `@langfuse/otel`). Server-side only; the browser bundle does not import them.
+- **Env (Vercel, Preview + Production):** `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_BASE_URL` (`https://cloud.langfuse.com`), optional `LANGFUSE_SAMPLE_RATE`. Without the keys the exporter is a no-op.
+
 ## 2026-10-05 — Project setup
 - Context: Claude Code project initialized with `CLAUDE.md`, `AGENTS.md` (spec Section 12 verbatim), and MCP config.
 - Decision: Configure GitHub and Vercel MCPs only. Supabase is not configured, per spec D6 and 15.1.
@@ -80,6 +95,13 @@ Format:
 - **MASE scale:** in-sample seasonal-naive (m=24) MAE of each origin's 56-day window, shared by all models at that origin.
 - **NESO in the backtest:** included as `neso_published` (forecast as returned by the API, lead time unknown), labelled as not a fair comparison (spec 5.3 item 7).
 - **backtest_summary.json:** `horizon_bucket` also takes `"all"`. Served from the site itself (`web/public`), so the web client fetches it same-origin.
+
+## 2026-10-09 — P3 contracts: user data, auth, browser dependencies
+- **Migration 0003** (`users_memory`): profiles, devices, conversations, messages, summaries, impact ledger, feedback, admins. Every user-owned row cascades from `auth.users`, and `turns.user_id` now references it too, so deleting the auth user deletes the user's data and traces (FR-7.4). RLS on all tables; owners may only SELECT their rows; all writes go through the server.
+- **Server auth:** access tokens are verified with one call to Supabase Auth `GET /auth/v1/user` (design S5 fallback), cached briefly; no JWT library.
+- **Impact ledger:** realized values are filled lazily when `get_impact` runs (from the published observations), so P3 needs no cron job or cron secret. Retention (90 days, idle anonymous users after 30 days) runs as a pg_cron SQL job if available on the free plan (verify), else in the 6-hourly pipeline.
+- **New dependency `@supabase/supabase-js`** (browser only): anonymous sign-in, Google OAuth with PKCE, `linkIdentity`, session refresh. Hand-writing the OAuth/PKCE flow would be riskier.
+- **Third-party script: Cloudflare Turnstile** (`challenges.cloudflare.com`) loads only when the chat is first used, before creating an anonymous session (H8). Exception to AGENTS.md rule 6, which covers data fetches; recorded here.
 
 ## 2026-10-08 — Risk mode meaning; eval-driven fixes
 - **Risk mode:** "cautious" plans on the high (q90) forecast so the lower-carbon benefit holds if the forecast is off. A deadline ("must be done by 7am") is a hard constraint in both modes and is no longer a cautious signal. Corrects PRD FR-3.4 / design §6.2 wording ("it really must finish" -> cautious), which conflated deadline urgency with forecast risk; the live evals showed it changing recommendations.

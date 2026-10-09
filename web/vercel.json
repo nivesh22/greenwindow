@@ -10,6 +10,26 @@
   },
   "rewrites": [
     {
+      "source": "/api/plans",
+      "destination": "/api/user?route=plans"
+    },
+    {
+      "source": "/api/push/subscribe",
+      "destination": "/api/user?route=push-subscribe"
+    },
+    {
+      "source": "/api/reminders",
+      "destination": "/api/user?route=reminders"
+    },
+    {
+      "source": "/api/cron/:job",
+      "destination": "/api/cron?route=:job"
+    },
+    {
+      "source": "/api/admin/:view",
+      "destination": "/api/admin?route=:view"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

@@ -1,0 +1,333 @@
+{
+ "version": 1,
+ "scenario_id": "user-profile-dishwasher",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "0f07e0aec906bf03a26a4612d76f2460af82ed9dc226d2bb1126c479b93e4985",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01C2RNo7qsTuMc11ZaKPXUkK",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 2, \"power_kw\": 1.2, \"deadline_local\": \"2026-10-07T07:00\", \"label\": \"Dishwasher\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4710,
+       "outputTokens": 442,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "fbafc8feaa6e9f517336b08fa15272e2073837b7c45c0837a11ad2fb1c0f2b19",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01Q46bxwQWuHVp1ZSP4cBKd5",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5171,
+       "outputTokens": 29,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "e270ac3a7b94ed304c8c6dce2f439c0cba3a3d0fdd998fe5ff0bc7e2e1dacfad",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "For"
+      },
+      {
+       "type": "text",
+       "delta": " your"
+      },
+      {
+       "type": "text",
+       "delta": " dishwasher ("
+      },
+      {
+       "type": "text",
+       "delta": "1"
+      },
+      {
+       "type": "text",
+       "delta": ".2 kW for"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "2 hours, from"
+      },
+      {
+       "type": "text",
+       "delta": " your saved device"
+      },
+      {
+       "type": "text",
+       "delta": ","
+      },
+      {
+       "type": "text",
+       "delta": " so 2.4 kW"
+      },
+      {
+       "type": "text",
+       "delta": "h), the l"
+      },
+      {
+       "type": "text",
+       "delta": "owest forecast window"
+      },
+      {
+       "type": "text",
+       "delta": " is **Tue 6 "
+      },
+      {
+       "type": "text",
+       "delta": "Oct, 12:00"
+      },
+      {
+       "type": "text",
+       "delta": " BST to 14:00"
+      },
+      {
+       "type": "text",
+       "delta": " BST**."
+      },
+      {
+       "type": "text",
+       "delta": " The average intensity there"
+      },
+      {
+       "type": "text",
+       "delta": " is "
+      },
+      {
+       "type": "text",
+       "delta": "162 gCO2/k"
+      },
+      {
+       "type": "text",
+       "delta": "Wh, against"
+      },
+      {
+       "type": "text",
+       "delta": " 188 if"
+      },
+      {
+       "type": "text",
+       "delta": " you start"
+      },
+      {
+       "type": "text",
+       "delta": " now at"
+      },
+      {
+       "type": "text",
+       "delta": " 02:00 BST,"
+      },
+      {
+       "type": "text",
+       "delta": " a 14% l"
+      },
+      {
+       "type": "text",
+       "delta": "ower for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast average.\n\n- The"
+      },
+      {
+       "type": "text",
+       "delta": " estimated difference is **"
+      },
+      {
+       "type": "text",
+       "delta": "62 g C"
+      },
+      {
+       "type": "text",
+       "delta": "O2**"
+      },
+      {
+       "type": "text",
+       "delta": ", with a range"
+      },
+      {
+       "type": "text",
+       "delta": " of -64 g to 182"
+      },
+      {
+       "type": "text",
+       "delta": " g. The"
+      },
+      {
+       "type": "text",
+       "delta": " range includes the recommended"
+      },
+      {
+       "type": "text",
+       "delta": " time being worse than"
+      },
+      {
+       "type": "text",
+       "delta": " running now, so this is"
+      },
+      {
+       "type": "text",
+       "delta": " not a robust result"
+      },
+      {
+       "type": "text",
+       "delta": ".\n- This is"
+      },
+      {
+       "type": "text",
+       "delta": " an estimated difference based"
+      },
+      {
+       "type": "text",
+       "delta": " on average"
+      },
+      {
+       "type": "text",
+       "delta": " gr"
+      },
+      {
+       "type": "text",
+       "delta": "id intensity, not a meas"
+      },
+      {
+       "type": "text",
+       "delta": "ured or guaranteed change"
+      },
+      {
+       "type": "text",
+       "delta": ".\n\nWould you like a"
+      },
+      {
+       "type": "text",
+       "delta": " calendar event or"
+      },
+      {
+       "type": "text",
+       "delta": " a reminder for this window?"
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5408,
+       "outputTokens": 409,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "cbc88aa81c2020e304f952d820111b718b79af5214b5078d80b521c5a12eaf50",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027342
+     }
+    },
+    {
+     "fingerprint": "90edd06c7eea031f816c6858cd142b9cc7f7d1f0116e37b930c88194ec7f173b",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 0.81,
+      "probabilities": {
+       "plan_job": 0.83,
+       "plan_batch": 0,
+       "recurring": 0.17,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031458
+     }
+    },
+    {
+     "fingerprint": "d2b13ebd3b7d6ff578cc64bef2891060a9d62edbf750999e4cf99845ba2ba755",
+     "result": {
+      "choice": "act",
+      "confidence": 1,
+      "probabilities": {
+       "act": 1,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "ask_clarify": 0
+      },
+      "costUsd": 0.000029442
+     }
+    },
+    {
+     "fingerprint": "cfb2860800cbf68776a83461453cb6b888114289ae7c4b1438ba9566cf7daf00",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.00002604
+     }
+    },
+    {
+     "fingerprint": "4530523d3dbc8e6c902b2626f269b64b997189e22eff5822782c4417b91a8758",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "pass": 1,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000044016
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "c91653b581789596df6be4d7a97f83466dafca8ff1e14064624b1afc5a77a448",
+     "fingerprint": "7d90199aff167554f42abeaa77076e0a51799d401ee7ec5931ebca67169445e5",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01MnwvZTN6TzPKGVjggXmEAd",
+        "id": "toolu_017tZ1Js1UFkh8rJs5oKBz13",
         "name": "lookup_device",
         "argsJson": "{\"gpu\": {\"type\": \"RTX 4090\", \"count\": 1}}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 2860,
-       "outputTokens": 212,
+       "inputTokens": 4146,
+       "outputTokens": 214,
        "cachedInputTokens": 0
       },
       {
@@ -29,21 +29,21 @@
      ]
     },
     {
-     "fingerprint": "728d5aed024632e89a39ce7e50fdf04b3d8ce58d17a4db093a52f1b63527d1ae",
+     "fingerprint": "18c6e3c6c33d1e0a85b750480e5d4fe6cbdfa159ecf696c264a6bcd75733f9ad",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01SSwuwkz325DLoFGz8HutSQ",
+        "id": "toolu_01U5cqGAyu9BGNvMgC7xwvt5",
         "name": "recommend_window",
-        "argsJson": "{\"duration_h\": 3, \"power_kw\": 0.84, \"deadline_local\": \"2026-10-06T23:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"RTX 4090 job\"}"
+        "argsJson": "{\"duration_h\": 3, \"power_kw\": 0.84, \"deadline_local\": \"2026-10-06T23:00\", \"label\": \"RTX 4090 job\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3095,
-       "outputTokens": 270,
+       "inputTokens": 4381,
+       "outputTokens": 261,
        "cachedInputTokens": 0
       },
       {
@@ -53,20 +53,20 @@
      ]
     },
     {
-     "fingerprint": "1a20c731a9ca7fa28b5b0c1573b984845f6ad953876894aaaf82bfa421885f2d",
+     "fingerprint": "4b8763c41e0fc96f2b8e044cd6913603e976858192395e70e472d1eac3a3a1d0",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01FF8LrKJumMNt4tP8ZJciWy",
+        "id": "toolu_01SW6eiDZJpM1HmmF6ppdQEB",
         "name": "estimate_co2",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3601,
+       "inputTokens": 4853,
        "outputTokens": 29,
        "cachedInputTokens": 0
       },
@@ -77,40 +77,44 @@
      ]
     },
     {
-     "fingerprint": "063f8ac1b4696b445a8a454b472c1d0a3f0da627f84dd45fb2c99a92142a9183",
+     "fingerprint": "71c8ed2c9f53d40a0da70edcc68e863d572c191da25a8856c6342395eaf09675",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "**Best"
+       "delta": "The best"
       },
       {
        "type": "text",
-       "delta": " start:"
+       "delta": " start is **"
       },
       {
        "type": "text",
-       "delta": " Tue 6 O"
+       "delta": "Tue 6 Oct"
       },
       {
        "type": "text",
-       "delta": "ct, 12:00 B"
+       "delta": ", 12:00 BST"
       },
       {
        "type": "text",
-       "delta": "ST**"
+       "delta": "**"
       },
       {
        "type": "text",
-       "delta": ", finishing 15:00"
+       "delta": ", fin"
       },
       {
        "type": "text",
-       "delta": " BST, well"
+       "delta": "ishing at"
       },
       {
        "type": "text",
-       "delta": " before your"
+       "delta": " 15:00 BST,"
+      },
+      {
+       "type": "text",
+       "delta": " well before your"
       },
       {
        "type": "text",
@@ -118,107 +122,59 @@
       },
       {
        "type": "text",
-       "delta": ". The forecast average there"
+       "delta": "."
       },
       {
        "type": "text",
-       "delta": " is "
+       "delta": " Running now at"
       },
       {
        "type": "text",
-       "delta": "163 gCO2/k"
+       "delta": " 02:00 BST would"
       },
       {
        "type": "text",
-       "delta": "Wh, against"
+       "delta": " average about 191 gCO"
       },
       {
        "type": "text",
-       "delta": " 191"
+       "delta": "2/kWh, against"
       },
       {
        "type": "text",
-       "delta": " if"
+       "delta": " about 163 gCO2"
       },
       {
        "type": "text",
-       "delta": " you "
+       "delta": "/kWh at"
       },
       {
        "type": "text",
-       "delta": "ran now"
+       "delta": " "
       },
       {
        "type": "text",
-       "delta": " at 02:00 BST"
+       "delta": "12:00."
       },
       {
        "type": "text",
-       "delta": ", a"
+       "delta": "\n\n- **Estimated dif"
       },
       {
        "type": "text",
-       "delta": " 14.5% l"
+       "delta": "ference:** about"
       },
       {
        "type": "text",
-       "delta": "ower average. The job"
+       "delta": " 70 g CO2 "
       },
       {
        "type": "text",
-       "delta": " uses 2"
+       "delta": "in favour of wa"
       },
       {
        "type": "text",
-       "delta": ".52 kWh."
-      },
-      {
-       "type": "text",
-       "delta": "\n\n- **Not"
-      },
-      {
-       "type": "text",
-       "delta": " robust:** the for"
-      },
-      {
-       "type": "text",
-       "delta": "ecast u"
-      },
-      {
-       "type": "text",
-       "delta": "ncertainty could er"
-      },
-      {
-       "type": "text",
-       "delta": "ase the g"
-      },
-      {
-       "type": "text",
-       "delta": "ain, so treat this"
-      },
-      {
-       "type": "text",
-       "delta": " as a mod"
-      },
-      {
-       "type": "text",
-       "delta": "est improvement rather than a"
-      },
-      {
-       "type": "text",
-       "delta": " sure one.\n- **"
-      },
-      {
-       "type": "text",
-       "delta": "Estimated difference:** about"
-      },
-      {
-       "type": "text",
-       "delta": " 70 g C"
-      },
-      {
-       "type": "text",
-       "delta": "O2 ("
+       "delta": "iting ("
       },
       {
        "type": "text",
@@ -226,11 +182,11 @@
       },
       {
        "type": "text",
-       "delta": " -66 g"
+       "delta": " -"
       },
       {
        "type": "text",
-       "delta": " to "
+       "delta": "66 g to +"
       },
       {
        "type": "text",
@@ -242,7 +198,11 @@
       },
       {
        "type": "text",
-       "delta": "es running now"
+       "delta": "es running"
+      },
+      {
+       "type": "text",
+       "delta": " later"
       },
       {
        "type": "text",
@@ -250,72 +210,124 @@
       },
       {
        "type": "text",
-       "delta": " better"
+       "delta": " worse, so this is not a"
       },
       {
        "type": "text",
-       "delta": ", so the"
+       "delta": " s"
       },
       {
        "type": "text",
-       "delta": " t"
+       "delta": "ure g"
       },
       {
        "type": "text",
-       "delta": "ool says this"
+       "delta": "ain.\n- **Rob"
       },
       {
        "type": "text",
-       "delta": " could be worse.\n-"
+       "delta": "ustness:** the"
       },
       {
        "type": "text",
-       "delta": " Power of"
+       "delta": " recommendation is not robust"
       },
       {
        "type": "text",
-       "delta": " 0.84 kW is"
+       "delta": " to"
       },
       {
        "type": "text",
-       "delta": " an assumed"
+       "delta": " forecast error, so tre"
       },
       {
        "type": "text",
-       "delta": " typical figure for an RT"
+       "delta": "at the"
       },
       {
        "type": "text",
-       "delta": "X 4090 (450 "
+       "delta": " 12:00 start as a"
       },
       {
        "type": "text",
-       "delta": "W G"
+       "delta": " l"
       },
       {
        "type": "text",
-       "delta": "PU plus c"
+       "delta": "ean,"
       },
       {
        "type": "text",
-       "delta": "ooling and host"
+       "delta": " not a cert"
       },
       {
        "type": "text",
-       "delta": " overhead); t"
+       "delta": "ainty.\n- **Ass"
       },
       {
        "type": "text",
-       "delta": "ell me if your set"
+       "delta": "umptions:** I used "
       },
       {
        "type": "text",
-       "delta": "up differs."
+       "delta": "0.84 kW for an"
+      },
+      {
+       "type": "text",
+       "delta": " RTX 4090 ("
+      },
+      {
+       "type": "text",
+       "delta": "450 W G"
+      },
+      {
+       "type": "text",
+       "delta": "PU plus ass"
+      },
+      {
+       "type": "text",
+       "delta": "umed P"
+      },
+      {
+       "type": "text",
+       "delta": "UE and host overhead)"
+      },
+      {
+       "type": "text",
+       "delta": " over"
+      },
+      {
+       "type": "text",
+       "delta": " 3 hours, about"
+      },
+      {
+       "type": "text",
+       "delta": " 2.52"
+      },
+      {
+       "type": "text",
+       "delta": " kWh. T"
+      },
+      {
+       "type": "text",
+       "delta": "ell me your"
+      },
+      {
+       "type": "text",
+       "delta": " actual power dra"
+      },
+      {
+       "type": "text",
+       "delta": "w if you know"
+      },
+      {
+       "type": "text",
+       "delta": " it."
       },
       {
        "type": "usage",
-       "inputTokens": 3842,
-       "outputTokens": 596,
+       "inputTokens": 5094,
+       "outputTokens": 405,
        "cachedInputTokens": 0
       },
       {
@@ -360,18 +372,18 @@
      }
     },
     {
-     "fingerprint": "476e823ad1b1ce4ba38f2a6bd80263e4057b8dce64ff2c42179f628e5b293e9e",
+     "fingerprint": "1c62d582b76af559cf38a0d19dabfb9ca1af7c5b00f41c688350406a90fa1c5a",
      "result": {
       "choice": "act",
       "confidence": 1,
       "probabilities": {
        "act": 1,
        "ask_duration": 0,
-       "ask_clarify": 0,
        "ask_power": 0,
-       "ask_deadline": 0
+       "ask_deadline": 0,
+       "ask_clarify": 0
       },
-      "costUsd": 0.000028308
+      "costUsd": 0.000030156
      }
     },
     {
@@ -387,17 +399,16 @@
      }
     },
     {
-     "fingerprint": "54a7304e8daca78b866268da6505813edeec4856a341ae0b75312e7dadcb5696",
+     "fingerprint": "2b1e737652422a3defad115a1923134ca1de15f0b8481d288a9b47a8e7a021df",
      "result": {
       "choice": "pass",
       "confidence": 0.98,
       "probabilities": {
        "pass": 0.99,
-       "ungrounded_number": 0.01,
-       "overclaim_co2": 0,
+       "overclaim_co2": 0.01,
        "unsafe": 0
       },
-      "costUsd": 0.000054768
+      "costUsd": 0.000052752
      }
     }
    ]

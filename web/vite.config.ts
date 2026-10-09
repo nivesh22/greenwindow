@@ -7,7 +7,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,
-    env: { TZ: 'UTC' },
+    // Tests never depend on a developer's .env.local: auth and Turnstile stay off unless a test stubs them.
+    env: { TZ: 'UTC', VITE_SUPABASE_URL: '', VITE_SUPABASE_ANON_KEY: '', VITE_TURNSTILE_SITEKEY: '' },
     projects: [
       { extends: true, test: { name: 'app', include: ['src/**/*.test.{ts,tsx}'], environment: 'jsdom', setupFiles: ['./src/test/setup.ts'] } },
       // Server-side agent code: Node environment, no network (ScriptedProvider and fixtures only).

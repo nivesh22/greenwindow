@@ -67,7 +67,7 @@ describe('useChat', () => {
     })
     stub(() => new Response(body))
     const { result } = renderHook(() => useChat())
-    let p!: Promise<void>
+    let p!: Promise<unknown>
     act(() => {
       p = result.current.send('hi')
     })
@@ -123,7 +123,7 @@ describe('useChat', () => {
       return new Response(body)
     })
     const { result } = renderHook(() => useChat())
-    let p!: Promise<void>
+    let p!: Promise<unknown>
     act(() => {
       p = result.current.send('hi')
     })

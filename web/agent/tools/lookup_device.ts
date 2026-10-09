@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { DEVICES_DATA as devicesJson } from './devices.js'
-import { defineTool } from './registry.js'
+import { defineTool, type ToolCtx } from './registry.js'
 
 const deviceSchema = z.object({
   id: z.string(),
@@ -66,15 +66,39 @@ const matchSchema = z.object({
   kw: z.number(),
   typical_hours: z.number().nullable(),
   source: z.string(),
-  assumed: z.literal(true),
+  /** false only for the signed-in user's own saved device (P3 profile), which is not an assumption. */
+  assumed: z.boolean(),
 })
+
+/** The signed-in user's saved devices that match the query (best first), as lookup matches. */
+async function savedMatches(ctx: ToolCtx, query: string): Promise<z.infer<typeof matchSchema>[]> {
+  if (!ctx.users || !ctx.userId || ctx.isAnonymous) return []
+  let devices
+  try {
+    devices = await ctx.users.listDevices(ctx.userId)
+  } catch {
+    return [] // memory is best effort; fall back to the typical values
+  }
+  const q = tokens(query)
+  if (q.length === 0) return []
+  return devices
+    .map((d) => {
+      const t = new Set(tokens(d.name))
+      return { d, s: q.filter((x) => t.has(x)).length / q.length }
+    })
+    .filter((x) => x.s >= 0.5)
+    .sort((a, b) => b.s - a.s)
+    .slice(0, 3)
+    .map(({ d }) => ({ id: `saved:${d.id}`, name: d.name, kw: d.kw, typical_hours: d.typicalHours, source: 'your saved device', assumed: false }))
+}
 
 export const lookupDevice = defineTool({
   name: 'lookup_device',
   description:
     'Looks up typical power draw (kW) and run length for a household device or a GPU/server, so you can fill in power_kw and duration_h. ' +
     'Pass either {query} (e.g. "dishwasher", "EV charger") or {gpu:{type,count}} (e.g. H100 x 8). All figures are assumed typical values with a stated source; ' +
-    'tell the user they are assumptions and let them override.',
+    'tell the user they are assumptions and let them override. For a signed-in user, their own saved devices come first with ' +
+    'assumed: false and source "your saved device": use those values and do not call them assumptions.',
   input: z.strictObject({
     query: z.string().min(1).max(100).optional(),
     gpu: z.strictObject({ type: z.string().min(1).max(60), count: z.number().int().min(1).max(1024) }).optional(),
@@ -85,7 +109,7 @@ export const lookupDevice = defineTool({
   phase: 'P1',
   intents: 'all',
   statusText: 'Looking up the device…',
-  async handler(_ctx, input) {
+  async handler(ctx, input) {
     const pue = DEVICES.pue_default
     if (input.gpu) {
       const { type, count } = input.gpu
@@ -102,7 +126,8 @@ export const lookupDevice = defineTool({
       })
       return { matches }
     }
-    const matches = rank(input.query ?? '', DEVICES.devices).map((d) => ({
+    const saved = await savedMatches(ctx, input.query ?? '')
+    const typical = rank(input.query ?? '', DEVICES.devices).map((d) => ({
       id: d.id,
       name: d.category === 'gpu' ? `${d.name} (1 GPU, including PUE ${pue})` : d.name,
       kw: d.category === 'gpu' ? ((d.tdp_w ?? 0) * pue) / 1000 : (d.kw ?? 0),
@@ -110,6 +135,6 @@ export const lookupDevice = defineTool({
       source: d.source,
       assumed: true as const,
     }))
-    return { matches }
+    return { matches: [...saved, ...typical].slice(0, 3) }
   },
 })

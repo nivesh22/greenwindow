@@ -8,7 +8,7 @@ import type { ToolCtx, ToolDef, ToolRegistry } from '../tools/registry.js'
 import { ToolUserError } from '../tools/registry.js'
 import { type Budget, estimateMessagesTokens, estimateTokens } from './budget.js'
 import { BudgetExceeded, ProvidersDown } from './errors.js'
-import { planUpdateSchema, type PlanUpdate, type SseEvent, type StopReason } from './events.js'
+import { actionEventSchema, planUpdateSchema, type ActionEvent, type PlanUpdate, type SseEvent, type StopReason } from './events.js'
 
 export interface LoopOptions {
   router: ModelRouter
@@ -31,6 +31,8 @@ export interface LoopOptions {
    * for this, so turn.ts supplies it. Return null to skip. The result is validated against planUpdateSchema.
    */
   toPlanUpdate?: (toolName: string, output: unknown) => PlanUpdate | null
+  /** Maps a validated output of a tool with `emitsAction` to an action event (P4). */
+  toAction?: (toolName: string, output: unknown) => ActionEvent | null
   /** One-line summary for tool_end and the trace. Default: "ok" or the error code. */
   summarize?: (toolName: string, output: unknown) => string
   /** Clock for tool latency. Default Date.now. */
@@ -162,7 +164,7 @@ export async function runLoop(input: readonly Msg[], opts: LoopOptions): Promise
       traceFailedCalls(tracer, routed.calls.slice(0, -1), steps, opts.parentSpanId ?? null)
       const ok = routed.calls[routed.calls.length - 1]
       if (ok) {
-        tracer.addSpan({
+        const llmSpan = tracer.addSpan({
           kind: 'llm',
           name: `chat ${routed.model}`,
           parentId: opts.parentSpanId ?? null,
@@ -180,6 +182,10 @@ export async function runLoop(input: readonly Msg[], opts: LoopOptions): Promise
             [ATTR.usageEstimated]: estimated,
             'gen_ai.response.finish_reasons': [finish ?? 'unknown'],
           },
+        })
+        tracer.setPayload(llmSpan.id, {
+          input: { messages: messages.map(toOpenAiMessage), tools: specs.map((t) => t.name) },
+          output: toOpenAiMessage(calls.length > 0 ? { role: 'assistant', content: text, toolCalls: calls } : { role: 'assistant', content: text }),
         })
       }
 
@@ -223,6 +229,19 @@ export async function runLoop(input: readonly Msg[], opts: LoopOptions): Promise
     if (s) return result(s.stop, s.detail)
     throw err
   }
+}
+
+/** OpenAI chat format, which Langfuse renders as a role-labelled conversation with tool-call cards. */
+function toOpenAiMessage(m: Msg): Record<string, unknown> {
+  if (m.role === 'tool') return { role: 'tool', tool_call_id: m.toolCallId ?? null, content: m.content }
+  if (m.toolCalls && m.toolCalls.length > 0) {
+    return {
+      role: m.role,
+      content: m.content,
+      tool_calls: m.toolCalls.map((c) => ({ id: c.id, type: 'function', function: { name: c.name, arguments: c.argsJson } })),
+    }
+  }
+  return { role: m.role, content: m.content }
 }
 
 function llmAttrs(c: LlmCallRecord, step: number): Record<string, unknown> {
@@ -316,10 +335,15 @@ async function runTool(call: ToolCall, opts: LoopOptions): Promise<ToolOutcome> 
   }
   const summary = opts.summarize?.(call.name, valid.data) ?? 'ok'
   span.end({ status: 'ok', attrs: { [ATTR.toolArgs]: parsed.data, [ATTR.toolSummary]: summary } })
+  tracer.setPayload(span.id, { input: parsed.data, output: valid.data })
   end(true, summary)
   if (def.emitsPlan && opts.toPlanUpdate) {
     const plan = planUpdateSchema.safeParse(opts.toPlanUpdate(call.name, valid.data))
     if (plan.success) opts.emit({ type: 'plan_update', data: plan.data })
+  }
+  if (def.emitsAction && opts.toAction) {
+    const action = actionEventSchema.safeParse(opts.toAction(call.name, valid.data))
+    if (action.success) opts.emit({ type: 'action', data: action.data })
   }
   return { ok: true, tool: call.name, data: valid.data }
 }

@@ -1,13 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { HISTORY_MAX, type ChatRequest, type PanelState, type PlanUpdate, type StopReason, type TraceSummary } from '../../agent/harness/events'
+import { HISTORY_MAX, type ActionEvent, type ChatRequest, type PanelState, type PlanUpdate, type StopReason, type TraceSummary } from '../../agent/harness/events'
+import { conversationResponseSchema } from '../../agent/harness/api_schemas'
+import { apiFetch, authEnabled, ensureSession, getAuthInfo, getClient, mergeAnonymousIfPending, signInWithGoogle, storeHeldMessage, takeHeldMessage } from './auth'
 import { parseSse } from './sse'
 
 export interface ChatMessage {
   id: string
   role: 'user' | 'assistant'
   text: string
+  turnId?: string
   trace?: TraceSummary
   stopReason?: StopReason
+  actions?: ActionEvent[]
 }
 export interface LimitState { kind: string; message: string; signIn: boolean }
 export interface ChatError { code: string; message: string }
@@ -48,6 +52,9 @@ export function useChat(opts: UseChatOptions = {}) {
   const [limit, setLimit] = useState<LimitState | null>(null)
   const [error, setError] = useState<ChatError | null>(null)
   const [busy, setBusy] = useState(false)
+  const [checking, setChecking] = useState(false)
+  const [messagesLeft, setMessagesLeft] = useState<number | null>(null)
+  const lastUserRef = useRef('')
 
   const optsRef = useRef(opts)
   useEffect(() => {
@@ -64,13 +71,30 @@ export function useChat(opts: UseChatOptions = {}) {
     abortRef.current?.abort()
   }, [])
 
-  const send = useCallback(async (raw: string) => {
+  const send = useCallback(async (raw: string): Promise<boolean> => {
     const message = raw.trim()
-    if (!message || message.length > 2000 || busyRef.current) return
+    if (!message || message.length > 2000 || busyRef.current) return false
     busyRef.current = true
     setBusy(true)
     setError(null)
     setStatus(null)
+    if (authEnabled()) {
+      setChecking(true)
+      try {
+        await ensureSession()
+      } catch (e) {
+        setError({
+          code: 'auth_failed',
+          message: `Could not verify your session${e instanceof Error ? ` (${e.message})` : ''}. Please try again.`,
+        })
+        busyRef.current = false
+        setBusy(false)
+        return false
+      } finally {
+        setChecking(false)
+      }
+    }
+    lastUserRef.current = message
     setMessages((m) => [...m, { id: `m${++seq.current}`, role: 'user', text: message }])
     const ctrl = new AbortController()
     abortRef.current = ctrl
@@ -85,8 +109,10 @@ export function useChat(opts: UseChatOptions = {}) {
       client_now_utc: nowUtc(),
     }
     let finished = false
+    let pending: ActionEvent[] = [] // actions that arrive before the answer
+    let answered = false
     try {
-      const res = await fetch(optsRef.current.endpoint ?? '/api/chat', {
+      const res = await apiFetch(optsRef.current.endpoint ?? '/api/chat', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(body),
@@ -94,11 +120,11 @@ export function useChat(opts: UseChatOptions = {}) {
       })
       if (!res.ok) {
         setError(await httpError(res))
-        return
+        return false
       }
       if (!res.body) {
         setError({ code: 'no_body', message: 'The assistant sent an empty response.' })
-        return
+        return false
       }
       for await (const item of parseSse(res.body)) {
         if (!item.ok) {
@@ -111,6 +137,7 @@ export function useChat(opts: UseChatOptions = {}) {
           case 'turn_start':
             convRef.current = ev.data.conversation_id
             setConversationId(ev.data.conversation_id)
+            setMessagesLeft(ev.data.messages_left)
             break
           case 'tool_start':
             setStatus(ev.data.status_text)
@@ -124,7 +151,21 @@ export function useChat(opts: UseChatOptions = {}) {
           case 'answer': {
             setStatus(null)
             const text = ev.data.text
-            setMessages((m) => [...m, { id: `m${++seq.current}`, role: 'assistant', text }])
+            const actions = pending
+            pending = []
+            answered = true
+            setMessages((m) => [...m, { id: `m${++seq.current}`, role: 'assistant', text, ...(actions.length ? { actions } : {}) }])
+            break
+          }
+          case 'action': {
+            const act = ev.data
+            if (!answered) pending.push(act)
+            else
+              setMessages((m) => {
+                const last = m[m.length - 1]
+                if (!last || last.role !== 'assistant') return m
+                return [...m.slice(0, -1), { ...last, actions: [...(last.actions ?? []), act] }]
+              })
             break
           }
           case 'limit':
@@ -137,11 +178,11 @@ export function useChat(opts: UseChatOptions = {}) {
             break
           case 'done': {
             finished = true
-            const { trace, stop_reason } = ev.data
+            const { trace, stop_reason, turn_id } = ev.data
             setMessages((m) => {
               const last = m[m.length - 1]
               if (!last || last.role !== 'assistant') return m
-              return [...m.slice(0, -1), { ...last, trace, stopReason: stop_reason }]
+              return [...m.slice(0, -1), { ...last, trace, stopReason: stop_reason, turnId: turn_id }]
             })
             break
           }
@@ -162,7 +203,66 @@ export function useChat(opts: UseChatOptions = {}) {
       setStatus(null)
       setBusy(false)
     }
+    return true
   }, [])
 
-  return { messages, status, conversationId, limit, error, busy, send, stop }
+  const sendRef = useRef(send)
+  useEffect(() => {
+    sendRef.current = send
+  })
+
+  // On load: finish a pending account merge, restore the latest conversation, resend a held message once.
+  useEffect(() => {
+    if (!authEnabled()) return
+    let live = true
+    void (async () => {
+      try {
+        if (!(await getClient()) || !live) return
+        await mergeAnonymousIfPending().catch(() => undefined)
+        const info = await getAuthInfo()
+        if (!info || !live) return
+        const res = await apiFetch('/api/conversations/latest')
+        if (res.ok) {
+          const parsed = conversationResponseSchema.safeParse(await res.json())
+          if (parsed.success && live) {
+            const { conversation, messages_left } = parsed.data
+            setMessagesLeft(messages_left)
+            if (conversation && convRef.current === null) {
+              convRef.current = conversation.id
+              setConversationId(conversation.id)
+              setMessages(
+                conversation.messages.map((m) => ({
+                  id: `m${++seq.current}`,
+                  role: m.role,
+                  text: m.content,
+                  ...(m.turn_id ? { turnId: m.turn_id } : {}),
+                })),
+              )
+            }
+          }
+        }
+        if (!info.isAnonymous && live) {
+          const held = takeHeldMessage()
+          if (held) void sendRef.current(held)
+        }
+      } catch {
+        // restoring is best-effort; the chat still works
+      }
+    })()
+    return () => {
+      live = false
+    }
+  }, [])
+
+  /** Limit -> sign in (FR-6.2): hold the last message, then link Google (or fall back to sign-in). */
+  const signIn = useCallback(async () => {
+    storeHeldMessage(lastUserRef.current)
+    try {
+      await signInWithGoogle()
+    } catch (e) {
+      setError({ code: 'sign_in_failed', message: e instanceof Error ? `Sign-in failed (${e.message}).` : 'Sign-in failed.' })
+    }
+  }, [])
+
+  return { messages, status, conversationId, limit, error, busy, checking, messagesLeft, send, stop, signIn }
 }

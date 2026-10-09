@@ -1,0 +1,38 @@
+{
+ "id": "user-profile-update-ambiguous",
+ "persona": "household",
+ "notes": "FR-7.1 / design 7.4: a vague preference is not consent; the agent asks before saving, and saves with confirm true after yes.",
+ "user": {
+  "signed_in": true
+ },
+ "turns": [
+  {
+   "user": "I'd rather play it safe with my plans in general.",
+   "expect": {
+    "tool_not_called": [
+     "update_profile"
+    ],
+    "answer_matches": [
+     "(confirm|shall i|should i|want me to|would you like|go ahead|is that (ok|right)|do you want|save|default)"
+    ],
+    "no_banned_claim": true
+   }
+  },
+  {
+   "user": "Yes, make cautious my default risk mode.",
+   "expect": {
+    "tools_called": [
+     "update_profile"
+    ],
+    "tool_args": {
+     "update_profile": {
+      "confirm": true,
+      "risk_default": "cautious"
+     }
+    },
+    "no_banned_claim": true,
+    "stop_reason": "final"
+   }
+  }
+ ]
+}

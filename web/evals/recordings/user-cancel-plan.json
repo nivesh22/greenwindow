@@ -1,0 +1,388 @@
+{
+ "version": 1,
+ "scenario_id": "user-cancel-plan",
+ "turns": [
+  {
+   "model_calls": [
+    {
+     "fingerprint": "6be7aad86c546d59432ba85a0cee18a87123d05441acafac714de438d60c8de7",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01GdXqqdejjMSJ4XmPqBv5Ub",
+        "name": "list_plans",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5434,
+       "outputTokens": 158,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "61ee6af9cb2e4d0989ec423fa8f8afb7c9be8028af11e1e5a79723abd5237bb5",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "I"
+      },
+      {
+       "type": "text",
+       "delta": " found one saved plan that"
+      },
+      {
+       "type": "text",
+       "delta": " matches: **Compressor"
+      },
+      {
+       "type": "text",
+       "delta": "**, every"
+      },
+      {
+       "type": "text",
+       "delta": " we"
+      },
+      {
+       "type": "text",
+       "delta": "ekday ("
+      },
+      {
+       "type": "text",
+       "delta": "Mon-"
+      },
+      {
+       "type": "text",
+       "delta": "Fri) from 09:"
+      },
+      {
+       "type": "text",
+       "delta": "00 "
+      },
+      {
+       "type": "text",
+       "delta": "to 17:00, 3"
+      },
+      {
+       "type": "text",
+       "delta": " hours at"
+      },
+      {
+       "type": "text",
+       "delta": " 5 kW, exp"
+      },
+      {
+       "type": "text",
+       "delta": "ected mode, no"
+      },
+      {
+       "type": "text",
+       "delta": " reminders.\n\nDo"
+      },
+      {
+       "type": "text",
+       "delta": " you want me to cancel it"
+      },
+      {
+       "type": "text",
+       "delta": "? Re"
+      },
+      {
+       "type": "text",
+       "delta": "ply y"
+      },
+      {
+       "type": "text",
+       "delta": "es to conf"
+      },
+      {
+       "type": "text",
+       "delta": "irm."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5618,
+       "outputTokens": 228,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "c88585865e810ee4ffd50460e7c6a645369316f8d854214db978ffd314ccab7e",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027006
+     }
+    },
+    {
+     "fingerprint": "e8e869a3f36e823a81e387e6af811dd364ff0a892c1a71da712016edaf9d6643",
+     "result": {
+      "choice": "recurring",
+      "confidence": 0.47,
+      "probabilities": {
+       "plan_job": 0.01,
+       "plan_batch": 0,
+       "recurring": 0.53,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0.46,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031122
+     }
+    },
+    {
+     "fingerprint": "89a1c14167b097035e22fddf619f455ac03233f3cf1ac5bc3ea38a264a3aa16c",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000022932
+     }
+    },
+    {
+     "fingerprint": "a91aa2ec13c5baac0512d9d26232f611a98fd345a837396da5b7e4703574f449",
+     "result": {
+      "choice": "ask_clarify",
+      "confidence": 0.65,
+      "probabilities": {
+       "act": 0.05,
+       "ask_duration": 0.04,
+       "ask_power": 0.04,
+       "ask_deadline": 0.15,
+       "ask_clarify": 0.72
+      },
+      "costUsd": 0.000026334
+     }
+    },
+    {
+     "fingerprint": "b6915663a602dffada0cea250451ef9fe2cd480ef5b4d14f9c3f060ca4439b94",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "pass": 1,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000026544
+     }
+    }
+   ]
+  },
+  {
+   "model_calls": [
+    {
+     "fingerprint": "2c5f810ca932c13feab08e975e73d87919b698e6456160c0cce1c94fdddf302d",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01JKGeBVLFHhf8kCPG5YNrUW",
+        "name": "list_plans",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5542,
+       "outputTokens": 163,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "2f3d08a0a8fde9ebae394aeb9ed96048723fadccf09dbb465b86d4d5da9217ec",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01Q9rD3i3WV1JcTKmRcU9rRC",
+        "name": "cancel_plan",
+        "argsJson": "{\"plan_id\": \"00000000-0000-4000-9000-000000000001\", \"confirm\": true}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5726,
+       "outputTokens": 92,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "da4285dc21ad0161aaeb863fe81bf006ab76a3b2fe3d5df9fab8e6b4ffebf696",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "text",
+       "delta": "The recurring Compressor"
+      },
+      {
+       "type": "text",
+       "delta": " plan ("
+      },
+      {
+       "type": "text",
+       "delta": "weekd"
+      },
+      {
+       "type": "text",
+       "delta": "ays 09:00-"
+      },
+      {
+       "type": "text",
+       "delta": "17:00, 3 h"
+      },
+      {
+       "type": "text",
+       "delta": "ours at"
+      },
+      {
+       "type": "text",
+       "delta": " 5 kW) is c"
+      },
+      {
+       "type": "text",
+       "delta": "ancelled,"
+      },
+      {
+       "type": "text",
+       "delta": " and its"
+      },
+      {
+       "type": "text",
+       "delta": " pending reminders are c"
+      },
+      {
+       "type": "text",
+       "delta": "leared too."
+      },
+      {
+       "type": "usage",
+       "inputTokens": 5899,
+       "outputTokens": 57,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "stop"
+      }
+     ]
+    }
+   ],
+   "gate_calls": [
+    {
+     "fingerprint": "ea6014a79bced849d9ce8c74ee2e1d6cae38de7d3345f6d295e14dc8c5261ce3",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000031416
+     }
+    },
+    {
+     "fingerprint": "08e00c7816e359a58b15b542498f57b8926dc338eb1cb7628e71916eeb8eded3",
+     "result": {
+      "choice": "recurring",
+      "confidence": 0.8,
+      "probabilities": {
+       "plan_job": 0.08,
+       "plan_batch": 0,
+       "recurring": 0.82,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0.1,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000035532
+     }
+    },
+    {
+     "fingerprint": "4e11a440796a8c079f832b21a3fdd0e62bdd8909eb74c336e51d0e05b57a6dd0",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000027342
+     }
+    },
+    {
+     "fingerprint": "6fce05929f0a7c0d2e235dae4a1a42f67f87e375ebf72d3ec8bccadca49daae8",
+     "result": {
+      "choice": "act",
+      "confidence": 0.24,
+      "probabilities": {
+       "act": 0.39,
+       "ask_duration": 0.09,
+       "ask_power": 0.02,
+       "ask_deadline": 0.22,
+       "ask_clarify": 0.28
+      },
+      "costUsd": 0.000030744
+     }
+    },
+    {
+     "fingerprint": "82a6d9bb25be1e76f73bea873765f75c48c97570f0a99cc8ecdc0980fb703cb1",
+     "result": {
+      "choice": "pass",
+      "confidence": 1,
+      "probabilities": {
+       "pass": 1,
+       "overclaim_co2": 0,
+       "unsafe": 0
+      },
+      "costUsd": 0.000028602
+     }
+    }
+   ]
+  }
+ ]
+}

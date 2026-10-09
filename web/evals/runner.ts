@@ -7,8 +7,11 @@ import { fileURLToPath } from 'node:url'
 import { loadConfig, type AgentConfig } from '../agent/config.js'
 import { FixtureForecastSource } from '../agent/data/forecast_source.js'
 import type { ChoiceBackend } from '../agent/gates/types.js'
-import { HISTORY_MAX, type ChatRequest, type PlanUpdate, type SseEvent, type TraceSummary } from '../agent/harness/events.js'
+import { HISTORY_MAX, type ChatRequest, type ActionEvent, type PlanUpdate, type SseEvent, type TraceSummary } from '../agent/harness/events.js'
 import type { ToolResultLike } from '../agent/harness/grounding.js'
+import type { AuthUser } from '../agent/store/user_types.js'
+import { MemoryUserStore } from '../agent/store/user_types.js'
+import { MemoryPlanStore, type NewPlan } from '../agent/store/plan_types.js'
 import { buildRouter, createTurnRunner, type TurnDeps, defaultChoiceBackend } from '../agent/harness/turn.js'
 import { ModelRouter } from '../agent/providers/router.js'
 import { MemoryStore } from '../agent/store/types.js'
@@ -26,7 +29,7 @@ import {
   saveRecording,
   STALE_MESSAGE,
 } from './recording.js'
-import { scenarioSchema, type Recording, type Scenario, type ScenarioResult, type TurnResult } from './schema.js'
+import { scenarioSchema, type Recording, type UserBlock, type Scenario, type ScenarioResult, type TurnResult } from './schema.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 export const EVALS_DIR = HERE
@@ -99,12 +102,73 @@ function wrapRegistry(base: ToolRegistry, log: ToolResultLike[]): ToolRegistry {
   return new ToolRegistry(wrapped)
 }
 
+/** The signed-in user's stores for one scenario; shared by all its turns (history is server-side when signed in). */
+export interface World {
+  auth: AuthUser
+  users: MemoryUserStore
+  plans: MemoryPlanStore
+}
+
+export const EVAL_USER_ID = '00000000-0000-4000-8000-00000000e0e0'
+
+/** Seeds MemoryUserStore + MemoryPlanStore from the scenario's `user` block. Null for anonymous scenarios. */
+export async function seedWorld(user: UserBlock | undefined, nowMs: number): Promise<World | null> {
+  if (!user) return null
+  const userId = EVAL_USER_ID
+  const users = new MemoryUserStore({ now: () => nowMs })
+  const plans = new MemoryPlanStore({ now: () => nowMs })
+  if (user.profile) {
+    await users.upsertProfile({
+      userId,
+      displayName: user.profile.display_name,
+      riskDefault: user.profile.risk_default,
+      quietFrom: user.profile.quiet_from,
+      quietTo: user.profile.quiet_to,
+    })
+  }
+  for (const d of user.devices ?? []) {
+    await users.saveDevice({ userId, name: d.name, kw: d.kw, typicalHours: d.typical_hours, sourceDeviceId: null })
+  }
+  for (const r of user.impact ?? []) {
+    const row = await users.addImpact({
+      userId,
+      conversationId: null,
+      turnId: null,
+      windowStartUtc: r.window_start_utc,
+      runNowStartUtc: r.run_now_start_utc,
+      durationH: r.duration_h,
+      energyKwh: r.energy_kwh,
+      runId: 'eval-seed',
+      model: 'seed',
+      estPointG: r.est_point_g,
+      estLowG: r.est_low_g,
+      estHighG: r.est_high_g,
+    })
+    if (r.realized_g !== null) await users.setRealized(userId, row.id, r.realized_g, null, nowMs)
+  }
+  if (user.push_subscription) await plans.savePushSubscription({ userId, endpoint: 'https://push.example.invalid/eval', p256dh: 'eval', auth: 'eval' })
+  for (const p of user.plans ?? []) {
+    const plan: NewPlan = {
+      userId,
+      label: p.label,
+      kind: 'recurring',
+      job: { durationH: p.duration_h, powerKw: p.power_kw, mode: 'expected' },
+      rule: { days: p.days, windowLocal: { from: p.window_from, to: p.window_to }, remind: p.remind },
+      nextStartUtc: null,
+      nextRunId: null,
+    }
+    await plans.createPlan(plan)
+  }
+  return { auth: { userId, isAnonymous: false, email: null }, users, plans }
+}
+
 async function runTurn(
   scenario: Scenario,
   request: ChatRequest,
   turnIndex: number,
   recording: Recording | null,
   opts: RunOptions,
+  world: World | null,
 ): Promise<TurnRun> {
   const nowMs = Date.parse(scenario.now_utc)
   const fixtureDir = opts.fixtureDir ?? FIXTURE_DIR
@@ -145,11 +209,12 @@ async function runTurn(
     registry: wrapRegistry(buildRegistry(), toolResults),
     router,
     now: () => nowMs,
+    ...(world ? { users: world.users, plans: world.plans } : {}),
     // The harness-engineer adds `choiceBackend` to TurnDeps; passing it through a spread keeps this compiling both ways.
     ...(backend ? ({ choiceBackend: backend } as object) : {}),
   }
   const run = createTurnRunner(deps)
-  await run({ request, ipHash: 'eval', nowMs, messagesLeft: null, signal: new AbortController().signal }, (ev) => events.push(ev))
+  await run({ request, ipHash: 'eval', nowMs, messagesLeft: null, ...(world ? { auth: world.auth } : {}), signal: new AbortController().signal }, (ev) => events.push(ev))
   if (replayProvider && !stale.problem && replayProvider.consumed < (recording?.turns[turnIndex]?.model_calls.length ?? 0)) {
     stale.mark('the recording has model calls the run did not make')
   }
@@ -158,19 +223,21 @@ async function runTurn(
 
 function outcomeOf(run: TurnRun): TurnOutcome | null {
   let answer = ''
+  const actions: ActionEvent[] = []
   let trace: TraceSummary | null = null
   let stopReason = ''
   let plan: PlanUpdate | null = null
   for (const ev of run.events) {
     if (ev.type === 'answer') answer = ev.data.text
     else if (ev.type === 'plan_update') plan = ev.data
+    else if (ev.type === 'action') actions.push(ev.data)
     else if (ev.type === 'done') {
       trace = ev.data.trace
       stopReason = ev.data.stop_reason
     }
   }
   if (!trace) return null
-  return { answer, stopReason, trace, planUpdate: plan, toolResults: run.toolResults }
+  return { answer, stopReason, trace, planUpdate: plan, toolResults: run.toolResults, actions }
 }
 
 export async function runScenario(scenario: Scenario, opts: RunOptions): Promise<ScenarioResult> {
@@ -197,6 +264,7 @@ export async function runScenario(scenario: Scenario, opts: RunOptions): Promise
   })
   const ref = optimizerRef(refCtx)
 
+  const world = await seedWorld(scenario.user, nowMs)
   const history: ChatRequest['history'] = []
   let conversationId: string | null = null
   const turns: TurnResult[] = []
@@ -218,7 +286,7 @@ export async function runScenario(scenario: Scenario, opts: RunOptions): Promise
     }
     let run: TurnRun
     try {
-      run = await runTurn(scenario, request, i, recording, opts)
+      run = await runTurn(scenario, request, i, recording, opts, world)
     } catch (err) {
       return { ...base, status: 'failed', note: `turn ${i + 1} threw: ${err instanceof Error ? err.message : 'unknown'}`, cost_usd: cost, turns }
     }
@@ -232,6 +300,7 @@ export async function runScenario(scenario: Scenario, opts: RunOptions): Promise
     const turnCost = o.trace.totals.cost_usd
     cost += turnCost
     if (opts.spend) opts.spend.spentUsd += turnCost
+    if (world) o.planState = { activePlans: world.plans.plans.filter((p) => p.active).length, reminders: world.plans.reminders.length }
     const assertions = await evaluateTurn(t.expect, o, ref)
     const bad = assertions.filter((a) => a.status === 'fail')
     if (bad.length > 0) {

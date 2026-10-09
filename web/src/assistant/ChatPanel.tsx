@@ -1,8 +1,12 @@
 import { useId, useState, type KeyboardEvent } from 'react'
 import type { PanelState, PlanUpdate } from '../../agent/harness/events'
+import { ChatActions } from './ChatActions'
+import { AccountMenu } from './AccountMenu'
+import { Feedback } from './Feedback'
 import { FormattedText } from './FormattedText'
 import { MAX_CHARS, STARTERS } from './flag'
 import { TraceDrawer } from './TraceDrawer'
+import { useAuth } from './useAuth'
 import { useChat } from './useChat'
 
 interface Props {
@@ -12,6 +16,7 @@ interface Props {
 
 export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
   const chat = useChat({ getPanelState, onPlanUpdate })
+  const auth = useAuth()
   const [draft, setDraft] = useState('')
   const inputId = useId()
   const unavailable = chat.limit ?? chat.error
@@ -20,7 +25,9 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
   const submit = (text: string) => {
     if (!text.trim() || chat.busy || blocked) return
     setDraft('')
-    void chat.send(text)
+    void chat.send(text).then((ok) => {
+      if (!ok) setDraft((d) => d || text)
+    })
   }
   const onKey = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
@@ -31,7 +38,10 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
 
   return (
     <section aria-label="Assistant" className="rounded-2xl border border-stone-200 bg-white p-4 sm:p-5 dark:border-stone-800 dark:bg-stone-900">
-      <h2 className="text-lg font-semibold">Ask the assistant</h2>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+        <h2 className="text-lg font-semibold">Ask the assistant</h2>
+        <AccountMenu auth={auth} messagesLeft={chat.messagesLeft} />
+      </div>
 
       <div aria-live="polite" role="log" aria-label="Conversation" className="mt-3 space-y-3">
         {chat.messages.length === 0 && (
@@ -59,10 +69,15 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
               <span className="sr-only">{m.role === 'user' ? 'You: ' : 'Assistant: '}</span>
               <FormattedText text={m.text} />
             </div>
+            {m.role === 'assistant' && m.actions && <ChatActions actions={m.actions} />}
             {m.role === 'assistant' && m.trace && <TraceDrawer trace={m.trace} />}
+            {m.role === 'assistant' && m.turnId && <Feedback turnId={m.turnId} />}
           </div>
         ))}
-        {chat.busy && (
+        {chat.checking && (
+          <p role="status" className="text-sm text-stone-600 dark:text-stone-300">Checking you&apos;re human…</p>
+        )}
+        {chat.busy && !chat.checking && (
           <p role="status" className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-300">
             <span aria-hidden="true" className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-stone-300 border-t-brand-600" />
             <span>{chat.status ?? 'Thinking...'}</span>
@@ -81,6 +96,23 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
         </div>
       )}
 
+      {chat.limit?.signIn && (
+        <div className="mt-3 space-y-2">
+          <button
+            type="button"
+            onClick={() => void chat.signIn()}
+            className="w-full rounded-lg bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 focus-visible:outline-2 focus-visible:outline-brand-600"
+          >
+            Continue with Google
+          </button>
+          <p className="text-xs text-stone-500 dark:text-stone-400">
+            We only read your email and name. See the{' '}
+            <a className="underline" href="/privacy" target="_blank" rel="noreferrer">privacy notice</a>.
+          </p>
+        </div>
+      )}
+
+      {!chat.limit?.signIn && (
       <form
         onSubmit={(e) => {
           e.preventDefault()
@@ -124,7 +156,11 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
           </div>
         </div>
       </form>
-      <p className="mt-2 text-xs text-stone-500 dark:text-stone-400">GB national grid only · 48-hour forecast · estimates, not guarantees</p>
+      )}
+      <p className="mt-2 text-xs text-stone-500 dark:text-stone-400">
+        GB national grid only · 48-hour forecast · estimates, not guarantees ·{' '}
+        <a className="underline" href="/privacy" target="_blank" rel="noreferrer">Privacy</a>
+      </p>
     </section>
   )
 }

@@ -1,0 +1,46 @@
+{
+ "id": "user-profile-dishwasher",
+ "persona": "household",
+ "notes": "J3: the saved dishwasher (1.2 kW, 2 h) and the cautious default are applied without a question and without calling the values assumed.",
+ "user": {
+  "signed_in": true,
+  "profile": {
+   "display_name": null,
+   "risk_default": "cautious",
+   "quiet_from": "23:00",
+   "quiet_to": "07:00"
+  },
+  "devices": [
+   {
+    "name": "dishwasher",
+    "kw": 1.2,
+    "typical_hours": 2
+   }
+  ]
+ },
+ "turns": [
+  {
+   "user": "Dishwasher, the usual, done by 7am tomorrow.",
+   "expect": {
+    "tools_called": [
+     "recommend_window"
+    ],
+    "window_equals_optimizer": {
+     "duration_h": 2,
+     "power_kw": 1.2,
+     "deadline_local": "2026-10-07T07:00",
+     "mode": "cautious"
+    },
+    "answer_matches": [
+     "(saved|your profile|your dishwasher|1\\.2 ?kW)"
+    ],
+    "answer_excludes": [
+     "assum",
+     "typical"
+    ],
+    "contains_caveat": true,
+    "no_banned_claim": true
+   }
+  }
+ ]
+}

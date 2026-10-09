@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "a6e2711c473ede4c97e020c72ce5c70b5dd01c26e943db6f5c0ed65af4576362",
+     "fingerprint": "6233d54d05dfc869b42c9a95ca2989a96631dc0664021c1f803cd24278013e82",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_018E61Sjcfcw4RYNiA8vsDxY",
+        "id": "toolu_01AYjbUM2Tj1N3SsRQz3HLyX",
         "name": "recommend_window",
-        "argsJson": "{\"duration_h\": 6, \"power_kw\": 7, \"deadline_local\": \"2026-10-06T04:00\", \"label\": \"EV charge\"}"
+        "argsJson": "{\"duration_h\": 6, \"power_kw\": 7, \"deadline_local\": \"2026-10-06T04:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"EV charge\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 2855,
-       "outputTokens": 550,
+       "inputTokens": 4141,
+       "outputTokens": 517,
        "cachedInputTokens": 0
       },
       {
@@ -29,7 +29,7 @@
      ]
     },
     {
-     "fingerprint": "71a8ab3239eda338cb3de8a2f00ae6904216e6d377b0102fbebc01dd8b54aa44",
+     "fingerprint": "717e91e1d0f31de69c7b8d9eb09a1a12ebe063c28fa822a9489726ca8727727f",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
@@ -42,123 +42,115 @@
       },
       {
        "type": "text",
-       "delta": "ge can't finish by 4"
+       "delta": "ge can't fin"
       },
       {
        "type": "text",
-       "delta": "am today."
+       "delta": "ish by 4am today. The"
       },
       {
        "type": "text",
-       "delta": " It's"
+       "delta": " next wh"
       },
       {
        "type": "text",
-       "delta": " 01:30 BST now"
+       "delta": "ole hour is 02:00"
       },
       {
        "type": "text",
-       "delta": ", so there"
+       "delta": " London time, which"
       },
       {
        "type": "text",
-       "delta": " are"
+       "delta": " leaves only "
       },
       {
        "type": "text",
-       "delta": " only about 2.5 h"
+       "delta": "2 hours before your"
       },
       {
        "type": "text",
-       "delta": "ours before 4am, and the"
+       "delta": " deadline.\n\nYou"
       },
       {
        "type": "text",
-       "delta": " planner can't f"
+       "delta": " could:"
       },
       {
        "type": "text",
-       "delta": "it the"
+       "delta": "\n- **"
       },
       {
        "type": "text",
-       "delta": " job in"
+       "delta": "Move the deadline later"
       },
       {
        "type": "text",
-       "delta": " that time"
+       "delta": "."
       },
       {
        "type": "text",
-       "delta": ".\n\nYou could:"
+       "delta": "** For example, "
       },
       {
        "type": "text",
-       "delta": "\n- **Move"
+       "delta": "8"
       },
       {
        "type": "text",
-       "delta": " the"
+       "delta": "am today"
       },
       {
        "type": "text",
-       "delta": " deadline later"
+       "delta": " would"
       },
       {
        "type": "text",
-       "delta": "**"
+       "delta": " give about"
       },
       {
        "type": "text",
-       "delta": ", for example to 4"
+       "delta": " 6 hours of"
       },
       {
        "type": "text",
-       "delta": "am tomorrow ("
+       "delta": " room"
       },
       {
        "type": "text",
-       "delta": "Wed 7 O"
+       "delta": ". I can"
       },
       {
        "type": "text",
-       "delta": "ct)"
+       "delta": " pl"
       },
       {
        "type": "text",
-       "delta": " or a"
+       "delta": "an that if you t"
       },
       {
        "type": "text",
-       "delta": " later time today"
+       "delta": "ell me the"
       },
       {
        "type": "text",
-       "delta": " if"
+       "delta": " time"
       },
       {
        "type": "text",
-       "delta": " that"
+       "delta": ".\n- **Shorten"
       },
       {
        "type": "text",
-       "delta": "'s acceptable.\n-"
+       "delta": " the job.** A"
       },
       {
        "type": "text",
-       "delta": " **Shorten the char"
+       "delta": " 2-hour charge at"
       },
       {
        "type": "text",
-       "delta": "ge** to about"
-      },
-      {
-       "type": "text",
-       "delta": " 2 "
-      },
-      {
-       "type": "text",
-       "delta": "hours, which f"
+       "delta": " 7 kW f"
       },
       {
        "type": "text",
@@ -166,40 +158,24 @@
       },
       {
        "type": "text",
-       "delta": " 4am today"
+       "delta": " 4am."
       },
       {
        "type": "text",
-       "delta": ", though"
+       "delta": " I can plan that inst"
       },
       {
        "type": "text",
-       "delta": " it"
+       "delta": "ead.\n\nWhich"
       },
       {
        "type": "text",
-       "delta": " would de"
-      },
-      {
-       "type": "text",
-       "delta": "liver less energy."
-      },
-      {
-       "type": "text",
-       "delta": "\n\nWhich would you like me"
-      },
-      {
-       "type": "text",
-       "delta": " to pl"
-      },
-      {
-       "type": "text",
-       "delta": "an?"
+       "delta": " would you like?"
       },
       {
        "type": "usage",
-       "inputTokens": 3055,
-       "outputTokens": 298,
+       "inputTokens": 4375,
+       "outputTokens": 375,
        "cachedInputTokens": 0
       },
       {
@@ -209,20 +185,24 @@
      ]
     },
     {
-     "fingerprint": "4ced9c8f22568bfe36de189a7f8640328c678d64e31165c300ca63191859cf00",
+     "fingerprint": "93dbced196757ddb652ab17a213c439fd35e1017579fe90f6416c541cbe18041",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "The planner could"
+       "delta": "I"
       },
       {
        "type": "text",
-       "delta": "n't f"
+       "delta": " couldn't find"
       },
       {
        "type": "text",
-       "delta": "it a 6-hour,"
+       "delta": " a window for"
+      },
+      {
+       "type": "text",
+       "delta": " a 6-hour,"
       },
       {
        "type": "text",
@@ -230,60 +210,92 @@
       },
       {
        "type": "text",
-       "delta": "kW charge before your"
+       "delta": "kW charge that fin"
       },
       {
        "type": "text",
-       "delta": " 4am deadline,"
+       "delta": "ishes by 4am today,"
       },
       {
        "type": "text",
-       "delta": " so it"
+       "delta": " so the job doesn't f"
       },
       {
        "type": "text",
-       "delta": " retur"
+       "delta": "it before"
       },
       {
        "type": "text",
-       "delta": "ned no rec"
+       "delta": " that"
       },
       {
        "type": "text",
-       "delta": "ommendation. You"
+       "delta": " deadline."
       },
       {
        "type": "text",
-       "delta": " could either"
+       "delta": " You"
       },
       {
        "type": "text",
-       "delta": " move"
+       "delta": " can either"
       },
       {
        "type": "text",
-       "delta": " the deadline later or"
+       "delta": ":"
       },
       {
        "type": "text",
-       "delta": " shorten the char"
+       "delta": "\n\n- **Move the deadline"
       },
       {
        "type": "text",
-       "delta": "ge, and I can"
+       "delta": " later**"
       },
       {
        "type": "text",
-       "delta": " plan wh"
+       "delta": ", and I'"
       },
       {
        "type": "text",
-       "delta": "ichever you choose."
+       "delta": "ll plan the"
+      },
+      {
+       "type": "text",
+       "delta": " 6-hour char"
+      },
+      {
+       "type": "text",
+       "delta": "ge against that new"
+      },
+      {
+       "type": "text",
+       "delta": " time.\n- **Shor"
+      },
+      {
+       "type": "text",
+       "delta": "ten the job**, and"
+      },
+      {
+       "type": "text",
+       "delta": " I'll plan a sh"
+      },
+      {
+       "type": "text",
+       "delta": "orter charge that fits before"
+      },
+      {
+       "type": "text",
+       "delta": " 4am.\n\nWhich would"
+      },
+      {
+       "type": "text",
+       "delta": " you like?"
       },
       {
        "type": "usage",
-       "inputTokens": 1487,
-       "outputTokens": 386,
+       "inputTokens": 2133,
+       "outputTokens": 123,
        "cachedInputTokens": 0
       },
       {
@@ -300,10 +312,10 @@
       "choice": "allow",
       "confidence": 1,
       "probabilities": {
-       "injection": 0,
+       "allow": 1,
        "off_topic": 0,
-       "abuse": 0,
-       "allow": 1
+       "injection": 0,
+       "abuse": 0
       },
       "costUsd": 0.000027552
      }
@@ -328,18 +340,18 @@
      }
     },
     {
-     "fingerprint": "95fcd777d1532eacfc3833da967ac6282b46e916b08cf6a01e5f26738479f90f",
+     "fingerprint": "c38f8e5a760d40340ff6f82328ae6b1d4791aa266c0dce8829ae9960e1af9ce6",
      "result": {
       "choice": "act",
-      "confidence": 0.74,
+      "confidence": 0.91,
       "probabilities": {
-       "act": 0.79,
+       "act": 0.93,
        "ask_duration": 0,
        "ask_power": 0,
        "ask_deadline": 0,
-       "ask_clarify": 0.21
+       "ask_clarify": 0.07
       },
-      "costUsd": 0.00002646
+      "costUsd": 0.000028308
      }
     },
     {
@@ -355,31 +367,16 @@
      }
     },
     {
-     "fingerprint": "2221d7bdbc06f83dd008c6313b33ef98865e5aff6eebecab1b6e712d1dae0c5a",
+     "fingerprint": "744587637e982f25ae971d9d9056d2d90b207d93042586fda5f6febbbf785ce1",
      "result": {
-      "choice": "ungrounded_number",
-      "confidence": 0.81,
+      "choice": "pass",
+      "confidence": 1,
       "probabilities": {
-       "pass": 0.14,
-       "ungrounded_number": 0.86,
+       "pass": 1,
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000026712
-     }
-    },
-    {
-     "fingerprint": "928a5ba4e40f3087559a4383c79c5731b7c3e18f5aad86bb6c1ab934b2db832e",
-     "result": {
-      "choice": "pass",
-      "confidence": 0.63,
-      "probabilities": {
-       "overclaim_co2": 0,
-       "ungrounded_number": 0.28,
-       "unsafe": 0,
-       "pass": 0.72
-      },
-      "costUsd": 0.00002352
+      "costUsd": 0.000022344
      }
     }
    ]

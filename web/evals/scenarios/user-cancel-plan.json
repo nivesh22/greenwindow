@@ -1,0 +1,59 @@
+{
+ "id": "user-cancel-plan",
+ "persona": "business",
+ "notes": "J5 cancel: the plan stays until the user confirms; then cancel_plan runs with confirm true.",
+ "user": {
+  "signed_in": true,
+  "plans": [
+   {
+    "label": "Compressor",
+    "days": [
+     "mon",
+     "tue",
+     "wed",
+     "thu",
+     "fri"
+    ],
+    "window_from": "09:00",
+    "window_to": "17:00",
+    "duration_h": 3,
+    "power_kw": 5,
+    "remind": false
+   }
+  ]
+ },
+ "turns": [
+  {
+   "user": "Cancel my recurring compressor plan.",
+   "expect": {
+    "tools_called": [
+     "list_plans"
+    ],
+    "tool_not_called": [
+     "cancel_plan"
+    ],
+    "plans_saved": 1,
+    "answer_matches": [
+     "(confirm|shall i|should i|want me to|would you like|go ahead|is that (ok|right)|do you want)"
+    ],
+    "no_banned_claim": true
+   }
+  },
+  {
+   "user": "Yes, cancel the recurring compressor plan.",
+   "expect": {
+    "tools_called": [
+     "cancel_plan"
+    ],
+    "tool_args": {
+     "cancel_plan": {
+      "confirm": true
+     }
+    },
+    "plans_saved": 0,
+    "no_banned_claim": true,
+    "stop_reason": "final"
+   }
+  }
+ ]
+}

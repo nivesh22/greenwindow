@@ -10,21 +10,31 @@ const localTime = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/, 'YYYY-MM-D
 
 export const PERSONAS = ['household', 'developer', 'business', 'accuracy', 'injection', 'offtopic', 'edge'] as const
 
+const windowRef = z.strictObject({
+  duration_h: z.number().int().min(1).max(12),
+  power_kw: z.number().positive(),
+  deadline_local: localTime,
+  earliest_local: localTime.optional(),
+  mode: z.enum(['expected', 'cautious']),
+})
+
 export const expectSchema = z.strictObject({
   /** gate name -> expected choice. Skipped (with a note) when the trace has no such gate. */
   gates: z.record(z.string(), z.string()).optional(),
   /** Subset of the turn's tool calls, in order. */
   tools_called: z.array(z.string()).optional(),
   tool_not_called: z.array(z.string()).optional(),
-  window_equals_optimizer: z
-    .strictObject({
-      duration_h: z.number().int().min(1).max(12),
-      power_kw: z.number().positive(),
-      deadline_local: localTime,
-      earliest_local: localTime.optional(),
-      mode: z.enum(['expected', 'cautious']),
-    })
-    .optional(),
+  window_equals_optimizer: windowRef.optional(),
+  /** Action events (P4) the turn emitted; the expected kinds must all appear (extra kinds are allowed). */
+  actions_emitted: z.array(z.enum(['calendar', 'reminder_set', 'plan_saved', 'push_needed'])).optional(),
+  /** Per tool: a subset the validated args of the FIRST call to that tool must contain (deep subset; arrays match exactly). */
+  tool_args: z.record(z.string(), z.record(z.string(), z.unknown())).optional(),
+  /** Number of ACTIVE saved plans in the store after the turn (seeded plans count; cancelled plans do not). */
+  plans_saved: z.number().int().nonnegative().optional(),
+  /** Number of reminder rows in the store after the turn. */
+  reminders_created: z.number().int().nonnegative().optional(),
+  /** The calendar action's start (and the .ics DTSTART) equals recommend() on the fixture for this job. */
+  calendar_start_equals_optimizer: windowRef.optional(),
   co2_equals_tool: z.boolean().optional(),
   contains_caveat: z.boolean().optional(),
   no_banned_claim: z.boolean().optional(),
@@ -42,6 +52,52 @@ export const expectSchema = z.strictObject({
 })
 export type Expect = z.infer<typeof expectSchema>
 
+/** A signed-in user for the scenario (P3/P4). Absent: anonymous, no user store, no plan store (the default). */
+export const userBlockSchema = z.strictObject({
+  signed_in: z.literal(true),
+  profile: z
+    .strictObject({
+      display_name: z.string().nullable().default(null),
+      risk_default: z.enum(['expected', 'cautious']).default('expected'),
+      quiet_from: z.string().nullable().default(null),
+      quiet_to: z.string().nullable().default(null),
+    })
+    .optional(),
+  devices: z.array(z.strictObject({ name: z.string(), kw: z.number().positive(), typical_hours: z.number().positive().nullable().default(null) })).optional(),
+  /** The user has a browser push subscription (schedule_reminder can work). */
+  push_subscription: z.boolean().optional(),
+  /** Recurring plans already saved. */
+  plans: z
+    .array(
+      z.strictObject({
+        label: z.string(),
+        days: z.array(z.enum(['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'])).min(1),
+        window_from: z.string(),
+        window_to: z.string(),
+        duration_h: z.number().int().min(1).max(12),
+        power_kw: z.number().positive(),
+        remind: z.boolean().default(false),
+      }),
+    )
+    .optional(),
+  /** Impact-ledger rows (J7), with the realized figure already set. */
+  impact: z
+    .array(
+      z.strictObject({
+        window_start_utc: utcTs,
+        run_now_start_utc: utcTs,
+        duration_h: z.number().int().min(1),
+        energy_kwh: z.number().positive(),
+        est_point_g: z.number(),
+        est_low_g: z.number(),
+        est_high_g: z.number(),
+        realized_g: z.number().nullable().default(null),
+      }),
+    )
+    .optional(),
+})
+export type UserBlock = z.infer<typeof userBlockSchema>
+
 export const scenarioSchema = z.strictObject({
   id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/),
   persona: z.enum(PERSONAS),
@@ -49,6 +105,7 @@ export const scenarioSchema = z.strictObject({
   description: z.string().optional(),
   now_utc: utcTs.default(FIXTURE_NOW_UTC),
   panel_state: panelStateSchema.nullable().default(null),
+  user: userBlockSchema.optional(),
   turns: z.array(z.strictObject({ user: z.string().min(1).max(2000), expect: expectSchema.default({}) })).min(1),
 })
 export type Scenario = z.infer<typeof scenarioSchema>
@@ -66,15 +123,20 @@ const modelEventSchema: z.ZodType<ModelEvent> = z.union([
 ])
 
 export const recordedModelCallSchema = z.object({ fingerprint: z.string(), model: z.string(), events: z.array(modelEventSchema) })
-export const recordedGateCallSchema = z.object({
-  fingerprint: z.string(),
-  result: z.object({
-    choice: z.string(),
-    confidence: z.number(),
-    probabilities: z.record(z.string(), z.number()),
-    costUsd: z.number(),
+export const recordedGateCallSchema = z.union([
+  z.object({
+    fingerprint: z.string(),
+    result: z.object({
+      choice: z.string(),
+      confidence: z.number(),
+      probabilities: z.record(z.string(), z.number()),
+      costUsd: z.number(),
+    }),
   }),
-})
+  // A gate call that failed while recording (e.g. a Jev timeout): replay fails it the same way, so the gate's rule
+  // fallback runs exactly as it did live.
+  z.object({ fingerprint: z.string(), error: z.string() }),
+])
 export const recordingSchema = z.object({
   version: z.literal(1),
   scenario_id: z.string(),

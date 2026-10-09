@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
+import { HeaderAccount } from '../assistant/HeaderAccount'
 import { useDataFile } from '../data/hooks'
 import { formatDateTime } from '../lib/time'
 import { StaleBanner } from './Status'
@@ -45,9 +46,12 @@ export function Layout({ children }: { children: ReactNode }) {
               </NavLink>
             ))}
           </nav>
-          <p className="text-xs text-stone-500 sm:ml-auto dark:text-stone-400">
-            Data last updated: {meta.data ? formatDateTime(meta.data.generated_at_utc) : '…'}
-          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 sm:ml-auto">
+            <p className="text-xs text-stone-500 dark:text-stone-400">
+              Data last updated: {meta.data ? formatDateTime(meta.data.generated_at_utc) : '…'}
+            </p>
+            <HeaderAccount />
+          </div>
         </div>
       </header>
       {meta.data && <StaleBanner generatedAt={meta.data.generated_at_utc} />}
@@ -61,7 +65,11 @@ export function Layout({ children }: { children: ReactNode }) {
             Great Britain only. Forecasts are estimates of average grid intensity, not a guarantee.{' '}
             <a className="underline hover:text-stone-800 dark:hover:text-stone-200" href="https://github.com/nivesh22/greenwindow">
               Source on GitHub
-            </a>
+            </a>{' '}
+            ·{' '}
+            <NavLink className="underline hover:text-stone-800 dark:hover:text-stone-200" to="/privacy">
+              Privacy
+            </NavLink>
           </p>
         </div>
       </footer>

@@ -42,8 +42,25 @@ export function planJevState(s: PlanState): Record<string, unknown> {
 }
 
 /** Rules (design §6.2): act iff duration and deadline are known and power is known or defaultable. */
+// "start at 3am versus 2pm", "now or tomorrow 9am": comparing named start times needs no deadline (compare_starts).
+const COMPARE_STARTS = /\b(vs\.?|versus|compared? (to|with)|or)\b.*\b(\d{1,2}(:\d{2})?\s*(am|pm)|\d{1,2}:\d{2}|now|tonight|tomorrow)\b/i
+
+// Managing saved plans or following up on a plan ("cancel my compressor plan", "what plans do I have", "add it to my
+// calendar", "remind me") is not a new planning question: the tools handle it, so the gate never asks first.
+const PLAN_FOLLOW_UP =
+  /\b(cancel|stop|delete|remove|list|show)\b.*\bplans?\b|\b(my|saved|recurring) plans?\b|\bwhat plans\b|\badd (it|this|that) to (my )?calendar\b|\bremind me\b/i
+
+/** Plan management / follow-through wording (P4): always act. */
+export function isPlanFollowUp(message: string): boolean {
+  return PLAN_FOLLOW_UP.test(message)
+}
+
 export function askOrActRules(s: PlanState): RuleDecision<AskOrActChoice> {
+  if (isPlanFollowUp(s.message)) return { choice: 'act', confidence: 0.9, reason: 'plan management or follow-up' }
   const sl = s.slots
+  if (COMPARE_STARTS.test(s.message) && sl.duration_h && (sl.power_kw || sl.device)) {
+    return { choice: 'act', confidence: 0.8, reason: 'compares named start times (no deadline needed)' }
+  }
   if (!sl.duration_h && !sl.power_kw && !sl.deadline && !sl.device) return { choice: 'ask_clarify', confidence: 0.6, reason: 'no job details' }
   if (!sl.duration_h) return { choice: 'ask_duration', confidence: 0.8, reason: 'duration unknown' }
   if (!sl.deadline) return { choice: 'ask_deadline', confidence: 0.8, reason: 'deadline unknown' }
@@ -58,15 +75,18 @@ export function askOrActSpec(threshold: number): GateSpec<PlanState, AskOrActCho
     instructions:
       'The user wants a start-time recommendation for an electricity job. `known` lists what is already known and where ' +
       'it came from (the user, the planner panel, or a typical default for the named device; defaults are fine to use). ' +
-      'Decide whether the assistant can plan now or must first ask ONE question.',
+      'Decide whether the assistant can plan now or must first ask ONE question. Comparing specific start times the ' +
+      'user names ("3am versus 2pm", "now or tomorrow") needs only duration and power, not a deadline.',
     options: {
-      act: 'Enough is known to plan: the duration, the deadline and the power are known or can be taken from a device default or the planner panel.',
+      act: 'Enough is known: duration, deadline and power are known or defaultable, OR the user compares named start times and duration and power are known.',
       ask_duration: 'How long the job runs is unknown and there is no default for it.',
       ask_power: 'The power draw is unknown and there is no device to take a typical value from.',
-      ask_deadline: 'When the job must be finished is unknown.',
+      ask_deadline: 'When the job must be finished is unknown and the user did not name specific start times to compare.',
       ask_clarify: 'It is unclear what the user wants to run.',
     },
     rules: askOrActRules,
+    override: (s, a) =>
+      a.choice !== 'act' && isPlanFollowUp(s.message) ? { choice: 'act', confidence: 1, reason: 'plan management or follow-up' } : null,
   }
 }
 
@@ -76,6 +96,11 @@ const EXPLICIT_EXPECTED = /\b(expected|median|typical|average)[- ](mode|case|for
 // ("must be done by 7am") is NOT a risk signal: the deadline is a hard constraint in both modes.
 const CAUTIOUS_HINTS = /\b(no risk|lowest risk|least risk|low risk|risk[- ]averse|guarantee\w*|be sure|make sure it'?s (cleaner|greener|lower)|certain(ly)? (cleaner|greener|lower)|worst case|confident)\b/i
 const FLEXIBLE_HINTS = /\b(flexible|no rush|whenever|don'?t mind|not fussed|any ?time|relaxed)\b/i
+
+/** Risk wording in the message (explicit mode, or clear low-risk / flexible wording), else null. Beats a saved profile default. */
+export function messageRiskSignal(message: string): RiskModeChoice | null {
+  return explicitMode(message) ?? (CAUTIOUS_HINTS.test(message) ? 'cautious' : FLEXIBLE_HINTS.test(message) ? 'expected' : null)
+}
 
 /** The mode the user explicitly asked for in this message, if any. It wins over Jev and the rules. */
 export function explicitMode(message: string): RiskModeChoice | null {

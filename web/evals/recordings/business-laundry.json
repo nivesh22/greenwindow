@@ -5,105 +5,137 @@
   {
    "model_calls": [
     {
-     "fingerprint": "5ab027128ebc1c5e7559b3fbdea94412fce2c8807135d5d31e8969422929c4aa",
+     "fingerprint": "98610bdf1b7a775dca062925b4a402e8e6a1b804c9f49c29d3610f242e2127d1",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_0114ob7dMVrjo1cP2F87Gw4z",
+        "name": "lookup_device",
+        "argsJson": "{\"query\": \"industrial washer\"}"
+       }
+      },
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01ExjfppDDqYH8srhSLhgVRt",
+        "name": "lookup_device",
+        "argsJson": "{\"query\": \"industrial dryer\"}"
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4847,
+       "outputTokens": 334,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "b2da41277dd4e03a9f2d089d493a909a67521234adaaad02d4affeac29070693",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "What"
+       "delta": "I"
       },
       {
        "type": "text",
-       "delta": " time do"
+       "delta": " cou"
       },
       {
        "type": "text",
-       "delta": " the"
+       "delta": "ldn't find typical fig"
       },
       {
        "type": "text",
-       "delta": " three mach"
+       "delta": "ures for indust"
       },
       {
        "type": "text",
-       "delta": "ines need to be"
+       "delta": "rial washers or dryers"
       },
       {
        "type": "text",
-       "delta": " finished by t"
+       "delta": ", so I need"
       },
       {
        "type": "text",
-       "delta": "onight? Once"
+       "delta": " your"
       },
       {
        "type": "text",
-       "delta": " I"
+       "delta": " num"
       },
       {
        "type": "text",
-       "delta": " have"
+       "delta": "bers. For"
       },
       {
        "type": "text",
-       "delta": " that, I'll look"
+       "delta": " each machine, what"
       },
       {
        "type": "text",
-       "delta": " up typ"
+       "delta": "'s its run length in"
       },
       {
        "type": "text",
-       "delta": "ical power and run"
+       "delta": " hours ("
       },
       {
        "type": "text",
-       "delta": " length"
+       "delta": "1 "
       },
       {
        "type": "text",
-       "delta": " for an"
+       "delta": "to 12) and power"
       },
       {
        "type": "text",
-       "delta": " industrial washer and a"
+       "delta": " rating in"
       },
       {
        "type": "text",
-       "delta": " dryer, and find the best"
+       "delta": " kW ("
       },
       {
        "type": "text",
-       "delta": " sl"
+       "delta": "it"
       },
       {
        "type": "text",
-       "delta": "ots."
+       "delta": "'s usually on the rating pl"
       },
       {
        "type": "text",
-       "delta": " Those"
+       "delta": "ate), and what"
       },
       {
        "type": "text",
-       "delta": " fig"
+       "delta": " time"
       },
       {
        "type": "text",
-       "delta": "ures will"
+       "delta": " must ever"
       },
       {
        "type": "text",
-       "delta": " be assumptions you can override"
+       "delta": "ything finish by t"
       },
       {
        "type": "text",
-       "delta": "."
+       "delta": "onight?"
       },
       {
        "type": "usage",
-       "inputTokens": 2860,
-       "outputTokens": 385,
+       "inputTokens": 5069,
+       "outputTokens": 304,
        "cachedInputTokens": 0
       },
       {
@@ -134,58 +166,57 @@
       "choice": "plan_batch",
       "confidence": 1,
       "probabilities": {
-       "smalltalk": 0,
        "plan_job": 0,
-       "model_accuracy": 0,
+       "plan_batch": 1,
        "recurring": 0,
-       "impact_history": 0,
        "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
        "profile_update": 0,
-       "off_topic": 0,
-       "plan_batch": 1
+       "smalltalk": 0,
+       "off_topic": 0
       },
       "costUsd": 0.000031668
-     }
-    },
-    {
-     "fingerprint": "4ed9c40ede04a9184f2b0b2494781a87e902268456a72c75f2340cfd9d4e315e",
-     "result": {
-      "choice": "act",
-      "confidence": 0.7,
-      "probabilities": {
-       "act": 0.75,
-       "ask_duration": 0.02,
-       "ask_power": 0.02,
-       "ask_deadline": 0.01,
-       "ask_clarify": 0.2
-      },
-      "costUsd": 0.000027762
      }
     },
     {
      "fingerprint": "453b73e525dc3362ce4b6d638d0442be6b0535eb0cf05f350459d33c0c12d311",
      "result": {
       "choice": "expected",
-      "confidence": 1,
+      "confidence": 0.98,
       "probabilities": {
-       "expected": 1,
-       "cautious": 0
+       "expected": 0.99,
+       "cautious": 0.01
       },
       "costUsd": 0.000026208
      }
     },
     {
-     "fingerprint": "8937cae7da3e7a07eb8da10a61e3802ef340ec0a6a82bc587c6f6843533001e2",
+     "fingerprint": "9be173d2514d068e9400649753d77a645498ec292fe469c07d755d7e198b32c3",
+     "result": {
+      "choice": "act",
+      "confidence": 0.86,
+      "probabilities": {
+       "act": 0.89,
+       "ask_duration": 0.01,
+       "ask_power": 0.01,
+       "ask_deadline": 0.01,
+       "ask_clarify": 0.08
+      },
+      "costUsd": 0.00002961
+     }
+    },
+    {
+     "fingerprint": "db63f64fa704068df1cf85ac32a3e7342b453ba69f6858be2e5d7e2eacb9a04e",
      "result": {
       "choice": "pass",
-      "confidence": 0.97,
+      "confidence": 1,
       "probabilities": {
-       "pass": 0.98,
-       "ungrounded_number": 0.02,
+       "pass": 1,
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000023184
+      "costUsd": 0.000022092
      }
     }
    ]

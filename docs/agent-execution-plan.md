@@ -49,7 +49,7 @@ Owner:    H1-H3  H4, O1  H5      H6-H8,  H9-H11
 | P0 | Docs, rules, contracts and agent definitions in place. Supabase project exists. | Contracts compile. `npm test` and `npm run typecheck` green. `.claude/agents/*.md` committed. Migration 0001 applied. | No (docs/rules commit to `main` only) |
 | P1a | One chat turn works end to end on the `assistant` preview URL. | J1 ("charge my EV before 7am") answered with an optimizer-exact start time. Spend written to `cost_ledger`. Harness unit tests green. | No |
 | P1b | ✅ done 2026-10-08, **release 1** (`assistant` → `main`) | Grounding check (pass / one rewrite / template) + circuit breaker; plan panel two-way sync, two-column layout, "How I got this" drawer; migration 0002 (80% alert, `reset_budget`, `budget_status`) applied live; health keepalive; `explain_uncertainty`; functions in `dub1`; `recommend_window` returns London-time fields (prompt v2); route Gemini 3.5-flash → Haiku 5.5 → flash-lite → 3.8-flash. Turns ~10–13 s, ~$0.002 when Haiku answers. 269 web tests + Python suite green. |
-| P2 | 🟡 code complete on `assistant`, release 2 pending | ✅ P2.2 gates (Jev first, rules fallback; guard_in ∥ router, ask_or_act ∥ risk_mode, guard_out after grounding; live `gate` events; injection rules override a Jev allow). ✅ P2.3 insight tools (benchmark always included). ✅ P2.4 eval suite: 50 scenarios, replay/record/live, CI `agent-evals (replay)`. **Live recording 2026-10-08: first run 70% found 4 real bugs** (deadline read as cautious risk mode, deadline silently moved, our model names screened off-topic, rewrite text leaking); fixed (prompt v3, risk_mode = carbon-forecast risk only); second run **replay 50/50, window correctness 100%, banned claims 0, $0.069 per full live run**. Tools in one step now run sequentially. Known limitation: injected text in a device name/label blocks the whole request (safe, less helpful than FR-2.8). |
+| P2 | ✅ done 2026-10-09, **release 2** (`main` 2918ba0; production verified: Jev gates ~250–365 ms, honest infeasible answer, insight tools) | ✅ P2.2 gates (Jev first, rules fallback; guard_in ∥ router, ask_or_act ∥ risk_mode, guard_out after grounding; live `gate` events; injection rules override a Jev allow). ✅ P2.3 insight tools (benchmark always included). ✅ P2.4 eval suite: 50 scenarios, replay/record/live, CI `agent-evals (replay)`. **Live recording 2026-10-08: first run 70% found 4 real bugs** (deadline read as cautious risk mode, deadline silently moved, our model names screened off-topic, rewrite text leaking); fixed (prompt v3, risk_mode = carbon-forecast risk only); second run **replay 50/50, window correctness 100%, banned claims 0, $0.069 per full live run**. Tools in one step now run sequentially. Known limitation: injected text in a device name/label blocks the whole request (safe, less helpful than FR-2.8). |
 | P3 | Users, memory, impact ledger. | J2, J3 and J7 work end to end. pgTAP RLS tests pass. Delete-my-data test passes. | Yes |
 | P4 | Follow-through and ops. | J4, J5, J6 and J8 work. The Ops page shows real data. README showcase done. | Yes |
 
@@ -139,12 +139,12 @@ takes a while.
 
 | ID | Task | Agent | Needs |
 |----|------|-------|-------|
-| P2.1 | Gate contracts finalized, eval scenario schema (`evals/schema.ts`), replay recording format | orchestrator | P1b |
-| P2.2 ∥ | The 5 gates on rules + Flash-Lite JSON classifier (`fallbacks.ts`, `router_gate.ts`, `guard_in.ts`, `ask_or_act.ts`, `risk_mode.ts`, `guard_out.ts`), `turn.ts` stages 4/5/7, gate spans in the drawer | harness-engineer | P2.1 |
-| P2.3 ∥ | Insight tools: `get_leaderboard`, `get_backtest`, `compare_models` (always with `n_scored` and the seasonal-naive row) | tools-engineer | P2.1 |
-| P2.4 ∥ | Eval runner (replay + live), assertions, ~50 scenarios, `agent-evals.yml` (replay on PRs; live on dispatch/nightly) | eval-engineer | P2.1 |
-| P2.5 | *If S1 passes and you approve the spend:* `gates/jev.ts` adapter, plus a Jev-vs-fallback comparison in the live evals (a good showcase result) | harness-engineer | S1, **H12** |
-| P2.6 | Integration, record replay fixtures from a live run, make replay evals a required check, release 2 | orchestrator | P2.2–2.4, **H5** |
+| P2.1 ✅ | Gate contracts finalized, eval scenario schema (`evals/schema.ts`), replay recording format | orchestrator | P1b |
+| P2.2 ∥ ✅ | The 5 gates on rules + Flash-Lite JSON classifier (`fallbacks.ts`, `router_gate.ts`, `guard_in.ts`, `ask_or_act.ts`, `risk_mode.ts`, `guard_out.ts`), `turn.ts` stages 4/5/7, gate spans in the drawer | harness-engineer | P2.1 |
+| P2.3 ∥ ✅ | Insight tools: `get_leaderboard`, `get_backtest`, `compare_models` (always with `n_scored` and the seasonal-naive row) | tools-engineer | P2.1 |
+| P2.4 ∥ ✅ | Eval runner (replay + live), assertions, ~50 scenarios, `agent-evals.yml` (replay on PRs; live on dispatch/nightly) | eval-engineer | P2.1 |
+| P2.5 ✅ | *If S1 passes and you approve the spend:* `gates/jev.ts` adapter, plus a Jev-vs-fallback comparison in the live evals (a good showcase result) | harness-engineer | S1, **H12** |
+| P2.6 ✅ | Integration, record replay fixtures from a live run, make replay evals a required check, release 2 | orchestrator | P2.2–2.4, **H5** |
 
 **Owner, meanwhile:** H5 (GitHub secrets for live evals), H6 (Google OAuth client), H7 (Supabase Auth settings), H8
 (Turnstile), and decide H12 (Jev) after S1.
@@ -192,17 +192,22 @@ never print or decrypt values.
 | **H4** ✅ | Env vars in Vercel + `web/.env.local` | P1a.6 | Add H1–H3 values. I'll give you the exact list, including generated non-secret config such as `IP_SALT` (you generate it with `openssl rand -hex 32`). | — | 10 min |
 | **O1** | CO2 wording decision | P1a.2 merge | Choose (a) or (b) in §1 | — | 1 min |
 | **H5** ✅ | GitHub Actions secrets | P2.6 (live evals) | github.com/nivesh22/greenwindow → Settings → Secrets → Actions: `GEMINI_API_KEY`, `AI_GATEWAY_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | — | 5 min |
+| **H4b** ✅ | Public Supabase values in Vercel + `.env.local` (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` = publishable key, type Config) | P3.4 | — | — | 2 min |
 | **H6** ✅ | Google OAuth client | P3.2, P3.4 | console.cloud.google.com → new project → OAuth consent screen (External, scopes `email` + `profile` only, privacy URL `https://greenwindow-one.vercel.app/privacy`) → Credentials → OAuth client (Web) with redirect URI `https://<project-ref>.supabase.co/auth/v1/callback`. Paste the client ID/secret into Supabase (H7), not into Vercel. | (stored in Supabase) | 20 min |
 | **H7** ✅ | Supabase Auth settings | P3.2, P3.4 | Authentication → Providers: enable **Anonymous**, enable **Google** (H6 values), enable **Manual linking**. URL config: site URL = production URL, add the preview URL pattern. | — | 5 min |
 | **H8** ✅ | Cloudflare Turnstile (free) | P3.2 | dash.cloudflare.com → Turnstile → add site (production + `*.vercel.app` preview hostnames) | `VITE_TURNSTILE_SITEKEY`, `TURNSTILE_SECRET` | 5 min |
-| **H9** | VAPID key pair | P4.3 | `npx web-push generate-vapid-keys` locally. Put the private key straight into Vercel. | `VITE_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (`mailto:` your address) | 5 min |
-| **H10** | Langfuse Cloud Hobby | P4.5 | cloud.langfuse.com (EU region) → project → API keys | `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_BASE_URL` | 5 min |
+| **H9** 🟡 | VAPID key pair (in Vercel 2026-10-09; `VITE_VAPID_PUBLIC_KEY` and `VAPID_SUBJECT` still need the Preview target) | P4.3 | `npx web-push generate-vapid-keys` locally. Put the private key straight into Vercel. | `VITE_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (`mailto:` your address) | 5 min |
+| **H10** ✅ | Langfuse Cloud Hobby (keys in Vercel, Preview + Production, 2026-10-09) | P4.5 | cloud.langfuse.com (EU region) → project → API keys | `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_BASE_URL` | 5 min |
 | **H11** | Make yourself admin | P4.3 | Sign in on production once. I insert your user ID into `admins` with a migration seed you approve. | — | 2 min |
 | **H12** ✅ | Jev decision | P2.5 | After S1: approve (or not) Jev via the gateway, with its cost counted toward the $5 | — | 2 min |
 | **H14** | Make `agent-evals` a required check on `main` | P2.6 | GitHub → Settings → Branches → rule for `main` → Require status checks → add `agent-evals (replay)` after its first run. | — | 2 min |
 | H13 | (Optional) Mac git identity | any | On the Mac: `git config --global user.name nivesh22` and `git config --global user.email nivesh@g.ucla.edu` | — | 1 min |
 
 Also generated by the owner, server-only: `CRON_SECRET` (P3, also stored in Supabase Vault), `IP_SALT` (P1a).
+
+**P4 additions (2026-10-09):**
+- **H15 `CRON_SECRET`:** generate (`openssl rand -hex 32`), add to Vercel (Preview + Production, sensitive), and in the Supabase SQL editor run `select vault.create_secret('<value>', 'greenwindow_cron_secret');` and `select vault.create_secret('https://greenwindow-one.vercel.app', 'greenwindow_app_url');`. Until then the cron jobs do nothing.
+- **H16 calendar link check (S7):** open one generated Google Calendar link and confirm the time.
 
 ## 6. Spikes
 
@@ -237,10 +242,10 @@ Last updated 2026-10-08 (late evening). Integration branch `assistant`; preview:
 | P1a | ✅ done 2026-10-08 | Harness core, core tools, chat UI, API + Supabase store, `turn.ts` + system prompt. Owner verified J1 on the preview. |
 | P1b | 🟡 in progress | ✅ P1b.2 plan panel two-way sync, two-column layout, "How I got this" drawer. ✅ P1b.3 migration 0002 (80% alert, `reset_budget`, `budget_status`) **applied and checked live**; limit tests; health keepalive in `pipeline.yml`; `sse-test` removed. ✅ P1b.4 `explain_uncertainty`. ✅ Functions in `dub1`. 🟡 P1b.1 grounding check + circuit breaker (harness agent running). Then P1b.5: integration (`messages_left` in `turn_start`), live check, owner review, **release 1** (`assistant` → `main`). 206 tests green. |
 | P2 | 🟡 in progress (agents started 2026-10-08) | Gates on rules + Gemini classifier first, then Jev adapter (approved, H12). Live evals can use the GitHub secrets (H5). |
-| P3 | not started | Needs H6 (Google OAuth), H7 (Supabase Auth settings), H8 (Turnstile). |
-| P4 | not started | Needs H9 (VAPID), H10 (Langfuse), H11 (admin). |
+| P3 | 🟡 code complete on `assistant` (2026-10-09), live testing | Migrations 0003 (users, memory, RLS) and 0004 (merge/session/anon-count functions, retention) applied. Auth via `/auth/v1/user`; Turnstile → anonymous session → 3 free messages → Google `linkIdentity` (merge fallback); server history, profile in context, rolling summary, impact ledger (lazy realization); Settings, Privacy, feedback. 543 tests. |
+| P4 | 🟡 code complete on `assistant` (2026-10-09), live testing | P4.1 migration 0005 applied; P4.2 tools (`plan_batch`, recurring plans, `make_calendar_event`, `schedule_reminder`), P4.3 APIs + cron + admin ops/trace, P4.4 chat actions, plan-panel calendar/reminder, push opt-in + `sw.js`, Settings plans, Ops pages; P4.5 Langfuse export; P4.6 13 new scenarios (J3-J7) + `eval_runs` trend rows. Live recording found 6 real issues (plan management asked first; router misrouted 'make X my default' and 'my plans'; saved devices ignored by lookup_device; guests not told saving needs sign-in; failed gate calls not replayable), all fixed: **replay 63/63**, ~$0.24 of live eval spend. Next: owner items (H9 Preview, H11, H15), live checks of push/cron/Langfuse on the preview, P4.7 README, release 4. |
 
-**Owner items closed:** H1, H2, H3 (+ paid gateway top-up, auto-reload off), H4 (env vars on Preview), H5 (GitHub Actions secrets), O1 (wording: "estimated emissions difference" with range + caveat; rule 9 rewritten), H12 (Jev approved for P2.5), H6 + H7 (Google OAuth client in Supabase only; anonymous sign-ins + manual linking on; verified live 2026-10-08: anonymous signup 200, Google authorize 302 to accounts.google.com; manual linking to be tested in P3). H8 (Turnstile widget for both hostnames; secret verified live against siteverify 2026-10-08). **Next owner items:** H9 (VAPID), H10 (Langfuse), H14 (required check, after the first eval run).
+**Owner items closed:** H1, H2, H3 (+ paid gateway top-up, auto-reload off), H4 (env vars on Preview), H5 (GitHub Actions secrets), O1 (wording: "estimated emissions difference" with range + caveat; rule 9 rewritten), H12 (Jev approved for P2.5), H6 + H7 (Google OAuth client in Supabase only; anonymous sign-ins + manual linking on; verified live 2026-10-08: anonymous signup 200, Google authorize 302 to accounts.google.com; manual linking to be tested in P3). H8 (Turnstile widget for both hostnames; secret verified live against siteverify 2026-10-08). **Next owner items:** H14 (make `agent-evals (replay)` a required check on `main` — ready now), then H9 (VAPID) and H10 (Langfuse) for P4.
 
 **Live facts (details in `docs/spikes.md`):** model route `gemini-3.5-flash` → `gemini-3.5-flash-lite` → `gemini-3.8-flash` → `anthropic/claude-haiku-5.5` (paid, $0.10/$0.50 per 1M). Jev via gateway: 5/5 router intents, ~300 ms, ~$0.000017/decision. Turn: 4 model steps, ~5–6 s, $0 on Gemini.
 

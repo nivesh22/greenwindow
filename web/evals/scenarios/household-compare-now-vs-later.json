@@ -1,0 +1,17 @@
+{
+ "id": "household-compare-now-vs-later",
+ "persona": "household",
+ "notes": "Owner testing 2026-10-09: 'now vs tomorrow' must use compare_starts, give grams with a range and the caveat, and never claim a tool is unavailable.",
+ "turns": [
+  {
+   "user": "I charge my EV at 7 kW for 4 hours. How much CO2 difference if I start at 3am versus 2pm today?",
+   "expect": {
+    "tools_called": ["compare_starts"],
+    "contains_caveat": true,
+    "no_banned_claim": true,
+    "answer_excludes": ["isn't available", "not available", "can't multiply"],
+    "stop_reason": "final"
+   }
+  }
+ ]
+}

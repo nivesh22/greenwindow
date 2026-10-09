@@ -204,3 +204,18 @@ describe('TraceDrawer', () => {
     expect(screen.getByLabelText('Arguments for big').textContent!.length).toBeLessThan(1400)
   })
 })
+
+describe('Scheduler plan actions', () => {
+  it('shows Add to calendar for a feasible plan (no Remind me for guests) and hides it when there is no plan', async () => {
+    stubAll([])
+    mount()
+    const panel = await screen.findByRole('region', { name: 'Plan panel' })
+    expect(await within(panel).findByText('Add to calendar')).toBeInTheDocument()
+    expect(within(panel).getByRole('button', { name: 'Download .ics' })).toBeInTheDocument()
+    expect(within(panel).getByRole('link', { name: 'Add to Google Calendar' })).toHaveAttribute('rel', expect.stringContaining('noopener'))
+    expect(within(panel).queryByRole('button', { name: 'Remind me' })).toBeNull()
+    // an empty deadline is invalid: no plan, so no calendar actions
+    await userEvent.clear(within(panel).getByLabelText('Must finish by (UK time)'))
+    await waitFor(() => expect(within(panel).queryByText('Add to calendar')).toBeNull())
+  })
+})

@@ -1,9 +1,9 @@
 import { z } from 'zod'
 import { MODES, type PlanUpdate } from '../harness/events.js'
-import { HOUR_MS, formatDateTime, fromLocalInput, toIso, toMs } from '../../src/lib/time.js'
-import { InfeasibleJobError, InvalidJobError, recommend } from '../../src/scheduler/optimizer.js'
-import { ceilHour, floorHour, loadForecast } from './forecast_hours.js'
-import { ToolUserError, defineTool } from './registry.js'
+import { HOUR_MS, formatDateTime, toIso, toMs } from '../../src/lib/time.js'
+import { loadForecast } from './forecast_hours.js'
+import { resolveWindow, runOptimizer } from './job_window.js'
+import { defineTool } from './registry.js'
 
 const localTime = z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/, 'Use YYYY-MM-DDTHH:mm in UK local time')
 
@@ -54,38 +54,10 @@ export const recommendWindow = defineTool({
   statusText: 'Finding the best window…',
   async handler(ctx, input) {
     const f = await loadForecast(ctx, input.model)
-    const first = f.hours[0]
-    const lastHour = f.hours[f.hours.length - 1]
-    if (!first || !lastHour) throw new ToolUserError('no_forecast', 'No forecast with uncertainty bands is available right now.')
-
-    // Same rule as Scheduler.tsx: the forecast start, or the next whole hour if that is later.
-    const firstMs = Math.max(toMs(first.ts), ceilHour(ctx.nowMs))
-    const endMs = toMs(lastHour.ts) + HOUR_MS
-
-    let earliestMs = firstMs
-    if (input.earliest_local !== undefined) {
-      const e = fromLocalInput(input.earliest_local)
-      if (e === null) throw new ToolUserError('bad_time', 'earliest_local is not a valid time.')
-      // A start inside the current hour means "now": move it to the next whole hour.
-      earliestMs = e >= floorHour(ctx.nowMs) && e < firstMs ? firstMs : e
-      if (earliestMs < firstMs) {
-        throw new ToolUserError('earliest_in_past', `The earliest start must be ${formatDateTime(toIso(firstMs))} or later.`)
-      }
-    }
-    const d = fromLocalInput(input.deadline_local)
-    if (d === null) throw new ToolUserError('bad_time', 'deadline_local is not a valid time.')
-    if (d <= earliestMs) throw new ToolUserError('bad_deadline', 'The deadline must be after the earliest start.')
-    if (d > endMs) throw new ToolUserError('deadline_too_late', `The forecast ends ${formatDateTime(toIso(endMs))}; pick an earlier deadline.`)
-
+    const { earliestMs, deadlineMs: d } = resolveWindow(f, ctx.nowMs, input.earliest_local, input.deadline_local)
     const mode = input.mode ?? ctx.riskMode
     const job = { durationH: input.duration_h, powerKw: input.power_kw, earliestStart: toIso(earliestMs), deadline: toIso(d) }
-    let rec
-    try {
-      rec = recommend(f.hours, job, mode)
-    } catch (e) {
-      if (e instanceof InfeasibleJobError || e instanceof InvalidJobError) throw new ToolUserError('infeasible', e.message)
-      throw e
-    }
+    const rec = runOptimizer(f, job, mode)
 
     ctx.turn.lastRecommendation = {
       rec,
