@@ -68,6 +68,9 @@ jobs:
           EVAL_BUDGET_USD: ${{ inputs.budget_usd }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           AI_GATEWAY_API_KEY: ${{ secrets.AI_GATEWAY_API_KEY }}
+          # FR-9.5: the live run inserts one eval_runs trend row (evals/trend.ts). Replay never gets these secrets.
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: npx vitest run --config evals/vitest.config.ts
       - name: Summary
         if: always()

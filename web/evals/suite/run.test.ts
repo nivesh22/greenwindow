@@ -12,6 +12,7 @@ import {
   type SuiteResult,
 } from '../runner.js'
 import type { ScenarioResult } from '../schema.js'
+import { recordEvalTrend } from '../trend.js'
 
 const mode = parseMode(process.env.EVAL_MODE)
 const scenarios = loadScenarios()
@@ -29,9 +30,13 @@ describe(`agent evals (${mode})`, () => {
     })
   }
 
-  afterAll(() => {
+  afterAll(async () => {
     const suite: SuiteResult = { mode, results }
-    writeReport(suite, verdictOf(suite, { requireRecordings: process.env.EVAL_REQUIRE_RECORDINGS === '1' }))
+    const v = verdictOf(suite, { requireRecordings: process.env.EVAL_REQUIRE_RECORDINGS === '1' })
+    writeReport(suite, v)
+    // FR-9.5: record and live runs add one trend row when the Supabase env is present (replay never writes).
+    const t = await recordEvalTrend(suite, v, process.env)
+    if (mode !== 'replay') console.warn(t.written ? 'eval trend row written' : `eval trend row not written: ${t.reason}`)
   })
 
   it('suite thresholds (overall >= 90%, window correctness 100%, banned claims 0)', () => {

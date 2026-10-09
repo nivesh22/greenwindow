@@ -1,0 +1,41 @@
+{
+ "id": "user-calendar-anonymous",
+ "persona": "household",
+ "notes": "J6: calendar needs no account. recommend_window is called again in the second turn (the recommendation lives for one turn); the event start equals the optimizer.",
+ "turns": [
+  {
+   "user": "Charge my EV, 7 kW for 4 hours, ready by 8am.",
+   "expect": {
+    "tools_called": [
+     "recommend_window"
+    ],
+    "window_equals_optimizer": {
+     "duration_h": 4,
+     "power_kw": 7,
+     "deadline_local": "2026-10-06T08:00",
+     "mode": "expected"
+    }
+   }
+  },
+  {
+   "user": "Add it to my calendar.",
+   "expect": {
+    "tools_called": [
+     "recommend_window",
+     "make_calendar_event"
+    ],
+    "actions_emitted": [
+     "calendar"
+    ],
+    "calendar_start_equals_optimizer": {
+     "duration_h": 4,
+     "power_kw": 7,
+     "deadline_local": "2026-10-06T08:00",
+     "mode": "expected"
+    },
+    "no_banned_claim": true,
+    "stop_reason": "final"
+   }
+  }
+ ]
+}

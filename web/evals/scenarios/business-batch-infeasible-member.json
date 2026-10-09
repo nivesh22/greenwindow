@@ -1,0 +1,26 @@
+{
+ "id": "business-batch-infeasible-member",
+ "persona": "business",
+ "notes": "J4 edge: one member cannot fit (6 h before 4am from 01:30 BST). The others are still planned; the answer says which one does not fit and never moves the deadline.",
+ "turns": [
+  {
+   "user": "Plan two jobs for me: a 1.2 kW dishwasher cycle of 2 hours that must be done by 7am tomorrow, and a 7 kW van charge of 6 hours that must be done by 4am tonight.",
+   "expect": {
+    "gates": {
+     "router": "plan_batch"
+    },
+    "tools_called": [
+     "plan_batch"
+    ],
+    "no_banned_claim": true,
+    "stop_reason": "final",
+    "answer_contains": [
+     "dishwasher"
+    ],
+    "answer_matches": [
+     "(can'?t|cannot|couldn'?t|could not|not (possible|enough|feasible)|infeasible|too (short|tight)|won'?t fit|doesn'?t fit|does not fit|no window)"
+    ]
+   }
+  }
+ ]
+}
