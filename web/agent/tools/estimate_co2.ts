@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { fmtMass } from '../../src/lib/format.js'
+import type { Recommendation } from '../../src/scheduler/optimizer.js'
 import { ToolUserError, defineTool } from './registry.js'
 
 /**
@@ -14,6 +15,17 @@ export const CO2_WORDING = {
     'the low-to-high range uses the forecast\'s 10-90% bands.',
   noChange: 'The recommendation is to run at the earliest start, so there is no estimated difference.',
 } as const
+
+/** Point estimate and q10-q90 range of the difference between running at the earliest start and in the recommended window. */
+export function co2Range(rec: Recommendation): { point: number; low: number; high: number } | null {
+  const best = rec.candidates.find((c) => c.start === rec.bestStart)
+  const now = rec.candidates.find((c) => c.start === rec.runNowStart)
+  if (!best || !now) return null
+  if (rec.bestStart === rec.runNowStart) return { point: 0, low: 0, high: 0 }
+  const e = rec.energyKwh
+  // pessimistic: best window comes in high, run-now comes in low
+  return { point: rec.gramsDifference, low: e * (now.avgQ10 - best.avgQ90), high: e * (now.avgQ90 - best.avgQ10) }
+}
 
 const outputSchema = z.object({
   grams_point: z.number(),
