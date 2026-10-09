@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "3eb8bf2157a2daf31591b2e325304e4bb354da797dd0dda993486003a976376d",
+     "fingerprint": "c12ba37fa7232e7db35c8c4d93ca406a9e778a49a702d974c9d295136cb18061",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01SCCuhDNQkmezJQKCu9AtQg",
+        "id": "toolu_01FvM9Gw6EuP1omohURzq6iT",
         "name": "lookup_device",
         "argsJson": "{\"query\": \"dishwasher\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 2855,
-       "outputTokens": 196,
+       "inputTokens": 3446,
+       "outputTokens": 159,
        "cachedInputTokens": 0
       },
       {
@@ -29,80 +29,80 @@
      ]
     },
     {
-     "fingerprint": "84a85c2d3035e3ae2fc9299f868ad06427b459217269e05f48ad7a9a8a7342fa",
+     "fingerprint": "b9917c1d5ce0869f286b618de0ee39317bb38dc4b5a9846c960c8ddb56834316",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "I ass"
+       "delta": "I"
       },
       {
        "type": "text",
-       "delta": "ume the"
+       "delta": "'m assuming a"
       },
       {
        "type": "text",
-       "delta": " dishwasher dra"
+       "delta": " **1.2 kW**"
       },
       {
        "type": "text",
-       "delta": "ws **1.2 kW"
+       "delta": " cycle-average dra"
       },
       {
        "type": "text",
-       "delta": "** on"
+       "delta": "w and a"
       },
       {
        "type": "text",
-       "delta": " average over"
+       "delta": " **2-hour**"
       },
       {
        "type": "text",
-       "delta": " a **"
+       "delta": " run for"
       },
       {
        "type": "text",
-       "delta": "2-hour**"
+       "delta": " a typical UK dishw"
       },
       {
        "type": "text",
-       "delta": " cycle. This is a"
+       "delta": "asher. This"
       },
       {
        "type": "text",
-       "delta": " typical UK appliance fig"
+       "delta": " is a typical appliance r"
       },
       {
        "type": "text",
-       "delta": "ure, not"
+       "delta": "ating, not your"
       },
       {
        "type": "text",
-       "delta": " a measur"
+       "delta": " mach"
       },
       {
        "type": "text",
-       "delta": "ement,"
+       "delta": "ine's, so change"
       },
       {
        "type": "text",
-       "delta": " so you can change either"
+       "delta": " it if your model"
       },
       {
        "type": "text",
-       "delta": " number"
+       "delta": " differ"
       },
       {
        "type": "text",
-       "delta": ".\n\nWhat time should"
+       "delta": "s.\n\nWhat time"
       },
       {
        "type": "text",
-       "delta": " the"
+       "delta": " should the dishwasher fin"
       },
       {
        "type": "text",
-       "delta": " cycle finish by t"
+       "delta": "ish by t"
       },
       {
        "type": "text",
@@ -110,8 +110,8 @@
       },
       {
        "type": "usage",
-       "inputTokens": 3011,
-       "outputTokens": 256,
+       "inputTokens": 3602,
+       "outputTokens": 261,
        "cachedInputTokens": 0
       },
       {
@@ -129,9 +129,9 @@
       "confidence": 1,
       "probabilities": {
        "allow": 1,
-       "abuse": 0,
        "off_topic": 0,
-       "injection": 0
+       "injection": 0,
+       "abuse": 0
       },
       "costUsd": 0.000027426
      }
@@ -140,15 +140,15 @@
      "fingerprint": "d691865a87f87accc1edc803aeb1f8c392f284cd2a89f30dd0255f081033a5a9",
      "result": {
       "choice": "plan_job",
-      "confidence": 0.98,
+      "confidence": 0.97,
       "probabilities": {
-       "plan_job": 0.98,
+       "plan_job": 0.97,
        "plan_batch": 0,
        "recurring": 0,
        "explain_forecast": 0,
        "model_accuracy": 0,
        "impact_history": 0,
-       "profile_update": 0.02,
+       "profile_update": 0.03,
        "smalltalk": 0,
        "off_topic": 0
       },
@@ -156,44 +156,43 @@
      }
     },
     {
-     "fingerprint": "297521d8a16801da3230cb3939897dd0c52e67885194e08df6f5bc482cd29710",
+     "fingerprint": "67568b29574631a98fa6818eab9559f61d08139559ea8528aea1893cc5a0f944",
      "result": {
       "choice": "act",
       "confidence": 0.96,
       "probabilities": {
-       "ask_deadline": 0.01,
+       "act": 0.97,
        "ask_duration": 0,
-       "ask_clarify": 0.01,
        "ask_power": 0.01,
-       "act": 0.97
+       "ask_deadline": 0.02,
+       "ask_clarify": 0
       },
-      "costUsd": 0.000027552
+      "costUsd": 0.0000294
      }
     },
     {
      "fingerprint": "4f7e10f79182eb425148ae3e57bddb8ff82089608f9dcf41e5ed1ffcdc54c58d",
      "result": {
       "choice": "expected",
-      "confidence": 1,
+      "confidence": 0.98,
       "probabilities": {
-       "expected": 1,
-       "cautious": 0
+       "expected": 0.99,
+       "cautious": 0.01
       },
       "costUsd": 0.000025998
      }
     },
     {
-     "fingerprint": "b846fd12e2b5fe7f56a9fdb4c08af71f3b9a3fb9a69460142692f9688e018205",
+     "fingerprint": "62d9167605d469f20a91663dc84eee561864e499703c49c2b974e587f101a808",
      "result": {
       "choice": "pass",
-      "confidence": 0.88,
+      "confidence": 1,
       "probabilities": {
-       "unsafe": 0,
-       "ungrounded_number": 0.09,
-       "pass": 0.91,
-       "overclaim_co2": 0
+       "pass": 1,
+       "overclaim_co2": 0,
+       "unsafe": 0
       },
-      "costUsd": 0.00002583
+      "costUsd": 0.000023184
      }
     }
    ]

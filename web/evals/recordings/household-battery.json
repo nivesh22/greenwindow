@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "a089a7ce632ce7bc8e690a5515ff75cd92ae3e643ca40d79d0cfaa24db15ae2d",
+     "fingerprint": "c80499024ba738de393509ddd045b0bd90792c7f84ab33d3fcee848cada6f79b",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01LeK8JqZHZdN5iQcSQwoEQs",
+        "id": "toolu_01TqHkH1emw8B8mehTGVCwkZ",
         "name": "recommend_window",
         "argsJson": "{\"duration_h\": 3, \"power_kw\": 3, \"deadline_local\": \"2026-10-06T23:00\", \"label\": \"Home battery charge\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 2860,
-       "outputTokens": 281,
+       "inputTokens": 3451,
+       "outputTokens": 270,
        "cachedInputTokens": 0
       },
       {
@@ -29,21 +29,21 @@
      ]
     },
     {
-     "fingerprint": "a53685b5d5cec61f41dc8c040cb55755c5e9765c1057a86d5bf7d3212a591497",
+     "fingerprint": "62873322133ef6c0765379ed1e94dfce72041dceb55f719a4ed0bb6876d1e3fc",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01QfY6BZuyvGXG9bVFV9UnSC",
+        "id": "toolu_01Hrz8hXBP57rFrtdWGwzptr",
         "name": "estimate_co2",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3324,
-       "outputTokens": 61,
+       "inputTokens": 3915,
+       "outputTokens": 29,
        "cachedInputTokens": 0
       },
       {
@@ -53,100 +53,100 @@
      ]
     },
     {
-     "fingerprint": "ca034007c64c4a080eef17c4499f8a24acc0de57b407c8bb0fa5d4c01c44272b",
+     "fingerprint": "7b4127f6fd3699b86ecf98ef8e16234107f3d48e75ea13f270e8a2858effbeb2",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Char"
+       "delta": "**Rec"
       },
       {
        "type": "text",
-       "delta": "ging from"
+       "delta": "ommended start:"
       },
       {
        "type": "text",
-       "delta": " **12:00 to"
+       "delta": " 12:00 BST ("
       },
       {
        "type": "text",
-       "delta": " 15:00 BST today"
+       "delta": "Tue 6 O"
       },
       {
        "type": "text",
-       "delta": "** is"
+       "delta": "ct), finishing 15:"
       },
       {
        "type": "text",
-       "delta": " for"
+       "delta": "00 BST**, well"
       },
       {
        "type": "text",
-       "delta": "ecast to be"
+       "delta": " before"
       },
       {
        "type": "text",
-       "delta": " cleaner than star"
+       "delta": " your"
       },
       {
        "type": "text",
-       "delta": "ting now at"
+       "delta": " 11pm deadline."
       },
       {
        "type": "text",
-       "delta": " 02:00 BST:"
+       "delta": " The for"
       },
       {
        "type": "text",
-       "delta": " an"
+       "delta": "ecast average over"
       },
       {
        "type": "text",
-       "delta": " average of 163 gCO"
+       "delta": " that"
       },
       {
        "type": "text",
-       "delta": "2/kWh vers"
+       "delta": " window is "
       },
       {
        "type": "text",
-       "delta": "us 191,"
+       "delta": "163 gCO2/k"
       },
       {
        "type": "text",
-       "delta": " about 15"
+       "delta": "Wh, against"
       },
       {
        "type": "text",
-       "delta": "% lower. The"
+       "delta": " 191 gCO2/"
       },
       {
        "type": "text",
-       "delta": " plan cov"
+       "delta": "kWh if"
       },
       {
        "type": "text",
-       "delta": "ers 9 kWh and"
+       "delta": " you start"
       },
       {
        "type": "text",
-       "delta": " fin"
+       "delta": " now at 02:00 B"
       },
       {
        "type": "text",
-       "delta": "ishes well"
+       "delta": "ST,"
       },
       {
        "type": "text",
-       "delta": " before your"
+       "delta": " about"
       },
       {
        "type": "text",
-       "delta": " 23:00 deadline"
+       "delta": " 15"
       },
       {
        "type": "text",
-       "delta": ".\n\n-"
+       "delta": "% lower.\n\n-"
       },
       {
        "type": "text",
@@ -154,120 +154,92 @@
       },
       {
        "type": "text",
-       "delta": " recommendation is **not rob"
+       "delta": " recommendation is **"
       },
       {
        "type": "text",
-       "delta": "ust**, so the for"
+       "delta": "not robust**:"
       },
       {
        "type": "text",
-       "delta": "ecast u"
+       "delta": " the forecast range is wide"
       },
       {
        "type": "text",
-       "delta": "ncertainty is"
+       "delta": " en"
       },
       {
        "type": "text",
-       "delta": " large rel"
+       "delta": "ough that the"
       },
       {
        "type": "text",
-       "delta": "ative to the"
+       "delta": " g"
       },
       {
        "type": "text",
-       "delta": " difference."
+       "delta": "ain could dis"
       },
       {
        "type": "text",
-       "delta": "\n- The estimated difference"
+       "delta": "appear.\n- The estim"
       },
       {
        "type": "text",
-       "delta": " is 249 g C"
+       "delta": "ated difference is"
       },
       {
        "type": "text",
-       "delta": "O2,"
+       "delta": " **249 g**"
       },
       {
        "type": "text",
-       "delta": " with a range"
+       "delta": " of CO2 vers"
       },
       {
        "type": "text",
-       "delta": " of -235 g to 715"
+       "delta": "us running now, with a range of"
       },
       {
        "type": "text",
-       "delta": " g. The"
+       "delta": " **"
       },
       {
        "type": "text",
-       "delta": " range includ"
+       "delta": "-235 g to"
       },
       {
        "type": "text",
-       "delta": "es the"
+       "delta": " 715 g**, so"
       },
       {
        "type": "text",
-       "delta": " option"
+       "delta": " it"
       },
       {
        "type": "text",
-       "delta": " being"
+       "delta": " could be worse than"
       },
       {
        "type": "text",
-       "delta": " worse than"
+       "delta": " running now.\n- The"
       },
       {
        "type": "text",
-       "delta": " char"
+       "delta": " job uses 9 kW"
       },
       {
        "type": "text",
-       "delta": "ging now, and"
+       "delta": "h (3 kW for"
       },
       {
        "type": "text",
-       "delta": " the fig"
-      },
-      {
-       "type": "text",
-       "delta": "ure is based"
-      },
-      {
-       "type": "text",
-       "delta": " on average"
-      },
-      {
-       "type": "text",
-       "delta": " intensity, so"
-      },
-      {
-       "type": "text",
-       "delta": " it may not match"
-      },
-      {
-       "type": "text",
-       "delta": " the real"
-      },
-      {
-       "type": "text",
-       "delta": " change"
-      },
-      {
-       "type": "text",
-       "delta": "."
+       "delta": " 3 hours)."
       },
       {
        "type": "usage",
-       "inputTokens": 3565,
-       "outputTokens": 534,
+       "inputTokens": 4156,
+       "outputTokens": 389,
        "cachedInputTokens": 0
       },
       {
@@ -279,36 +251,36 @@
    ],
    "gate_calls": [
     {
+     "fingerprint": "e2224e5f68e6c5f51859522087be75ddf627478320270e119873d5f130289d1e",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 1,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.00003171
+     }
+    },
+    {
      "fingerprint": "a5ec6c01d9d9b7f68dd80a615eb40dc03265dc669a1483a4c8a287c78193da8f",
      "result": {
       "choice": "allow",
       "confidence": 1,
       "probabilities": {
        "allow": 1,
-       "injection": 0,
        "off_topic": 0,
+       "injection": 0,
        "abuse": 0
       },
       "costUsd": 0.000027594
-     }
-    },
-    {
-     "fingerprint": "e2224e5f68e6c5f51859522087be75ddf627478320270e119873d5f130289d1e",
-     "result": {
-      "choice": "plan_job",
-      "confidence": 1,
-      "probabilities": {
-       "profile_update": 0,
-       "off_topic": 0,
-       "recurring": 0,
-       "plan_batch": 0,
-       "smalltalk": 0,
-       "plan_job": 1,
-       "model_accuracy": 0,
-       "impact_history": 0,
-       "explain_forecast": 0
-      },
-      "costUsd": 0.00003171
      }
     },
     {
@@ -324,32 +296,31 @@
      }
     },
     {
-     "fingerprint": "4059ee968a1c30ab829258030fb3e2198fc6f79cd17337523de7df9523e50fc9",
+     "fingerprint": "ecb8bb66b6cf0a59ee481b5b9827225f43309546001233e7b3bf08462d08697c",
      "result": {
       "choice": "act",
       "confidence": 1,
       "probabilities": {
-       "ask_duration": 0,
-       "ask_deadline": 0,
        "act": 1,
-       "ask_clarify": 0,
-       "ask_power": 0
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "ask_clarify": 0
       },
-      "costUsd": 0.000027678
+      "costUsd": 0.000029526
      }
     },
     {
-     "fingerprint": "d966a91e0a6950cb8a6bf287f7175a7fc520e19031012a2e99ff36dbd1847bbc",
+     "fingerprint": "5db66e1e2752e93b08753f8e2efcf473674c6c33042299407510610ffd6c6f1f",
      "result": {
       "choice": "pass",
-      "confidence": 1,
+      "confidence": 0.95,
       "probabilities": {
-       "unsafe": 0,
-       "pass": 1,
-       "overclaim_co2": 0,
-       "ungrounded_number": 0
+       "pass": 0.97,
+       "overclaim_co2": 0.03,
+       "unsafe": 0
       },
-      "costUsd": 0.00004767
+      "costUsd": 0.000045024
      }
     }
    ]

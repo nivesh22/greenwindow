@@ -30,9 +30,9 @@
       "choice": "off_topic",
       "confidence": 1,
       "probabilities": {
+       "allow": 0,
        "off_topic": 1,
        "injection": 0,
-       "allow": 0,
        "abuse": 0
       },
       "costUsd": 0.00002709

@@ -123,3 +123,11 @@ describe('evaluateTurn', () => {
     expect(await statusOf({ answer_excludes: ['hello'] }, o)).toEqual(['fail'])
   })
 })
+
+import { clockVariants } from '../assertions.js'
+describe('clockVariants', () => {
+  it('accepts 24 h and am/pm spellings', () => {
+    expect(clockVariants('02:00')).toEqual(expect.arrayContaining(['02:00', '2:00am', '2am']))
+    expect(clockVariants('14:30')).toEqual(expect.arrayContaining(['14:30', '2:30pm']))
+  })
+})

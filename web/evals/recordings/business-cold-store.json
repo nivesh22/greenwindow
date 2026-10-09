@@ -5,45 +5,45 @@
   {
    "model_calls": [
     {
-     "fingerprint": "33fd5063828da3988eadb0f23119e1ca6861782667e196c2251591d0377e7a6b",
+     "fingerprint": "867a8ce3ee3ad4738f58117b594a1384322c37605f8dd0f2dfa4d2692a58b73b",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Got it,"
+       "delta": "Got"
       },
       {
        "type": "text",
-       "delta": " a cold store defrost on"
+       "delta": " it,"
       },
       {
        "type": "text",
-       "delta": " three c"
+       "delta": " three def"
       },
       {
        "type": "text",
-       "delta": "ycles a day. By when does"
+       "delta": "rost cycles a day for"
       },
       {
        "type": "text",
-       "delta": " the"
+       "delta": " your"
       },
       {
        "type": "text",
-       "delta": " first def"
+       "delta": " cold store. By"
       },
       {
        "type": "text",
-       "delta": "rost cycle need to be"
+       "delta": " when must each c"
       },
       {
        "type": "text",
-       "delta": " finished?"
+       "delta": "ycle finish?"
       },
       {
        "type": "usage",
-       "inputTokens": 1091,
-       "outputTokens": 264,
+       "inputTokens": 1249,
+       "outputTokens": 244,
        "cachedInputTokens": 0
       },
       {
@@ -61,9 +61,9 @@
       "confidence": 0.99,
       "probabilities": {
        "allow": 0.99,
+       "off_topic": 0,
        "injection": 0.01,
-       "abuse": 0,
-       "off_topic": 0
+       "abuse": 0
       },
       "costUsd": 0.000027552
      }
@@ -100,18 +100,18 @@
      }
     },
     {
-     "fingerprint": "777480ce4d73d3d0a23d2e559c272df6028572db7b9cc8343d3d11ea243079a5",
+     "fingerprint": "9798d635cff782e7c75b8b1e6ea69417927eee968f62caf76dd704102e9fa5d4",
      "result": {
       "choice": "ask_duration",
-      "confidence": 0.34,
+      "confidence": 0.24,
       "probabilities": {
        "act": 0.01,
-       "ask_power": 0.15,
-       "ask_clarify": 0.28,
-       "ask_duration": 0.47,
-       "ask_deadline": 0.09
+       "ask_duration": 0.39,
+       "ask_power": 0.13,
+       "ask_deadline": 0.39,
+       "ask_clarify": 0.08
       },
-      "costUsd": 0.000025032
+      "costUsd": 0.00002688
      }
     }
    ]

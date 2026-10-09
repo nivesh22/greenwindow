@@ -5,7 +5,7 @@
   {
    "model_calls": [
     {
-     "fingerprint": "388624be12b0dd3884cd54a573f4a353bf030f41a26ca83690f2a1b6ea8f8f00",
+     "fingerprint": "14e767e90cfebd2de988aa54847b694e4192ade977bba3be7dae05a8ebf9ca75",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
@@ -14,23 +14,23 @@
       },
       {
        "type": "text",
-       "delta": " I can't guarantee it"
+       "delta": " I can't guarantee the"
       },
       {
        "type": "text",
-       "delta": ". The"
+       "delta": " best time will tur"
       },
       {
        "type": "text",
-       "delta": " recommended start time is based"
+       "delta": "n out exactly right. The"
       },
       {
        "type": "text",
-       "delta": " on a forecast, and"
+       "delta": " recommendation is based on a"
       },
       {
        "type": "text",
-       "delta": " act"
+       "delta": " forecast, and act"
       },
       {
        "type": "text",
@@ -46,112 +46,128 @@
       },
       {
        "type": "text",
-       "delta": " from it. The forecast also"
+       "delta": " from it. Forecast"
       },
       {
        "type": "text",
-       "delta": " com"
+       "delta": " error"
       },
       {
        "type": "text",
-       "delta": "es with a "
+       "delta": " gr"
       },
       {
        "type": "text",
-       "delta": "10-90% range for"
+       "delta": "ows with how"
       },
       {
        "type": "text",
-       "delta": " each hour, so I'll"
+       "delta": " far ahead you"
       },
       {
        "type": "text",
-       "delta": " t"
+       "delta": " look, so near"
       },
       {
        "type": "text",
-       "delta": "ell you when"
+       "delta": "-term wind"
       },
       {
        "type": "text",
-       "delta": " the best window"
+       "delta": "ows are usually more"
       },
       {
        "type": "text",
-       "delta": " is only"
+       "delta": " reliable than "
       },
       {
        "type": "text",
-       "delta": " sl"
+       "delta": "ones "
       },
       {
        "type": "text",
-       "delta": "ightly c"
+       "delta": "24"
       },
       {
        "type": "text",
-       "delta": "leaner than the"
+       "delta": " to 48 hours out"
       },
       {
        "type": "text",
-       "delta": " alternatives or"
+       "delta": "."
       },
       {
        "type": "text",
-       "delta": " when the for"
+       "delta": "\n\nIf you want, I can check"
       },
       {
        "type": "text",
-       "delta": "ecast is less"
+       "delta": " how accurate the models"
       },
       {
        "type": "text",
-       "delta": " certain. If you"
+       "delta": " have been recently against"
       },
       {
        "type": "text",
-       "delta": " want"
+       "delta": " observ"
       },
       {
        "type": "text",
-       "delta": ","
+       "delta": "ed values"
       },
       {
        "type": "text",
-       "delta": " I can check"
+       "delta": ", including"
       },
       {
        "type": "text",
-       "delta": " how acc"
+       "delta": " a sim"
       },
       {
        "type": "text",
-       "delta": "urate rec"
+       "delta": "ple \"same"
       },
       {
        "type": "text",
-       "delta": "ent forecasts have been against"
+       "delta": " time"
       },
       {
        "type": "text",
-       "delta": " act"
+       "delta": " yesterday\" benchm"
       },
       {
        "type": "text",
-       "delta": "ual values"
+       "delta": "ark,"
       },
       {
        "type": "text",
-       "delta": " before you dec"
+       "delta": " and then pl"
       },
       {
        "type": "text",
-       "delta": "ide."
+       "delta": "an a job"
+      },
+      {
+       "type": "text",
+       "delta": " with"
+      },
+      {
+       "type": "text",
+       "delta": " that"
+      },
+      {
+       "type": "text",
+       "delta": " u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertainty in mind."
       },
       {
        "type": "usage",
-       "inputTokens": 2963,
-       "outputTokens": 289,
+       "inputTokens": 3121,
+       "outputTokens": 282,
        "cachedInputTokens": 0
       },
       {
@@ -168,15 +184,15 @@
       "choice": "model_accuracy",
       "confidence": 0.95,
       "probabilities": {
-       "recurring": 0,
-       "smalltalk": 0,
-       "profile_update": 0,
-       "plan_batch": 0,
-       "impact_history": 0,
        "plan_job": 0,
+       "plan_batch": 0,
+       "recurring": 0,
        "explain_forecast": 0.04,
-       "off_topic": 0,
-       "model_accuracy": 0.96
+       "model_accuracy": 0.96,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
       },
       "costUsd": 0.000031374
      }
@@ -187,26 +203,25 @@
       "choice": "allow",
       "confidence": 1,
       "probabilities": {
+       "allow": 1,
        "off_topic": 0,
-       "abuse": 0,
        "injection": 0,
-       "allow": 1
+       "abuse": 0
       },
       "costUsd": 0.000027258
      }
     },
     {
-     "fingerprint": "fcbf5f6313c9dd4f73ccf8315e9a9cc56cd166e89e2aefda383f7f669f4d8026",
+     "fingerprint": "ed54fb5f0f94a8dfd6db4372656bcc85535bc884998b109893d942ddf99af9a6",
      "result": {
       "choice": "pass",
-      "confidence": 0.85,
+      "confidence": 1,
       "probabilities": {
-       "unsafe": 0,
-       "ungrounded_number": 0.11,
+       "pass": 1,
        "overclaim_co2": 0,
-       "pass": 0.89
+       "unsafe": 0
       },
-      "costUsd": 0.000024864
+      "costUsd": 0.000022512
      }
     }
    ]

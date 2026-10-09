@@ -42,8 +42,14 @@ export function planJevState(s: PlanState): Record<string, unknown> {
 }
 
 /** Rules (design §6.2): act iff duration and deadline are known and power is known or defaultable. */
+// "start at 3am versus 2pm", "now or tomorrow 9am": comparing named start times needs no deadline (compare_starts).
+const COMPARE_STARTS = /\b(vs\.?|versus|compared? (to|with)|or)\b.*\b(\d{1,2}(:\d{2})?\s*(am|pm)|\d{1,2}:\d{2}|now|tonight|tomorrow)\b/i
+
 export function askOrActRules(s: PlanState): RuleDecision<AskOrActChoice> {
   const sl = s.slots
+  if (COMPARE_STARTS.test(s.message) && sl.duration_h && (sl.power_kw || sl.device)) {
+    return { choice: 'act', confidence: 0.8, reason: 'compares named start times (no deadline needed)' }
+  }
   if (!sl.duration_h && !sl.power_kw && !sl.deadline && !sl.device) return { choice: 'ask_clarify', confidence: 0.6, reason: 'no job details' }
   if (!sl.duration_h) return { choice: 'ask_duration', confidence: 0.8, reason: 'duration unknown' }
   if (!sl.deadline) return { choice: 'ask_deadline', confidence: 0.8, reason: 'deadline unknown' }
@@ -58,12 +64,13 @@ export function askOrActSpec(threshold: number): GateSpec<PlanState, AskOrActCho
     instructions:
       'The user wants a start-time recommendation for an electricity job. `known` lists what is already known and where ' +
       'it came from (the user, the planner panel, or a typical default for the named device; defaults are fine to use). ' +
-      'Decide whether the assistant can plan now or must first ask ONE question.',
+      'Decide whether the assistant can plan now or must first ask ONE question. Comparing specific start times the ' +
+      'user names ("3am versus 2pm", "now or tomorrow") needs only duration and power, not a deadline.',
     options: {
-      act: 'Enough is known to plan: the duration, the deadline and the power are known or can be taken from a device default or the planner panel.',
+      act: 'Enough is known: duration, deadline and power are known or defaultable, OR the user compares named start times and duration and power are known.',
       ask_duration: 'How long the job runs is unknown and there is no default for it.',
       ask_power: 'The power draw is unknown and there is no device to take a typical value from.',
-      ask_deadline: 'When the job must be finished is unknown.',
+      ask_deadline: 'When the job must be finished is unknown and the user did not name specific start times to compare.',
       ask_clarify: 'It is unclear what the user wants to run.',
     },
     rules: askOrActRules,

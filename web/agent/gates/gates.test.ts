@@ -249,3 +249,10 @@ describe('risk_mode: deadlines are not risk signals', () => {
   it.each(['It must be done by 7', "it's critical it finishes by 6", "can't be late for work"])('expected: %s', (m) =>
     expect(riskModeRules(planState('plan_job', m, [], null)).choice).toBe('expected'))
 })
+
+describe('ask_or_act: comparing named start times', () => {
+  it('acts without a deadline', () => {
+    const ps = planState('plan_job', 'I charge my EV at 7 kW for 4 hours. How much CO2 difference if I start at 3am versus 2pm today?', [], null)
+    expect(askOrActRules(ps).choice).toBe('act')
+  })
+})

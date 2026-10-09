@@ -1,0 +1,39 @@
+
+ RUN  v5.0.3 E:/Time series/web
+
+ ❯ |evals| evals/suite/run.test.ts (52 tests | 1 failed) 338642ms
+   ❯ agent evals (record) (52)
+     × suite thresholds (overall >= 90%, window correctness 100%, banned claims 0) 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |evals| evals/suite/run.test.ts > agent evals (record) > suite thresholds (overall >= 90%, window correctness 100%, banned claims 0)
+AssertionError: 48 passed, 3 failed, 0 skipped
+accuracy-uncertainty: turn 1: co2_equals_tool (estimate_co2 was not called successfully); contains_caveat (answer lacks the "estimate" + "average grid intensity" caveat)
+edge-beyond-48h: turn 1: tool_not_called (called forbidden tools: estimate_co2)
+household-ev-ask-then-plan: turn 2: window_equals_optimizer (answer does not contain 02:00 (Tue 6 Oct, 02:00 BST)): expected [ 'window correctness 93.3% < 100%' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "window correctness 93.3% < 100%",
++ ]
+
+ ❯ evals/suite/run.test.ts:41:31
+     39|     const failed = results.filter((r) => r.status === 'failed').map((r…
+     40|     const detail = `${v.passed} passed, ${v.failed} failed, ${v.skippe…
+     41|     expect(v.reasons, detail).toEqual([])
+       |                               ^
+     42|   })
+     43| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 51 passed (52)
+   Start at  18:14:10
+   Duration  339.07s (tests 100%)
+

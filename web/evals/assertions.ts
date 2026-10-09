@@ -99,7 +99,7 @@ export async function evaluateTurn(expect: Expect, o: TurnOutcome, ref: Optimize
       if (p.duration_h !== w.duration_h) problems.push(`duration_h ${p.duration_h} != ${w.duration_h}`)
       if (Math.abs(p.power_kw - w.power_kw) > 1e-6) problems.push(`power_kw ${p.power_kw} != ${w.power_kw}`)
       const clock = clockOf(ref_.best_start_london)
-      if (clock && !answer.includes(clock)) problems.push(`answer does not contain ${clock} (${ref_.best_start_london})`)
+      if (clock && !clockVariants(clock).some((v) => answer.toLowerCase().includes(v))) problems.push(`answer does not contain ${clock} (${ref_.best_start_london})`)
       out.push(check('window_equals_optimizer', problems.length === 0, problems.join('; ')))
     }
   }
@@ -146,5 +146,16 @@ export async function evaluateTurn(expect: Expect, o: TurnOutcome, ref: Optimize
   for (const re of expect.answer_matches ?? []) {
     out.push(check(`answer_matches:${re}`, new RegExp(re, 'i').test(answer), `answer does not match /${re}/i`))
   }
+  return out
+}
+
+/** "02:00" -> ["02:00", "2:00am", "2:00 am", "2am", "2 am"]; "14:00" -> ["14:00", "2:00pm", "2pm", ...]. */
+export function clockVariants(hhmm: string): string[] {
+  const [h, m] = hhmm.split(':').map(Number) as [number, number]
+  const h12 = h % 12 === 0 ? 12 : h % 12
+  const ap = h < 12 ? 'am' : 'pm'
+  const mm = String(m).padStart(2, '0')
+  const out = [hhmm, `${h12}:${mm}${ap}`, `${h12}:${mm} ${ap}`]
+  if (m === 0) out.push(`${h12}${ap}`, `${h12} ${ap}`)
   return out
 }

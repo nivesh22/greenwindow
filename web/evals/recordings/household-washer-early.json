@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "5bc22e3951f5ebd7186965babcd8d3c74cc7dfaded6de9c82265b03e77aa23bc",
+     "fingerprint": "7aded203643c77a41aae80e152cb1a586f1df3197c013a96b44e0b83cd327c8a",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01WP16U1mJeqf7i1yRcFceug",
+        "id": "toolu_01GNB2CpXpjaFJyMmADNeb7U",
         "name": "recommend_window",
         "argsJson": "{\"duration_h\": 2, \"power_kw\": 0.6, \"deadline_local\": \"2026-10-06T06:00\", \"label\": \"Washing machine\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 2858,
-       "outputTokens": 250,
+       "inputTokens": 3449,
+       "outputTokens": 275,
        "cachedInputTokens": 0
       },
       {
@@ -29,21 +29,21 @@
      ]
     },
     {
-     "fingerprint": "41719e3d26189c723482402a83fbaee02c6c059ec81b418fb4a595504c99212b",
+     "fingerprint": "676acd840c5ae8eea773396b8e9d51f9102a927fe83199d061c45fc74475a1ac",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01V8c4LjVFyeQFbmifkrayzf",
+        "id": "toolu_01HhNHQoMff46PvxzdkbQA4t",
         "name": "estimate_co2",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3309,
-       "outputTokens": 81,
+       "inputTokens": 3900,
+       "outputTokens": 114,
        "cachedInputTokens": 0
       },
       {
@@ -53,149 +53,149 @@
      ]
     },
     {
-     "fingerprint": "8777760115f66a8e9d3e48139a6b1f8407c67d5a565f3504f9a0e5ed0f2fe873",
+     "fingerprint": "0d7e0eebc9437e1453b1347a4a06849f93efa6cdf2a9c076809736432a2c98f6",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "**"
+       "delta": "**Start now ("
       },
       {
        "type": "text",
-       "delta": "Run now."
+       "delta": "Tue 6 Oct"
       },
       {
        "type": "text",
-       "delta": "** The best"
+       "delta": ", 02:00 BST"
       },
       {
        "type": "text",
-       "delta": " start is Tue 6 "
+       "delta": ")"
       },
       {
        "type": "text",
-       "delta": "Oct, 02:00"
+       "delta": "** and it"
       },
       {
        "type": "text",
-       "delta": " BST, the"
+       "delta": " will finish by 04:00"
       },
       {
        "type": "text",
-       "delta": " same as running"
+       "delta": " BST, well before your "
       },
       {
        "type": "text",
-       "delta": " now, so the for"
+       "delta": "06:00 deadline."
       },
       {
        "type": "text",
-       "delta": "ecast sh"
+       "delta": "\n\n-"
       },
       {
        "type": "text",
-       "delta": "ows no c"
+       "delta": " Running now"
       },
       {
        "type": "text",
-       "delta": "leaner window before"
+       "delta": " and"
       },
       {
        "type": "text",
-       "delta": " your"
+       "delta": " the"
       },
       {
        "type": "text",
-       "delta": " 6am deadline. The"
+       "delta": " best window"
       },
       {
        "type": "text",
-       "delta": " average"
+       "delta": " are"
       },
       {
        "type": "text",
-       "delta": " intensity is "
+       "delta": " the same,"
       },
       {
        "type": "text",
-       "delta": "188 gCO2/k"
+       "delta": " with an average of"
       },
       {
        "type": "text",
-       "delta": "Wh over"
+       "delta": " 188 gCO2/"
       },
       {
        "type": "text",
-       "delta": " the "
+       "delta": "kWh. The"
       },
       {
        "type": "text",
-       "delta": "2-hour run (1."
+       "delta": " estimated difference is 0"
       },
       {
        "type": "text",
-       "delta": "2 kWh),"
+       "delta": " g."
       },
       {
        "type": "text",
-       "delta": " "
+       "delta": "\n- This recommendation is"
       },
       {
        "type": "text",
-       "delta": "ending by"
+       "delta": " **"
       },
       {
        "type": "text",
-       "delta": " 04:00 BST."
+       "delta": "not robust**, so the"
       },
       {
        "type": "text",
-       "delta": "\n\nThe est"
+       "delta": " forecast do"
       },
       {
        "type": "text",
-       "delta": "imated difference is "
+       "delta": "esn't cl"
       },
       {
        "type": "text",
-       "delta": "0 g."
+       "delta": "early fav"
       },
       {
        "type": "text",
-       "delta": " The recommendation is **"
+       "delta": "our any start"
       },
       {
        "type": "text",
-       "delta": "not robust**, so tre"
+       "delta": " in"
       },
       {
        "type": "text",
-       "delta": "at this"
+       "delta": " the window"
       },
       {
        "type": "text",
-       "delta": " as a close"
+       "delta": "."
       },
       {
        "type": "text",
-       "delta": " call r"
+       "delta": "\n- The job"
       },
       {
        "type": "text",
-       "delta": "ather than a fir"
+       "delta": " uses about"
       },
       {
        "type": "text",
-       "delta": "m answ"
+       "delta": " 1.2 kWh"
       },
       {
        "type": "text",
-       "delta": "er."
+       "delta": "."
       },
       {
        "type": "usage",
-       "inputTokens": 3559,
-       "outputTokens": 238,
+       "inputTokens": 4150,
+       "outputTokens": 256,
        "cachedInputTokens": 0
       },
       {
@@ -206,25 +206,6 @@
     }
    ],
    "gate_calls": [
-    {
-     "fingerprint": "1daf94604180f7359a8693f986b67535d2eb98dc782be469f8b18997b69db5a4",
-     "result": {
-      "choice": "plan_job",
-      "confidence": 1,
-      "probabilities": {
-       "profile_update": 0,
-       "model_accuracy": 0,
-       "recurring": 0,
-       "plan_batch": 0,
-       "explain_forecast": 0,
-       "off_topic": 0,
-       "smalltalk": 0,
-       "impact_history": 0,
-       "plan_job": 1
-      },
-      "costUsd": 0.000031752
-     }
-    },
     {
      "fingerprint": "321f6330dce0f537edfd9a0ad5467a2587530d63bda3b394b51119c789df29e7",
      "result": {
@@ -240,10 +221,29 @@
      }
     },
     {
+     "fingerprint": "1daf94604180f7359a8693f986b67535d2eb98dc782be469f8b18997b69db5a4",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 1,
+      "probabilities": {
+       "plan_job": 1,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.000031752
+     }
+    },
+    {
      "fingerprint": "d86053ccab573432ec36031963f465c87e5d24277a0371217ab41d4bf4c80adf",
      "result": {
       "choice": "expected",
-      "confidence": 0.99,
+      "confidence": 1,
       "probabilities": {
        "expected": 1,
        "cautious": 0
@@ -252,32 +252,31 @@
      }
     },
     {
-     "fingerprint": "06c1d5942b348d834cea30216d94ae55ad92050fd88621c39f703c04f9130371",
+     "fingerprint": "22328b5def0e68d56f89977372c774da7b54fc5da066537e92e55dfcb15b6ffc",
      "result": {
       "choice": "act",
       "confidence": 1,
       "probabilities": {
-       "ask_deadline": 0,
-       "ask_duration": 0,
-       "ask_clarify": 0,
        "act": 1,
-       "ask_power": 0
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0,
+       "ask_clarify": 0
       },
-      "costUsd": 0.000027804
+      "costUsd": 0.000029652
      }
     },
     {
-     "fingerprint": "7f68a115b1a25822073493c6dbcf8177e3a76577af2f836cf639ff771dfcc11f",
+     "fingerprint": "42633b8dea56e2ef93451024c62925e65e44571a5d3024d24dfc16f5875240a0",
      "result": {
       "choice": "pass",
-      "confidence": 0.95,
+      "confidence": 0.56,
       "probabilities": {
-       "pass": 0.96,
-       "ungrounded_number": 0.02,
-       "overclaim_co2": 0.02,
+       "pass": 0.71,
+       "overclaim_co2": 0.29,
        "unsafe": 0
       },
-      "costUsd": 0.000042462
+      "costUsd": 0.000039606
      }
     }
    ]

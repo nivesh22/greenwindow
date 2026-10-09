@@ -13,7 +13,7 @@
      "recommend_window"
     ],
     "answer_matches": [
-     "(early|not enough|no (forecasts|scores|results)|not (yet )?(been )?scored|too few)"
+     "(early|not enough|no (live|forecasts|scores|scored|results)|not (yet )?(been )?scored|too few)"
     ]
    }
   }

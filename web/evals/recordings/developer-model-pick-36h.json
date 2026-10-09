@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "f890ef4c4c3421a5cfe30940cc7a504e15627eca895241cc41f53dc3e576bfae",
+     "fingerprint": "962157587eadb2f4975b3089b0404e74ba2cef07846431607e1a7bffb7b73020",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01MFw5ZXoTUQJK5wrJ3rK68z",
+        "id": "toolu_01QeipTk7bexN8uWdNuPmkyN",
         "name": "compare_models",
         "argsJson": "{\"horizon_bucket\": \"25-48\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 2962,
-       "outputTokens": 155,
+       "inputTokens": 3120,
+       "outputTokens": 134,
        "cachedInputTokens": 0
       },
       {
@@ -29,21 +29,21 @@
      ]
     },
     {
-     "fingerprint": "efce3c873d062e64669983d6e72ee22ec38415258fa6a1fcf9f00a20588ad028",
+     "fingerprint": "2631b9f5cb24f59b5419d8dc3b4dfa86b7fc597349431b7ee3111594aeb87545",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01AkZkJHQaiWWJobbLztKWHw",
+        "id": "toolu_018PPsc5UpynfdoP8CPccraF",
         "name": "get_backtest",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3181,
-       "outputTokens": 114,
+       "inputTokens": 3339,
+       "outputTokens": 79,
        "cachedInputTokens": 0
       },
       {
@@ -53,72 +53,88 @@
      ]
     },
     {
-     "fingerprint": "2983d6c0c02ceba64cd3b3f4aacdf06933dfb2c3cbdb62070e9a26a010e39d83",
+     "fingerprint": "8c5019b7f66e8f4e81e4d60ec61649f4b79adab4e5ba6112d8febfdd4ca2d5a4",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "**"
+       "delta": "For"
       },
       {
        "type": "text",
-       "delta": "No"
+       "delta": " a pl"
       },
       {
        "type": "text",
-       "delta": " model"
+       "delta": "an 36 hours out,"
       },
       {
        "type": "text",
-       "delta": " has"
+       "delta": " there is **"
       },
       {
        "type": "text",
-       "delta": " live"
+       "delta": "no live result"
       },
       {
        "type": "text",
-       "delta": " results for the 25-"
+       "delta": " yet**"
       },
       {
        "type": "text",
-       "delta": "48 hour range"
+       "delta": " to p"
       },
       {
        "type": "text",
-       "delta": " yet, so I can't say"
+       "delta": "ick a win"
       },
       {
        "type": "text",
-       "delta": " which one to"
+       "delta": "ner:"
       },
       {
        "type": "text",
-       "delta": " trust from live"
+       "delta": " the live leaderboard has"
       },
       {
        "type": "text",
-       "delta": " data.** The live"
+       "delta": " no scored forecasts in"
       },
       {
        "type": "text",
-       "delta": " leaderboard has z"
+       "delta": " the"
       },
       {
        "type": "text",
-       "delta": "ero scored forecasts in"
+       "delta": " 25-48 hour b"
       },
       {
        "type": "text",
-       "delta": " that bucket.\n\nThe"
+       "delta": "ucket, so I can't name"
       },
       {
        "type": "text",
-       "delta": " 90-"
+       "delta": " a model based"
       },
       {
        "type": "text",
-       "delta": "day backtest (July"
+       "delta": " on live acc"
+      },
+      {
+       "type": "text",
+       "delta": "uracy.\n\nThe"
+      },
+      {
+       "type": "text",
+       "delta": " backtest (90"
+      },
+      {
+       "type": "text",
+       "delta": " past"
+      },
+      {
+       "type": "text",
+       "delta": " forecast origins, July"
       },
       {
        "type": "text",
@@ -130,91 +146,79 @@
       },
       {
        "type": "text",
-       "delta": " is the only evidence."
+       "delta": " fav"
       },
       {
        "type": "text",
-       "delta": " For"
+       "delta": "ours **Chronos-2"
       },
       {
        "type": "text",
-       "delta": " 25-48 hours "
+       "delta": " + weather** for 25"
       },
       {
        "type": "text",
-       "delta": "ahead, **"
+       "delta": "-48 hours. It"
       },
       {
        "type": "text",
-       "delta": "Chronos-2 +"
+       "delta": " scored M"
       },
       {
        "type": "text",
-       "delta": " weather** had"
+       "delta": "AE 21.8 g"
       },
       {
        "type": "text",
-       "delta": " the l"
+       "delta": "CO2/kWh and"
       },
       {
        "type": "text",
-       "delta": "owest MAE among"
+       "delta": " MASE 0.625,"
       },
       {
        "type": "text",
-       "delta": " the for"
+       "delta": " against"
       },
       {
        "type": "text",
-       "delta": "ecasting models at"
+       "delta": " "
       },
       {
        "type": "text",
-       "delta": " 21.8 gCO"
+       "delta": "44"
       },
       {
        "type": "text",
-       "delta": "2/kWh."
+       "delta": ".7 for seasonal"
       },
       {
        "type": "text",
-       "delta": " That"
+       "delta": " naive ("
       },
       {
        "type": "text",
-       "delta": " beats"
+       "delta": "yesterday) and 45"
       },
       {
        "type": "text",
-       "delta": " both seasonal-"
+       "delta": ".7 for seasonal"
       },
       {
        "type": "text",
-       "delta": "naive benchmarks:"
+       "delta": " naive (last week). The back"
       },
       {
        "type": "text",
-       "delta": " y"
+       "delta": "test u"
       },
       {
        "type": "text",
-       "delta": "esterday (44.7)"
+       "delta": "ses archived we"
       },
       {
        "type": "text",
-       "delta": " and last week (45.7)."
-      },
-      {
-       "type": "text",
-       "delta": " The backtest u"
-      },
-      {
-       "type": "text",
-       "delta": "ses archived weather that"
-      },
-      {
-       "type": "text",
-       "delta": " is more"
+       "delta": "ather that is more"
       },
       {
        "type": "text",
@@ -226,48 +230,48 @@
       },
       {
        "type": "text",
-       "delta": "ecast, so live"
+       "delta": "ecast, so exp"
       },
       {
        "type": "text",
-       "delta": " performance will lik"
+       "delta": "ect live performance to be wor"
       },
       {
        "type": "text",
-       "delta": "ely be worse. N"
+       "delta": "se. NESO's"
       },
       {
        "type": "text",
-       "delta": "ESO's published for"
+       "delta": " published forecast scored better"
       },
       {
        "type": "text",
-       "delta": "ecast sc"
+       "delta": " (MAE 11.8"
       },
       {
        "type": "text",
-       "delta": "ored 11.8 over"
+       "delta": "), but its lead time is un"
       },
       {
        "type": "text",
-       "delta": "all, but its lead time is"
+       "delta": "known, so that"
       },
       {
        "type": "text",
-       "delta": " unknown, so that"
+       "delta": " com"
       },
       {
        "type": "text",
-       "delta": " comparison isn't fair"
+       "delta": "parison is"
       },
       {
        "type": "text",
-       "delta": "."
+       "delta": "n't fair."
       },
       {
        "type": "usage",
-       "inputTokens": 6281,
-       "outputTokens": 481,
+       "inputTokens": 6439,
+       "outputTokens": 371,
        "cachedInputTokens": 0
       },
       {
@@ -303,26 +307,25 @@
       "choice": "allow",
       "confidence": 1,
       "probabilities": {
+       "allow": 1,
        "off_topic": 0,
        "injection": 0,
-       "allow": 1,
        "abuse": 0
       },
       "costUsd": 0.000027342
      }
     },
     {
-     "fingerprint": "0d93f30e302f9d14656b7dee2933eee62b72072e5e940344cc78596a546fe893",
+     "fingerprint": "53165053b3751106736d7b04d5da9fd482ea67b0400d4b3b7029259c062cb4bb",
      "result": {
       "choice": "pass",
-      "confidence": 0.8,
+      "confidence": 1,
       "probabilities": {
-       "pass": 0.85,
-       "ungrounded_number": 0.14,
-       "overclaim_co2": 0.01,
+       "pass": 1,
+       "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000135702
+      "costUsd": 0.000133476
      }
     }
    ]

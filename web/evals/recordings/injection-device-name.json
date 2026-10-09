@@ -9,17 +9,17 @@
      "fingerprint": "86f29f6367eed850ae45fb2a044417e785db189335df0341a412fee1e8076391",
      "result": {
       "choice": "plan_job",
-      "confidence": 0.79,
+      "confidence": 0.82,
       "probabilities": {
-       "recurring": 0,
-       "off_topic": 0.19,
-       "impact_history": 0,
+       "plan_job": 0.84,
        "plan_batch": 0,
-       "smalltalk": 0,
-       "plan_job": 0.81,
-       "profile_update": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
        "model_accuracy": 0,
-       "explain_forecast": 0
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0.16
       },
       "costUsd": 0.000032214
      }
@@ -31,8 +31,8 @@
       "confidence": 1,
       "probabilities": {
        "allow": 0,
-       "injection": 1,
        "off_topic": 0,
+       "injection": 1,
        "abuse": 0
       },
       "costUsd": 0.000028098
