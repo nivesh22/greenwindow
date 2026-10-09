@@ -122,6 +122,23 @@ Implications for the design:
 
 ---
 
+## S7 Google Calendar "add event" link (2026-10-09, orchestrator)
+- **Finding:** Google publishes no reference for `https://calendar.google.com/calendar/render?action=TEMPLATE`. The
+  Calendar API v3 docs cover the API, not this URL. Third-party guides (Interaction Design Foundation
+  add-event-to-calendar-docs, Formsite, U-M TeamDynamix) agree on `text`, `dates=YYYYMMDDTHHMMSSZ/YYYYMMDDTHHMMSSZ` (UTC with
+  `Z`), `details`, optional `location`/`ctz`. Some guides drop the `Z` and pass `ctz`; we always use UTC + `Z`.
+- **Status:** UNVERIFIED by a primary source. Owner check: open one generated link (plan panel "Google Calendar")
+  while signed in to Google and confirm the event time shows correctly in London time. Fallback if it breaks: the .ics
+  download (RFC 5545), which is standard.
+- **Code:** `web/src/lib/calendar.ts` (+ tests).
+
+## S8 pg_net at a 1-minute cadence (2026-10-09, orchestrator)
+- `net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds int) returns bigint` checked
+  against https://supabase.com/docs/guides/database/extensions/pg_net. Secrets from Vault as in
+  https://supabase.com/docs/guides/functions/schedule-functions (`vault.create_secret`, `vault.decrypted_secrets`).
+- Design change: the reminders job runs every minute but only calls the app when a reminder is due (`where exists`),
+  so Vercel invocations stay near zero. The 24 h cadence test is still to run after the Vault secrets exist.
+
 ## Open items (UNVERIFIED, for the orchestrator)
 
 1. Jev live call through the gateway (`typesafe-ai/jev`, `/typesafe/v1/systemone`) and the 10-call latency measurement. Also confirm whether the direct TypeSafe API requires a waitlist for the user's account.

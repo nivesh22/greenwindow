@@ -8,7 +8,7 @@ import type { ToolCtx, ToolDef, ToolRegistry } from '../tools/registry.js'
 import { ToolUserError } from '../tools/registry.js'
 import { type Budget, estimateMessagesTokens, estimateTokens } from './budget.js'
 import { BudgetExceeded, ProvidersDown } from './errors.js'
-import { planUpdateSchema, type PlanUpdate, type SseEvent, type StopReason } from './events.js'
+import { actionEventSchema, planUpdateSchema, type ActionEvent, type PlanUpdate, type SseEvent, type StopReason } from './events.js'
 
 export interface LoopOptions {
   router: ModelRouter
@@ -31,6 +31,8 @@ export interface LoopOptions {
    * for this, so turn.ts supplies it. Return null to skip. The result is validated against planUpdateSchema.
    */
   toPlanUpdate?: (toolName: string, output: unknown) => PlanUpdate | null
+  /** Maps a validated output of a tool with `emitsAction` to an action event (P4). */
+  toAction?: (toolName: string, output: unknown) => ActionEvent | null
   /** One-line summary for tool_end and the trace. Default: "ok" or the error code. */
   summarize?: (toolName: string, output: unknown) => string
   /** Clock for tool latency. Default Date.now. */
@@ -338,6 +340,10 @@ async function runTool(call: ToolCall, opts: LoopOptions): Promise<ToolOutcome> 
   if (def.emitsPlan && opts.toPlanUpdate) {
     const plan = planUpdateSchema.safeParse(opts.toPlanUpdate(call.name, valid.data))
     if (plan.success) opts.emit({ type: 'plan_update', data: plan.data })
+  }
+  if (def.emitsAction && opts.toAction) {
+    const action = actionEventSchema.safeParse(opts.toAction(call.name, valid.data))
+    if (action.success) opts.emit({ type: 'action', data: action.data })
   }
   return { ok: true, tool: call.name, data: valid.data }
 }
