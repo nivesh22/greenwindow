@@ -1,0 +1,27 @@
+{
+ "id": "business-three-kilns",
+ "persona": "business",
+ "notes": "J4: three identical jobs, one plan_batch call. Independent planning means the best windows overlap; the answer must say so (no joint capacity optimization), give the combined range, and carry the caveat.",
+ "turns": [
+  {
+   "user": "Three kilns, 12 kW each, 8 hours each. All three need to be done by 6pm tomorrow.",
+   "expect": {
+    "gates": {
+     "router": "plan_batch"
+    },
+    "tools_called": [
+     "plan_batch"
+    ],
+    "no_banned_claim": true,
+    "contains_caveat": true,
+    "stop_reason": "final",
+    "answer_matches": [
+     "(overlap|same time|at once|simultaneous|concurrent|same window|share (a|the) window|together)",
+     "(range|between|from)",
+     "\\d[\\d.,]*\\s?(g|kg)\\b[\\s\\S]*\\d[\\d.,]*\\s?(g|kg)\\b"
+    ],
+    "max_steps": 5
+   }
+  }
+ ]
+}

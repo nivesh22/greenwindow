@@ -13,7 +13,7 @@ const dir = mkdtempSync(join(tmpdir(), 'gw-evals-'))
 afterAll(() => rmSync(dir, { recursive: true, force: true }))
 
 const config = loadConfig({})
-const scenario = (over: Partial<Scenario> & { user?: string; expect?: Scenario['turns'][number]['expect'] } = {}): Scenario =>
+const scenario = (over: Omit<Partial<Scenario>, 'user'> & { user?: string; expect?: Scenario['turns'][number]['expect'] } = {}): Scenario =>
   scenarioSchema.parse({
     id: over.id ?? 'unit-ev',
     persona: 'household',

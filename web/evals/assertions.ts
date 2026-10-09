@@ -1,6 +1,7 @@
 // Per-turn assertions (design §15.2). Each returns pass / fail / skip; a scenario passes when none fail.
 import { checkGrounding, normalize, type ToolResultLike } from '../agent/harness/grounding.js'
-import type { PlanUpdate, TraceSummary } from '../agent/harness/events.js'
+import { icsDate } from '../src/lib/calendar.js'
+import type { ActionEvent, PlanUpdate, TraceSummary } from '../agent/harness/events.js'
 import type { ToolCtx } from '../agent/tools/registry.js'
 import { recommendWindow, type RecommendWindowOutput } from '../agent/tools/recommend_window.js'
 import type { AssertionResult, Expect } from './schema.js'
@@ -13,9 +14,24 @@ export interface TurnOutcome {
   planUpdate: PlanUpdate | null
   /** Every tool result of the turn, in call order (recorded by the runner's registry wrapper). */
   toolResults: ToolResultLike[]
+  /** Every `action` SSE event of the turn, in order (P4). Default: none. */
+  actions?: ActionEvent[]
+  /** Store state after the turn (P4): active saved plans and reminder rows. Default: 0 / 0 (no plan store). */
+  planState?: { activePlans: number; reminders: number }
 }
 
-export type OptimizerRef = (args: NonNullable<Expect['window_equals_optimizer']>) => Promise<RecommendWindowOutput>
+export type WindowRefArgs = NonNullable<Expect['window_equals_optimizer']>
+
+/** True when every key of `want` is present in `have` with an equal value (objects recurse; arrays and scalars must be equal). */
+export function isSubset(want: unknown, have: unknown): boolean {
+  if (want !== null && typeof want === 'object' && !Array.isArray(want)) {
+    if (have === null || typeof have !== 'object' || Array.isArray(have)) return false
+    return Object.entries(want).every(([k, v]) => isSubset(v, (have as Record<string, unknown>)[k]))
+  }
+  return JSON.stringify(want) === JSON.stringify(have)
+}
+
+export type OptimizerRef = (args: WindowRefArgs) => Promise<RecommendWindowOutput>
 
 /** Runs the real recommend_window handler on a fresh ctx (the fixture source and the scenario's frozen clock). */
 export function optimizerRef(makeCtx: () => ToolCtx): OptimizerRef {
@@ -101,6 +117,48 @@ export async function evaluateTurn(expect: Expect, o: TurnOutcome, ref: Optimize
       const clock = clockOf(ref_.best_start_london)
       if (clock && !clockVariants(clock).some((v) => answer.toLowerCase().includes(v))) problems.push(`answer does not contain ${clock} (${ref_.best_start_london})`)
       out.push(check('window_equals_optimizer', problems.length === 0, problems.join('; ')))
+    }
+  }
+  if (expect.actions_emitted) {
+    const kinds = (o.actions ?? []).map((a) => a.kind)
+    const missing = expect.actions_emitted.filter((k) => !kinds.includes(k))
+    out.push(check('actions_emitted', missing.length === 0, `missing action(s) ${missing.join(', ')}; emitted [${kinds.join(', ')}]`))
+  }
+  if (expect.tool_args) {
+    for (const [tool, want] of Object.entries(expect.tool_args)) {
+      const name = `tool_args:${tool}`
+      const first = o.trace.tools.find((t) => t.name === tool)
+      if (!first) out.push(fail(name, `${tool} was not called`))
+      else out.push(check(name, isSubset(want, first.args), `first ${tool} call args ${JSON.stringify(first.args)} do not contain ${JSON.stringify(want)}`))
+    }
+  }
+  if (expect.plans_saved !== undefined) {
+    const n = o.planState?.activePlans ?? 0
+    out.push(check('plans_saved', n === expect.plans_saved, `${n} active plan(s) in the store, expected ${expect.plans_saved}`))
+  }
+  if (expect.reminders_created !== undefined) {
+    const n = o.planState?.reminders ?? 0
+    out.push(check('reminders_created', n === expect.reminders_created, `${n} reminder(s) in the store, expected ${expect.reminders_created}`))
+  }
+  if (expect.calendar_start_equals_optimizer) {
+    const w = expect.calendar_start_equals_optimizer
+    const cal = (o.actions ?? []).find((a) => a.kind === 'calendar')
+    let ref_: RecommendWindowOutput | null = null
+    let err = ''
+    try {
+      ref_ = await ref(w)
+    } catch (e) {
+      err = e instanceof Error ? e.message : 'unknown'
+    }
+    if (!ref_) out.push(fail('calendar_start_equals_optimizer', `optimizer reference failed: ${err}`))
+    else if (!cal || cal.kind !== 'calendar') out.push(fail('calendar_start_equals_optimizer', 'no calendar action was emitted'))
+    else {
+      const problems: string[] = []
+      if (cal.start_utc !== ref_.best_start_utc) problems.push(`start ${cal.start_utc} != optimizer ${ref_.best_start_utc}`)
+      if (!cal.ics.includes(`DTSTART:${icsDate(ref_.best_start_utc)}`)) problems.push(`.ics has no DTSTART:${icsDate(ref_.best_start_utc)}`)
+      const hours = (Date.parse(cal.end_utc) - Date.parse(cal.start_utc)) / 3_600_000
+      if (hours !== w.duration_h) problems.push(`event lasts ${hours} h, expected ${w.duration_h} h`)
+      out.push(check('calendar_start_equals_optimizer', problems.length === 0, problems.join('; ')))
     }
   }
   if (expect.co2_equals_tool) {

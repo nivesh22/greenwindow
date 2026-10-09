@@ -1,0 +1,38 @@
+{
+ "id": "user-profile-update-confirm",
+ "persona": "household",
+ "notes": "FR-6/7: a profile change is confirmed first; \"yes\" saves it with confirm true.",
+ "user": {
+  "signed_in": true
+ },
+ "turns": [
+  {
+   "user": "Set my default risk mode to cautious.",
+   "expect": {
+    "tool_not_called": [
+     "update_profile"
+    ],
+    "answer_matches": [
+     "(confirm|shall i|should i|want me to|would you like|go ahead|is that (ok|right)|do you want)"
+    ],
+    "no_banned_claim": true
+   }
+  },
+  {
+   "user": "Yes, do it.",
+   "expect": {
+    "tools_called": [
+     "update_profile"
+    ],
+    "tool_args": {
+     "update_profile": {
+      "confirm": true,
+      "risk_default": "cautious"
+     }
+    },
+    "no_banned_claim": true,
+    "stop_reason": "final"
+   }
+  }
+ ]
+}
