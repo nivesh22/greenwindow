@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "e1dafba060a984d7afc11220d0fa895f77b11dbb165664aa7c9fd01561e63650",
+     "fingerprint": "54b6dd26011da1c05cfbf801618fae2a6550b6a99ca1367cf858b5df2c84d329",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_013QAKiSLAaqWvxRkNbCmGyH",
+        "id": "toolu_015aQMhGH4ua4Zs4f3523HXg",
         "name": "lookup_device",
         "argsJson": "{\"query\": \"dishwasher\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4115,
-       "outputTokens": 152,
+       "inputTokens": 4141,
+       "outputTokens": 254,
        "cachedInputTokens": 0
       },
       {
@@ -29,7 +29,7 @@
      ]
     },
     {
-     "fingerprint": "93cadaff62f39fc67c2ac5057908134e24e0a21c48fe5dca1e386491f40de226",
+     "fingerprint": "6442171c648740a034b18d5cf2e7cdb128f143d42546345c32a800afddf9763b",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
@@ -54,15 +54,15 @@
       },
       {
        "type": "text",
-       "delta": "** on average over"
+       "delta": "** for"
       },
       {
        "type": "text",
-       "delta": " a typ"
+       "delta": " a **"
       },
       {
        "type": "text",
-       "delta": "ical **2-hour**"
+       "delta": "2-hour**"
       },
       {
        "type": "text",
@@ -70,35 +70,47 @@
       },
       {
        "type": "text",
-       "delta": "ical UK appliance fig"
+       "delta": "ical UK c"
       },
       {
        "type": "text",
-       "delta": "ure, not your mach"
+       "delta": "ycle-average fig"
       },
       {
        "type": "text",
-       "delta": "ine's rating, so you can"
+       "delta": "ure, not"
       },
       {
        "type": "text",
-       "delta": " change either"
+       "delta": " your"
       },
       {
        "type": "text",
-       "delta": " value"
+       "delta": " mach"
       },
       {
        "type": "text",
-       "delta": "."
+       "delta": "ine's rating, so t"
       },
       {
        "type": "text",
-       "delta": "\n\nBy what time does"
+       "delta": "ell me if"
       },
       {
        "type": "text",
-       "delta": " it need to finish t"
+       "delta": " y"
+      },
+      {
+       "type": "text",
+       "delta": "ours differs.\n\nWhat time should"
+      },
+      {
+       "type": "text",
+       "delta": " it be"
+      },
+      {
+       "type": "text",
+       "delta": " finished by t"
       },
       {
        "type": "text",
@@ -106,15 +118,7 @@
       },
       {
        "type": "text",
-       "delta": " Once I have"
-      },
-      {
-       "type": "text",
-       "delta": " a"
-      },
-      {
-       "type": "text",
-       "delta": " deadline, I can"
+       "delta": " I'll then"
       },
       {
        "type": "text",
@@ -122,7 +126,15 @@
       },
       {
        "type": "text",
-       "delta": "owest-carbon start window"
+       "delta": "owest-carbon start"
+      },
+      {
+       "type": "text",
+       "delta": " before"
+      },
+      {
+       "type": "text",
+       "delta": " that"
       },
       {
        "type": "text",
@@ -130,8 +142,8 @@
       },
       {
        "type": "usage",
-       "inputTokens": 4271,
-       "outputTokens": 279,
+       "inputTokens": 4297,
+       "outputTokens": 271,
        "cachedInputTokens": 0
       },
       {
@@ -142,6 +154,20 @@
     }
    ],
    "gate_calls": [
+    {
+     "fingerprint": "f504bb637f2c344c762ffe61ea1e08e50b9cf287a8c70b97be635545d4c0d469",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027426
+     }
+    },
     {
      "fingerprint": "d691865a87f87accc1edc803aeb1f8c392f284cd2a89f30dd0255f081033a5a9",
      "result": {
@@ -162,17 +188,15 @@
      }
     },
     {
-     "fingerprint": "f504bb637f2c344c762ffe61ea1e08e50b9cf287a8c70b97be635545d4c0d469",
+     "fingerprint": "4f7e10f79182eb425148ae3e57bddb8ff82089608f9dcf41e5ed1ffcdc54c58d",
      "result": {
-      "choice": "allow",
-      "confidence": 1,
+      "choice": "expected",
+      "confidence": 0.98,
       "probabilities": {
-       "allow": 1,
-       "off_topic": 0,
-       "injection": 0,
-       "abuse": 0
+       "expected": 0.99,
+       "cautious": 0.01
       },
-      "costUsd": 0.000027426
+      "costUsd": 0.000025998
      }
     },
     {
@@ -191,19 +215,7 @@
      }
     },
     {
-     "fingerprint": "4f7e10f79182eb425148ae3e57bddb8ff82089608f9dcf41e5ed1ffcdc54c58d",
-     "result": {
-      "choice": "expected",
-      "confidence": 1,
-      "probabilities": {
-       "expected": 1,
-       "cautious": 0
-      },
-      "costUsd": 0.000025998
-     }
-    },
-    {
-     "fingerprint": "4467df705a12fcf630dc942435b5ca58e4428828b55290fc9daac1b80ec48495",
+     "fingerprint": "9daa0ad4fc7c800efd9b938aae2fd12b2bd80240be67c6d86153d1309e551e0b",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -212,7 +224,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000023772
+      "costUsd": 0.000023478
      }
     }
    ]

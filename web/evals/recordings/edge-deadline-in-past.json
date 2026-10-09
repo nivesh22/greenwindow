@@ -5,297 +5,301 @@
   {
    "model_calls": [
     {
-     "fingerprint": "56f0c6c3a85c58de062b5902cabb49653a942e1a3ed51de6f1ac038a7c8c333d",
+     "fingerprint": "34052423f73722ce11881a1bbe91aeabffe9f81c4a8f6aaf469b2ef7236c03ca",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
-       "type": "text",
-       "delta": "Midnight last night has already pass"
-      },
-      {
-       "type": "text",
-       "delta": "ed ("
-      },
-      {
-       "type": "text",
-       "delta": "it's"
-      },
-      {
-       "type": "text",
-       "delta": " "
-      },
-      {
-       "type": "text",
-       "delta": "01:30 BST on"
-      },
-      {
-       "type": "text",
-       "delta": " Tu"
-      },
-      {
-       "type": "text",
-       "delta": "esday 6 October), so"
-      },
-      {
-       "type": "text",
-       "delta": " I can't sch"
-      },
-      {
-       "type": "text",
-       "delta": "edule a 4-hour"
-      },
-      {
-       "type": "text",
-       "delta": ","
-      },
-      {
-       "type": "text",
-       "delta": " 7 kW job to"
-      },
-      {
-       "type": "text",
-       "delta": " finish by"
-      },
-      {
-       "type": "text",
-       "delta": " then"
-      },
-      {
-       "type": "text",
-       "delta": ".\n\nOptions:\n- **"
-      },
-      {
-       "type": "text",
-       "delta": "Mid"
-      },
-      {
-       "type": "text",
-       "delta": "night tonight**"
-      },
-      {
-       "type": "text",
-       "delta": " (end"
-      },
-      {
-       "type": "text",
-       "delta": " of Tuesday 6"
-      },
-      {
-       "type": "text",
-       "delta": " October),"
-      },
-      {
-       "type": "text",
-       "delta": " so"
-      },
-      {
-       "type": "text",
-       "delta": " the"
-      },
-      {
-       "type": "text",
-       "delta": " job must"
-      },
-      {
-       "type": "text",
-       "delta": " finish by"
-      },
-      {
-       "type": "text",
-       "delta": " 00:00 on"
-      },
-      {
-       "type": "text",
-       "delta": " Wednesday 7 "
-      },
-      {
-       "type": "text",
-       "delta": "October. I can"
-      },
-      {
-       "type": "text",
-       "delta": " plan that"
-      },
-      {
-       "type": "text",
-       "delta": " now"
-      },
-      {
-       "type": "text",
-       "delta": ".\n- **A"
-      },
-      {
-       "type": "text",
-       "delta": " different"
-      },
-      {
-       "type": "text",
-       "delta": " deadline** of"
-      },
-      {
-       "type": "text",
-       "delta": " your choice, within"
-      },
-      {
-       "type": "text",
-       "delta": " the"
-      },
-      {
-       "type": "text",
-       "delta": " next 48 hours."
-      },
-      {
-       "type": "text",
-       "delta": "\n- **A shorter job**"
-      },
-      {
-       "type": "text",
-       "delta": ", if"
-      },
-      {
-       "type": "text",
-       "delta": " "
-      },
-      {
-       "type": "text",
-       "delta": "4 hours is"
-      },
-      {
-       "type": "text",
-       "delta": "n't ess"
-      },
-      {
-       "type": "text",
-       "delta": "ential.\n\nWhich would"
-      },
-      {
-       "type": "text",
-       "delta": " you like?"
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01XkYvvFD2uXbCEXJZLu61XL",
+        "name": "recommend_window",
+        "argsJson": "{\"duration_h\": 4, \"power_kw\": 7, \"deadline_local\": \"2026-10-07T00:00\", \"label\": \"EV charge\"}"
+       }
       },
       {
        "type": "usage",
-       "inputTokens": 4120,
-       "outputTokens": 651,
+       "inputTokens": 4146,
+       "outputTokens": 652,
        "cachedInputTokens": 0
       },
       {
        "type": "finish",
-       "reason": "stop"
+       "reason": "tool_calls"
       }
      ]
     },
     {
-     "fingerprint": "7702d12300fd1a67ef4c16e3198462d9b02505cec1a00c40d66f45b9aae4a624",
+     "fingerprint": "c4f9a1e7f912db30e38287951a8a8afe7c40bfa3347effa74847c82b7a6978a5",
+     "model": "anthropic/claude-haiku-5.5",
+     "events": [
+      {
+       "type": "tool_call",
+       "call": {
+        "id": "toolu_01SvAS2Vjm4RDQFURdMWdqRE",
+        "name": "estimate_co2",
+        "argsJson": ""
+       }
+      },
+      {
+       "type": "usage",
+       "inputTokens": 4604,
+       "outputTokens": 368,
+       "cachedInputTokens": 0
+      },
+      {
+       "type": "finish",
+       "reason": "tool_calls"
+      }
+     ]
+    },
+    {
+     "fingerprint": "6db18a19af08104280041394e3015aecac2898a4631fb4a17853085352657c59",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Mid"
+       "delta": "Midnight last night has"
       },
       {
        "type": "text",
-       "delta": "night last"
+       "delta": " already passed, so this"
       },
       {
        "type": "text",
-       "delta": " night has already passed, so I"
+       "delta": " job can't be fin"
       },
       {
        "type": "text",
-       "delta": " can't schedule a 4"
+       "delta": "ished by then"
       },
       {
        "type": "text",
-       "delta": "-hour, 7 k"
+       "delta": ". The"
       },
       {
        "type": "text",
-       "delta": "W char"
+       "delta": " nearest upcoming mid"
       },
       {
        "type": "text",
-       "delta": "ge to finish by then"
+       "delta": "night is **"
       },
       {
        "type": "text",
-       "delta": ".\n\nHere are your options:"
+       "delta": "Wed 7 O"
       },
       {
        "type": "text",
-       "delta": "\n- **Midnight t"
+       "delta": "ct, 00:00 B"
       },
       {
        "type": "text",
-       "delta": "onight**:"
+       "delta": "ST**, and"
       },
       {
        "type": "text",
-       "delta": " I can plan a"
+       "delta": " I planned against"
       },
       {
        "type": "text",
-       "delta": " 4-hour,"
+       "delta": " that."
       },
       {
        "type": "text",
-       "delta": " 7 kW charge to"
+       "delta": "\n\n- **Best"
       },
       {
        "type": "text",
-       "delta": " finish by"
+       "delta": " start:** Tue 6"
       },
       {
        "type": "text",
-       "delta": " midnight t"
+       "delta": " Oct, 11:"
       },
       {
        "type": "text",
-       "delta": "onight.\n- **A different"
+       "delta": "00 BST, "
       },
       {
        "type": "text",
-       "delta": " deadline**: give me a"
+       "delta": "ending "
       },
       {
        "type": "text",
-       "delta": " time within the next 48 h"
+       "delta": "15:00 BST."
       },
       {
        "type": "text",
-       "delta": "ours and I'll plan around"
+       "delta": " Average for"
       },
       {
        "type": "text",
-       "delta": " it"
+       "delta": "ecast intensity is 164"
       },
       {
        "type": "text",
-       "delta": ".\n- **A shorter"
+       "delta": ".55"
       },
       {
        "type": "text",
-       "delta": " job**: if 4 h"
+       "delta": " gCO2/kW"
       },
       {
        "type": "text",
-       "delta": "ours isn't essential, I"
+       "delta": "h, against"
       },
       {
        "type": "text",
-       "delta": " can plan a shorter char"
+       "delta": " 194.53 if"
       },
       {
        "type": "text",
-       "delta": "ge.\n\nWhich would you like"
+       "delta": " you start now (about"
       },
       {
        "type": "text",
-       "delta": "?"
+       "delta": " 15% lower).\n-"
+      },
+      {
+       "type": "text",
+       "delta": " **Estimated difference:"
+      },
+      {
+       "type": "text",
+       "delta": "** 839 g C"
+      },
+      {
+       "type": "text",
+       "delta": "O2 vers"
+      },
+      {
+       "type": "text",
+       "delta": "us star"
+      },
+      {
+       "type": "text",
+       "delta": "ting now,"
+      },
+      {
+       "type": "text",
+       "delta": " with"
+      },
+      {
+       "type": "text",
+       "delta": " a range from"
+      },
+      {
+       "type": "text",
+       "delta": " -684 g to 2."
+      },
+      {
+       "type": "text",
+       "delta": "3 kg. The"
+      },
+      {
+       "type": "text",
+       "delta": " range includ"
+      },
+      {
+       "type": "text",
+       "delta": "es the recommended"
+      },
+      {
+       "type": "text",
+       "delta": " window"
+      },
+      {
+       "type": "text",
+       "delta": " being worse, so the"
+      },
+      {
+       "type": "text",
+       "delta": " result is u"
+      },
+      {
+       "type": "text",
+       "delta": "ncertain.\n- **"
+      },
+      {
+       "type": "text",
+       "delta": "Robustness:** This recomm"
+      },
+      {
+       "type": "text",
+       "delta": "endation is not robust to"
+      },
+      {
+       "type": "text",
+       "delta": " forecast error, so tre"
+      },
+      {
+       "type": "text",
+       "delta": "at the"
+      },
+      {
+       "type": "text",
+       "delta": " 11:"
+      },
+      {
+       "type": "text",
+       "delta": "00 start"
+      },
+      {
+       "type": "text",
+       "delta": " as a reasonable choice"
+      },
+      {
+       "type": "text",
+       "delta": " rather than a cl"
+      },
+      {
+       "type": "text",
+       "delta": "ear win"
+      },
+      {
+       "type": "text",
+       "delta": ".\n\nI ass"
+      },
+      {
+       "type": "text",
+       "delta": "umed the 4-hour"
+      },
+      {
+       "type": "text",
+       "delta": ", 7 kW job"
+      },
+      {
+       "type": "text",
+       "delta": " you gave me ("
+      },
+      {
+       "type": "text",
+       "delta": "28 kWh). If you"
+      },
+      {
+       "type": "text",
+       "delta": " me"
+      },
+      {
+       "type": "text",
+       "delta": "ant a different deadline,"
+      },
+      {
+       "type": "text",
+       "delta": " t"
+      },
+      {
+       "type": "text",
+       "delta": "ell me and I'll re"
+      },
+      {
+       "type": "text",
+       "delta": "-plan."
       },
       {
        "type": "usage",
-       "inputTokens": 1896,
-       "outputTokens": 451,
+       "inputTokens": 4853,
+       "outputTokens": 925,
        "cachedInputTokens": 0
       },
       {
@@ -306,6 +310,20 @@
     }
    ],
    "gate_calls": [
+    {
+     "fingerprint": "64667fbe21ded7596958bdfd5faa9302c9c0d49c59ca8545d0bad7fab7236380",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.96,
+      "probabilities": {
+       "allow": 0.97,
+       "off_topic": 0,
+       "injection": 0.03,
+       "abuse": 0
+      },
+      "costUsd": 0.000027636
+     }
+    },
     {
      "fingerprint": "d92f474ba469b9437a1664e107d21d441f66fa5b5b7a18348ff5cdbc362f5522",
      "result": {
@@ -326,35 +344,6 @@
      }
     },
     {
-     "fingerprint": "64667fbe21ded7596958bdfd5faa9302c9c0d49c59ca8545d0bad7fab7236380",
-     "result": {
-      "choice": "allow",
-      "confidence": 0.96,
-      "probabilities": {
-       "allow": 0.97,
-       "off_topic": 0,
-       "injection": 0.03,
-       "abuse": 0
-      },
-      "costUsd": 0.000027636
-     }
-    },
-    {
-     "fingerprint": "de77b7e287385a3462bbb46ea4922f3db6dffb42d3cbdd100261eea67205ae6a",
-     "result": {
-      "choice": "act",
-      "confidence": 0.59,
-      "probabilities": {
-       "act": 0.67,
-       "ask_duration": 0,
-       "ask_power": 0,
-       "ask_deadline": 0.06,
-       "ask_clarify": 0.27
-      },
-      "costUsd": 0.000028308
-     }
-    },
-    {
      "fingerprint": "d102315f8052ae20c50f4496d40a7e1bb6c399571ad548cee5990b0441674721",
      "result": {
       "choice": "expected",
@@ -367,16 +356,31 @@
      }
     },
     {
-     "fingerprint": "b1a4d428e6e77005b7e214506bf341b4e3f18b930d622593d884d48298fd6e88",
+     "fingerprint": "de77b7e287385a3462bbb46ea4922f3db6dffb42d3cbdd100261eea67205ae6a",
+     "result": {
+      "choice": "act",
+      "confidence": 0.62,
+      "probabilities": {
+       "act": 0.7,
+       "ask_duration": 0,
+       "ask_power": 0,
+       "ask_deadline": 0.06,
+       "ask_clarify": 0.24
+      },
+      "costUsd": 0.000028308
+     }
+    },
+    {
+     "fingerprint": "b6ccf1617fe64df32ce19351d2ffc381b1cc3e0232758b36e2446b9c284cb954",
      "result": {
       "choice": "pass",
-      "confidence": 1,
+      "confidence": 0.98,
       "probabilities": {
-       "pass": 1,
-       "overclaim_co2": 0,
+       "pass": 0.99,
+       "overclaim_co2": 0.01,
        "unsafe": 0
       },
-      "costUsd": 0.000023016
+      "costUsd": 0.000047712
      }
     }
    ]

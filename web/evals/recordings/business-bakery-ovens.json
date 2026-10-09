@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "285b6ad7341d6db0ff92543f9671b83bc1393ffd507f2c8d36e68c64873c304b",
+     "fingerprint": "067fb6eb96b7328ad12e01954c23c40fa8f4f36c57ebd9a8ff953e09277ae990",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01AJ72Kn3WeHt9hkZ4xyNUWX",
+        "id": "toolu_01CftsabJe4d8gKbfpFNFqor",
         "name": "plan_batch",
-        "argsJson": "{\"jobs\": [{\"label\": \"Bakery oven 1\", \"duration_h\": 3, \"power_kw\": 9, \"deadline_local\": \"2026-10-06T05:00\"}, {\"label\": \"Bakery oven 2\", \"duration_h\": 3, \"power_kw\": 9, \"deadline_local\": \"2026-10-06T05:00\"}]}"
+        "argsJson": "{\"jobs\": [{\"label\":\"Oven 1\",\"duration_h\":3,\"power_kw\":9,\"deadline_local\":\"2026-10-06T05:00\"},{\"label\":\"Oven 2\",\"duration_h\":3,\"power_kw\":9,\"deadline_local\":\"2026-10-06T05:00\"}]}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4829,
-       "outputTokens": 521,
+       "inputTokens": 4855,
+       "outputTokens": 427,
        "cachedInputTokens": 0
       },
       {
@@ -29,7 +29,7 @@
      ]
     },
     {
-     "fingerprint": "e967604aa03dd987fad1718516cc04ec63eb91da633bc960d89347ee58ca137b",
+     "fingerprint": "733009d62cca9c4c4a3d82010394e1fd166f20322de40e4b6719d2ff4130aebe",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
@@ -42,55 +42,43 @@
       },
       {
        "type": "text",
-       "delta": " best started"
+       "delta": " planned to start at **"
       },
       {
        "type": "text",
-       "delta": " **"
+       "delta": "Tue 6 Oct"
       },
       {
        "type": "text",
-       "delta": "now,"
+       "delta": ", 02:00 BST"
       },
       {
        "type": "text",
-       "delta": " Tue 6 O"
+       "delta": "**"
       },
       {
        "type": "text",
-       "delta": "ct at"
+       "delta": " and finish at"
       },
       {
        "type": "text",
-       "delta": " 02:00 BST**"
+       "delta": " **05:00 BST**"
       },
       {
        "type": "text",
-       "delta": ", fin"
+       "delta": ", which is the"
       },
       {
        "type": "text",
-       "delta": "ishing at"
+       "delta": " run-now start,"
       },
       {
        "type": "text",
-       "delta": " 05:00 BST."
+       "delta": " so there"
       },
       {
        "type": "text",
-       "delta": " That"
-      },
-      {
-       "type": "text",
-       "delta": " is also"
-      },
-      {
-       "type": "text",
-       "delta": " the run-now start"
-      },
-      {
-       "type": "text",
-       "delta": ", so there is no c"
+       "delta": " is no c"
       },
       {
        "type": "text",
@@ -98,27 +86,11 @@
       },
       {
        "type": "text",
-       "delta": " the"
+       "delta": " the deadline. The average"
       },
       {
        "type": "text",
-       "delta": " deadline. The"
-      },
-      {
-       "type": "text",
-       "delta": " gr"
-      },
-      {
-       "type": "text",
-       "delta": "id is"
-      },
-      {
-       "type": "text",
-       "delta": " forecast at"
-      },
-      {
-       "type": "text",
-       "delta": " about 191"
+       "delta": " intensity is 190.7"
       },
       {
        "type": "text",
@@ -126,83 +98,67 @@
       },
       {
        "type": "text",
-       "delta": "h for"
+       "delta": "h for both, and the estim"
       },
       {
        "type": "text",
-       "delta": " the run,"
+       "delta": "ated difference is 0 g"
       },
       {
        "type": "text",
-       "delta": " and the plan is not robust"
+       "delta": "."
       },
       {
        "type": "text",
-       "delta": " to"
+       "delta": " The recommendation is not rob"
       },
       {
        "type": "text",
-       "delta": " forecast error, so the tim"
+       "delta": "ust.\n\n- **O"
       },
       {
        "type": "text",
-       "delta": "ing is not a"
+       "delta": "ven 1:** 9 "
       },
       {
        "type": "text",
-       "delta": " clear win"
+       "delta": "kW for"
       },
       {
        "type": "text",
-       "delta": ".\n\n- **B"
+       "delta": " 3 hours ("
       },
       {
        "type": "text",
-       "delta": "akery oven 1:**"
+       "delta": "27 kWh), "
       },
       {
        "type": "text",
-       "delta": " 3"
+       "delta": "02:00–05:00 "
       },
       {
        "type": "text",
-       "delta": " h, 9 kW"
+       "delta": "BST\n- **Oven"
       },
       {
        "type": "text",
-       "delta": ", 27 kWh,"
+       "delta": " 2:** 9 k"
       },
       {
        "type": "text",
-       "delta": " 02:00–05:00"
+       "delta": "W for 3 hours ("
       },
       {
        "type": "text",
-       "delta": " BST\n- **B"
+       "delta": "27 kWh), 02"
       },
       {
        "type": "text",
-       "delta": "akery oven 2:**"
+       "delta": ":00–05:00 B"
       },
       {
        "type": "text",
-       "delta": " 3 h, 9 "
-      },
-      {
-       "type": "text",
-       "delta": "kW, 27 kW"
-      },
-      {
-       "type": "text",
-       "delta": "h, 02:00–05"
-      },
-      {
-       "type": "text",
-       "delta": ":00 BST\n\nThe two"
-      },
-      {
-       "type": "text",
-       "delta": " wind"
+       "delta": "ST\n\nThese two wind"
       },
       {
        "type": "text",
@@ -214,92 +170,88 @@
       },
       {
        "type": "text",
-       "delta": " was planned independently with"
+       "delta": " was planned independently, so the"
       },
       {
        "type": "text",
-       "delta": " no shared power limit, so"
+       "delta": " comb"
       },
       {
        "type": "text",
-       "delta": " together"
+       "delta": "ined 18 kW draw"
       },
       {
        "type": "text",
-       "delta": " they would draw about"
+       "delta": " has not been checked against"
       },
       {
        "type": "text",
-       "delta": " 18 kW for those"
+       "delta": " any power"
       },
       {
        "type": "text",
-       "delta": " three hours. I ha"
+       "delta": " limit. If your"
       },
       {
        "type": "text",
-       "delta": "ven't checked wh"
+       "delta": " sup"
       },
       {
        "type": "text",
-       "delta": "ether your sup"
+       "delta": "ply can"
       },
       {
        "type": "text",
-       "delta": "ply can handle that. Sta"
+       "delta": "'t hand"
       },
       {
        "type": "text",
-       "delta": "ggering one"
+       "delta": "le that, you could"
       },
       {
        "type": "text",
-       "delta": " o"
+       "delta": " run"
       },
       {
        "type": "text",
-       "delta": "ven by an hour or more"
+       "delta": " one o"
       },
       {
        "type": "text",
-       "delta": " would need a different"
+       "delta": "ven ear"
       },
       {
        "type": "text",
-       "delta": " plan, which"
+       "delta": "lier, but"
       },
       {
        "type": "text",
-       "delta": " I can run"
+       "delta": " the for"
       },
       {
        "type": "text",
-       "delta": " if"
+       "delta": "ecast shows no c"
       },
       {
        "type": "text",
-       "delta": " you t"
+       "delta": "leaner sl"
       },
       {
        "type": "text",
-       "delta": "ell me the"
+       "delta": "ot to gain from"
       },
       {
        "type": "text",
-       "delta": " start you"
+       "delta": " do"
       },
       {
        "type": "text",
-       "delta": "'d pr"
-      },
-      {
-       "type": "text",
-       "delta": "efer."
+       "delta": "ing so."
       },
       {
        "type": "usage",
-       "inputTokens": 5824,
-       "outputTokens": 385,
+       "inputTokens": 5832,
+       "outputTokens": 364,
        "cachedInputTokens": 0
       },
       {
@@ -309,108 +261,92 @@
      ]
     },
     {
-     "fingerprint": "b753a1b1374ca0c432ff4e275a8b7c67a2eaaf66c19051d63714b523b5aad173",
+     "fingerprint": "300738456277a9902ba512e585866281164cff2436310cada5d55618a4053f8d",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Both ovens are best started **"
+       "delta": "Both ovens are planned"
       },
       {
        "type": "text",
-       "delta": "now, Tue 6 "
+       "delta": " to start at **Tue "
       },
       {
        "type": "text",
-       "delta": "Oct at 02:00"
+       "delta": "6 Oct, 02"
       },
       {
        "type": "text",
-       "delta": " BST**, finishing"
+       "delta": ":00 BST** and fin"
       },
       {
        "type": "text",
-       "delta": " at 05:00 BST"
+       "delta": "ish at **05:00 B"
       },
       {
        "type": "text",
-       "delta": ". That is also the run-now"
+       "delta": "ST**."
       },
       {
        "type": "text",
-       "delta": " start, so there is no cle"
+       "delta": " That is also"
       },
       {
        "type": "text",
-       "delta": "aner window before the deadline"
+       "delta": " the run-now start, so the"
       },
       {
        "type": "text",
-       "delta": ". The est"
+       "delta": " forecast shows no cle"
       },
       {
        "type": "text",
-       "delta": "imated em"
+       "delta": "aner window before your"
       },
       {
        "type": "text",
-       "delta": "issions are"
+       "delta": " 5am deadline. The"
       },
       {
        "type": "text",
-       "delta": " "
+       "delta": " average intensity is 190."
       },
       {
        "type": "text",
-       "delta": "0 g, and the plan"
+       "delta": "7 gCO2/k"
       },
       {
        "type": "text",
-       "delta": " is not robust to forecast"
+       "delta": "Wh for"
       },
       {
        "type": "text",
-       "delta": " error, so the timing is not"
+       "delta": " both, and the estimated dif"
       },
       {
        "type": "text",
-       "delta": " a clear win.\n\n- **"
+       "delta": "ference is 0 g."
       },
       {
        "type": "text",
-       "delta": "Bakery oven 1"
+       "delta": " The recommendation is not rob"
       },
       {
        "type": "text",
-       "delta": ":** 3 h, "
+       "delta": "ust.\n\n- **Oven"
       },
       {
        "type": "text",
-       "delta": "9 kW, 27 "
+       "delta": " 1:** 9 k"
       },
       {
        "type": "text",
-       "delta": "kWh, 02:00"
+       "delta": "W for 3 hours ("
       },
       {
        "type": "text",
-       "delta": "–05:00 BST"
-      },
-      {
-       "type": "text",
-       "delta": "\n- **Bakery oven"
-      },
-      {
-       "type": "text",
-       "delta": " 2:** 3 h"
-      },
-      {
-       "type": "text",
-       "delta": ", 9 kW, "
-      },
-      {
-       "type": "text",
-       "delta": "27 kWh, 02"
+       "delta": "27 kWh), 02"
       },
       {
        "type": "text",
@@ -418,19 +354,47 @@
       },
       {
        "type": "text",
-       "delta": "ST\n\nThe two windows overl"
+       "delta": "ST\n- **Oven "
       },
       {
        "type": "text",
-       "delta": "ap. Each job was planned"
+       "delta": "2:** 9 kW"
       },
       {
        "type": "text",
-       "delta": " independently with no shared power lim"
+       "delta": " for 3 hours (27"
       },
       {
        "type": "text",
-       "delta": "it, so their"
+       "delta": " kWh), 02:"
+      },
+      {
+       "type": "text",
+       "delta": "00–05:00 BST"
+      },
+      {
+       "type": "text",
+       "delta": "\n\nThese two windows overlap"
+      },
+      {
+       "type": "text",
+       "delta": ". Each job was planned independ"
+      },
+      {
+       "type": "text",
+       "delta": "ently against"
+      },
+      {
+       "type": "text",
+       "delta": " the same forecast, with"
+      },
+      {
+       "type": "text",
+       "delta": " no shared power limit, so"
+      },
+      {
+       "type": "text",
+       "delta": " their"
       },
       {
        "type": "text",
@@ -438,59 +402,67 @@
       },
       {
        "type": "text",
-       "delta": " draw during"
+       "delta": " draw has not been checked."
       },
       {
        "type": "text",
-       "delta": " those h"
+       "delta": " If your supply can't handle"
       },
       {
        "type": "text",
-       "delta": "ours has not been checked against"
+       "delta": " both"
       },
       {
        "type": "text",
-       "delta": " your supply. Staggering"
+       "delta": " running"
       },
       {
        "type": "text",
-       "delta": " one oven would"
+       "delta": " together"
       },
       {
        "type": "text",
-       "delta": " need"
+       "delta": ", check"
       },
       {
        "type": "text",
-       "delta": " a different plan, which I can"
+       "delta": " that"
       },
       {
        "type": "text",
-       "delta": " run if you tell me the"
+       "delta": " before"
       },
       {
        "type": "text",
-       "delta": " start you'd prefer."
+       "delta": " rel"
       },
       {
        "type": "text",
-       "delta": "\n\nThis is an estimated dif"
+       "delta": "ying on this"
       },
       {
        "type": "text",
-       "delta": "ference in emissions based on the"
+       "delta": " plan.\n\nThis is an est"
       },
       {
        "type": "text",
-       "delta": " grid's average carbon int"
+       "delta": "imated difference in emissions"
       },
       {
        "type": "text",
-       "delta": "ensity, not a measured or"
+       "delta": " based on the grid's average car"
       },
       {
        "type": "text",
-       "delta": " guaranteed change. The"
+       "delta": "bon intensity, not a"
+      },
+      {
+       "type": "text",
+       "delta": " measured or guaranteed"
+      },
+      {
+       "type": "text",
+       "delta": " change. The"
       },
       {
        "type": "text",
@@ -498,20 +470,20 @@
       },
       {
        "type": "text",
-       "delta": ", and the range"
+       "delta": ", and the low-to-high"
       },
       {
        "type": "text",
-       "delta": " uses the forecast's "
+       "delta": " range uses the forecast's"
       },
       {
        "type": "text",
-       "delta": "10-90% bands."
+       "delta": " 10-90% bands."
       },
       {
        "type": "usage",
-       "inputTokens": 3031,
-       "outputTokens": 335,
+       "inputTokens": 3014,
+       "outputTokens": 338,
        "cachedInputTokens": 0
       },
       {
@@ -522,6 +494,25 @@
     }
    ],
    "gate_calls": [
+    {
+     "fingerprint": "14808890f193a124c9370ea94ea031212d97cbaf9f6da5c4d6ad278188233e8d",
+     "result": {
+      "choice": "plan_batch",
+      "confidence": 0.81,
+      "probabilities": {
+       "plan_job": 0.17,
+       "plan_batch": 0.83,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0
+      },
+      "costUsd": 0.00003192
+     }
+    },
     {
      "fingerprint": "1e94478c4cce5cbf991c5ba9538e8ccb219f71a638fba8296eb3fe13f1d0f347",
      "result": {
@@ -537,22 +528,15 @@
      }
     },
     {
-     "fingerprint": "14808890f193a124c9370ea94ea031212d97cbaf9f6da5c4d6ad278188233e8d",
+     "fingerprint": "664037865e03feda31e791f688265a5da52fd27b96ad27f0b352fafe89152f5a",
      "result": {
-      "choice": "plan_batch",
-      "confidence": 0.82,
+      "choice": "expected",
+      "confidence": 0.98,
       "probabilities": {
-       "plan_job": 0.15,
-       "plan_batch": 0.84,
-       "recurring": 0.01,
-       "explain_forecast": 0,
-       "model_accuracy": 0,
-       "impact_history": 0,
-       "profile_update": 0,
-       "smalltalk": 0,
-       "off_topic": 0
+       "expected": 0.99,
+       "cautious": 0.01
       },
-      "costUsd": 0.00003192
+      "costUsd": 0.00002625
      }
     },
     {
@@ -571,19 +555,7 @@
      }
     },
     {
-     "fingerprint": "664037865e03feda31e791f688265a5da52fd27b96ad27f0b352fafe89152f5a",
-     "result": {
-      "choice": "expected",
-      "confidence": 1,
-      "probabilities": {
-       "expected": 1,
-       "cautious": 0
-      },
-      "costUsd": 0.00002625
-     }
-    },
-    {
-     "fingerprint": "6a2c486741c17ee69ffac069fcd28e16d561c0e0b9519fa19da5d25f94b5515d",
+     "fingerprint": "4b1b2d9f49af8c451013e8f495521d5bf576bf4d1ce3ed9292d0083c8170d4e0",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -592,7 +564,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000056406
+      "costUsd": 0.000056322
      }
     }
    ]

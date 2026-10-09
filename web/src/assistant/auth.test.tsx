@@ -5,6 +5,7 @@ import { Privacy } from '../pages/Privacy'
 import { Settings } from '../pages/Settings'
 import { ANON_TOKEN_KEY, HELD_KEY, resetAuthClient } from './auth'
 import { ChatPanel } from './ChatPanel'
+import { AccountControls } from './HeaderAccount'
 import { CONV_ID, sseResponse, turnEvents } from './testing'
 import { useChat } from './useChat'
 
@@ -151,14 +152,48 @@ describe('restore and account line', () => {
     expect(await screen.findByText(/Guest — 7 free messages left/)).toBeInTheDocument()
   })
 
-  it('shows email, Settings and Sign out for a signed-in user', async () => {
+  it('header: shows email, Settings and Sign out for a signed-in user', async () => {
     fake.state.session = USER
-    route({ '/api/conversations/latest': () => json({ conversation: null, messages_left: null, is_anonymous: false }) })
-    render(<ChatPanel />)
+    render(
+      <MemoryRouter>
+        <AccountControls />
+      </MemoryRouter>,
+    )
     expect(await screen.findByText('ada@example.com')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Settings' })).toHaveAttribute('href', '/settings')
     await userEvent.click(screen.getByRole('button', { name: 'Sign out' }))
     expect(fake.auth.signOut).toHaveBeenCalled()
+  })
+
+  it('header: a visitor with no session gets Sign in, which opens Google', async () => {
+    fake.state.session = null
+    render(
+      <MemoryRouter>
+        <AccountControls />
+      </MemoryRouter>,
+    )
+    await userEvent.click(await screen.findByRole('button', { name: 'Sign in' }))
+    expect(fake.auth.signInWithOAuth).toHaveBeenCalled()
+    expect(fake.auth.linkIdentity).not.toHaveBeenCalled()
+  })
+
+  it('header: a guest signing in links Google to the guest session (history kept)', async () => {
+    fake.state.session = ANON
+    render(
+      <MemoryRouter>
+        <AccountControls />
+      </MemoryRouter>,
+    )
+    await userEvent.click(await screen.findByRole('button', { name: 'Sign in' }))
+    expect(fake.auth.linkIdentity).toHaveBeenCalled()
+  })
+
+  it('chat panel does not repeat the signed-in account line', async () => {
+    fake.state.session = USER
+    route({ '/api/conversations/latest': () => json({ conversation: null, messages_left: null, is_anonymous: false }) })
+    render(<ChatPanel />)
+    await screen.findByLabelText('Message to the assistant')
+    expect(screen.queryByText('ada@example.com')).toBeNull()
   })
 })
 

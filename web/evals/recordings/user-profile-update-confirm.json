@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "bac180d0587283ec0fa4716a00d7b6eed1cd5c2637a5bea81aa96ab10236c129",
+     "fingerprint": "ef641eacbf7145d97ba7f0b93cc5cb5eec03707b748d6892918e9414d256ec29",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01D4okxjcTabdwxzQAisPbrf",
+        "id": "toolu_01DtaTtQy7kpsBovG2n7kbWE",
         "name": "update_profile",
         "argsJson": "{\"confirm\": true, \"risk_default\": \"cautious\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3084,
-       "outputTokens": 253,
+       "inputTokens": 3110,
+       "outputTokens": 267,
        "cachedInputTokens": 0
       },
       {
@@ -29,41 +29,45 @@
      ]
     },
     {
-     "fingerprint": "3897e4685d22a8fca7146cfc584fc8c0673eb7f79f23b9cdaa88d50d74eef1ef",
+     "fingerprint": "6328a7ab1de16f4a49da098363498617fe2918ca7d38e338e24da30a427e864e",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Your default risk mode is"
+       "delta": "Your default ris"
       },
       {
        "type": "text",
-       "delta": " now **cautious**. I"
+       "delta": "k mode is now **caut"
       },
       {
        "type": "text",
-       "delta": "'ll use it when plan"
+       "delta": "ious**. Future"
       },
       {
        "type": "text",
-       "delta": "ning your"
+       "delta": " plans will use this"
       },
       {
        "type": "text",
-       "delta": " fl"
+       "delta": " setting un"
       },
       {
        "type": "text",
-       "delta": "exible jobs unless you"
+       "delta": "less you cho"
       },
       {
        "type": "text",
-       "delta": " change it."
+       "delta": "ose ot"
+      },
+      {
+       "type": "text",
+       "delta": "herwise."
       },
       {
        "type": "usage",
-       "inputTokens": 3228,
-       "outputTokens": 38,
+       "inputTokens": 3254,
+       "outputTokens": 77,
        "cachedInputTokens": 0
       },
       {
@@ -78,11 +82,11 @@
      "fingerprint": "366c9d3dfcc1a1022193de604c7fd7a08c9c467b12068324ddaca5d60fac3cb5",
      "result": {
       "choice": "allow",
-      "confidence": 0.95,
+      "confidence": 0.96,
       "probabilities": {
-       "allow": 0.96,
+       "allow": 0.97,
        "off_topic": 0,
-       "injection": 0.04,
+       "injection": 0.03,
        "abuse": 0
       },
       "costUsd": 0.00002709
@@ -108,7 +112,7 @@
      }
     },
     {
-     "fingerprint": "b307051e38a978d8b37eaaa922f15a93bbe5b094d46e47d044038da2a59c5aec",
+     "fingerprint": "868b0df3ce8906f6a8e1e93000b5595c6819265d466ed1b63b0ced8d3cc08bf1",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -117,7 +121,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000020874
+      "costUsd": 0.000020748
      }
     }
    ]

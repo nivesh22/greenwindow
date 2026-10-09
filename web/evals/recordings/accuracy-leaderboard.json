@@ -5,13 +5,13 @@
   {
    "model_calls": [
     {
-     "fingerprint": "23af1c8c2af41ae6bff0504c43b41ccf3a7efa99e8b861955292a3c1a6c1ad2c",
+     "fingerprint": "f58d06e35c0f0bb918af1d72e43c6318e84c064bc45aa66fbc656f4b794d7081",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01VkJMwy55ySJqzHhFKBNr7x",
+        "id": "toolu_01J8eLa7h584yAhyk8zHvSLt",
         "name": "compare_models",
         "argsJson": "{\"horizon_bucket\": \"1-6\"}"
        }
@@ -19,7 +19,7 @@
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01VHoxJAhfgpMEUTaYrvYDRA",
+        "id": "toolu_01Cw7whgeAbUiLSZMqD52tDz",
         "name": "compare_models",
         "argsJson": "{\"horizon_bucket\": \"7-24\"}"
        }
@@ -27,15 +27,15 @@
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01AHJEasCyzZzrGpo5rEb3q2",
+        "id": "toolu_01PH6PmgafWMAJHxqUSreKNz",
         "name": "compare_models",
         "argsJson": "{\"horizon_bucket\": \"25-48\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3582,
-       "outputTokens": 320,
+       "inputTokens": 3608,
+       "outputTokens": 296,
        "cachedInputTokens": 0
       },
       {
@@ -45,84 +45,84 @@
      ]
     },
     {
-     "fingerprint": "fefaaa9d50a3801889076ffcafecf375f98f5eaa53950b7dce9b2ed912e3214f",
-     "model": "anthropic/claude-haiku-5.5",
-     "events": [
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_01MJf4mjoCLJdfeVxVP3AAUL",
-        "name": "get_backtest",
-        "argsJson": ""
-       }
-      },
-      {
-       "type": "usage",
-       "inputTokens": 4302,
-       "outputTokens": 127,
-       "cachedInputTokens": 0
-      },
-      {
-       "type": "finish",
-       "reason": "tool_calls"
-      }
-     ]
-    },
-    {
-     "fingerprint": "3550c424dafed42eddec914cd77a7d04a2f20cb47b8c627919a287e48d8f581f",
+     "fingerprint": "5ebb8415649801c3d79fd0e9f1328bea7751f1a0ca2e03b85c4dcc529b08b78e",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Live acc"
+       "delta": "There"
       },
       {
        "type": "text",
-       "delta": "uracy isn't available"
+       "delta": "'s no live "
       },
       {
        "type": "text",
-       "delta": " yet: the le"
+       "delta": "ranking yet."
       },
       {
        "type": "text",
-       "delta": "aderboard has"
+       "delta": " None"
       },
       {
        "type": "text",
-       "delta": " **"
+       "delta": " of the for"
       },
       {
        "type": "text",
-       "delta": "no"
+       "delta": "ecasting models has scored for"
       },
       {
        "type": "text",
-       "delta": " scored forecasts**"
+       "delta": "ecasts in"
       },
       {
        "type": "text",
-       "delta": " in any horizon bucket"
+       "delta": " any hor"
       },
       {
        "type": "text",
-       "delta": ", so I can't name"
+       "delta": "izon bucket (1-"
       },
       {
        "type": "text",
-       "delta": " a live"
+       "delta": "6,"
       },
       {
        "type": "text",
-       "delta": " win"
+       "delta": " 7-24 or 25"
       },
       {
        "type": "text",
-       "delta": "ner.\n\nThe back"
+       "delta": "-48 hours), so I"
       },
       {
        "type": "text",
-       "delta": "test (90"
+       "delta": " can't name"
+      },
+      {
+       "type": "text",
+       "delta": " a most"
+      },
+      {
+       "type": "text",
+       "delta": " accurate model right"
+      },
+      {
+       "type": "text",
+       "delta": " now.\n\nI"
+      },
+      {
+       "type": "text",
+       "delta": " can p"
+      },
+      {
+       "type": "text",
+       "delta": "ull the backtest results,"
+      },
+      {
+       "type": "text",
+       "delta": " which replay past"
       },
       {
        "type": "text",
@@ -130,184 +130,36 @@
       },
       {
        "type": "text",
-       "delta": "ecast origins, 7"
+       "delta": "ecas"
       },
       {
        "type": "text",
-       "delta": " "
+       "delta": "ts."
       },
       {
        "type": "text",
-       "delta": "Jul to 4"
+       "delta": " They"
       },
       {
        "type": "text",
-       "delta": " Oct 2026)"
+       "delta": " are optimistic about"
       },
       {
        "type": "text",
-       "delta": " is the best ev"
+       "delta": " weather, so they're not a"
       },
       {
        "type": "text",
-       "delta": "idence."
+       "delta": " direct meas"
       },
       {
        "type": "text",
-       "delta": " It"
-      },
-      {
-       "type": "text",
-       "delta": " is"
-      },
-      {
-       "type": "text",
-       "delta": " optimistic because"
-      },
-      {
-       "type": "text",
-       "delta": " it uses archived weather,"
-      },
-      {
-       "type": "text",
-       "delta": " so"
-      },
-      {
-       "type": "text",
-       "delta": " tre"
-      },
-      {
-       "type": "text",
-       "delta": "at it as a gu"
-      },
-      {
-       "type": "text",
-       "delta": "ide only"
-      },
-      {
-       "type": "text",
-       "delta": ".\n\n- **Chronos"
-      },
-      {
-       "type": "text",
-       "delta": "-2 + weather**"
-      },
-      {
-       "type": "text",
-       "delta": " had the lowest MAE"
-      },
-      {
-       "type": "text",
-       "delta": " of the"
-      },
-      {
-       "type": "text",
-       "delta": " models:"
-      },
-      {
-       "type": "text",
-       "delta": " "
-      },
-      {
-       "type": "text",
-       "delta": "18.1 gCO2"
-      },
-      {
-       "type": "text",
-       "delta": "/kWh overall, and"
-      },
-      {
-       "type": "text",
-       "delta": " 10.0 for"
-      },
-      {
-       "type": "text",
-       "delta": " 1-6 hours "
-      },
-      {
-       "type": "text",
-       "delta": "ahead.\n- **N"
-      },
-      {
-       "type": "text",
-       "delta": "ESO's"
-      },
-      {
-       "type": "text",
-       "delta": " published forecast** sc"
-      },
-      {
-       "type": "text",
-       "delta": "ored lower still"
-      },
-      {
-       "type": "text",
-       "delta": " (MAE 11.8"
-      },
-      {
-       "type": "text",
-       "delta": " "
-      },
-      {
-       "type": "text",
-       "delta": "overall), but the"
-      },
-      {
-       "type": "text",
-       "delta": " back"
-      },
-      {
-       "type": "text",
-       "delta": "test not"
-      },
-      {
-       "type": "text",
-       "delta": "es it isn't a fair"
-      },
-      {
-       "type": "text",
-       "delta": " head-to-head because"
-      },
-      {
-       "type": "text",
-       "delta": " its"
-      },
-      {
-       "type": "text",
-       "delta": " lead time is unknown."
-      },
-      {
-       "type": "text",
-       "delta": "\n- **Seasonal"
-      },
-      {
-       "type": "text",
-       "delta": " naive (yesterday)"
-      },
-      {
-       "type": "text",
-       "delta": "**"
-      },
-      {
-       "type": "text",
-       "delta": ", the benchmark, sc"
-      },
-      {
-       "type": "text",
-       "delta": "ored 41.6 overall"
-      },
-      {
-       "type": "text",
-       "delta": ". Every model beat it in"
-      },
-      {
-       "type": "text",
-       "delta": " the backtest."
+       "delta": "ure of current accuracy."
       },
       {
        "type": "usage",
-       "inputTokens": 7402,
-       "outputTokens": 548,
+       "inputTokens": 4328,
+       "outputTokens": 212,
        "cachedInputTokens": 0
       },
       {
@@ -318,6 +170,20 @@
     }
    ],
    "gate_calls": [
+    {
+     "fingerprint": "a78a2f3459d1930171961031590a4e3d35d23f7fb98f8a7df240d1be8fb8b388",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027174
+     }
+    },
     {
      "fingerprint": "5321bac4070e82eae808eaeec5d0efd30aa4a8c5f5594ea51eabe50a0e9cc2f1",
      "result": {
@@ -338,21 +204,7 @@
      }
     },
     {
-     "fingerprint": "a78a2f3459d1930171961031590a4e3d35d23f7fb98f8a7df240d1be8fb8b388",
-     "result": {
-      "choice": "allow",
-      "confidence": 1,
-      "probabilities": {
-       "allow": 1,
-       "off_topic": 0,
-       "injection": 0,
-       "abuse": 0
-      },
-      "costUsd": 0.000027174
-     }
-    },
-    {
-     "fingerprint": "2a301259a6030f2a9e266e90e416b9f046eaf9b88b3edcc373e1d9b00aed064b",
+     "fingerprint": "1a82e03403ad8f533b69bc37d996c25dbdf0e62a77afa37cfd0e4cee6d2847ef",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -361,7 +213,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000130074
+      "costUsd": 0.000035742
      }
     }
    ]

@@ -1,22 +1,14 @@
-import { signOut } from './auth'
 import type { AuthState } from './useAuth'
 
-/** Small account line for the chat header: guest (with messages left) or signed in (email, Sign out, Settings). */
+/**
+ * Account line in the chat header: a guest's free messages left. Signing in, the email, Settings and Sign out live in
+ * the site header (HeaderAccount), on every page.
+ */
 export function AccountMenu({ auth, messagesLeft }: { auth: AuthState; messagesLeft: number | null }) {
-  if (!auth.enabled || !auth.ready || !auth.info) return null
-  const link = 'underline hover:text-stone-900 dark:hover:text-stone-100'
-  if (auth.info.isAnonymous) {
-    return (
-      <p className="text-xs text-stone-600 dark:text-stone-300" aria-label="Account">
-        Guest{messagesLeft !== null ? ` — ${messagesLeft} free messages left` : ''}
-      </p>
-    )
-  }
+  if (!auth.enabled || !auth.ready || !auth.info || !auth.info.isAnonymous) return null
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone-600 dark:text-stone-300" aria-label="Account">
-      <span className="break-all">{auth.info.email ?? 'Signed in'}</span>
-      <a className={link} href="/settings">Settings</a>
-      <button type="button" className={link} onClick={() => void signOut()}>Sign out</button>
-    </div>
+    <p className="text-xs text-stone-600 dark:text-stone-300" aria-label="Account">
+      Guest{messagesLeft !== null ? ` — ${messagesLeft} free messages left` : ''}. Sign in (top right) to keep your plans.
+    </p>
   )
 }

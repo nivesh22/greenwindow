@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "4451895189728f2e35446e4d3fe1803ac572662a0b3ab5f94a1fe974e301b9a3",
+     "fingerprint": "b21c8d61f4163bf29c5cf93c4fd68ba939e57e581324d449a5d1353f02c9a19a",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_018wz7N2HTcRoJFwsozRRrfk",
+        "id": "toolu_01Dsnt4FXBfwQ4uEeDKdZ4xd",
         "name": "compare_models",
         "argsJson": "{\"horizon_bucket\": \"25-48\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3585,
-       "outputTokens": 130,
+       "inputTokens": 3611,
+       "outputTokens": 197,
        "cachedInputTokens": 0
       },
       {
@@ -29,21 +29,21 @@
      ]
     },
     {
-     "fingerprint": "499a4f2ce5c1c2f9d56d0bc3afc1b2a006c871080986d49c7caaab413418cf12",
+     "fingerprint": "786fee4b69d5ad3253fe250e2aa7568895b4d92f7242835f505ad10601ab7541",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_013ZhikSpYAgPdcAnVkwW5yt",
+        "id": "toolu_01MwQc6cuxT11nkQTxzCgPve",
         "name": "get_backtest",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3804,
-       "outputTokens": 136,
+       "inputTokens": 3830,
+       "outputTokens": 147,
        "cachedInputTokens": 0
       },
       {
@@ -53,100 +53,16 @@
      ]
     },
     {
-     "fingerprint": "a924d153ee95cfa252baf3ca9612063615dbb782e504cad3811401a376abdc77",
+     "fingerprint": "a44fb190fca6aeef0249a62285b25f3a137be508dbbe19765cba5979905fe1b3",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "There"
+       "delta": "At"
       },
       {
        "type": "text",
-       "delta": "'s no live accuracy data"
-      },
-      {
-       "type": "text",
-       "delta": " yet for "
-      },
-      {
-       "type": "text",
-       "delta": "25"
-      },
-      {
-       "type": "text",
-       "delta": "–48 hours ahead"
-      },
-      {
-       "type": "text",
-       "delta": " ("
-      },
-      {
-       "type": "text",
-       "delta": "0 scored for"
-      },
-      {
-       "type": "text",
-       "delta": "ecasts), so I"
-      },
-      {
-       "type": "text",
-       "delta": " can only"
-      },
-      {
-       "type": "text",
-       "delta": " point"
-      },
-      {
-       "type": "text",
-       "delta": " to the backtest."
-      },
-      {
-       "type": "text",
-       "delta": " That repl"
-      },
-      {
-       "type": "text",
-       "delta": "ay"
-      },
-      {
-       "type": "text",
-       "delta": "ed "
-      },
-      {
-       "type": "text",
-       "delta": "90 past forecast origins"
-      },
-      {
-       "type": "text",
-       "delta": " (July to"
-      },
-      {
-       "type": "text",
-       "delta": " early"
-      },
-      {
-       "type": "text",
-       "delta": " October)"
-      },
-      {
-       "type": "text",
-       "delta": " with arch"
-      },
-      {
-       "type": "text",
-       "delta": "ived weather, which is more"
-      },
-      {
-       "type": "text",
-       "delta": " favourable than a true live"
-      },
-      {
-       "type": "text",
-       "delta": " forecast.\n\nIn"
-      },
-      {
-       "type": "text",
-       "delta": " that backtest, for"
+       "delta": " 25"
       },
       {
        "type": "text",
@@ -154,27 +70,211 @@
       },
       {
        "type": "text",
-       "delta": "25–48 hours ah"
+       "delta": "to 48 hours ah"
       },
       {
        "type": "text",
-       "delta": "ead:\n- **NESO"
+       "delta": "ead, I can"
       },
       {
        "type": "text",
-       "delta": "'s published forecast:** M"
+       "delta": "'t give"
       },
       {
        "type": "text",
-       "delta": "AE 11.8 g"
+       "delta": " you a"
       },
       {
        "type": "text",
-       "delta": "CO2/kWh ("
+       "delta": " live accuracy figure y"
       },
       {
        "type": "text",
-       "delta": "MASE 0.339,"
+       "delta": "et,"
+      },
+      {
+       "type": "text",
+       "delta": " because no for"
+      },
+      {
+       "type": "text",
+       "delta": "ecasts in"
+      },
+      {
+       "type": "text",
+       "delta": " that range"
+      },
+      {
+       "type": "text",
+       "delta": " have been scored against"
+      },
+      {
+       "type": "text",
+       "delta": " observed int"
+      },
+      {
+       "type": "text",
+       "delta": "ensity so"
+      },
+      {
+       "type": "text",
+       "delta": " far."
+      },
+      {
+       "type": "text",
+       "delta": "\n\nThe"
+      },
+      {
+       "type": "text",
+       "delta": " backtest (90 past"
+      },
+      {
+       "type": "text",
+       "delta": " forecast origins, July"
+      },
+      {
+       "type": "text",
+       "delta": " to early"
+      },
+      {
+       "type": "text",
+       "delta": " October)"
+      },
+      {
+       "type": "text",
+       "delta": " is"
+      },
+      {
+       "type": "text",
+       "delta": " the best available gu"
+      },
+      {
+       "type": "text",
+       "delta": "ide,"
+      },
+      {
+       "type": "text",
+       "delta": " but it u"
+      },
+      {
+       "type": "text",
+       "delta": "ses archived weather that"
+      },
+      {
+       "type": "text",
+       "delta": " is more"
+      },
+      {
+       "type": "text",
+       "delta": " accurate than a real"
+      },
+      {
+       "type": "text",
+       "delta": " for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast, so live"
+      },
+      {
+       "type": "text",
+       "delta": " results will lik"
+      },
+      {
+       "type": "text",
+       "delta": "ely be worse:\n\n- **"
+      },
+      {
+       "type": "text",
+       "delta": "Chronos-2 +"
+      },
+      {
+       "type": "text",
+       "delta": " weather:** MAE "
+      },
+      {
+       "type": "text",
+       "delta": "21.8 gCO2"
+      },
+      {
+       "type": "text",
+       "delta": "/kWh, MASE"
+      },
+      {
+       "type": "text",
+       "delta": " 0.625,"
+      },
+      {
+       "type": "text",
+       "delta": " which beats the ben"
+      },
+      {
+       "type": "text",
+       "delta": "chmarks.\n- **"
+      },
+      {
+       "type": "text",
+       "delta": "Seasonal naive,"
+      },
+      {
+       "type": "text",
+       "delta": " \"yesterday\""
+      },
+      {
+       "type": "text",
+       "delta": " (snaive_24):**"
+      },
+      {
+       "type": "text",
+       "delta": " MAE 44.7 "
+      },
+      {
+       "type": "text",
+       "delta": "gCO2/kWh"
+      },
+      {
+       "type": "text",
+       "delta": ".\n- **Season"
+      },
+      {
+       "type": "text",
+       "delta": "al naive, \"last week\""
+      },
+      {
+       "type": "text",
+       "delta": " (snaive_168):**"
+      },
+      {
+       "type": "text",
+       "delta": " MAE 45.7 "
+      },
+      {
+       "type": "text",
+       "delta": "gCO2/kWh"
+      },
+      {
+       "type": "text",
+       "delta": "."
+      },
+      {
+       "type": "text",
+       "delta": "\n- **NESO published for"
+      },
+      {
+       "type": "text",
+       "delta": "ecast:** MAE "
+      },
+      {
+       "type": "text",
+       "delta": "11.8 gCO2"
+      },
+      {
+       "type": "text",
+       "delta": "/kWh,"
+      },
+      {
+       "type": "text",
+       "delta": " but its"
       },
       {
        "type": "text",
@@ -182,136 +282,24 @@
       },
       {
        "type": "text",
-       "delta": "ower is"
+       "delta": "ead time is unknown,"
       },
       {
        "type": "text",
-       "delta": " better).\n- **Chron"
+       "delta": " so it is"
       },
       {
        "type": "text",
-       "delta": "os-2 + weather:"
+       "delta": "n't a fair com"
       },
       {
        "type": "text",
-       "delta": "** MAE 21.8"
-      },
-      {
-       "type": "text",
-       "delta": " gCO2/kW"
-      },
-      {
-       "type": "text",
-       "delta": "h ("
-      },
-      {
-       "type": "text",
-       "delta": "MASE 0.625),"
-      },
-      {
-       "type": "text",
-       "delta": " with 81"
-      },
-      {
-       "type": "text",
-       "delta": "% coverage of its"
-      },
-      {
-       "type": "text",
-       "delta": " 80% interval.\n-"
-      },
-      {
-       "type": "text",
-       "delta": " **Seasonal naive"
-      },
-      {
-       "type": "text",
-       "delta": " ben"
-      },
-      {
-       "type": "text",
-       "delta": "chmarks:** \""
-      },
-      {
-       "type": "text",
-       "delta": "yesterday\" MAE"
-      },
-      {
-       "type": "text",
-       "delta": " 44.7 ("
-      },
-      {
-       "type": "text",
-       "delta": "MASE 1"
-      },
-      {
-       "type": "text",
-       "delta": ".272)"
-      },
-      {
-       "type": "text",
-       "delta": " and \"last week\" MAE"
-      },
-      {
-       "type": "text",
-       "delta": " 45.7 (MAS"
-      },
-      {
-       "type": "text",
-       "delta": "E 1.300)."
-      },
-      {
-       "type": "text",
-       "delta": "\n\nEvery"
-      },
-      {
-       "type": "text",
-       "delta": " model beat"
-      },
-      {
-       "type": "text",
-       "delta": " both"
-      },
-      {
-       "type": "text",
-       "delta": " benchmarks in this"
-      },
-      {
-       "type": "text",
-       "delta": " window. Live"
-      },
-      {
-       "type": "text",
-       "delta": " results"
-      },
-      {
-       "type": "text",
-       "delta": " will show"
-      },
-      {
-       "type": "text",
-       "delta": " whether that"
-      },
-      {
-       "type": "text",
-       "delta": " holds once"
-      },
-      {
-       "type": "text",
-       "delta": " forecasts are"
-      },
-      {
-       "type": "text",
-       "delta": " scored against real out"
-      },
-      {
-       "type": "text",
-       "delta": "comes."
+       "delta": "parison."
       },
       {
        "type": "usage",
-       "inputTokens": 6904,
-       "outputTokens": 509,
+       "inputTokens": 6930,
+       "outputTokens": 500,
        "cachedInputTokens": 0
       },
       {
@@ -322,6 +310,20 @@
     }
    ],
    "gate_calls": [
+    {
+     "fingerprint": "4c535518d8f1f52d85aef4addf0222a9c3af1ec9afb8d87338e0e2c98f9c655a",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027258
+     }
+    },
     {
      "fingerprint": "51c9029a73695e853a532c779dd5416a3eb566aeaea18d7b9c435cae6bf69b27",
      "result": {
@@ -342,30 +344,16 @@
      }
     },
     {
-     "fingerprint": "4c535518d8f1f52d85aef4addf0222a9c3af1ec9afb8d87338e0e2c98f9c655a",
-     "result": {
-      "choice": "allow",
-      "confidence": 1,
-      "probabilities": {
-       "allow": 1,
-       "off_topic": 0,
-       "injection": 0,
-       "abuse": 0
-      },
-      "costUsd": 0.000027258
-     }
-    },
-    {
-     "fingerprint": "c0f2fb744f9d7a1d2b6f2c2c15f077a7d465ba6879c6546e64bd382cfd593152",
+     "fingerprint": "a95dc3fccf7ce5d526da5656322f23b79923c1a5e9a23b3088d94e241a7cb52a",
      "result": {
       "choice": "pass",
-      "confidence": 1,
+      "confidence": 0.98,
       "probabilities": {
-       "pass": 1,
-       "overclaim_co2": 0,
+       "pass": 0.99,
+       "overclaim_co2": 0.01,
        "unsafe": 0
       },
-      "costUsd": 0.00013524
+      "costUsd": 0.000134736
      }
     }
    ]

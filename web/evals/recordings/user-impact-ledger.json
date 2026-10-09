@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "6b2c128d4293730c92433d8f051a33a4b0ec39abbf6c12269c5c1da68c719b23",
+     "fingerprint": "42b58a5933db7d3713ebc246e17f7c86f5781c382af6d1ab7233a0d37a6ac640",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01EDkZ6mse4EDcfLRFo4dgjx",
+        "id": "toolu_01UszGMg5VTNQhZ2DiNV4RBr",
         "name": "get_impact",
         "argsJson": "{\"limit\": 50}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 2784,
-       "outputTokens": 111,
+       "inputTokens": 2810,
+       "outputTokens": 168,
        "cachedInputTokens": 0
       },
       {
@@ -29,120 +29,116 @@
      ]
     },
     {
-     "fingerprint": "5407cf8fa04730d365fc4c9c6d6e75551783ee7eca7eb81d058fb07aa3fc315d",
+     "fingerprint": "949ac29354855a029b44ad4bdb57a59de00336df74acb189dc1da28caa360564",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Your"
+       "delta": "Your history"
       },
       {
        "type": "text",
-       "delta": " history sh"
+       "delta": " shows an"
       },
       {
        "type": "text",
-       "delta": "ows two recommendations,"
+       "delta": " **"
       },
       {
        "type": "text",
-       "delta": " both in early"
+       "delta": "estimated difference of"
       },
       {
        "type": "text",
-       "delta": " October, with"
+       "delta": " 630 g CO2**"
       },
       {
        "type": "text",
-       "delta": " an **"
+       "delta": " from"
       },
       {
        "type": "text",
-       "delta": "estimated difference**"
+       "delta": " two fin"
       },
       {
        "type": "text",
-       "delta": " of about 720 g"
+       "delta": "ished jobs (Sun"
       },
       {
        "type": "text",
-       "delta": " C"
+       "delta": " 4 Oct and"
       },
       {
        "type": "text",
-       "delta": "O2"
+       "delta": " Mon 5 Oct"
       },
       {
        "type": "text",
-       "delta": " "
+       "delta": "), based on actual average grid"
       },
       {
        "type": "text",
-       "delta": "(range 420 "
+       "delta": " intensity."
       },
       {
        "type": "text",
-       "delta": "to 1,"
+       "delta": " The planned estimate for"
       },
       {
        "type": "text",
-       "delta": "000 g) based"
+       "delta": " these"
       },
       {
        "type": "text",
-       "delta": " on average"
+       "delta": " windows was 720 g ("
       },
       {
        "type": "text",
-       "delta": " grid intensity. Once"
+       "delta": "range 420 to 1,"
       },
       {
        "type": "text",
-       "delta": " the"
+       "delta": "000 g).\n\nThis is an"
       },
       {
        "type": "text",
-       "delta": " windows finished, the realised"
+       "delta": " estimated difference based"
       },
       {
        "type": "text",
-       "delta": " difference from actual intensity"
+       "delta": " on the grid's average carb"
       },
       {
        "type": "text",
-       "delta": " was about 630 g C"
+       "delta": "on intensity, not a meas"
       },
       {
        "type": "text",
-       "delta": "O2.\n\nThis is"
+       "delta": "ured or guaranteed change"
       },
       {
        "type": "text",
-       "delta": " an estimated difference, not"
+       "delta": "."
       },
       {
        "type": "text",
-       "delta": " a measured or guarante"
+       "delta": " Shifting a job do"
       },
       {
        "type": "text",
-       "delta": "ed change. Shifting a"
+       "delta": "esn't necessarily change"
       },
       {
        "type": "text",
-       "delta": " job doesn't nec"
+       "delta": " mar"
       },
       {
        "type": "text",
-       "delta": "essarily change the grid's"
+       "delta": "ginal emissions by the same"
       },
       {
        "type": "text",
-       "delta": " marginal emissions by the"
-      },
-      {
-       "type": "text",
-       "delta": " same amount, and for"
+       "delta": " amount, and for"
       },
       {
        "type": "text",
@@ -153,29 +149,9 @@
        "delta": "."
       },
       {
-       "type": "text",
-       "delta": " The real"
-      },
-      {
-       "type": "text",
-       "delta": "ised figure"
-      },
-      {
-       "type": "text",
-       "delta": " assumes you"
-      },
-      {
-       "type": "text",
-       "delta": " ran each"
-      },
-      {
-       "type": "text",
-       "delta": " job in the suggested window."
-      },
-      {
        "type": "usage",
-       "inputTokens": 3235,
-       "outputTokens": 357,
+       "inputTokens": 3261,
+       "outputTokens": 385,
        "cachedInputTokens": 0
       },
       {
@@ -186,20 +162,6 @@
     }
    ],
    "gate_calls": [
-    {
-     "fingerprint": "719f5c3a3ae097102152c6391bbf94b74bda18e96b8bdcd49e9913154a17a2a7",
-     "result": {
-      "choice": "allow",
-      "confidence": 1,
-      "probabilities": {
-       "allow": 1,
-       "off_topic": 0,
-       "injection": 0,
-       "abuse": 0
-      },
-      "costUsd": 0.000027258
-     }
-    },
     {
      "fingerprint": "adaef900eb514023285faefd38ab1a9afb7ea67df173bbafd4f107a7b7613c49",
      "result": {
@@ -220,7 +182,21 @@
      }
     },
     {
-     "fingerprint": "45c950587ebc0d29bc25360c569dcd680a50a61f5bc10cbb524df732f96629e6",
+     "fingerprint": "719f5c3a3ae097102152c6391bbf94b74bda18e96b8bdcd49e9913154a17a2a7",
+     "result": {
+      "choice": "allow",
+      "confidence": 1,
+      "probabilities": {
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
+      },
+      "costUsd": 0.000027258
+     }
+    },
+    {
+     "fingerprint": "6835ad0b3f9b19d921702571cddbd10e65002d9a8727dadd40da8694133933cc",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -229,7 +205,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.00003549
+      "costUsd": 0.000035028
      }
     }
    ]

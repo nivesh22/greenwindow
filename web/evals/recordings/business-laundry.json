@@ -5,13 +5,13 @@
   {
    "model_calls": [
     {
-     "fingerprint": "b1dc3c978e7aee66508160cd2b9c4899d09db7b9af6c909844dc4d967ad5c1da",
+     "fingerprint": "98610bdf1b7a775dca062925b4a402e8e6a1b804c9f49c29d3610f242e2127d1",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01CkmxeSGJB6taCS5ozoKBZ4",
+        "id": "toolu_0114ob7dMVrjo1cP2F87Gw4z",
         "name": "lookup_device",
         "argsJson": "{\"query\": \"industrial washer\"}"
        }
@@ -19,15 +19,15 @@
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01Kmg5UvEbQrDPamN5AzpNhx",
+        "id": "toolu_01ExjfppDDqYH8srhSLhgVRt",
         "name": "lookup_device",
         "argsJson": "{\"query\": \"industrial dryer\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4821,
-       "outputTokens": 491,
+       "inputTokens": 4847,
+       "outputTokens": 334,
        "cachedInputTokens": 0
       },
       {
@@ -37,39 +37,7 @@
      ]
     },
     {
-     "fingerprint": "e2fa538f0064ab3f5118655a874da0c85b0144100f05178db996c886e7372d33",
-     "model": "anthropic/claude-haiku-5.5",
-     "events": [
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_012HqAihG1gADTGdgE1uSwR6",
-        "name": "lookup_device",
-        "argsJson": "{\"query\": \"washing machine\"}"
-       }
-      },
-      {
-       "type": "tool_call",
-       "call": {
-        "id": "toolu_01SRL2Esop84JJU9xU4xKrth",
-        "name": "lookup_device",
-        "argsJson": "{\"query\": \"tumble dryer\"}"
-       }
-      },
-      {
-       "type": "usage",
-       "inputTokens": 5043,
-       "outputTokens": 256,
-       "cachedInputTokens": 0
-      },
-      {
-       "type": "finish",
-       "reason": "tool_calls"
-      }
-     ]
-    },
-    {
-     "fingerprint": "0a6211f178470ed58fd2b7e38c8b6efd3f9aaf37111fbd1bd96e042e0bb79411",
+     "fingerprint": "b2da41277dd4e03a9f2d089d493a909a67521234adaaad02d4affeac29070693",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
@@ -78,140 +46,96 @@
       },
       {
        "type": "text",
-       "delta": " can pl"
+       "delta": " cou"
       },
       {
        "type": "text",
-       "delta": "an these, but I need one"
+       "delta": "ldn't find typical fig"
       },
       {
        "type": "text",
-       "delta": " th"
+       "delta": "ures for indust"
       },
       {
        "type": "text",
-       "delta": "ing first"
+       "delta": "rial washers or dryers"
       },
       {
        "type": "text",
-       "delta": ": **"
+       "delta": ", so I need"
       },
       {
        "type": "text",
-       "delta": "what time must all three finish by"
+       "delta": " your"
       },
       {
        "type": "text",
-       "delta": "?** It"
+       "delta": " num"
       },
       {
        "type": "text",
-       "delta": "'s now 01:30 on"
+       "delta": "bers. For"
       },
       {
        "type": "text",
-       "delta": " Tuesday "
+       "delta": " each machine, what"
       },
       {
        "type": "text",
-       "delta": "6 October, so \"ton"
+       "delta": "'s its run length in"
       },
       {
        "type": "text",
-       "delta": "ight\" could"
+       "delta": " hours ("
       },
       {
        "type": "text",
-       "delta": " mean early"
+       "delta": "1 "
       },
       {
        "type": "text",
-       "delta": " this"
+       "delta": "to 12) and power"
       },
       {
        "type": "text",
-       "delta": " morning or late"
+       "delta": " rating in"
       },
       {
        "type": "text",
-       "delta": " tonight.\n\nI'm"
+       "delta": " kW ("
       },
       {
        "type": "text",
-       "delta": " using typ"
+       "delta": "it"
       },
       {
        "type": "text",
-       "delta": "ical dom"
+       "delta": "'s usually on the rating pl"
       },
       {
        "type": "text",
-       "delta": "estic ratings because"
+       "delta": "ate), and what"
       },
       {
        "type": "text",
-       "delta": " I"
+       "delta": " time"
       },
       {
        "type": "text",
-       "delta": " don't have industrial fig"
+       "delta": " must ever"
       },
       {
        "type": "text",
-       "delta": "ures."
+       "delta": "ything finish by t"
       },
       {
        "type": "text",
-       "delta": " Tell me your"
-      },
-      {
-       "type": "text",
-       "delta": " machines' power"
-      },
-      {
-       "type": "text",
-       "delta": " and run"
-      },
-      {
-       "type": "text",
-       "delta": " times if you have"
-      },
-      {
-       "type": "text",
-       "delta": " them:\n- Washing"
-      },
-      {
-       "type": "text",
-       "delta": " machine: 0.5 "
-      },
-      {
-       "type": "text",
-       "delta": "kW, 2 h"
-      },
-      {
-       "type": "text",
-       "delta": "ours (assumed)\n-"
-      },
-      {
-       "type": "text",
-       "delta": " Tumble dryer:"
-      },
-      {
-       "type": "text",
-       "delta": " 2.5 kW,"
-      },
-      {
-       "type": "text",
-       "delta": " 2 hours (assum"
-      },
-      {
-       "type": "text",
-       "delta": "ed)"
+       "delta": "onight?"
       },
       {
        "type": "usage",
-       "inputTokens": 5496,
-       "outputTokens": 668,
+       "inputTokens": 5069,
+       "outputTokens": 304,
        "cachedInputTokens": 0
       },
       {
@@ -271,19 +195,19 @@
      "fingerprint": "9be173d2514d068e9400649753d77a645498ec292fe469c07d755d7e198b32c3",
      "result": {
       "choice": "act",
-      "confidence": 0.85,
+      "confidence": 0.86,
       "probabilities": {
-       "act": 0.88,
+       "act": 0.89,
        "ask_duration": 0.01,
        "ask_power": 0.01,
-       "ask_deadline": 0.02,
+       "ask_deadline": 0.01,
        "ask_clarify": 0.08
       },
       "costUsd": 0.00002961
      }
     },
     {
-     "fingerprint": "a1c9df948a7e4211834e98420562034d680a3e8a82c4bd1757943d3ca89cfdc9",
+     "fingerprint": "db63f64fa704068df1cf85ac32a3e7342b453ba69f6858be2e5d7e2eacb9a04e",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -292,7 +216,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000032298
+      "costUsd": 0.000022092
      }
     }
    ]

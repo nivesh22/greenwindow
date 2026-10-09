@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "232f34b6260007892429b11b7449633ce25944120e8444dfe2dc6b0adfd1a306",
+     "fingerprint": "2a1f51a3435b878733b8627d582a460ba48a68cdca0982000ca500da5324989f",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_017WtX67VnjcWVTpq2e9pGL9",
+        "id": "toolu_01WxkoUAaHS7xazG8anUQv47",
         "name": "lookup_device",
         "argsJson": "{\"query\": \"tumble dryer\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4114,
-       "outputTokens": 160,
+       "inputTokens": 4140,
+       "outputTokens": 171,
        "cachedInputTokens": 0
       },
       {
@@ -29,21 +29,21 @@
      ]
     },
     {
-     "fingerprint": "721ec52cf348ea24d5d37f23797e4b1b80d423d9b0cda2ef34f5c29bcad5c67d",
+     "fingerprint": "a66f45abafe2ad6520334bb1f5215d8b82e43be16537da80688991ccc06de7e5",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01XU79mbWSHE3TqmK53LpXzy",
+        "id": "toolu_01LwYeDEwyTobQsrJtH5TugQ",
         "name": "recommend_window",
-        "argsJson": "{\"duration_h\": 2, \"power_kw\": 2.5, \"deadline_local\": \"2026-10-06T21:00\", \"earliest_local\": \"2026-10-06T02:00\", \"label\": \"Tumble dryer load\"}"
+        "argsJson": "{\"duration_h\": 2, \"power_kw\": 2.5, \"deadline_local\": \"2026-10-06T21:00\", \"label\": \"Tumble dryer load\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4366,
-       "outputTokens": 276,
+       "inputTokens": 4392,
+       "outputTokens": 310,
        "cachedInputTokens": 0
       },
       {
@@ -53,20 +53,20 @@
      ]
     },
     {
-     "fingerprint": "b5054226b1be57606ff989a1b1c604210cc3e608946ebb0219cda0f01a984a12",
+     "fingerprint": "aecc526de3fddd06e18d84dd26b8c25d7356894b285d5b97fb3833a3bcd4dc2c",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01EzvsKx95PteYY4nz3FMGWQ",
+        "id": "toolu_01LpwuC1Wdm4P9smz7coNRhg",
         "name": "estimate_co2",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4860,
+       "inputTokens": 4852,
        "outputTokens": 29,
        "cachedInputTokens": 0
       },
@@ -77,28 +77,24 @@
      ]
     },
     {
-     "fingerprint": "2b25e75c33cd6c17b17a8f3aa3a2376948513277e7b8e9587cea5264651f5ece",
+     "fingerprint": "6f1f4fa8e81b0557574c77cf8a9fcbb07a1b549333976bfa16ce2a91369bec36",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "The"
+       "delta": "Run"
       },
       {
        "type": "text",
-       "delta": " best window"
+       "delta": " the dryer from"
       },
       {
        "type": "text",
-       "delta": " for"
+       "delta": " **12"
       },
       {
        "type": "text",
-       "delta": " your tumble dryer load"
-      },
-      {
-       "type": "text",
-       "delta": " is **12:00 to"
+       "delta": ":00 to"
       },
       {
        "type": "text",
@@ -110,11 +106,11 @@
       },
       {
        "type": "text",
-       "delta": "Oct)**, which finish"
+       "delta": "Oct)**, finishing"
       },
       {
        "type": "text",
-       "delta": "es well"
+       "delta": " well"
       },
       {
        "type": "text",
@@ -126,7 +122,7 @@
       },
       {
        "type": "text",
-       "delta": " The"
+       "delta": " This"
       },
       {
        "type": "text",
@@ -134,35 +130,51 @@
       },
       {
        "type": "text",
-       "delta": "umed def"
+       "delta": "umes a"
       },
       {
        "type": "text",
-       "delta": "aults are 2.5 "
+       "delta": " 2.5 kW d"
       },
       {
        "type": "text",
-       "delta": "kW for"
+       "delta": "ryer running"
       },
       {
        "type": "text",
-       "delta": " 2 hours, so change"
+       "delta": " for 2 hours, which"
       },
       {
        "type": "text",
-       "delta": " them"
+       "delta": " are typical values"
       },
       {
        "type": "text",
-       "delta": " if your"
+       "delta": ","
       },
       {
        "type": "text",
-       "delta": " dryer differ"
+       "delta": " not your"
       },
       {
        "type": "text",
-       "delta": "s.\n\n-"
+       "delta": " mach"
+      },
+      {
+       "type": "text",
+       "delta": "ine's specs. Let"
+      },
+      {
+       "type": "text",
+       "delta": " me know if"
+      },
+      {
+       "type": "text",
+       "delta": " y"
+      },
+      {
+       "type": "text",
+       "delta": "ours differ.\n\n-"
       },
       {
        "type": "text",
@@ -174,63 +186,47 @@
       },
       {
        "type": "text",
-       "delta": "kWh in the rec"
+       "delta": "kWh at 12:00"
       },
       {
        "type": "text",
-       "delta": "ommended window, versus 188"
+       "delta": ", vers"
       },
       {
        "type": "text",
-       "delta": " g"
+       "delta": "us 188 if"
       },
       {
        "type": "text",
-       "delta": "CO2/kWh if"
+       "delta": " you start at 02:00."
       },
       {
        "type": "text",
-       "delta": " you "
+       "delta": "\n- Estimated difference"
       },
       {
        "type": "text",
-       "delta": "ran it now ("
+       "delta": ": about 129 g C"
       },
       {
        "type": "text",
-       "delta": "02:00 BST)."
+       "delta": "O2 l"
       },
       {
        "type": "text",
-       "delta": "\n-"
+       "delta": "ower, but"
       },
       {
        "type": "text",
-       "delta": " Estimated difference: about"
+       "delta": " the range run"
       },
       {
        "type": "text",
-       "delta": " 129 g CO2 "
+       "delta": "s from about "
       },
       {
        "type": "text",
-       "delta": "l"
-      },
-      {
-       "type": "text",
-       "delta": "ower,"
-      },
-      {
-       "type": "text",
-       "delta": " but the range run"
-      },
-      {
-       "type": "text",
-       "delta": "s from about"
-      },
-      {
-       "type": "text",
-       "delta": " 133 g l"
+       "delta": "133 g l"
       },
       {
        "type": "text",
@@ -238,76 +234,80 @@
       },
       {
        "type": "text",
-       "delta": ","
+       "delta": ", so star"
       },
       {
        "type": "text",
-       "delta": " so running"
+       "delta": "ting later"
       },
       {
        "type": "text",
-       "delta": " later"
+       "delta": " could be wor"
       },
       {
        "type": "text",
-       "delta": " could"
+       "delta": "se.\n- This recommend"
       },
       {
        "type": "text",
-       "delta": " tur"
+       "delta": "ation is **"
       },
       {
        "type": "text",
-       "delta": "n out wor"
+       "delta": "not robust**."
       },
       {
        "type": "text",
-       "delta": "se. The"
+       "delta": " The forecast u"
       },
       {
        "type": "text",
-       "delta": " recommendation is **"
+       "delta": "ncertainty is large"
       },
       {
        "type": "text",
-       "delta": "not robust**.\n- The"
+       "delta": " enough that the"
       },
       {
        "type": "text",
-       "delta": " difference is u"
+       "delta": " gain"
       },
       {
        "type": "text",
-       "delta": "ncertain, so this is a"
+       "delta": " is not"
       },
       {
        "type": "text",
-       "delta": " mod"
+       "delta": " certain,"
       },
       {
        "type": "text",
-       "delta": "est,"
+       "delta": " so the"
       },
       {
        "type": "text",
-       "delta": " not"
+       "delta": " cho"
       },
       {
        "type": "text",
-       "delta": " a gu"
+       "delta": "ice is only"
       },
       {
        "type": "text",
-       "delta": "aranteed, impro"
+       "delta": " a mod"
       },
       {
        "type": "text",
-       "delta": "vement."
+       "delta": "est l"
+      },
+      {
+       "type": "text",
+       "delta": "ean."
       },
       {
        "type": "usage",
-       "inputTokens": 5097,
-       "outputTokens": 339,
+       "inputTokens": 5089,
+       "outputTokens": 400,
        "cachedInputTokens": 0
       },
       {
@@ -318,20 +318,6 @@
     }
    ],
    "gate_calls": [
-    {
-     "fingerprint": "ce934dcbd6092c12adc5ebdc33416acb231978b60f0b29eef19c2d7820cada11",
-     "result": {
-      "choice": "allow",
-      "confidence": 1,
-      "probabilities": {
-       "allow": 1,
-       "off_topic": 0,
-       "injection": 0,
-       "abuse": 0
-      },
-      "costUsd": 0.000027384
-     }
-    },
     {
      "fingerprint": "fbfb02c81f1b68b7de77dce49a660ed32e22ce4cf4bfe2b7d00f816240ae49b9",
      "result": {
@@ -352,15 +338,17 @@
      }
     },
     {
-     "fingerprint": "f1d27576089034dfa7da38d13037d734446bb791f9fe43c023840eecbe434096",
+     "fingerprint": "ce934dcbd6092c12adc5ebdc33416acb231978b60f0b29eef19c2d7820cada11",
      "result": {
-      "choice": "expected",
+      "choice": "allow",
       "confidence": 1,
       "probabilities": {
-       "expected": 1,
-       "cautious": 0
+       "allow": 1,
+       "off_topic": 0,
+       "injection": 0,
+       "abuse": 0
       },
-      "costUsd": 0.000026418
+      "costUsd": 0.000027384
      }
     },
     {
@@ -379,16 +367,28 @@
      }
     },
     {
-     "fingerprint": "13a513f31b2efecc729cf70dc29cab146addd0935deef959c6205a0629283f0a",
+     "fingerprint": "f1d27576089034dfa7da38d13037d734446bb791f9fe43c023840eecbe434096",
+     "result": {
+      "choice": "expected",
+      "confidence": 1,
+      "probabilities": {
+       "expected": 1,
+       "cautious": 0
+      },
+      "costUsd": 0.000026418
+     }
+    },
+    {
+     "fingerprint": "c8ce3107dc959e2dad014039e7d1b75d2a4fb8dcbe2b2509277c03bda9f52128",
      "result": {
       "choice": "pass",
-      "confidence": 0.91,
+      "confidence": 0.89,
       "probabilities": {
-       "pass": 0.94,
-       "overclaim_co2": 0.06,
+       "pass": 0.93,
+       "overclaim_co2": 0.07,
        "unsafe": 0
       },
-      "costUsd": 0.000049308
+      "costUsd": 0.000049518
      }
     }
    ]

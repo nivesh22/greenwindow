@@ -5,49 +5,37 @@
   {
    "model_calls": [
     {
-     "fingerprint": "bf1a89991ec5d0ebbce52e607cda1c6fc9ef9f896df2c87dce24f99846735f3f",
+     "fingerprint": "1bb7897cbffd40104020f690e6003fe2d78df7151dd58738f532e85b173fd68a",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Got it: 4"
+       "delta": "Got it"
       },
       {
        "type": "text",
-       "delta": " hours, done"
+       "delta": ": a 4-hour job"
       },
       {
        "type": "text",
-       "delta": " by 8am. What"
+       "delta": ", done by 8am. What"
       },
       {
        "type": "text",
-       "delta": " power in"
+       "delta": " power does that"
       },
       {
        "type": "text",
-       "delta": " kW does that set"
+       "delta": " setup draw,"
       },
       {
        "type": "text",
-       "delta": "up draw, or is it a"
-      },
-      {
-       "type": "text",
-       "delta": " specific device I"
-      },
-      {
-       "type": "text",
-       "delta": " should"
-      },
-      {
-       "type": "text",
-       "delta": " look up?"
+       "delta": " in kW?"
       },
       {
        "type": "usage",
-       "inputTokens": 1670,
-       "outputTokens": 132,
+       "inputTokens": 1696,
+       "outputTokens": 231,
        "cachedInputTokens": 0
       },
       {
@@ -95,11 +83,11 @@
      "fingerprint": "d26b3b143044dff56642d43aa01f73485c1492c249c38ba89c173d9d9619b812",
      "result": {
       "choice": "ask_power",
-      "confidence": 0.96,
+      "confidence": 0.95,
       "probabilities": {
-       "act": 0.03,
+       "act": 0.04,
        "ask_duration": 0,
-       "ask_power": 0.97,
+       "ask_power": 0.96,
        "ask_deadline": 0,
        "ask_clarify": 0
       },

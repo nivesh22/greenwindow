@@ -5,20 +5,20 @@
   {
    "model_calls": [
     {
-     "fingerprint": "a95264829e9381069ae8249096dc5b8a145388fd301ef8b32d5e73171c020f03",
+     "fingerprint": "0e0c86140cdc871c88c9ae2a112ed2b341acb2069d33639834dfd9a500ef74cb",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01D2W8VnXBroacZE3FZnBydZ",
+        "id": "toolu_01H9YQBWkyS9ZTjGbC7j5hu8",
         "name": "lookup_device",
         "argsJson": "{\"query\": \"1U server\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4120,
+       "inputTokens": 4146,
        "outputTokens": 242,
        "cachedInputTokens": 0
       },
@@ -29,45 +29,29 @@
      ]
     },
     {
-     "fingerprint": "01dc20e3353ba97ef729cc983b72a3bc1ee649c308fb5bc9bf525ad7e02b64cb",
+     "fingerprint": "30102331c2524a9615718addbdc87753b81b7e93dcf2e5b10477aff73b1ca17b",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_017iSSaGmVTytUZmdsDbUbKx",
+        "id": "toolu_01UM9s567JVhUtydiQYxoUBp",
         "name": "recommend_window",
         "argsJson": "{\"duration_h\": 2, \"power_kw\": 0.5, \"deadline_local\": \"2026-10-06T06:00\", \"label\": \"Nightly ETL\"}"
        }
       },
       {
-       "type": "usage",
-       "inputTokens": 4273,
-       "outputTokens": 252,
-       "cachedInputTokens": 0
-      },
-      {
-       "type": "finish",
-       "reason": "tool_calls"
-      }
-     ]
-    },
-    {
-     "fingerprint": "acdae7f1d54d92dfc844abaecc71074db1908e503eb1044cbc7e7f841cefeac9",
-     "model": "anthropic/claude-haiku-5.5",
-     "events": [
-      {
        "type": "tool_call",
        "call": {
-        "id": "toolu_017CJAyQbyRQ4VekejmP5VjA",
+        "id": "toolu_01CzYBMYDmDrPPQTMXW7CAMC",
         "name": "estimate_co2",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4724,
-       "outputTokens": 133,
+       "inputTokens": 4299,
+       "outputTokens": 321,
        "cachedInputTokens": 0
       },
       {
@@ -77,217 +61,181 @@
      ]
     },
     {
-     "fingerprint": "201e8e2c1dd924d87826cdb400c920cd6fe5adc2d48deacc29e3aa58fd22b32f",
+     "fingerprint": "6f680b458c83f0ce3ce187eff98b6c6e7d125339aa06c3345d822477ca1eba01",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "For"
+       "delta": "Run now:"
       },
       {
        "type": "text",
-       "delta": " the nightly ETL,"
+       "delta": " the best"
       },
       {
        "type": "text",
-       "delta": " the"
+       "delta": " start is **Tue 6"
       },
       {
        "type": "text",
-       "delta": " best start is **now"
+       "delta": " Oct, 02:"
       },
       {
        "type": "text",
-       "delta": ", Tue 6 "
+       "delta": "00 BST**"
       },
       {
        "type": "text",
-       "delta": "Oct, 02:00 "
+       "delta": ", fin"
       },
       {
        "type": "text",
-       "delta": "BST**, fin"
+       "delta": "ishing at "
       },
       {
        "type": "text",
-       "delta": "ishing at"
+       "delta": "04:00 BST,"
       },
       {
        "type": "text",
-       "delta": " 04:00 BST,"
+       "delta": " well before your"
       },
       {
        "type": "text",
-       "delta": " before"
+       "delta": " 06:00 deadline"
       },
       {
        "type": "text",
-       "delta": " your"
+       "delta": "."
       },
       {
        "type": "text",
-       "delta": " 06"
+       "delta": " Waiting does"
       },
       {
        "type": "text",
-       "delta": ":00 deadline."
+       "delta": " not l"
       },
       {
        "type": "text",
-       "delta": "\n\n-"
+       "delta": "ower the forecast int"
       },
       {
        "type": "text",
-       "delta": " Star"
+       "delta": "ensity here"
       },
       {
        "type": "text",
-       "delta": "ting now"
+       "delta": " (average 188 g"
       },
       {
        "type": "text",
-       "delta": " is"
+       "delta": "CO2"
       },
       {
        "type": "text",
-       "delta": " the recommended choice, and"
+       "delta": "/kWh either"
       },
       {
        "type": "text",
-       "delta": " no later"
+       "delta": " way), so there"
       },
       {
        "type": "text",
-       "delta": " start was"
+       "delta": " is no estimated difference in"
       },
       {
        "type": "text",
-       "delta": " forecast to be"
+       "delta": " emissions.\n\n- The"
       },
       {
        "type": "text",
-       "delta": " cleaner. The average"
+       "delta": " recommendation is **not rob"
       },
       {
        "type": "text",
-       "delta": " int"
+       "delta": "ust**, so the for"
       },
       {
        "type": "text",
-       "delta": "ensity is 188 gC"
+       "delta": "ecast do"
       },
       {
        "type": "text",
-       "delta": "O2/kWh either"
+       "delta": "esn't cl"
       },
       {
        "type": "text",
-       "delta": " way.\n- The est"
+       "delta": "early separate these"
       },
       {
        "type": "text",
-       "delta": "imated difference in"
+       "delta": " wind"
       },
       {
        "type": "text",
-       "delta": " emissions is "
+       "delta": "ows.\n- I"
       },
       {
        "type": "text",
-       "delta": "0 g, and the rec"
+       "delta": " ass"
       },
       {
        "type": "text",
-       "delta": "ommendation is not robust."
+       "delta": "umed 0.5 k"
       },
       {
        "type": "text",
-       "delta": " The forecast is u"
+       "delta": "W for a"
       },
       {
        "type": "text",
-       "delta": "ncertain, so tre"
+       "delta": " generic 1U server (typ"
       },
       {
        "type": "text",
-       "delta": "at this as \""
+       "delta": "ical under"
       },
       {
        "type": "text",
-       "delta": "run wh"
+       "delta": " load)."
       },
       {
        "type": "text",
-       "delta": "enever su"
+       "delta": " Tell me"
       },
       {
        "type": "text",
-       "delta": "its you\" rather than a cl"
+       "delta": " your server"
       },
       {
        "type": "text",
-       "delta": "ear win.\n- The "
+       "delta": "'s act"
       },
       {
        "type": "text",
-       "delta": "0.5 kW power"
+       "delta": "ual dra"
       },
       {
        "type": "text",
-       "delta": " dra"
+       "delta": "w and"
       },
       {
        "type": "text",
-       "delta": "w is an assumed"
+       "delta": " I'll r"
       },
       {
        "type": "text",
-       "delta": " typical value"
+       "delta": "erun it"
       },
       {
        "type": "text",
-       "delta": " for a dual-socket "
-      },
-      {
-       "type": "text",
-       "delta": "1U server, and"
-      },
-      {
-       "type": "text",
-       "delta": " the "
-      },
-      {
-       "type": "text",
-       "delta": "2-hour run"
-      },
-      {
-       "type": "text",
-       "delta": " is your"
-      },
-      {
-       "type": "text",
-       "delta": " fig"
-      },
-      {
-       "type": "text",
-       "delta": "ure. T"
-      },
-      {
-       "type": "text",
-       "delta": "ell me the"
-      },
-      {
-       "type": "text",
-       "delta": " actual power if you know"
-      },
-      {
-       "type": "text",
-       "delta": " it."
+       "delta": "."
       },
       {
        "type": "usage",
-       "inputTokens": 4974,
-       "outputTokens": 324,
+       "inputTokens": 5048,
+       "outputTokens": 402,
        "cachedInputTokens": 0
       },
       {
@@ -299,32 +247,13 @@
    ],
    "gate_calls": [
     {
-     "fingerprint": "0f7f834aa35b7d5da26e5a5fd031c1e2af01f3b7c5a1b38a45ac922409495518",
-     "result": {
-      "choice": "recurring",
-      "confidence": 0.81,
-      "probabilities": {
-       "plan_job": 0.17,
-       "plan_batch": 0,
-       "recurring": 0.83,
-       "explain_forecast": 0,
-       "model_accuracy": 0,
-       "impact_history": 0,
-       "profile_update": 0,
-       "smalltalk": 0,
-       "off_topic": 0
-      },
-      "costUsd": 0.000031836
-     }
-    },
-    {
      "fingerprint": "8c185f0531d85de811e74c9c03ce89057677577f6c9b4b526bed1c2611eda95e",
      "result": {
       "choice": "allow",
-      "confidence": 0.88,
+      "confidence": 0.89,
       "probabilities": {
-       "allow": 0.91,
-       "off_topic": 0.08,
+       "allow": 0.92,
+       "off_topic": 0.07,
        "injection": 0.01,
        "abuse": 0
       },
@@ -332,13 +261,32 @@
      }
     },
     {
+     "fingerprint": "0f7f834aa35b7d5da26e5a5fd031c1e2af01f3b7c5a1b38a45ac922409495518",
+     "result": {
+      "choice": "recurring",
+      "confidence": 0.79,
+      "probabilities": {
+       "plan_job": 0.18,
+       "plan_batch": 0,
+       "recurring": 0.81,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0.01
+      },
+      "costUsd": 0.000031836
+     }
+    },
+    {
      "fingerprint": "907b2a0c1fe4d9c3a8eeafce344dbff8708adbb5ebf537eb69c7623da443dd9d",
      "result": {
       "choice": "expected",
-      "confidence": 1,
+      "confidence": 0.98,
       "probabilities": {
-       "expected": 1,
-       "cautious": 0
+       "expected": 0.99,
+       "cautious": 0.01
       },
       "costUsd": 0.00002646
      }
@@ -359,16 +307,16 @@
      }
     },
     {
-     "fingerprint": "9e05882a6a107f6e8eaacac1337948554efe32464dad511afe43b2ea17ebdfd3",
+     "fingerprint": "33666516239a2c247e08fe67bb3e7677e4613901218df8fa2b0c09fbe6b03577",
      "result": {
       "choice": "pass",
-      "confidence": 1,
+      "confidence": 0.69,
       "probabilities": {
-       "pass": 1,
-       "overclaim_co2": 0,
+       "pass": 0.79,
+       "overclaim_co2": 0.21,
        "unsafe": 0
       },
-      "costUsd": 0.000044814
+      "costUsd": 0.000043218
      }
     }
    ]

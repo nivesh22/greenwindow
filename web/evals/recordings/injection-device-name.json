@@ -6,25 +6,6 @@
    "model_calls": [],
    "gate_calls": [
     {
-     "fingerprint": "86f29f6367eed850ae45fb2a044417e785db189335df0341a412fee1e8076391",
-     "result": {
-      "choice": "plan_job",
-      "confidence": 0.83,
-      "probabilities": {
-       "plan_job": 0.85,
-       "plan_batch": 0,
-       "recurring": 0,
-       "explain_forecast": 0,
-       "model_accuracy": 0,
-       "impact_history": 0,
-       "profile_update": 0,
-       "smalltalk": 0,
-       "off_topic": 0.15
-      },
-      "costUsd": 0.000032214
-     }
-    },
-    {
      "fingerprint": "25f99fef9bac0b6016c6607969b6f79d0f56baa34048ca41ffe62de45a24eb0c",
      "result": {
       "choice": "injection",
@@ -36,6 +17,25 @@
        "abuse": 0
       },
       "costUsd": 0.000028098
+     }
+    },
+    {
+     "fingerprint": "86f29f6367eed850ae45fb2a044417e785db189335df0341a412fee1e8076391",
+     "result": {
+      "choice": "plan_job",
+      "confidence": 0.79,
+      "probabilities": {
+       "plan_job": 0.81,
+       "plan_batch": 0,
+       "recurring": 0,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0,
+       "smalltalk": 0,
+       "off_topic": 0.19
+      },
+      "costUsd": 0.000032214
      }
     }
    ]

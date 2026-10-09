@@ -6,6 +6,20 @@
    "model_calls": [],
    "gate_calls": [
     {
+     "fingerprint": "e089b79fdbff9dfb3717a6cc8ecaa9e8d31c473ccb39ed822f63770f96dbdbb3",
+     "result": {
+      "choice": "injection",
+      "confidence": 0.97,
+      "probabilities": {
+       "allow": 0.02,
+       "off_topic": 0,
+       "injection": 0.98,
+       "abuse": 0
+      },
+      "costUsd": 0.000028476
+     }
+    },
+    {
      "fingerprint": "4dab7bfff8417d493fa3c0b08feb66772266d6e9cb19136dcbb8ecaaf5e3729a",
      "result": {
       "choice": "plan_job",
@@ -22,20 +36,6 @@
        "off_topic": 0.03
       },
       "costUsd": 0.000032592
-     }
-    },
-    {
-     "fingerprint": "e089b79fdbff9dfb3717a6cc8ecaa9e8d31c473ccb39ed822f63770f96dbdbb3",
-     "result": {
-      "choice": "injection",
-      "confidence": 0.97,
-      "probabilities": {
-       "allow": 0.02,
-       "off_topic": 0,
-       "injection": 0.98,
-       "abuse": 0
-      },
-      "costUsd": 0.000028476
      }
     }
    ]

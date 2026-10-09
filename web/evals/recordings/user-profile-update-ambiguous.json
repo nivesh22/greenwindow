@@ -5,153 +5,165 @@
   {
    "model_calls": [
     {
-     "fingerprint": "0d3cdd7c06e105d1af5cb20433f7d14d7a1160c013a65d4c4cc23cd2f5840c94",
+     "fingerprint": "48f3d692ea10a76fc3316744b1103dcbcef33868696a12a2e0e2e57a4a39f2df",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Underst"
+       "delta": "Got"
       },
       {
        "type": "text",
-       "delta": "ood. I'll fav"
+       "delta": " it. I can"
       },
       {
        "type": "text",
-       "delta": "our cautious pl"
+       "delta": " pl"
       },
       {
        "type": "text",
-       "delta": "ans, which means"
+       "delta": "an with"
       },
       {
        "type": "text",
-       "delta": " picking wind"
+       "delta": " a"
       },
       {
        "type": "text",
-       "delta": "ows that st"
+       "delta": " cautious appro"
       },
       {
        "type": "text",
-       "delta": "ay low"
+       "delta": "ach: when"
       },
       {
        "type": "text",
-       "delta": "-carbon even if"
+       "delta": " I"
       },
       {
        "type": "text",
-       "delta": " the forecast sh"
+       "delta": " pick a window, I'll"
       },
       {
        "type": "text",
-       "delta": "ifts,"
+       "delta": " favour one"
       },
       {
        "type": "text",
-       "delta": " and I'll t"
+       "delta": " where the forecast range"
       },
       {
        "type": "text",
-       "delta": "ell you how"
+       "delta": " stays low"
       },
       {
        "type": "text",
-       "delta": " rob"
+       "delta": ", not"
       },
       {
        "type": "text",
-       "delta": "ust each rec"
+       "delta": " just the single"
       },
       {
        "type": "text",
-       "delta": "ommendation is.\n\nWould"
+       "delta": " best-"
       },
       {
        "type": "text",
-       "delta": " you like me"
+       "delta": "guess number"
       },
       {
        "type": "text",
-       "delta": " to save \""
+       "delta": "."
       },
       {
        "type": "text",
-       "delta": "cautious\" as your default for"
+       "delta": "\n\nWould you like me to save"
       },
       {
        "type": "text",
-       "delta": " future plans? That"
+       "delta": " \""
       },
       {
        "type": "text",
-       "delta": " only works if you're signed in"
+       "delta": "cautious\" as your default ris"
       },
       {
        "type": "text",
-       "delta": ", and I'"
+       "delta": "k mode? Once"
       },
       {
        "type": "text",
-       "delta": "ll make the change only"
+       "delta": " it"
       },
       {
        "type": "text",
-       "delta": " once"
+       "delta": "'s saved, I'll use"
       },
       {
        "type": "text",
-       "delta": " you conf"
+       "delta": " it for future"
       },
       {
        "type": "text",
-       "delta": "irm. What would you like to"
+       "delta": " plans unless you say"
       },
       {
        "type": "text",
-       "delta": " plan first"
+       "delta": " otherwise. If"
       },
       {
        "type": "text",
-       "delta": ":"
+       "delta": " you'd like"
       },
       {
        "type": "text",
-       "delta": " what device"
+       "delta": " to"
       },
       {
        "type": "text",
-       "delta": " or"
+       "delta": " pl"
       },
       {
        "type": "text",
-       "delta": " job,"
+       "delta": "an a"
       },
       {
        "type": "text",
-       "delta": " ro"
+       "delta": " job now, tell me what it"
       },
       {
        "type": "text",
-       "delta": "ughly how long it"
+       "delta": " is,"
       },
       {
        "type": "text",
-       "delta": " runs, and by"
+       "delta": " how"
       },
       {
        "type": "text",
-       "delta": " when it need"
+       "delta": " many"
       },
       {
        "type": "text",
-       "delta": "s to finish?"
+       "delta": " hours it takes, its"
+      },
+      {
+       "type": "text",
+       "delta": " power in kW if"
+      },
+      {
+       "type": "text",
+       "delta": " you know it, and your dead"
+      },
+      {
+       "type": "text",
+       "delta": "line."
       },
       {
        "type": "usage",
-       "inputTokens": 3087,
-       "outputTokens": 401,
+       "inputTokens": 3113,
+       "outputTokens": 385,
        "cachedInputTokens": 0
       },
       {
@@ -166,15 +178,15 @@
      "fingerprint": "d51a305045e0ae1b5197bcd86138fcb87eac5c61c9297abfae278881e4c49cbe",
      "result": {
       "choice": "profile_update",
-      "confidence": 0.88,
+      "confidence": 0.85,
       "probabilities": {
-       "plan_job": 0.04,
+       "plan_job": 0.06,
        "plan_batch": 0,
        "recurring": 0,
        "explain_forecast": 0.01,
        "model_accuracy": 0.01,
        "impact_history": 0,
-       "profile_update": 0.89,
+       "profile_update": 0.87,
        "smalltalk": 0.04,
        "off_topic": 0.01
       },
@@ -196,7 +208,7 @@
      }
     },
     {
-     "fingerprint": "fd1cbe6b9ace06128070f75797788bbb01e94789299113c6f4654128a00f1e8a",
+     "fingerprint": "ad250a4e5fbb2de51ef2ff378b470942d22eb1750b272d3123756debbc9adfb4",
      "result": {
       "choice": "pass",
       "confidence": 1,
@@ -205,7 +217,7 @@
        "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000022512
+      "costUsd": 0.000022722
      }
     }
    ]
@@ -213,21 +225,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "ec18650e6bcac866a6f59f2c2f3562092f4da9ca75e9721c2fecc03eaf28d376",
+     "fingerprint": "71cc3d6c2f5e0d5b1a732b91aee3d2be50f088b9219d5c994b4ec80127c749e4",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01Ch16io1KAAfRFvB6ghx2pB",
+        "id": "toolu_01W8xrSWekuuR9z4UHYuDGd8",
         "name": "update_profile",
         "argsJson": "{\"confirm\": true, \"risk_default\": \"cautious\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 3240,
-       "outputTokens": 159,
+       "inputTokens": 3270,
+       "outputTokens": 132,
        "cachedInputTokens": 0
       },
       {
@@ -237,69 +249,65 @@
      ]
     },
     {
-     "fingerprint": "c6d854c741c3260fd88e5dda9c164630ba0433edd98f52c76f1d9dc40fd2f230",
+     "fingerprint": "8846738b6060c17a49e51011f77ab383ad609b52eead5c664befbb17f08fd6d0",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Your default risk mode is now"
+       "delta": "Your"
       },
       {
        "type": "text",
-       "delta": " **cautious**, so future"
+       "delta": " default risk mode is now **"
       },
       {
        "type": "text",
-       "delta": " plans will fav"
+       "delta": "cautious**,"
       },
       {
        "type": "text",
-       "delta": "our windows that stay low-"
+       "delta": " so I'll favour windows"
       },
       {
        "type": "text",
-       "delta": "carbon even if the forec"
+       "delta": " where the forecast range stays"
       },
       {
        "type": "text",
-       "delta": "ast shifts.\n\nWhat would"
+       "delta": " low. Tell me what you"
       },
       {
        "type": "text",
-       "delta": " you like to plan? T"
+       "delta": "'"
       },
       {
        "type": "text",
-       "delta": "ell me the device"
+       "delta": "d like to run"
       },
       {
        "type": "text",
-       "delta": " or job, ro"
+       "delta": ", how"
       },
       {
        "type": "text",
-       "delta": "ughly how long it runs,"
+       "delta": " many"
       },
       {
        "type": "text",
-       "delta": " and the"
+       "delta": " hours it takes, its power"
       },
       {
        "type": "text",
-       "delta": " time"
+       "delta": " in kW if you know it,"
       },
       {
        "type": "text",
-       "delta": " you"
-      },
-      {
-       "type": "text",
-       "delta": " need it finished by."
+       "delta": " and your deadline."
       },
       {
        "type": "usage",
-       "inputTokens": 3384,
-       "outputTokens": 81,
+       "inputTokens": 3414,
+       "outputTokens": 71,
        "cachedInputTokens": 0
       },
       {
@@ -311,21 +319,21 @@
    ],
    "gate_calls": [
     {
-     "fingerprint": "4f269523b0ad0a64e2c54bfeb6c583db27c8a4573521154e4823f643e72d328c",
+     "fingerprint": "8fa13e4334b49f9d96e34891923074f6dd3ebe06b4ddf62a0691bca0e06e9a57",
      "result": {
       "choice": "allow",
-      "confidence": 0.92,
+      "confidence": 0.95,
       "probabilities": {
-       "allow": 0.94,
+       "allow": 0.96,
        "off_topic": 0,
-       "injection": 0.06,
+       "injection": 0.04,
        "abuse": 0
       },
-      "costUsd": 0.000033348
+      "costUsd": 0.000033558
      }
     },
     {
-     "fingerprint": "a2dc4c88c46623e2dafaa56d8ebc40db8027088a15778f97304de7a370ad9718",
+     "fingerprint": "c2a90f1b2af2b37909a08890f2fa6560ae13853a96a4fd75dfd3d54dfc312a23",
      "result": {
       "choice": "profile_update",
       "confidence": 1,
@@ -340,20 +348,20 @@
        "smalltalk": 0,
        "off_topic": 0
       },
-      "costUsd": 0.000037464
+      "costUsd": 0.000037674
      }
     },
     {
-     "fingerprint": "fe05c078495857ebcbee84cdc8c96f42fdfbadd59749136c74eb3c6a304abc28",
+     "fingerprint": "cfaddbd6e491c2aaa1f176938faacf9e348feccffd39399680b31acc551a60bc",
      "result": {
       "choice": "pass",
-      "confidence": 0.92,
+      "confidence": 1,
       "probabilities": {
-       "pass": 0.95,
-       "overclaim_co2": 0.05,
+       "pass": 1,
+       "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000022218
+      "costUsd": 0.000021966
      }
     }
    ]

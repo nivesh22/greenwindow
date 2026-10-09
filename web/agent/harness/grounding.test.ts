@@ -146,6 +146,23 @@ describe('checkGrounding: banned claims and caveat', () => {
     expect(check('Saving the job for tonight is fine; avoided peak hours are listed below.').violations).toEqual([])
   })
 
+  it.each([
+    ["The timing is a forecast, so the actual saving isn't guaranteed.", 'saving'],
+    ['Your savings depend on the weather.', 'savings'],
+    ['That is a small saving.', 'saving'],
+  ])('bans impact "saving(s)" anywhere: %s', (text, match) => {
+    expect(check(text).violations).toContainEqual({ kind: 'banned_claim', match })
+  })
+
+  it.each([
+    'Saving your recurring plan now.',
+    'I am saving this reminder for 06:50.',
+    'Times are in BST (daylight saving time).',
+    'Daylight-savings ends on 25 October.',
+  ])('allows app and daylight-saving uses: %s', (text) => {
+    expect(check(text).violations.filter((v) => v.kind === 'banned_claim')).toEqual([])
+  })
+
   it('requires "average" and "estimate" when a mass appears', () => {
     expect(check('The difference is 185 g.').violations).toEqual([
       { kind: 'missing_caveat', match: 'average' },

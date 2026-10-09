@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "8610f9ae3e344de7d7396babc06bb28d0f5d25366432002d394b17839ebbaced",
+     "fingerprint": "6be7aad86c546d59432ba85a0cee18a87123d05441acafac714de438d60c8de7",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01MEhpBSVrRKdCuzFUVvCTRC",
+        "id": "toolu_01GdXqqdejjMSJ4XmPqBv5Ub",
         "name": "list_plans",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 5408,
-       "outputTokens": 165,
+       "inputTokens": 5434,
+       "outputTokens": 158,
        "cachedInputTokens": 0
       },
       {
@@ -29,60 +29,64 @@
      ]
     },
     {
-     "fingerprint": "b8866d33a29629d585e2f8e3dd94c3936185b421db5eb4b96fd2ce0bb2650399",
+     "fingerprint": "61ee6af9cb2e4d0989ec423fa8f8afb7c9be8028af11e1e5a79723abd5237bb5",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "I found one sa"
+       "delta": "I"
       },
       {
        "type": "text",
-       "delta": "ved plan that"
+       "delta": " found one saved plan that"
       },
       {
        "type": "text",
-       "delta": " matches:"
+       "delta": " matches: **Compressor"
       },
       {
        "type": "text",
-       "delta": " **Compressor**"
+       "delta": "**, every"
       },
       {
        "type": "text",
-       "delta": ", running"
+       "delta": " we"
       },
       {
        "type": "text",
-       "delta": " Mon-"
+       "delta": "ekday ("
       },
       {
        "type": "text",
-       "delta": "Fri in"
+       "delta": "Mon-"
       },
       {
        "type": "text",
-       "delta": " the 09:00-17:"
+       "delta": "Fri) from 09:"
       },
       {
        "type": "text",
-       "delta": "00 window for 3 h"
+       "delta": "00 "
       },
       {
        "type": "text",
-       "delta": "ours at 5 kW ("
+       "delta": "to 17:00, 3"
       },
       {
        "type": "text",
-       "delta": "expected"
+       "delta": " hours at"
       },
       {
        "type": "text",
-       "delta": " mode, no"
+       "delta": " 5 kW, exp"
       },
       {
        "type": "text",
-       "delta": " reminders).\n\nDo"
+       "delta": "ected mode, no"
+      },
+      {
+       "type": "text",
+       "delta": " reminders.\n\nDo"
       },
       {
        "type": "text",
@@ -94,16 +98,20 @@
       },
       {
        "type": "text",
-       "delta": "ply \""
+       "delta": "ply y"
       },
       {
        "type": "text",
-       "delta": "yes\" to confirm."
+       "delta": "es to conf"
+      },
+      {
+       "type": "text",
+       "delta": "irm."
       },
       {
        "type": "usage",
-       "inputTokens": 5592,
-       "outputTokens": 201,
+       "inputTokens": 5618,
+       "outputTokens": 228,
        "cachedInputTokens": 0
       },
       {
@@ -132,15 +140,15 @@
      "fingerprint": "e8e869a3f36e823a81e387e6af811dd364ff0a892c1a71da712016edaf9d6643",
      "result": {
       "choice": "recurring",
-      "confidence": 0.56,
+      "confidence": 0.47,
       "probabilities": {
        "plan_job": 0.01,
        "plan_batch": 0,
-       "recurring": 0.61,
+       "recurring": 0.53,
        "explain_forecast": 0,
        "model_accuracy": 0,
        "impact_history": 0,
-       "profile_update": 0.38,
+       "profile_update": 0.46,
        "smalltalk": 0,
        "off_topic": 0
       },
@@ -148,40 +156,40 @@
      }
     },
     {
-     "fingerprint": "a91aa2ec13c5baac0512d9d26232f611a98fd345a837396da5b7e4703574f449",
-     "result": {
-      "choice": "ask_clarify",
-      "confidence": 0.69,
-      "probabilities": {
-       "act": 0.04,
-       "ask_duration": 0.04,
-       "ask_power": 0.04,
-       "ask_deadline": 0.13,
-       "ask_clarify": 0.75
-      },
-      "costUsd": 0.000026334
-     }
-    },
-    {
      "fingerprint": "89a1c14167b097035e22fddf619f455ac03233f3cf1ac5bc3ea38a264a3aa16c",
      "result": {
       "choice": "expected",
-      "confidence": 0.98,
+      "confidence": 1,
       "probabilities": {
-       "expected": 0.99,
-       "cautious": 0.01
+       "expected": 1,
+       "cautious": 0
       },
       "costUsd": 0.000022932
      }
     },
     {
-     "fingerprint": "96a4135d67f91b5f0fda380922d577eaa974334f5afc58d66c01bbd58aa49573",
+     "fingerprint": "a91aa2ec13c5baac0512d9d26232f611a98fd345a837396da5b7e4703574f449",
+     "result": {
+      "choice": "ask_clarify",
+      "confidence": 0.65,
+      "probabilities": {
+       "act": 0.05,
+       "ask_duration": 0.04,
+       "ask_power": 0.04,
+       "ask_deadline": 0.15,
+       "ask_clarify": 0.72
+      },
+      "costUsd": 0.000026334
+     }
+    },
+    {
+     "fingerprint": "b6915663a602dffada0cea250451ef9fe2cd480ef5b4d14f9c3f060ca4439b94",
      "result": {
       "choice": "pass",
       "confidence": 1,
       "probabilities": {
-       "overclaim_co2": 0,
        "pass": 1,
+       "overclaim_co2": 0,
        "unsafe": 0
       },
       "costUsd": 0.000026544
@@ -192,21 +200,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "2756b80fe581647c936c32a4f87ab74e79382c3105211274f4494a3266d1c650",
+     "fingerprint": "2c5f810ca932c13feab08e975e73d87919b698e6456160c0cce1c94fdddf302d",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01S7D6KgK9iFWcReDTP86EVp",
+        "id": "toolu_01JKGeBVLFHhf8kCPG5YNrUW",
         "name": "list_plans",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 5514,
-       "outputTokens": 244,
+       "inputTokens": 5542,
+       "outputTokens": 163,
        "cachedInputTokens": 0
       },
       {
@@ -216,21 +224,21 @@
      ]
     },
     {
-     "fingerprint": "4fbc4faf24a92e53765a66eba70e3e6e9e4b1a20b4b94f5028abef5f71076e82",
+     "fingerprint": "2f3d08a0a8fde9ebae394aeb9ed96048723fadccf09dbb465b86d4d5da9217ec",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_015JTAJNj5EqSRQ2BJCJsefo",
+        "id": "toolu_01Q9rD3i3WV1JcTKmRcU9rRC",
         "name": "cancel_plan",
         "argsJson": "{\"plan_id\": \"00000000-0000-4000-9000-000000000001\", \"confirm\": true}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 5698,
-       "outputTokens": 131,
+       "inputTokens": 5726,
+       "outputTokens": 92,
        "cachedInputTokens": 0
       },
       {
@@ -240,53 +248,57 @@
      ]
     },
     {
-     "fingerprint": "fd3587cb4a57f195e53fb16d5ed3b0a80d319dad21d0acd6ae1ef91eccfd28c3",
+     "fingerprint": "da4285dc21ad0161aaeb863fe81bf006ab76a3b2fe3d5df9fab8e6b4ffebf696",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "Your recurring **"
+       "delta": "The recurring Compressor"
       },
       {
        "type": "text",
-       "delta": "Compressor** plan ("
+       "delta": " plan ("
       },
       {
        "type": "text",
-       "delta": "Mon-Fri,"
+       "delta": "weekd"
       },
       {
        "type": "text",
-       "delta": " 09:00-17:00"
+       "delta": "ays 09:00-"
       },
       {
        "type": "text",
-       "delta": ", 3 hours at "
+       "delta": "17:00, 3 h"
       },
       {
        "type": "text",
-       "delta": "5 kW) is canc"
+       "delta": "ours at"
       },
       {
        "type": "text",
-       "delta": "elled,"
+       "delta": " 5 kW) is c"
       },
       {
        "type": "text",
-       "delta": " and any pending reminders for"
+       "delta": "ancelled,"
       },
       {
        "type": "text",
-       "delta": " it are c"
+       "delta": " and its"
       },
       {
        "type": "text",
-       "delta": "ancelled too."
+       "delta": " pending reminders are c"
+      },
+      {
+       "type": "text",
+       "delta": "leared too."
       },
       {
        "type": "usage",
-       "inputTokens": 5871,
-       "outputTokens": 67,
+       "inputTokens": 5899,
+       "outputTokens": 57,
        "cachedInputTokens": 0
       },
       {
@@ -298,26 +310,7 @@
    ],
    "gate_calls": [
     {
-     "fingerprint": "388d6703a5fc1b84465c774d9c723b4a940ff98f85b4c743eab11512d80b6eb8",
-     "result": {
-      "choice": "recurring",
-      "confidence": 0.76,
-      "probabilities": {
-       "plan_job": 0.12,
-       "plan_batch": 0,
-       "recurring": 0.79,
-       "explain_forecast": 0,
-       "model_accuracy": 0,
-       "impact_history": 0,
-       "profile_update": 0.09,
-       "smalltalk": 0,
-       "off_topic": 0
-      },
-      "costUsd": 0.000035532
-     }
-    },
-    {
-     "fingerprint": "f4937bef76e844fe18e0d163e8797ee2837e3b63c8ea7a431ad9093a2004f891",
+     "fingerprint": "ea6014a79bced849d9ce8c74ee2e1d6cae38de7d3345f6d295e14dc8c5261ce3",
      "result": {
       "choice": "allow",
       "confidence": 1,
@@ -331,22 +324,26 @@
      }
     },
     {
-     "fingerprint": "5b9dcfdf0bf12d896298977964287f47bccaf6fe63c6ffa002c0980f29f005a9",
+     "fingerprint": "08e00c7816e359a58b15b542498f57b8926dc338eb1cb7628e71916eeb8eded3",
      "result": {
-      "choice": "ask_clarify",
-      "confidence": 0.14,
+      "choice": "recurring",
+      "confidence": 0.8,
       "probabilities": {
-       "act": 0.3,
-       "ask_duration": 0.11,
-       "ask_power": 0.03,
-       "ask_deadline": 0.25,
-       "ask_clarify": 0.31
+       "plan_job": 0.08,
+       "plan_batch": 0,
+       "recurring": 0.82,
+       "explain_forecast": 0,
+       "model_accuracy": 0,
+       "impact_history": 0,
+       "profile_update": 0.1,
+       "smalltalk": 0,
+       "off_topic": 0
       },
-      "costUsd": 0.000030744
+      "costUsd": 0.000035532
      }
     },
     {
-     "fingerprint": "153954024f9e342569e591814ef81b5c15b707c7640c38ef49de3a319c31a7a2",
+     "fingerprint": "4e11a440796a8c079f832b21a3fdd0e62bdd8909eb74c336e51d0e05b57a6dd0",
      "result": {
       "choice": "expected",
       "confidence": 1,
@@ -358,16 +355,31 @@
      }
     },
     {
-     "fingerprint": "e6f2d2d24c592ac372ef6eb8ce5775a85a857df151bb032586cc1d12719a2f7a",
+     "fingerprint": "6fce05929f0a7c0d2e235dae4a1a42f67f87e375ebf72d3ec8bccadca49daae8",
+     "result": {
+      "choice": "act",
+      "confidence": 0.24,
+      "probabilities": {
+       "act": 0.39,
+       "ask_duration": 0.09,
+       "ask_power": 0.02,
+       "ask_deadline": 0.22,
+       "ask_clarify": 0.28
+      },
+      "costUsd": 0.000030744
+     }
+    },
+    {
+     "fingerprint": "82a6d9bb25be1e76f73bea873765f75c48c97570f0a99cc8ecdc0980fb703cb1",
      "result": {
       "choice": "pass",
       "confidence": 1,
       "probabilities": {
-       "overclaim_co2": 0,
        "pass": 1,
+       "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000028812
+      "costUsd": 0.000028602
      }
     }
    ]

@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "9db1cbe15dc344d2684cf0cbdfe62aef4cbd5a076ca570281474e0cefbf22eed",
+     "fingerprint": "106d69b2f3ee163c9f07bb915de46c7d1f35f7a4423ef97db41a5e27ebddaed6",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01Gji9wRUyaQ1enork4Thqvr",
+        "id": "toolu_015taB8N9bR5HL55noXG5R8r",
         "name": "plan_batch",
         "argsJson": "{\"jobs\": [{\"label\":\"CNC machine 1\",\"duration_h\":4,\"power_kw\":2,\"deadline_local\":\"2026-10-06T18:00\"},{\"label\":\"CNC machine 2\",\"duration_h\":4,\"power_kw\":2,\"deadline_local\":\"2026-10-06T18:00\"},{\"label\":\"CNC machine 3\",\"duration_h\":4,\"power_kw\":2,\"deadline_local\":\"2026-10-06T18:00\"}]}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4832,
-       "outputTokens": 313,
+       "inputTokens": 4858,
+       "outputTokens": 325,
        "cachedInputTokens": 0
       },
       {
@@ -29,7 +29,7 @@
      ]
     },
     {
-     "fingerprint": "1fa5798f3d795edc17ab466e16dda65c34945f9ba7af62cb69d066d67f2df7a6",
+     "fingerprint": "81bbf1d8454fffce92eeb47c824367dfd2b3d9db0d165caaffcbf418d69c4ade",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
@@ -38,155 +38,199 @@
       },
       {
        "type": "text",
-       "delta": " three "
+       "delta": " three machines have"
       },
       {
        "type": "text",
-       "delta": "4-hour,"
+       "delta": " the same best window"
       },
       {
        "type": "text",
-       "delta": " 2 "
+       "delta": ": **11:00 to"
       },
       {
        "type": "text",
-       "delta": "kW j"
+       "delta": " 15:00 BST today"
       },
       {
        "type": "text",
-       "delta": "obs have"
+       "delta": " ("
       },
       {
        "type": "text",
-       "delta": " the"
+       "delta": "Tue 6 O"
       },
       {
        "type": "text",
-       "delta": " same best window"
+       "delta": "ct)**, compared with running"
       },
       {
        "type": "text",
-       "delta": ": **11"
+       "delta": " now at 02:00 B"
       },
       {
        "type": "text",
-       "delta": ":00 to"
+       "delta": "ST. Because"
       },
       {
        "type": "text",
-       "delta": " 15:00 BST,"
+       "delta": " they"
       },
       {
        "type": "text",
-       "delta": " Tue 6 O"
+       "delta": " over"
       },
       {
        "type": "text",
-       "delta": "ct**."
+       "delta": "lap, they would dra"
       },
       {
        "type": "text",
-       "delta": " Running now ("
+       "delta": "w about"
       },
       {
        "type": "text",
-       "delta": "02:00 BST) aver"
+       "delta": " "
       },
       {
        "type": "text",
-       "delta": "ages about 195 gCO"
+       "delta": "6 kW together."
       },
       {
        "type": "text",
-       "delta": "2/kWh, and that"
+       "delta": " The j"
       },
       {
        "type": "text",
-       "delta": " window averages about 165 "
+       "delta": "obs were planned independently,"
       },
       {
        "type": "text",
-       "delta": "gCO2/kWh"
+       "delta": " with no shared power limit,"
       },
       {
        "type": "text",
-       "delta": ".\n\n- **Not robust"
+       "delta": " so check that"
       },
       {
        "type": "text",
-       "delta": ":** the forecast u"
+       "delta": " your sup"
       },
       {
        "type": "text",
-       "delta": "ncertainty is"
+       "delta": "ply can handle that"
       },
       {
        "type": "text",
-       "delta": " w"
+       "delta": " load"
       },
       {
        "type": "text",
-       "delta": "ide en"
+       "delta": ".\n\n-"
       },
       {
        "type": "text",
-       "delta": "ough that running"
+       "delta": " Average"
       },
       {
        "type": "text",
-       "delta": " now could tur"
+       "delta": " forecast intensity: about"
       },
       {
        "type": "text",
-       "delta": "n out better"
+       "delta": " 165"
       },
       {
        "type": "text",
-       "delta": ". The estimated difference per"
+       "delta": " gCO2/kW"
       },
       {
        "type": "text",
-       "delta": " machine is "
+       "delta": "h in the best"
       },
       {
        "type": "text",
-       "delta": "240 g, with a range"
+       "delta": " window, vers"
       },
       {
        "type": "text",
-       "delta": " of -195 g to 661"
+       "delta": "us about 195 if"
       },
       {
        "type": "text",
-       "delta": " g."
+       "delta": " run"
       },
       {
        "type": "text",
-       "delta": " For"
+       "delta": " now (a 15% redu"
       },
       {
        "type": "text",
-       "delta": " all three, the combined estim"
+       "delta": "ction).\n- Estimated"
       },
       {
        "type": "text",
-       "delta": "ate is 719 g, with"
+       "delta": " difference per machine: "
       },
       {
        "type": "text",
-       "delta": " a range of -586 g to"
+       "delta": "240 g ("
       },
       {
        "type": "text",
-       "delta": " 2.0 kg."
+       "delta": "range"
       },
       {
        "type": "text",
-       "delta": " This is an estimated difference"
+       "delta": " -195 g"
       },
       {
        "type": "text",
-       "delta": " based"
+       "delta": " to 661 g). The"
+      },
+      {
+       "type": "text",
+       "delta": " range includes running"
+      },
+      {
+       "type": "text",
+       "delta": " now being"
+      },
+      {
+       "type": "text",
+       "delta": " better, so this is"
+      },
+      {
+       "type": "text",
+       "delta": " not robust.\n- Comb"
+      },
+      {
+       "type": "text",
+       "delta": "ined est"
+      },
+      {
+       "type": "text",
+       "delta": "imated difference for"
+      },
+      {
+       "type": "text",
+       "delta": " all three: 719 g ("
+      },
+      {
+       "type": "text",
+       "delta": "range -586 g to 2"
+      },
+      {
+       "type": "text",
+       "delta": ".0 kg). This is"
+      },
+      {
+       "type": "text",
+       "delta": " an estimated"
+      },
+      {
+       "type": "text",
+       "delta": " difference based"
       },
       {
        "type": "text",
@@ -198,84 +242,64 @@
       },
       {
        "type": "text",
+       "delta": " measured or"
+      },
+      {
+       "type": "text",
        "delta": " guaranteed change."
       },
       {
        "type": "text",
-       "delta": "\n- **Overlap:**"
+       "delta": "\n\nIf you'"
       },
       {
        "type": "text",
-       "delta": " all three wind"
+       "delta": "d r"
       },
       {
        "type": "text",
-       "delta": "ows over"
+       "delta": "ather av"
       },
       {
        "type": "text",
-       "delta": "lap complet"
+       "delta": "oid the"
       },
       {
        "type": "text",
-       "delta": "ely."
+       "delta": " overlap, I can pl"
       },
       {
        "type": "text",
-       "delta": " They"
+       "delta": "an the mach"
       },
       {
        "type": "text",
-       "delta": " were planned independently, with"
+       "delta": "ines at"
       },
       {
        "type": "text",
-       "delta": " no shared power limit, so"
+       "delta": " different start"
       },
       {
        "type": "text",
-       "delta": " together"
+       "delta": " times, though"
       },
       {
        "type": "text",
-       "delta": " they would dra"
+       "delta": " that's a separ"
       },
       {
        "type": "text",
-       "delta": "w about 6 kW for"
+       "delta": "ate planning run"
       },
       {
        "type": "text",
-       "delta": " 4 hours."
-      },
-      {
-       "type": "text",
-       "delta": " Check that"
-      },
-      {
-       "type": "text",
-       "delta": " your supply can handle that,"
-      },
-      {
-       "type": "text",
-       "delta": " or stag"
-      },
-      {
-       "type": "text",
-       "delta": "ger the starts if"
-      },
-      {
-       "type": "text",
-       "delta": " it"
-      },
-      {
-       "type": "text",
-       "delta": " can't."
+       "delta": "."
       },
       {
        "type": "usage",
-       "inputTokens": 6248,
-       "outputTokens": 526,
+       "inputTokens": 6274,
+       "outputTokens": 529,
        "cachedInputTokens": 0
       },
       {
@@ -286,6 +310,20 @@
     }
    ],
    "gate_calls": [
+    {
+     "fingerprint": "17a803f6548cbfe9d1b84bb6e9a1a020c3525d620119cc33522c4ead7dffe2bd",
+     "result": {
+      "choice": "allow",
+      "confidence": 0.97,
+      "probabilities": {
+       "allow": 0.98,
+       "off_topic": 0.01,
+       "injection": 0.01,
+       "abuse": 0
+      },
+      "costUsd": 0.00002793
+     }
+    },
     {
      "fingerprint": "46c2013d4d94d71fd66a579258f6b058899fa262fea5a465c07d14785d354d9b",
      "result": {
@@ -306,30 +344,16 @@
      }
     },
     {
-     "fingerprint": "17a803f6548cbfe9d1b84bb6e9a1a020c3525d620119cc33522c4ead7dffe2bd",
-     "result": {
-      "choice": "allow",
-      "confidence": 0.97,
-      "probabilities": {
-       "allow": 0.98,
-       "off_topic": 0.01,
-       "injection": 0.01,
-       "abuse": 0
-      },
-      "costUsd": 0.00002793
-     }
-    },
-    {
      "fingerprint": "0c7bd38d219560b24af871774f3e8654e287c3e050e8fccf1382563c4a8859c2",
      "result": {
       "choice": "act",
-      "confidence": 0.96,
+      "confidence": 0.95,
       "probabilities": {
-       "act": 0.97,
+       "act": 0.96,
        "ask_duration": 0,
        "ask_power": 0,
        "ask_deadline": 0,
-       "ask_clarify": 0.03
+       "ask_clarify": 0.04
       },
       "costUsd": 0.000028686
      }
@@ -347,16 +371,16 @@
      }
     },
     {
-     "fingerprint": "4d3c471335ebc7accb735c96c48337603cc231c9fef20d202dc641dcb4c52f6d",
+     "fingerprint": "f4aedfcea6abe5802a97690ac4694baecc1121c627f874ef15bd896d1f4839ff",
      "result": {
       "choice": "pass",
-      "confidence": 0.98,
+      "confidence": 1,
       "probabilities": {
-       "pass": 0.99,
-       "overclaim_co2": 0.01,
+       "pass": 1,
+       "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000075516
+      "costUsd": 0.00007581
      }
     }
    ]

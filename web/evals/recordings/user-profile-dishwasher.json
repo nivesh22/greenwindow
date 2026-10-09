@@ -5,21 +5,21 @@
   {
    "model_calls": [
     {
-     "fingerprint": "c8a65728f8607bc1bac0ee0c064cbfd530d07dc541695f5b41ce88687f9d5270",
+     "fingerprint": "0f07e0aec906bf03a26a4612d76f2460af82ed9dc226d2bb1126c479b93e4985",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01AEptKc2TXJPinT3RH4PdA2",
+        "id": "toolu_01C2RNo7qsTuMc11ZaKPXUkK",
         "name": "recommend_window",
         "argsJson": "{\"duration_h\": 2, \"power_kw\": 1.2, \"deadline_local\": \"2026-10-07T07:00\", \"label\": \"Dishwasher\"}"
        }
       },
       {
        "type": "usage",
-       "inputTokens": 4684,
-       "outputTokens": 634,
+       "inputTokens": 4710,
+       "outputTokens": 442,
        "cachedInputTokens": 0
       },
       {
@@ -29,21 +29,21 @@
      ]
     },
     {
-     "fingerprint": "55951595f2e199320d7174c5c13e2ea96981fa94ad36605dd85052c187fcfa0b",
+     "fingerprint": "fbafc8feaa6e9f517336b08fa15272e2073837b7c45c0837a11ad2fb1c0f2b19",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "tool_call",
        "call": {
-        "id": "toolu_01K5SWbQs1dZvAHqnfzD8XnP",
+        "id": "toolu_01Q46bxwQWuHVp1ZSP4cBKd5",
         "name": "estimate_co2",
         "argsJson": ""
        }
       },
       {
        "type": "usage",
-       "inputTokens": 5145,
-       "outputTokens": 95,
+       "inputTokens": 5171,
+       "outputTokens": 29,
        "cachedInputTokens": 0
       },
       {
@@ -53,20 +53,56 @@
      ]
     },
     {
-     "fingerprint": "bb15b27e6509837dfe6037a9fddcfdad90ce76b70a67db091ed1ced407bf68d5",
+     "fingerprint": "e270ac3a7b94ed304c8c6dce2f439c0cba3a3d0fdd998fe5ff0bc7e2e1dacfad",
      "model": "anthropic/claude-haiku-5.5",
      "events": [
       {
        "type": "text",
-       "delta": "The"
+       "delta": "For"
       },
       {
        "type": "text",
-       "delta": " best"
+       "delta": " your"
       },
       {
        "type": "text",
-       "delta": " start"
+       "delta": " dishwasher ("
+      },
+      {
+       "type": "text",
+       "delta": "1"
+      },
+      {
+       "type": "text",
+       "delta": ".2 kW for"
+      },
+      {
+       "type": "text",
+       "delta": " "
+      },
+      {
+       "type": "text",
+       "delta": "2 hours, from"
+      },
+      {
+       "type": "text",
+       "delta": " your saved device"
+      },
+      {
+       "type": "text",
+       "delta": ","
+      },
+      {
+       "type": "text",
+       "delta": " so 2.4 kW"
+      },
+      {
+       "type": "text",
+       "delta": "h), the l"
+      },
+      {
+       "type": "text",
+       "delta": "owest forecast window"
       },
       {
        "type": "text",
@@ -78,35 +114,23 @@
       },
       {
        "type": "text",
-       "delta": " BST**"
+       "delta": " BST to 14:00"
       },
       {
        "type": "text",
-       "delta": ", fin"
+       "delta": " BST**."
       },
       {
        "type": "text",
-       "delta": "ishing at"
+       "delta": " The average intensity there"
       },
       {
        "type": "text",
-       "delta": " 14:00."
+       "delta": " is "
       },
       {
        "type": "text",
-       "delta": " Running now at"
-      },
-      {
-       "type": "text",
-       "delta": " 02:00 BST would"
-      },
-      {
-       "type": "text",
-       "delta": " average "
-      },
-      {
-       "type": "text",
-       "delta": "188 gCO2/k"
+       "delta": "162 gCO2/k"
       },
       {
        "type": "text",
@@ -114,99 +138,99 @@
       },
       {
        "type": "text",
-       "delta": " 162 for the rec"
+       "delta": " 188 if"
       },
       {
        "type": "text",
-       "delta": "ommended window"
+       "delta": " you start"
       },
       {
        "type": "text",
-       "delta": " ("
+       "delta": " now at"
       },
       {
        "type": "text",
-       "delta": "about 14%"
+       "delta": " 02:00 BST,"
       },
       {
        "type": "text",
-       "delta": " lower).\n\nThis"
+       "delta": " a 14% l"
       },
       {
        "type": "text",
-       "delta": " rec"
+       "delta": "ower for"
       },
       {
        "type": "text",
-       "delta": "ommendation is **"
+       "delta": "ecast average.\n\n- The"
       },
       {
        "type": "text",
-       "delta": "not robust**. The estim"
+       "delta": " estimated difference is **"
       },
       {
        "type": "text",
-       "delta": "ated difference is "
+       "delta": "62 g C"
       },
       {
        "type": "text",
-       "delta": "62 g CO2 "
+       "delta": "O2**"
       },
       {
        "type": "text",
-       "delta": "with"
+       "delta": ", with a range"
       },
       {
        "type": "text",
-       "delta": " a range of -64 g"
+       "delta": " of -64 g to 182"
       },
       {
        "type": "text",
-       "delta": " to 182 g, so running"
+       "delta": " g. The"
       },
       {
        "type": "text",
-       "delta": " now"
+       "delta": " range includes the recommended"
       },
       {
        "type": "text",
-       "delta": " could tur"
+       "delta": " time being worse than"
       },
       {
        "type": "text",
-       "delta": "n out better"
+       "delta": " running now, so this is"
       },
       {
        "type": "text",
-       "delta": ". The "
+       "delta": " not a robust result"
       },
       {
        "type": "text",
-       "delta": "2"
+       "delta": ".\n- This is"
       },
       {
        "type": "text",
-       "delta": "-"
+       "delta": " an estimated difference based"
       },
       {
        "type": "text",
-       "delta": "hour,"
+       "delta": " on average"
       },
       {
        "type": "text",
-       "delta": " 1.2 kW d"
+       "delta": " gr"
       },
       {
        "type": "text",
-       "delta": "ishwasher job"
+       "delta": "id intensity, not a meas"
       },
       {
        "type": "text",
-       "delta": " uses your saved device sett"
+       "delta": "ured or guaranteed change"
       },
       {
        "type": "text",
-       "delta": "ings.\n\nWould you like a"
+       "delta": ".\n\nWould you like a"
       },
       {
        "type": "text",
@@ -218,8 +242,8 @@
       },
       {
        "type": "usage",
-       "inputTokens": 5382,
-       "outputTokens": 325,
+       "inputTokens": 5408,
+       "outputTokens": 409,
        "cachedInputTokens": 0
       },
       {
@@ -248,11 +272,11 @@
      "fingerprint": "90edd06c7eea031f816c6858cd142b9cc7f7d1f0116e37b930c88194ec7f173b",
      "result": {
       "choice": "plan_job",
-      "confidence": 0.78,
+      "confidence": 0.81,
       "probabilities": {
-       "plan_job": 0.8,
+       "plan_job": 0.83,
        "plan_batch": 0,
-       "recurring": 0.2,
+       "recurring": 0.17,
        "explain_forecast": 0,
        "model_accuracy": 0,
        "impact_history": 0,
@@ -291,16 +315,16 @@
      }
     },
     {
-     "fingerprint": "8b9beb5ceabfbfda3f86d8e6366ca31795e9eb8e83b2e74bdd6b93dc3715cb93",
+     "fingerprint": "4530523d3dbc8e6c902b2626f269b64b997189e22eff5822782c4417b91a8758",
      "result": {
       "choice": "pass",
-      "confidence": 0.66,
+      "confidence": 1,
       "probabilities": {
-       "pass": 0.77,
-       "overclaim_co2": 0.23,
+       "pass": 1,
+       "overclaim_co2": 0,
        "unsafe": 0
       },
-      "costUsd": 0.000042462
+      "costUsd": 0.000044016
      }
     }
    ]
