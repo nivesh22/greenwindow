@@ -14,6 +14,11 @@ Format:
 
 ---
 
+## 2026-10-09 — P4 follow-through: web-push, cron via pg_net, calendar
+- **web-push 3.6.7** (+ `@types/web-push` 3.6.4, dev), exact pins: sends VAPID-signed Web Push from `/api/cron/reminders`. Mature, the standard Node implementation of RFC 8030/8291/8292; no paid service. Keys: `VITE_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (H9).
+- **Cron:** Supabase `pg_cron` + `pg_net` call `/api/cron/{reminders,recurring,ledger}` with `x-cron-secret` read from Vault (`greenwindow_app_url`, `greenwindow_cron_secret`); jobs are no-ops until both secrets exist. The reminders job only calls the app when a reminder is due. Migration 0005.
+- **Calendar:** `.ics` (RFC 5545) built in the browser/tool, plus a Google Calendar template link; the link format has no Google reference (spike S7), so the .ics is the dependable path.
+- **Recurring plans** never promise a slot beyond the forecast horizon (48 h): `next_start_utc` is recomputed each morning after the 06:17 pipeline run.
 ## 2026-10-09 — Langfuse export (P4.5) and its dependencies
 - **What:** each chat turn is exported to Langfuse Cloud (EU, Hobby, free) as one trace after it is saved to Supabase (`web/agent/telemetry/langfuse.ts`). Supabase stays the source of truth. Built with the Langfuse agent skill (github.com/langfuse/skills, installed at user level) and checked against https://langfuse.com/docs/observability/best-practices.md and the installed SDK types.
 - **Trace shape:** `chat-turn` (`agent`, input = user message, output = answer); gates as `guardrail` (check-input, check-grounding, check-output) or `chain` (route-intent, decide-ask-or-act, choose-risk-mode); one `generate-step` `generation` per model call (OpenAI-format messages, model, tokens, cost; failed attempts at level ERROR); tools as `tool` with args and results, siblings of the generation that asked for them. Session = conversation id, user = Supabase user id, version = prompt version, tags = auth state + intent, environment = `VERCEL_ENV`, release = git sha. Recorded start/end times are kept.
