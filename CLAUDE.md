@@ -18,7 +18,7 @@ A GitHub Actions pipeline (Python 3.11, every 6h at minute :17) fetches GB carbo
 ## Current status (2026-10-05)
 - T-1 feasibility: **GO** (`docs/feasibility_report.md`).
 - **Thin end-to-end slice done:** ingest -> observations (400-day bootstrap) -> `snaive_24`, `snaive_168`, `sarimax_wx`, `chronos2_uni`, `chronos2_cov` + NESO -> snapshots -> scorer -> JSON export -> `pipeline.yml` (cron `17 */6 * * *`, ~1 min on Actions) -> `data` branch. React app in `web/` (Forecast, Plan a job, Leaderboard, About). CI green (Python + web).
-- **Live:** https://greenwindow-one.vercel.app (Vercel Hobby, Root Directory `web`, auto-deploys `main`; V11 verified: `data` commits do not deploy).
+- **Live:** https://greenwindow.uk (custom domain from Namecheap, DNS at Namecheap: A @ 76.76.21.21, CNAME www -> cname.vercel-dns.com, www 308-redirects to apex; old https://greenwindow-one.vercel.app still works; Vercel Hobby, Root Directory `web`, auto-deploys `main`; V11 verified: `data` commits do not deploy).
 - **Done 2026-10-06:** `ets` (A,N,A), `ucm_wx`, `prophet_wx` in the live registry; backtest (`make backtest`, ~11 min, 90 origins + sensitivity) -> `web/public/backtest_summary.json`, `docs/results.md`; Backtest page.
 - **Done 2026-10-07:** `wind_cf` (power curve per point, 7 weather points) replaces `wind100` as model input; Chronos-2+wx 25-48 h MASE 0.625 -> 0.581. Live pipeline re-bootstraps observations once on deploy (missing column).
 - **Done 2026-10-07:** `blend_wx` (Chronos for 1-24 h; 0.7 Chronos + 0.3 Prophet for 25-48 h), backfilled from stored snapshots; 25-48 h MASE 0.553.

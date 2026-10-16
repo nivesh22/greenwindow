@@ -35,7 +35,7 @@ const envSchema = z.object({
   GATEWAY_BASE_URL: z.string().url().default('https://ai-gateway.vercel.sh/v1'),
   DATA_BASE_URL: z.string().url().default('https://raw.githubusercontent.com/nivesh22/greenwindow/data/app_data'),
   // backtest_summary.json is served by the site itself. Previews are behind Vercel login, so use production.
-  BACKTEST_BASE_URL: z.string().url().default('https://greenwindow-one.vercel.app'),
+  BACKTEST_BASE_URL: z.string().url().default('https://greenwindow.uk'),
 
   // Per-turn budgets (design §5.3).
   MAX_STEPS: num(6),
