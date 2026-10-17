@@ -7,7 +7,7 @@ time-series models and the Chronos-2 foundation model, turns the forecast into a
 for a flexible job, and scores itself against actuals and the grid operator's own forecast. A chat assistant
 plans jobs on top of the same forecast, with every number coming from deterministic tools.
 
-**Live:** https://greenwindow-one.vercel.app · Design: [`greenwindow-design-spec.md`](greenwindow-design-spec.md) ·
+**Live:** https://greenwindow.uk · Design: [`greenwindow-design-spec.md`](greenwindow-design-spec.md) ·
 Assistant: [`docs/agent-prd.md`](docs/agent-prd.md), [`docs/agent-design.md`](docs/agent-design.md),
 [`docs/agent-execution-plan.md`](docs/agent-execution-plan.md) · Decisions: [`docs/decisions.md`](docs/decisions.md)
 

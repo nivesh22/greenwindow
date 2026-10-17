@@ -20,10 +20,11 @@ const MODELS: [string, string][] = [
 
 export function About() {
   return (
-    <article className="max-w-3xl space-y-8">
+    <article className="max-w-4xl space-y-10">
       <section>
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">About & limitations</h1>
-        <p className="mt-2 text-stone-600 dark:text-stone-300">
+        <p className="eyebrow">How it works · what it can't do</p>
+        <h1 className="page-title mt-2">About & limitations</h1>
+        <p className="lede">
           GreenWindow forecasts Great Britain's national grid carbon intensity for the next 48 hours, recommends a start
           time for flexible jobs, and grades its own forecasts as the actual values arrive. Every 6 hours an automated
           pipeline fetches fresh data, runs each model, stores the forecast exactly as issued, and scores past forecasts.
@@ -31,24 +32,24 @@ export function About() {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">Models</h2>
-        <dl className="mt-3 space-y-3">
+        <h2 className="font-display text-xl font-semibold">Models</h2>
+        <dl className="mt-4 grid gap-3 sm:grid-cols-2">
           {MODELS.map(([t, d]) => (
-            <div key={t}>
-              <dt className="font-medium">{t}</dt>
-              <dd className="text-sm text-stone-600 dark:text-stone-300">{d}</dd>
+            <div key={t} className="card p-4">
+              <dt className="font-semibold">{t}</dt>
+              <dd className="mt-1 text-sm leading-relaxed text-ink-2">{d}</dd>
             </div>
           ))}
         </dl>
-        <p className="mt-3 text-sm text-stone-600 dark:text-stone-300">
+        <p className="mt-3 text-sm text-ink-2">
           Every model sees the same trailing window of data (56 days for classical models, 28 days of context for
           Chronos-2) and must output a P10, P50 and P90 for each of the next 48 hours.
         </p>
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">How the planner decides</h2>
-        <p className="mt-2 text-sm text-stone-600 dark:text-stone-300">
+        <h2 className="font-display text-xl font-semibold">How the planner decides</h2>
+        <p className="mt-2 text-sm text-ink-2">
           It averages the forecast over every possible job window and picks the lowest (median in "expected" mode, P90 in
           "cautious" mode). A choice is marked robust only if its P90 average is below the run-now window's P10 average.
           Averaging quantiles across hours assumes forecast errors are perfectly correlated, which overstates uncertainty;
@@ -57,23 +58,23 @@ export function About() {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">Known biases and limitations</h2>
-        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm">
+        <h2 className="font-display text-xl font-semibold">Known biases and limitations</h2>
+        <ol className="mt-3 list-decimal space-y-2.5 pl-5 text-sm leading-relaxed marker:font-semibold marker:text-ink-3">
           {BIASES.map(([t, d]) => (
-            <li key={t}><span className="font-medium">{t}.</span> <span className="text-stone-600 dark:text-stone-300">{d}</span></li>
+            <li key={t}><span className="font-medium">{t}.</span> <span className="text-ink-2">{d}</span></li>
           ))}
         </ol>
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">Data sources</h2>
-        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-stone-600 dark:text-stone-300">
+        <h2 className="font-display text-xl font-semibold">Data sources</h2>
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-ink-2">
           <li>
             Carbon intensity (actuals and operator forecast):{' '}
-            <a className="underline" href="https://carbonintensity.org.uk/">NESO Carbon Intensity API</a>, licensed CC BY 4.0.
+            <a className="underline underline-offset-2 hover:text-ink" href="https://carbonintensity.org.uk/">NESO Carbon Intensity API</a>, licensed CC BY 4.0.
           </li>
           <li>
-            Weather (Historical Forecast and Forecast APIs): <a className="underline" href="https://open-meteo.com/">Open-Meteo.com</a>,
+            Weather (Historical Forecast and Forecast APIs): <a className="underline underline-offset-2 hover:text-ink" href="https://open-meteo.com/">Open-Meteo.com</a>,
             licensed CC BY 4.0.
           </li>
           <li>Bank holidays: England, from the open-source <code>holidays</code> package.</li>

@@ -18,19 +18,27 @@ const dayHourFmt = new Intl.DateTimeFormat('en-GB', {
   hourCycle: 'h23',
   timeZoneName: 'short',
 })
-const shortFmt = new Intl.DateTimeFormat('en-GB', {
-  timeZone: TZ,
-  weekday: 'short',
-  hour: '2-digit',
-  hourCycle: 'h23',
-})
+const tickDayFmt = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, weekday: 'short', day: 'numeric' })
+const tickHourFmt = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+const londonHourFmt = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, hour: 'numeric', hourCycle: 'h23' })
 
 /** "01:00 BST" - includes the zone so the repeated hour on the October clock change stays distinct. */
 export const formatHour = (iso: string): string => hourFmt.format(new Date(iso))
 /** "Mon 5 Oct, 18:00 BST" */
 export const formatDateTime = (iso: string): string => dayHourFmt.format(new Date(iso))
-/** Compact axis tick: "Mon 18" */
-export const formatTick = (iso: string): string => shortFmt.format(new Date(iso))
+/** Hour of day (0-23) in UK time. */
+export const londonHour = (ms: number): number => Number(londonHourFmt.format(new Date(ms))) % 24
+/** Axis tick: the day at UK midnight ("Sun 18"), otherwise the UK time ("06:00"). */
+export const formatTick = (ms: number): string =>
+  londonHour(ms) === 0 ? tickDayFmt.format(new Date(ms)).replace(',', '') : tickHourFmt.format(new Date(ms))
+/** Whole hours in [startMs, endMs] that fall on a UK hour divisible by everyH (0, 6, 12, 18 by default). */
+export function axisTicks(startMs: number, endMs: number, everyH = 6): number[] {
+  const ticks: number[] = []
+  for (let t = Math.ceil(startMs / HOUR_MS) * HOUR_MS; t <= endMs; t += HOUR_MS) {
+    if (londonHour(t) % everyH === 0) ticks.push(t)
+  }
+  return ticks
+}
 
 export const HOUR_MS = 3_600_000
 export const toMs = (iso: string): number => Date.parse(iso)

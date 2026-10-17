@@ -17,7 +17,7 @@ export function PushOptIn({ onEnabled }: { onEnabled?: () => void }) {
       onEnabled?.()
     } else setMsg(r.message)
   }
-  if (done) return <p role="status" className="text-xs text-stone-600 dark:text-stone-300">Notifications are on.</p>
+  if (done) return <p role="status" className="text-xs text-ink-2">Notifications are on.</p>
   return (
     <div className="space-y-1">
       {supported && (
@@ -25,12 +25,12 @@ export function PushOptIn({ onEnabled }: { onEnabled?: () => void }) {
           type="button"
           disabled={busy}
           onClick={() => void run()}
-          className="rounded-md border border-stone-300 px-2 py-1 text-xs font-medium hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-brand-600 disabled:opacity-50 dark:border-stone-700 dark:hover:bg-stone-800"
+          className="rounded-md border border-line-strong px-2 py-1 text-xs font-medium hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50"
         >
           Turn on notifications
         </button>
       )}
-      {msg && <p role="status" className="text-xs text-stone-600 dark:text-stone-300">{msg}</p>}
+      {msg && <p role="status" className="text-xs text-ink-2">{msg}</p>}
     </div>
   )
 }

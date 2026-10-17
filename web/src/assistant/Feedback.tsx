@@ -24,14 +24,14 @@ export function Feedback({ turnId }: { turnId: string }) {
     }
   }
 
-  if (phase === 'done') return <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">Thanks for the feedback.</p>
+  if (phase === 'done') return <p className="mt-1 text-xs text-ink-3">Thanks for the feedback.</p>
 
   const btn =
-    'rounded-md border border-stone-300 px-2 py-0.5 text-xs hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-brand-600 disabled:opacity-50 dark:border-stone-700 dark:hover:bg-stone-800'
+    'rounded-md border border-line-strong px-2 py-0.5 text-xs hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50'
   return (
     <div className="mt-1 text-xs">
       <div className="flex items-center gap-2">
-        <span className="text-stone-500 dark:text-stone-400">Was this helpful?</span>
+        <span className="text-ink-3">Was this helpful?</span>
         <button type="button" className={btn} aria-label="Helpful" disabled={phase === 'sending'} onClick={() => { setRating(1); setPhase('comment') }}>
           <span aria-hidden="true">👍</span>
         </button>
@@ -54,7 +54,7 @@ export function Feedback({ turnId }: { turnId: string }) {
             maxLength={300}
             onChange={(e) => setComment(e.target.value)}
             placeholder="Optional comment"
-            className="min-w-0 flex-1 rounded-md border border-stone-300 bg-white px-2 py-1 dark:border-stone-700 dark:bg-stone-950"
+            className="min-w-0 flex-1 rounded-md border border-line-strong bg-surface px-2 py-1"
           />
           <button type="submit" disabled={phase === 'sending'} className={btn}>Send feedback</button>
           {phase === 'error' && <span role="alert" className="text-amber-700 dark:text-amber-300">Could not send. Try again.</span>}

@@ -7,15 +7,15 @@ export const LIMIT_COLOR = '#D55E00'
 
 export function Panel({ title, note, children }: { title: string; note?: string; children: ReactNode }) {
   return (
-    <section aria-label={title} className="min-w-0 rounded-2xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900">
+    <section aria-label={title} className="min-w-0 card p-4">
       <h2 className="text-base font-semibold">{title}</h2>
-      {note && <p className="mt-0.5 text-xs text-stone-500 dark:text-stone-400">{note}</p>}
+      {note && <p className="mt-0.5 text-xs text-ink-3">{note}</p>}
       <div className="mt-3">{children}</div>
     </section>
   )
 }
 
-const tooltipStyle = { fontSize: 12, borderRadius: 8, border: '1px solid var(--color-stone-300, #d6d3d1)' }
+const tooltipStyle = { fontSize: 12, borderRadius: 8, border: '1px solid var(--line-strong)', background: 'var(--surface)', color: 'var(--ink)' }
 
 interface BarSeries { key: string; label: string; color: string }
 
@@ -34,7 +34,7 @@ export function DayBars({
   fmt?: (v: number) => string
 }) {
   return (
-    <div style={{ height }} className="w-full text-stone-500 dark:text-stone-400">
+    <div style={{ height }} className="w-full text-ink-3">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
           <CartesianGrid strokeDasharray="2 4" stroke="currentColor" strokeOpacity={0.25} vertical={false} />
@@ -56,7 +56,7 @@ export function DayBars({
 
 export function TrendLine({ data, dataKey, label, height = 180 }: { data: Record<string, string | number>[]; dataKey: string; label: string; height?: number }) {
   return (
-    <div style={{ height }} className="w-full text-stone-500 dark:text-stone-400">
+    <div style={{ height }} className="w-full text-ink-3">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
           <CartesianGrid strokeDasharray="2 4" stroke="currentColor" strokeOpacity={0.25} vertical={false} />
@@ -76,7 +76,7 @@ export function ShareBar({ label, n, total }: { label: string; n: number; total:
   return (
     <div className="flex items-center gap-2 text-xs">
       <span className="w-28 shrink-0 truncate" title={label}>{label}</span>
-      <span className="h-2 flex-1 rounded bg-stone-200 dark:bg-stone-700" aria-hidden="true">
+      <span className="h-2 flex-1 rounded bg-line-strong" aria-hidden="true">
         <span className="block h-2 rounded bg-brand-600" style={{ width: `${pct}%` }} />
       </span>
       <span className="w-20 shrink-0 text-right tabular-nums">{n} ({pct.toFixed(0)}%)</span>
@@ -92,7 +92,7 @@ export function Histogram({ buckets, label }: { buckets: number[]; label: string
       {buckets.map((n, i) => (
         <div key={i} className="flex flex-1 flex-col items-center justify-end" title={`${(i / 10).toFixed(1)}–${((i + 1) / 10).toFixed(1)}: ${n}`}>
           <div className="w-full rounded-t bg-brand-600" style={{ height: `${(n / max) * 100}%`, minHeight: n > 0 ? 2 : 0 }} />
-          <span className="text-[9px] text-stone-500 dark:text-stone-400">{i === 0 ? '0' : i === 9 ? '1' : ''}</span>
+          <span className="text-[9px] text-ink-3">{i === 0 ? '0' : i === 9 ? '1' : ''}</span>
         </div>
       ))}
     </div>

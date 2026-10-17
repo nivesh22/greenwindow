@@ -20,13 +20,13 @@ const badge = 'rounded px-1.5 py-0.5 text-xs font-medium'
 export function TraceDrawer({ trace }: { trace: TraceSummary }) {
   const { gates, tools, llm_calls: calls, totals } = trace
   return (
-    <details className="mt-1 max-w-[92%] text-xs text-stone-600 dark:text-stone-300">
-      <summary className="cursor-pointer rounded px-1 py-0.5 font-medium focus-visible:outline-2 focus-visible:outline-brand-600">
+    <details className="mt-1 max-w-[92%] text-xs text-ink-2">
+      <summary className="cursor-pointer rounded px-1 py-0.5 font-medium focus-visible:outline-2 focus-visible:outline-accent">
         How I got this
       </summary>
-      <div className="mt-2 space-y-3 rounded-lg border border-stone-200 p-3 dark:border-stone-700">
+      <div className="mt-2 space-y-3 rounded-lg border border-line p-3">
         <section aria-label="Gate decisions">
-          <h3 className="font-semibold text-stone-800 dark:text-stone-100">Gate decisions</h3>
+          <h3 className="font-semibold text-ink">Gate decisions</h3>
           {gates.length === 0 ? (
             <p>none yet</p>
           ) : (
@@ -41,12 +41,12 @@ export function TraceDrawer({ trace }: { trace: TraceSummary }) {
                     aria-valuemax={1}
                     aria-valuenow={g.confidence}
                     aria-valuetext={`${Math.round(g.confidence * 100)}%`}
-                    className="inline-block h-2 w-16 overflow-hidden rounded bg-stone-200 dark:bg-stone-700"
+                    className="inline-block h-2 w-16 overflow-hidden rounded bg-line-strong"
                   >
                     <span className="block h-full bg-brand-600" style={{ width: `${Math.round(g.confidence * 100)}%` }} />
                   </span>
                   <span>{Math.round(g.confidence * 100)}%</span>
-                  <span className={`${badge} bg-stone-100 dark:bg-stone-800`}>{g.source}</span>
+                  <span className={`${badge} bg-surface-2`}>{g.source}</span>
                 </li>
               ))}
             </ul>
@@ -54,7 +54,7 @@ export function TraceDrawer({ trace }: { trace: TraceSummary }) {
         </section>
 
         <section aria-label="Tool calls">
-          <h3 className="font-semibold text-stone-800 dark:text-stone-100">Tool calls</h3>
+          <h3 className="font-semibold text-ink">Tool calls</h3>
           {tools.length === 0 ? (
             <p>none</p>
           ) : (
@@ -69,11 +69,11 @@ export function TraceDrawer({ trace }: { trace: TraceSummary }) {
                     <span>{Math.round(t.ms)} ms</span>
                   </div>
                   <details className="mt-1">
-                    <summary className="cursor-pointer focus-visible:outline-2 focus-visible:outline-brand-600">
+                    <summary className="cursor-pointer focus-visible:outline-2 focus-visible:outline-accent">
                       Details for {t.name}
                     </summary>
                     <p className="mt-1 break-words">{t.summary}</p>
-                    <pre className="mt-1 max-h-48 overflow-auto rounded bg-stone-100 p-2 text-[11px] dark:bg-stone-800" tabIndex={0} aria-label={`Arguments for ${t.name}`}>
+                    <pre className="mt-1 max-h-48 overflow-auto rounded bg-surface-2 p-2 text-[11px]" tabIndex={0} aria-label={`Arguments for ${t.name}`}>
                       {pretty(t.args)}
                     </pre>
                   </details>
@@ -84,7 +84,7 @@ export function TraceDrawer({ trace }: { trace: TraceSummary }) {
         </section>
 
         <section aria-label="Model calls">
-          <h3 className="font-semibold text-stone-800 dark:text-stone-100">Model calls</h3>
+          <h3 className="font-semibold text-ink">Model calls</h3>
           {calls.length === 0 ? (
             <p>none</p>
           ) : (
@@ -114,7 +114,7 @@ export function TraceDrawer({ trace }: { trace: TraceSummary }) {
         </section>
 
         <p>
-          <span className="font-semibold text-stone-800 dark:text-stone-100">Totals:</span> {totals.steps} steps, {totals.tokens_in} tokens in,{' '}
+          <span className="font-semibold text-ink">Totals:</span> {totals.steps} steps, {totals.tokens_in} tokens in,{' '}
           {totals.tokens_out} out, {fmtCost(totals.cost_usd)}, {Math.round(totals.ms)} ms · prompt {trace.prompt_version}
         </p>
       </div>

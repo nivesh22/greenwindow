@@ -34,9 +34,9 @@ export function NotificationsSection() {
     <section aria-labelledby="notif-h" className="space-y-2">
       <h2 id="notif-h" className="text-lg font-semibold">Notifications</h2>
       {status === null && <p role="status" className="text-sm">Loading…</p>}
-      {status === 'unsupported' && <p className="text-sm text-stone-600 dark:text-stone-300">{UNSUPPORTED_MESSAGE}</p>}
+      {status === 'unsupported' && <p className="text-sm text-ink-2">{UNSUPPORTED_MESSAGE}</p>}
       {status === 'denied' && (
-        <p className="text-sm text-stone-600 dark:text-stone-300">Notifications are blocked for this site. Allow them in your browser settings to turn them on.</p>
+        <p className="text-sm text-ink-2">Notifications are blocked for this site. Allow them in your browser settings to turn them on.</p>
       )}
       {(status === 'on' || status === 'off') && (
         <label className="flex items-center gap-2 text-sm">
@@ -98,13 +98,13 @@ export function PlansSection() {
       <h2 id="plans-h" className="text-lg font-semibold">Your plans</h2>
       {err && <p role="alert" className="text-sm text-amber-700 dark:text-amber-300">Could not load or change your plans ({err}).</p>}
       {plans === null && !err && <p role="status" className="text-sm">Loading…</p>}
-      {plans !== null && active.length === 0 && <p className="text-sm text-stone-600 dark:text-stone-300">No saved plans.</p>}
+      {plans !== null && active.length === 0 && <p className="text-sm text-ink-2">No saved plans.</p>}
       <ul className="space-y-2">
         {active.map((p) => (
-          <li key={p.id} className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-stone-200 p-3 text-sm dark:border-stone-800">
+          <li key={p.id} className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-line p-3 text-sm">
             <div className="min-w-0">
               <p className="font-medium break-words">{p.label}</p>
-              <p className="text-xs text-stone-600 dark:text-stone-300">
+              <p className="text-xs text-ink-2">
                 {p.kind === 'recurring' ? 'Recurring' : 'One-off'} · Next start: {p.next_start_utc ? formatDateTime(p.next_start_utc) : 'none planned'}
               </p>
             </div>

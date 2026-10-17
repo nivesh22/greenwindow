@@ -143,7 +143,7 @@ export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABL
       note={assistantNote ? 'Updated by the assistant' : null}
     />
   )
-  const results = (
+  const answer = (
     <>
       {problem && (
         <div role="alert" className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-100">
@@ -160,16 +160,21 @@ export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABL
           signedIn={Boolean(auth.info && !auth.info.isAnonymous)}
         />
       )}
-      <div className="rounded-2xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900">
+    </>
+  )
+  const chart = (
+    <>
+      <div className="card p-4 sm:p-5">
+        <h2 className="mb-3 font-display text-lg font-semibold">Forecast for your range</h2>
         <ForecastChart
           actuals={[]}
           main={{ label, points: series.points }}
           now={now}
-          highlight={result ? { start: toMs(result.bestStart), end: toMs(result.bestStart) + Number(state.duration) * HOUR_MS } : undefined}
+          highlight={result ? { start: toMs(result.bestStart), end: toMs(result.bestStart) + Number(state.duration) * HOUR_MS, label: 'Your job' } : undefined}
           height={260}
         />
       </div>
-      <p className="text-xs leading-relaxed text-stone-500 dark:text-stone-400">
+      <p className="text-xs leading-relaxed text-ink-3">
         How to read this: the figures are an estimated difference in the grid's <em>average</em> carbon intensity for
         your job window. Shifting a job does not necessarily change the grid's <em>marginal</em> emissions by the same
         amount. "Robust" means the chosen window's pessimistic (P90) average is below the run-now window's optimistic
@@ -180,36 +185,37 @@ export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABL
   )
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <section>
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Plan a flexible job</h1>
-        <p className="mt-2 max-w-2xl text-stone-600 dark:text-stone-300">
+        <p className="eyebrow">Carbon-aware scheduling</p>
+        <h1 className="page-title mt-2">Plan a flexible job</h1>
+        <p className="lede">
           Tell us how long the job runs and when it must finish. We find the start time with the lowest forecast average
           grid intensity, and say whether that choice still holds if the forecast is off.
         </p>
       </section>
 
       {assistantEnabled ? (
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)]">
-          <div className="min-w-0 space-y-3">
+        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]">
+          <div className="min-w-0 space-y-3 lg:sticky lg:top-24">
             <ChatPanel getPanelState={getPanelState} onPlanUpdate={onPlanUpdate} />
-            <button
-              type="button"
-              onClick={viewPlan}
-              className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-brand-600 lg:hidden dark:border-stone-700 dark:hover:bg-stone-800"
-            >
+            <button type="button" onClick={viewPlan} className="btn-secondary w-full lg:hidden">
               View plan
             </button>
           </div>
-          <div ref={planRef} tabIndex={-1} id="plan-panel" role="region" aria-label="Plan panel" className="min-w-0 space-y-4 outline-none">
+          <div ref={planRef} tabIndex={-1} id="plan-panel" role="region" aria-label="Plan panel" className="min-w-0 scroll-mt-24 space-y-4 outline-none">
+            {answer}
             {panel}
-            {results}
+            {chart}
           </div>
         </div>
       ) : (
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,20rem)_1fr]">
+        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
           {panel}
-          <div className="space-y-4">{results}</div>
+          <div className="min-w-0 space-y-4">
+            {answer}
+            {chart}
+          </div>
         </div>
       )}
     </div>
@@ -220,45 +226,59 @@ function RecommendationCard({ r, durationH }: { r: Recommendation; durationH: nu
   const changed = r.bestStart !== r.runNowStart
   const endIso = toIso(toMs(r.bestStart) + durationH * HOUR_MS)
   return (
-    <section aria-live="polite" className="rounded-2xl border border-brand-100 bg-brand-50 p-5 dark:border-brand-900 dark:bg-brand-900/30">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div>
-          <p className="text-sm text-brand-900 dark:text-brand-100">{changed ? 'Best start' : 'Recommendation'}</p>
-          <p className="text-2xl font-bold">{changed ? formatDateTime(r.bestStart) : 'Run it now'}</p>
-          {changed && <p className="text-sm text-stone-600 dark:text-stone-300">finishes {formatDateTime(endIso)}</p>}
+    <section aria-live="polite" className="card relative overflow-hidden">
+      <div aria-hidden className="absolute inset-y-0 left-0 w-1 bg-accent" />
+      <div className="p-5 pl-6 sm:p-6 sm:pl-7">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="eyebrow">{changed ? 'Best start' : 'Recommendation'}</p>
+            <p className="mt-1.5 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+              {changed ? formatDateTime(r.bestStart) : 'Run it now'}
+            </p>
+            {changed && <p className="mt-1 text-sm text-ink-2">finishes {formatDateTime(endIso)}</p>}
+          </div>
+          {changed && <RobustBadge robust={r.robust} />}
         </div>
-        {changed && (
-          <span className={`rounded-full px-3 py-1 text-xs font-semibold ${r.robust
-            ? 'bg-brand-600 text-white' : 'border border-stone-400 bg-white text-stone-700 dark:bg-stone-900 dark:text-stone-200'}`}>
-            {r.robust ? '✓ Robust' : '~ Not robust'}
-          </span>
+        {changed ? (
+          <dl className="mt-5 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-3">
+            <Metric term="Estimated difference in average grid intensity" value={`${r.intensityReductionPct.toFixed(0)}% lower`} />
+            <Metric term="Average intensity: best vs. now" value={`${Math.round(r.avgIntensityBest)} vs ${Math.round(r.avgIntensityNow)}`} unit="gCO₂/kWh" />
+            <Metric term={`For ${r.energyKwh.toFixed(1)} kWh, that intensity difference equals`} value={`≈ ${fmtMass(r.gramsDifference)}`} unit="CO₂" />
+          </dl>
+        ) : (
+          <p className="mt-3 text-sm text-ink-2">
+            No later window in your range has a lower forecast, so there is no reason to wait.
+          </p>
+        )}
+        {changed && !r.robust && (
+          <p className="mt-3 text-xs text-ink-2">
+            Not robust: the forecast ranges overlap, so the better window is likely but not certain.
+          </p>
         )}
       </div>
-      {changed ? (
-        <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
-          <Metric term="Estimated difference in average grid intensity" value={`${r.intensityReductionPct.toFixed(0)}% lower`} />
-          <Metric term="Average intensity: best vs. now" value={`${Math.round(r.avgIntensityBest)} vs ${Math.round(r.avgIntensityNow)} gCO₂/kWh`} />
-          <Metric term={`For ${r.energyKwh.toFixed(1)} kWh, that intensity difference equals`} value={`≈ ${fmtMass(r.gramsDifference)} CO₂`} />
-        </dl>
-      ) : (
-        <p className="mt-2 text-sm text-stone-700 dark:text-stone-300">
-          No later window in your range has a lower forecast, so there is no reason to wait.
-        </p>
-      )}
-      {changed && !r.robust && (
-        <p className="mt-3 text-xs text-stone-600 dark:text-stone-300">
-          Not robust: the forecast ranges overlap, so the better window is likely but not certain.
-        </p>
-      )}
     </section>
   )
 }
 
-function Metric({ term, value }: { term: string; value: string }) {
+function RobustBadge({ robust }: { robust: boolean }) {
   return (
-    <div>
-      <dt className="text-xs text-stone-600 dark:text-stone-400">{term}</dt>
-      <dd className="font-semibold tabular-nums">{value}</dd>
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+      robust ? 'bg-accent-soft text-accent-ink ring-1 ring-accent/40' : 'bg-surface-2 text-ink-2 ring-1 ring-line-strong'}`}>
+      <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {robust ? <path d="M3.5 8.5l3 3 6-7" /> : <path d="M3 9c1.5-2 3-2 5 0s3.5 2 5 0" />}
+      </svg>
+      {robust ? 'Robust' : 'Not robust'}
+    </span>
+  )
+}
+
+function Metric({ term, value, unit }: { term: string; value: string; unit?: string }) {
+  return (
+    <div className="flex flex-col-reverse justify-end gap-1 bg-surface p-3.5">
+      <dt className="text-xs leading-snug text-ink-3">{term}</dt>
+      <dd className="text-lg font-semibold tabular-nums">
+        {value} {unit && <span className="text-xs font-normal text-ink-3">{unit}</span>}
+      </dd>
     </div>
   )
 }

@@ -42,7 +42,7 @@ export function ErrorPanel({ error, onRetry }: { error: unknown; onRetry?: () =>
 }
 
 export function Skeleton({ className = '' }: { className?: string }) {
-  return <div aria-hidden className={`animate-pulse rounded-xl bg-stone-200 dark:bg-stone-800 ${className}`} />
+  return <div aria-hidden className={`animate-pulse rounded-xl bg-surface-2 ${className}`} />
 }
 
 export function Loading({ label }: { label: string }) {

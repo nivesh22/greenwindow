@@ -37,24 +37,33 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
   }
 
   return (
-    <section aria-label="Assistant" className="rounded-2xl border border-stone-200 bg-white p-4 sm:p-5 dark:border-stone-800 dark:bg-stone-900">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <h2 className="text-lg font-semibold">Ask the assistant</h2>
+    <section aria-label="Assistant" className="card p-4 sm:p-5">
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+        <div className="flex items-center gap-2.5">
+          <span aria-hidden="true" className="grid h-8 w-8 place-items-center rounded-full bg-accent-soft text-accent">
+            <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 5.5h12v7H9l-3.5 3v-3H4z" />
+            </svg>
+          </span>
+          <h2 className="font-display text-lg font-semibold">Ask the assistant</h2>
+        </div>
         <AccountMenu auth={auth} messagesLeft={chat.messagesLeft} />
       </div>
 
-      <div aria-live="polite" role="log" aria-label="Conversation" className="mt-3 space-y-3">
+      <div aria-live="polite" role="log" aria-label="Conversation" className="mt-4 space-y-3 lg:max-h-[min(60vh,40rem)] lg:overflow-y-auto lg:pr-1">
         {chat.messages.length === 0 && (
-          <div className="flex flex-wrap gap-2">
+          <div className="space-y-2">
+            <p className="text-sm text-ink-3">Describe a job in plain words, or try one of these:</p>
             {STARTERS.map((s) => (
               <button
                 key={s}
                 type="button"
                 disabled={chat.busy || blocked}
                 onClick={() => submit(s)}
-                className="rounded-full border border-stone-300 px-3 py-1.5 text-left text-sm hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-brand-600 disabled:opacity-50 dark:border-stone-700 dark:hover:bg-stone-800"
+                className="group flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl border border-line px-3.5 py-2.5 text-left text-sm text-ink-2 transition-colors hover:border-accent/50 hover:bg-accent-soft hover:text-ink focus-visible:outline-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {s}
+                <svg aria-hidden="true" viewBox="0 0 16 16" className="h-4 w-4 shrink-0 text-ink-3 group-hover:text-accent" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
               </button>
             ))}
           </div>
@@ -62,8 +71,8 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
         {chat.messages.map((m) => (
           <div key={m.id} className={m.role === 'user' ? 'flex justify-end' : 'flex flex-col items-start'}>
             <div
-              className={`max-w-[92%] rounded-2xl px-3 py-2 text-sm break-words ${
-                m.role === 'user' ? 'bg-brand-600 text-white' : 'bg-stone-100 text-stone-900 dark:bg-stone-800 dark:text-stone-100'
+              className={`max-w-[92%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed break-words ${
+                m.role === 'user' ? 'rounded-br-md bg-brand-600 text-white' : 'rounded-bl-md bg-surface-2 text-ink'
               }`}
             >
               <span className="sr-only">{m.role === 'user' ? 'You: ' : 'Assistant: '}</span>
@@ -75,11 +84,11 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
           </div>
         ))}
         {chat.checking && (
-          <p role="status" className="text-sm text-stone-600 dark:text-stone-300">Checking you&apos;re human…</p>
+          <p role="status" className="text-sm text-ink-2">Checking you&apos;re human…</p>
         )}
         {chat.busy && !chat.checking && (
-          <p role="status" className="flex items-center gap-2 text-sm text-stone-600 dark:text-stone-300">
-            <span aria-hidden="true" className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-stone-300 border-t-brand-600" />
+          <p role="status" className="flex items-center gap-2 text-sm text-ink-2">
+            <span aria-hidden="true" className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-line-strong border-t-accent" />
             <span>{chat.status ?? 'Thinking...'}</span>
           </p>
         )}
@@ -101,11 +110,11 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
           <button
             type="button"
             onClick={() => void chat.signIn()}
-            className="w-full rounded-lg bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 focus-visible:outline-2 focus-visible:outline-brand-600"
+            className="btn-primary w-full"
           >
             Continue with Google
           </button>
-          <p className="text-xs text-stone-500 dark:text-stone-400">
+          <p className="text-xs text-ink-3">
             We only read your email and name. See the{' '}
             <a className="underline" href="/privacy" target="_blank" rel="noreferrer">privacy notice</a>.
           </p>
@@ -118,7 +127,7 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
           e.preventDefault()
           submit(draft)
         }}
-        className="mt-3 space-y-2"
+        className="mt-4 space-y-2"
       >
         <label htmlFor={inputId} className="sr-only">Message to the assistant</label>
         <textarea
@@ -130,10 +139,10 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={onKey}
           placeholder="Describe the job and when it must be done"
-          className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm dark:border-stone-700 dark:bg-stone-950"
+          className="field resize-none text-sm"
         />
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs text-stone-500 dark:text-stone-400" aria-label="Characters used">
+          <span className="text-xs text-ink-3" aria-label="Characters used">
             {draft.length}/{MAX_CHARS}
           </span>
           <div className="flex gap-2">
@@ -141,7 +150,7 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
               <button
                 type="button"
                 onClick={chat.stop}
-                className="rounded-lg border border-stone-300 px-3 py-1.5 text-sm font-medium hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+                className="btn-secondary py-1.5"
               >
                 Stop
               </button>
@@ -149,7 +158,7 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
             <button
               type="submit"
               disabled={chat.busy || blocked || !draft.trim()}
-              className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
+              className="btn-primary py-1.5"
             >
               Send
             </button>
@@ -157,7 +166,7 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
         </div>
       </form>
       )}
-      <p className="mt-2 text-xs text-stone-500 dark:text-stone-400">
+      <p className="mt-3 border-t border-line pt-3 text-xs text-ink-3">
         GB national grid only · 48-hour forecast · estimates, not guarantees ·{' '}
         <a className="underline" href="/privacy" target="_blank" rel="noreferrer">Privacy</a>
       </p>

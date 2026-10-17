@@ -17,14 +17,14 @@ const PROCESSORS: [string, string][] = [
 export function Privacy() {
   return (
     <article className="max-w-3xl space-y-6">
-      <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Privacy</h1>
-      <p className="text-stone-600 dark:text-stone-300">
+      <h1 className="page-title">Privacy</h1>
+      <p className="text-ink-2">
         The forecast pages store nothing about you. This notice covers the optional assistant and accounts.
       </p>
 
       <section>
-        <h2 className="text-lg font-semibold">What is stored</h2>
-        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-stone-600 dark:text-stone-300">
+        <h2 className="font-display text-xl font-semibold">What is stored</h2>
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-ink-2">
           <li>Messages: what you type to the assistant and its answers.</li>
           <li>Profile: display name, default risk mode and quiet hours, if you set them.</li>
           <li>Devices: names and power ratings you save.</li>
@@ -40,48 +40,48 @@ export function Privacy() {
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">How long</h2>
-        <p className="mt-2 text-sm text-stone-600 dark:text-stone-300">
+        <h2 className="font-display text-xl font-semibold">How long</h2>
+        <p className="mt-2 text-sm text-ink-2">
           Data is kept for 90 days. Guest (anonymous) users who have been idle for 30 days are deleted sooner.
         </p>
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">Who processes it</h2>
+        <h2 className="font-display text-xl font-semibold">Who processes it</h2>
         <ul className="mt-2 space-y-2 text-sm">
           {PROCESSORS.map(([n, d]) => (
             <li key={n}>
-              <span className="font-medium">{n}.</span> <span className="text-stone-600 dark:text-stone-300">{d}</span>
+              <span className="font-medium">{n}.</span> <span className="text-ink-2">{d}</span>
             </li>
           ))}
         </ul>
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">Google sign-in</h2>
-        <p className="mt-2 text-sm text-stone-600 dark:text-stone-300">
+        <h2 className="font-display text-xl font-semibold">Google sign-in</h2>
+        <p className="mt-2 text-sm text-ink-2">
           Signing in with Google requests the email and profile scopes only. Nothing else in your Google account is read.
         </p>
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">Deleting your data</h2>
-        <p className="mt-2 text-sm text-stone-600 dark:text-stone-300">
+        <h2 className="font-display text-xl font-semibold">Deleting your data</h2>
+        <p className="mt-2 text-sm text-ink-2">
           Signed-in users can delete their account and all data from <a className="underline" href="/settings">Settings</a> (Delete my
           data). Guests can clear their browser data; guest records are removed after 30 idle days.
         </p>
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">Limits of the service</h2>
-        <p className="mt-2 text-sm text-stone-600 dark:text-stone-300">
+        <h2 className="font-display text-xl font-semibold">Limits of the service</h2>
+        <p className="mt-2 text-sm text-ink-2">
           Great Britain national grid only. Everything shown is an estimate of average grid intensity from a forecast, not a guarantee.
         </p>
       </section>
 
       <section>
-        <h2 className="text-lg font-semibold">Contact</h2>
-        <p className="mt-2 text-sm text-stone-600 dark:text-stone-300">
+        <h2 className="font-display text-xl font-semibold">Contact</h2>
+        <p className="mt-2 text-sm text-ink-2">
           Open an issue on the{' '}
           <a className="underline" href="https://github.com/nivesh22/greenwindow/issues">GitHub repository</a>.
         </p>

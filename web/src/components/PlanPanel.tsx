@@ -16,8 +16,7 @@ interface Props {
   note?: string | null
 }
 
-const inputCls =
-  'w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900 focus-visible:outline-2 focus-visible:outline-brand-600 aria-[invalid=true]:border-red-600 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-100'
+const inputCls = 'field aria-[invalid=true]:border-red-600'
 
 /** The controlled job form. All state lives in the Scheduler page so the assistant can set it. */
 export function PlanPanel({ state, errors, models, model, onField, onModel, note }: Props) {
@@ -26,14 +25,18 @@ export function PlanPanel({ state, errors, models, model, onField, onModel, note
     <form
       noValidate
       onSubmit={(e) => e.preventDefault()}
-      className="space-y-4 rounded-2xl border border-stone-200 bg-white p-4 sm:p-5 dark:border-stone-800 dark:bg-stone-900"
+      className="card @container p-4 sm:p-5"
       aria-label="Job details"
     >
-      {note && (
-        <p role="status" className="rounded-lg bg-brand-50 px-3 py-1.5 text-xs text-brand-900 dark:bg-brand-900/40 dark:text-brand-100">
-          {note}
-        </p>
-      )}
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+        <h2 className="font-display text-lg font-semibold">Job details</h2>
+        {note && (
+          <p role="status" className="rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent-ink">
+            {note}
+          </p>
+        )}
+      </div>
+      <div className="grid gap-4 @md:grid-cols-2">
       <Field id="duration" label="Duration (hours)" error={errors.duration}>
         <input id="duration" type="number" min={1} max={12} step={1} inputMode="numeric" value={state.duration}
           onChange={(e) => set('duration')(e.target.value)} className={inputCls} aria-invalid={!!errors.duration}
@@ -54,33 +57,36 @@ export function PlanPanel({ state, errors, models, model, onField, onModel, note
           onChange={(e) => set('deadline')(e.target.value)} className={inputCls} aria-invalid={!!errors.deadline}
           aria-describedby={errors.deadline ? 'deadline-error' : undefined} />
       </Field>
-      <fieldset>
-        <legend className="text-sm font-medium text-stone-700 dark:text-stone-300">Plan for</legend>
+      <fieldset className="@md:col-span-2">
+        <legend className="text-sm font-medium text-ink">Plan for</legend>
         <div className="mt-1 grid grid-cols-2 gap-2">
           {(['expected', 'cautious'] as const).map((m) => (
-            <label key={m} className={`cursor-pointer rounded-lg border px-3 py-2 text-sm has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-brand-600 ${
-              state.mode === m ? 'border-brand-600 bg-brand-50 dark:bg-brand-900/40' : 'border-stone-300 dark:border-stone-700'}`}>
+            <label key={m} className={`cursor-pointer rounded-lg border px-3 py-2.5 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-accent ${
+              state.mode === m ? 'border-accent bg-accent-soft ring-1 ring-accent' : 'border-line-strong hover:bg-surface-2'}`}>
               <input type="radio" name="mode" value={m} checked={state.mode === m} onChange={() => set('mode')(m)} className="sr-only" />
               <span className="font-medium">{m === 'expected' ? 'Expected' : 'Cautious'}</span>
-              <span className="block text-xs text-stone-500 dark:text-stone-400">{m === 'expected' ? 'Median forecast' : 'Plan for a bad case (P90)'}</span>
+              <span className="block text-xs text-ink-3">{m === 'expected' ? 'Median forecast' : 'Plan for a bad case (P90)'}</span>
             </label>
           ))}
         </div>
       </fieldset>
-      <ModelPicker id="sched-model" label="Forecast model" models={models} value={model} onChange={onModel} />
+      <div className="@md:col-span-2">
+        <ModelPicker id="sched-model" label="Forecast model" models={models} value={model} onChange={onModel} />
+      </div>
+      </div>
     </form>
   )
 }
 
 function Field({ id, label, hint, error, children }: { id: string; label: string; hint?: string; error?: string; children: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-1">
-      <label htmlFor={id} className="text-sm font-medium text-stone-700 dark:text-stone-300">{label}</label>
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={id} className="text-sm font-medium text-ink">{label}</label>
       {children}
       {error ? (
         <p id={`${id}-error`} className="text-xs text-red-700 dark:text-red-400">{error}</p>
       ) : hint ? (
-        <p id={`${id}-hint`} className="text-xs text-stone-500 dark:text-stone-400">{hint}</p>
+        <p id={`${id}-hint`} className="text-xs text-ink-3">{hint}</p>
       ) : null}
     </div>
   )

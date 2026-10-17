@@ -146,3 +146,12 @@ def test_scores_and_metrics_by_hand() -> None:
     assert metrics.coverage([1, 5, 9], [0, 0, 0], [6, 6, 6]) == pytest.approx(2 / 3)
     assert metrics.mase([2, 2], [1, 1], [0, 1, 2, 3], m=2) == pytest.approx(0.5)
     assert metrics.wql([10, 10], {0.5: [8, 12]}) == pytest.approx(2 * (1 + 1) / 20)
+
+
+def test_leaderboard_ratio_metrics_keep_three_decimals() -> None:
+    from greenwindow.export.app_json import leaderboard_value
+
+    assert leaderboard_value("wql", 0.08765) == 0.088
+    assert leaderboard_value("coverage80", 0.8312) == 0.831
+    assert leaderboard_value("mae", 17.66) == 17.7
+    assert leaderboard_value("wql", float("nan")) is None

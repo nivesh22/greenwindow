@@ -75,4 +75,4 @@ jobs:
       # released to production, a 404 here is expected.
       - name: Supabase keepalive
         if: always()
-        run: curl -fsS --max-time 20 "https://greenwindow-one.vercel.app/api/health?db=1" || echo "keepalive failed (non-fatal)"
+        run: curl -fsS --max-time 20 "https://greenwindow.uk/api/health?db=1" || echo "keepalive failed (non-fatal)"

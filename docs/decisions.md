@@ -14,6 +14,13 @@ Format:
 
 ---
 
+## 2026-10-17 — Website redesign (design system, fonts, leaderboard precision)
+- **Why:** the owner found the UI "silly": broken chart axis labels (an hour shown as a date, e.g. "Sat, 07"), the "now" label colliding with the y-axis, leaderboard ratio metrics rounded to one decimal (WQL 0.087 shown as 0.100), a lopsided Plan a job layout, and the default Vite favicon.
+- **Design system:** `design-system/greenwindow/MASTER.md` (from the ui-ux-pro-max skill, curated). Semantic colour tokens (`canvas`, `surface`, `line`, `ink`, `accent`) in `web/src/index.css`, switching on the OS light/dark setting. Components use the tokens, not `stone-*` light/dark pairs.
+- **New dependencies:** `@fontsource-variable/inter` and `@fontsource-variable/newsreader` (5.3.0, OFL). Self-hosted fonts, so visitors' IPs are not sent to Google Fonts and the privacy notice stays accurate. Newsreader for headings, Inter for UI and numbers.
+- **Pipeline:** `leaderboard.json` now rounds `wql` and `coverage80` to 3 decimals (other metrics stay at 1). Same field types, so this is not a breaking contract change and `schema_version` stays 1.
+- **Leaderboard UI:** one table at a time with a metric switch. Rows are sorted by the longest horizon, the best value per column is marked, benchmarks are tagged, and n stays beside every number.
+
 ## 2026-10-09 — P4 follow-through: web-push, cron via pg_net, calendar
 - **web-push 3.6.7** (+ `@types/web-push` 3.6.4, dev), exact pins: sends VAPID-signed Web Push from `/api/cron/reminders`. Mature, the standard Node implementation of RFC 8030/8291/8292; no paid service. Keys: `VITE_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` (H9).
 - **Cron:** Supabase `pg_cron` + `pg_net` call `/api/cron/{reminders,recurring,ledger}` with `x-cron-secret` read from Vault (`greenwindow_app_url`, `greenwindow_cron_secret`); jobs are no-ops until both secrets exist. The reminders job only calls the app when a reminder is due. Migration 0005.
