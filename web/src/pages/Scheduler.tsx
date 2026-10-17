@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { PanelState, PlanUpdate } from '../../agent/harness/events'
 import { ChatPanel } from '../assistant/ChatPanel'
 import { ASSISTANT_ENABLED } from '../assistant/flag'
@@ -31,6 +32,13 @@ export function validateForm(f: FormState, firstMs: number, endMs: number): Part
 
 export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABLED }: { now?: number; assistantEnabled?: boolean }) {
   const auth = useAuth()
+  const [params, setParams] = useSearchParams()
+  // A question asked on the home page arrives as ?ask=. Keep it for the chat, then drop it from the URL so a reload
+  // does not send it again.
+  const [initialAsk] = useState(() => params.get('ask'))
+  useEffect(() => {
+    if (params.has('ask')) setParams({}, { replace: true })
+  }, [params, setParams])
   const meta = useDataFile('meta')
   const fc = useDataFile('latestForecast')
   const [model, setModel] = useState<string | null>(null)
@@ -198,7 +206,7 @@ export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABL
       {assistantEnabled ? (
         <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]">
           <div className="min-w-0 space-y-3 lg:sticky lg:top-24">
-            <ChatPanel getPanelState={getPanelState} onPlanUpdate={onPlanUpdate} />
+            <ChatPanel getPanelState={getPanelState} onPlanUpdate={onPlanUpdate} initialMessage={initialAsk} />
             <button type="button" onClick={viewPlan} className="btn-secondary w-full lg:hidden">
               View plan
             </button>

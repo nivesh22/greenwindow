@@ -1,13 +1,14 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom'
 import type { PanelState, PlanUpdate, SseEvent } from '../../agent/harness/events'
 import { CONV_ID, EMPTY_TRACE, sseResponse } from '../assistant/testing'
 import { TraceDrawer } from '../assistant/TraceDrawer'
 import { FIXTURES, FIXTURE_NOW } from '../test/fixtures'
 import { HOUR_MS, formatDateTime, toIso, toLocalInput } from '../lib/time'
 import { recommend } from '../scheduler/optimizer'
+import { Home } from './Home'
 import { Scheduler } from './Scheduler'
 
 interface Fc { series: { model: string; points: { ts: string; q10: number | null; q50: number; q90: number | null }[] }[] }
@@ -217,5 +218,53 @@ describe('Scheduler plan actions', () => {
     // an empty deadline is invalid: no plan, so no calendar actions
     await userEvent.clear(within(panel).getByLabelText('Must finish by (UK time)'))
     await waitFor(() => expect(within(panel).queryByText('Add to calendar')).toBeNull())
+  })
+})
+
+describe('Home page assistant entry', () => {
+  function LocationProbe() {
+    return <p data-testid="location">{useLocation().pathname + useLocation().search}</p>
+  }
+
+  it('a starter on the home page opens the planner and sends that question once', async () => {
+    const bodies: { message: string }[] = []
+    stubAll(turn(update()), bodies)
+    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+    render(
+      <QueryClientProvider client={client}>
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path="/" element={<Home now={FIXTURE_NOW} assistantEnabled />} />
+            <Route path="/scheduler" element={<Scheduler now={FIXTURE_NOW} assistantEnabled />} />
+          </Routes>
+          <LocationProbe />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    )
+    const starter = 'Best time to run the dishwasher tomorrow?'
+    await userEvent.click(await screen.findByRole('button', { name: starter }))
+    expect(await screen.findByText('Start later tonight.')).toBeInTheDocument()
+    expect(bodies.map((b) => b.message)).toEqual([starter])
+    await waitFor(() => expect(screen.getByTestId('location')).toHaveTextContent(/^\/scheduler$/))
+  })
+
+  it('typing a question on the home page and pressing the button does the same', async () => {
+    const bodies: { message: string }[] = []
+    stubAll(turn(update()), bodies)
+    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+    render(
+      <QueryClientProvider client={client}>
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path="/" element={<Home now={FIXTURE_NOW} assistantEnabled />} />
+            <Route path="/scheduler" element={<Scheduler now={FIXTURE_NOW} assistantEnabled />} />
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>,
+    )
+    await userEvent.type(await screen.findByLabelText('Ask the assistant'), 'Charge my car by 6am')
+    await userEvent.click(screen.getByRole('button', { name: 'Ask the assistant' }))
+    expect(await screen.findByText('Start later tonight.')).toBeInTheDocument()
+    expect(bodies.map((b) => b.message)).toEqual(['Charge my car by 6am'])
   })
 })

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
+import { ASSISTANT_ENABLED } from '../assistant/flag'
 import { HeaderAccount } from '../assistant/HeaderAccount'
 import { useDataFile } from '../data/hooks'
 import { formatHour, hoursAgo } from '../lib/time'
@@ -89,6 +90,9 @@ function NavItems() {
             }
           >
             {n.label}
+            {n.to === '/scheduler' && ASSISTANT_ENABLED && (
+              <span className="ml-1.5 rounded bg-brand-600 px-1 py-px align-[1px] text-[10px] font-bold tracking-wide text-white">AI</span>
+            )}
           </NavLink>
         </li>
       ))}
