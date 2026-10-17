@@ -54,7 +54,7 @@ export function PlanActions({ startUtc, endUtc, label, description, signedIn, no
 
   return (
     <div aria-label="Plan actions" role="group" className="flex flex-wrap items-center gap-2">
-      <span className="text-xs font-medium text-stone-700 dark:text-stone-300">Add to calendar</span>
+      <span className="text-xs font-medium text-ink-2">Add to calendar</span>
       <CalendarButtons ics={ics} googleUrl={googleCalendarUrl(ev)} startUtc={startUtc} />
       {signedIn && phase.kind !== 'set' && (
         <button type="button" className={actionBtn} disabled={phase.kind === 'sending'} onClick={() => void remind()}>

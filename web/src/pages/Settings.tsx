@@ -17,9 +17,9 @@ interface DeviceRow {
 let rowSeq = 0
 const blankRow = (): DeviceRow => ({ key: `n${++rowSeq}`, name: '', kw: '', hours: '' })
 
-const inputCls = 'w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm dark:border-stone-700 dark:bg-stone-950'
+const inputCls = 'w-full rounded-lg border border-line-strong bg-surface px-3 py-2 text-sm'
 const btnCls =
-  'rounded-lg border border-stone-300 px-3 py-1.5 text-sm font-medium hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-brand-600 disabled:opacity-50 dark:border-stone-700 dark:hover:bg-stone-800'
+  'rounded-lg border border-line-strong px-3 py-1.5 text-sm font-medium hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50'
 
 export function Settings() {
   const auth = useAuth()
@@ -32,12 +32,12 @@ function SignInPrompt({ enabled }: { enabled: boolean }) {
   const [err, setErr] = useState<string | null>(null)
   return (
     <section className="max-w-xl space-y-3">
-      <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
-      <p className="text-stone-600 dark:text-stone-300">Sign in to save your profile and devices.</p>
+      <h1 className="page-title">Settings</h1>
+      <p className="text-ink-2">Sign in to save your profile and devices.</p>
       {enabled ? (
         <button
           type="button"
-          className="rounded-lg bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700"
+          className="btn-primary"
           onClick={() => signInWithGoogle().catch((e: unknown) => setErr(e instanceof Error ? e.message : 'Sign-in failed'))}
         >
           Continue with Google
@@ -46,7 +46,7 @@ function SignInPrompt({ enabled }: { enabled: boolean }) {
         <p className="text-sm">Sign-in is not enabled on this deployment.</p>
       )}
       {err && <p role="alert" className="text-sm text-amber-700 dark:text-amber-300">Sign-in failed ({err}).</p>}
-      <p className="text-xs text-stone-500 dark:text-stone-400">
+      <p className="text-xs text-ink-3">
         We only read your email and name. See the <Link className="underline" to="/privacy">privacy notice</Link>.
       </p>
     </section>
@@ -148,8 +148,8 @@ function SettingsForm({ email }: { email: string | null }) {
   return (
     <div className="max-w-2xl space-y-8">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
-        <p className="text-sm text-stone-600 dark:text-stone-300">
+        <h1 className="page-title">Settings</h1>
+        <p className="text-sm text-ink-2">
           Signed in as {email ?? 'your account'}. <button type="button" className="underline" onClick={() => void signOut()}>Sign out</button>
         </p>
       </header>
@@ -185,9 +185,9 @@ function SettingsForm({ email }: { email: string | null }) {
 
           <fieldset className="space-y-3">
             <legend className="text-lg font-semibold">Saved devices</legend>
-            {rows.length === 0 && <p className="text-sm text-stone-600 dark:text-stone-300">No devices yet.</p>}
+            {rows.length === 0 && <p className="text-sm text-ink-2">No devices yet.</p>}
             {rows.map((r, i) => (
-              <div key={r.key} className="grid grid-cols-2 gap-2 rounded-xl border border-stone-200 p-3 sm:grid-cols-[1fr_6rem_6rem_auto] dark:border-stone-800">
+              <div key={r.key} className="grid grid-cols-2 gap-2 rounded-xl border border-line p-3 sm:grid-cols-[1fr_6rem_6rem_auto]">
                 <div className="col-span-2 sm:col-span-1">
                   <label className="text-xs font-medium" htmlFor={`${r.key}-n`}>Device {i + 1} name</label>
                   <input id={`${r.key}-n`} className={inputCls} value={r.name} maxLength={60} onChange={(e) => setRow(r.key, { name: e.target.value })} />
@@ -221,7 +221,7 @@ function SettingsForm({ email }: { email: string | null }) {
           </fieldset>
 
           <div className="flex items-center gap-3">
-            <button type="submit" disabled={saving} className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50">
+            <button type="submit" disabled={saving} className="btn-primary">
               {saving ? 'Saving…' : 'Save'}
             </button>
           </div>
@@ -237,8 +237,8 @@ function SettingsForm({ email }: { email: string | null }) {
       <PlansSection />
 
       <section className="space-y-3 rounded-2xl border border-red-300 p-4 dark:border-red-800">
-        <h2 className="text-lg font-semibold">Delete my data</h2>
-        <p className="text-sm text-stone-600 dark:text-stone-300">
+        <h2 className="font-display text-xl font-semibold">Delete my data</h2>
+        <p className="text-sm text-ink-2">
           Permanently deletes your account, conversations, profile, devices, plans and feedback. See the{' '}
           <Link className="underline" to="/privacy">privacy notice</Link>.
         </p>

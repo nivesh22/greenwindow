@@ -1,7 +1,7 @@
 import { londonDate } from './london'
 
 export const actionBtn =
-  'inline-block rounded-md border border-stone-300 bg-white px-2 py-1 text-xs font-medium hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-brand-600 disabled:opacity-50 dark:border-stone-700 dark:bg-stone-900 dark:hover:bg-stone-800'
+  'inline-block rounded-md border border-line-strong bg-surface px-2 py-1 text-xs font-medium hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50'
 
 /** Download text as a file from the browser (no server round trip). */
 export function downloadText(filename: string, text: string, type = 'text/calendar;charset=utf-8'): void {

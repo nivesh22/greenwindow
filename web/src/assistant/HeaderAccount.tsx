@@ -22,11 +22,11 @@ export function AccountControls() {
   if (!auth.enabled || !auth.ready) return null
 
   const signedIn = auth.info !== null && !auth.info.isAnonymous
-  const link = 'rounded-lg px-2 py-1 hover:bg-stone-100 hover:text-stone-900 dark:hover:bg-stone-800 dark:hover:text-stone-100'
+  const link = 'rounded-lg px-2 py-1 hover:bg-surface-2 hover:text-ink'
 
   if (signedIn) {
     return (
-      <div className="flex items-center gap-1 text-sm text-stone-600 dark:text-stone-300" aria-label="Account">
+      <div className="flex items-center gap-1 text-sm text-ink-2" aria-label="Account">
         <span className="max-w-[12rem] truncate px-1 text-xs" title={auth.info?.email ?? undefined}>
           {auth.info?.email ?? 'Signed in'}
         </span>
@@ -62,7 +62,7 @@ export function AccountControls() {
         type="button"
         onClick={() => void onSignIn()}
         disabled={busy}
-        className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700 focus-visible:outline-2 focus-visible:outline-brand-600 disabled:opacity-60"
+        className="btn-primary py-1.5"
       >
         {busy ? 'Opening Google…' : 'Sign in'}
       </button>

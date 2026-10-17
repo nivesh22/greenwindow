@@ -1,7 +1,47 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/newsreader/opsz.css";
+
+/* Design system: design-system/greenwindow/MASTER.md. Components use the semantic tokens (canvas, surface, line, ink,
+   accent); raw palette colours are for one-off accents only. Light/dark follows the OS. */
+:root {
+  color-scheme: light dark;
+  --canvas: oklch(0.982 0.005 150);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.962 0.008 150);
+  --line: oklch(0.915 0.01 150);
+  --line-strong: oklch(0.85 0.012 150);
+  --ink: oklch(0.22 0.02 160);
+  --ink-2: oklch(0.4 0.018 160);
+  --ink-3: oklch(0.52 0.014 160);
+  --accent: oklch(0.52 0.13 158);
+  --accent-strong: oklch(0.44 0.11 158);
+  --accent-soft: oklch(0.95 0.04 158);
+  --accent-ink: oklch(0.3 0.07 158);
+  --chart-compare: oklch(0.62 0.15 60);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: oklch(0.155 0.01 165);
+    --surface: oklch(0.195 0.012 165);
+    --surface-2: oklch(0.24 0.014 165);
+    --line: oklch(0.28 0.014 165);
+    --line-strong: oklch(0.36 0.016 165);
+    --ink: oklch(0.96 0.006 150);
+    --ink-2: oklch(0.83 0.01 150);
+    --ink-3: oklch(0.69 0.012 150);
+    --accent: oklch(0.72 0.15 158);
+    --accent-strong: oklch(0.8 0.14 158);
+    --accent-soft: oklch(0.27 0.05 160);
+    --accent-ink: oklch(0.9 0.06 158);
+    --chart-compare: oklch(0.78 0.14 70);
+  }
+}
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Newsreader Variable", ui-serif, Georgia, "Times New Roman", serif;
   --color-brand-50: oklch(0.97 0.03 155);
   --color-brand-100: oklch(0.93 0.06 155);
   --color-brand-500: oklch(0.62 0.15 155);
@@ -10,12 +50,65 @@
   --color-brand-900: oklch(0.3 0.07 155);
 }
 
-:root {
-  color-scheme: light dark;
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
 }
 
 body {
-  @apply bg-stone-50 text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-100;
+  @apply bg-canvas font-sans text-ink antialiased;
+  font-feature-settings: "cv11", "ss01";
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-surface shadow-[0_1px_2px_rgb(0_0_0/0.04)];
+  }
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.08em] text-ink-3 uppercase;
+  }
+  .page-title {
+    @apply font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl;
+  }
+  .lede {
+    @apply mt-3 max-w-2xl text-base leading-relaxed text-ink-2;
+  }
+  .btn-primary {
+    @apply inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-brand-600 px-3.5 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-secondary {
+    @apply inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-line-strong bg-surface px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .field {
+    @apply w-full rounded-lg border border-line-strong bg-surface px-3 py-2 text-ink transition-colors placeholder:text-ink-3 hover:border-ink-3 focus-visible:border-accent focus-visible:outline-2 focus-visible:outline-accent/30;
+  }
+  .data-table th[scope="col"] {
+    @apply px-4 py-2.5 text-xs font-medium text-ink-3;
+  }
+  .data-table tbody tr {
+    @apply border-t border-line transition-colors hover:bg-surface-2/60;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Recharts focus outline is noisy on click; keep it for keyboard users only. */

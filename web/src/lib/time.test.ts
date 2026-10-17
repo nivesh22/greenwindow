@@ -1,4 +1,4 @@
-import { formatHour, fromLocalInput, toIso, toLocalInput } from './time'
+import { axisTicks, formatHour, formatTick, fromLocalInput, toIso, toLocalInput } from './time'
 
 const hoursFrom = (startIso: string, n: number) =>
   Array.from({ length: n }, (_, i) => toIso(Date.parse(startIso) + i * 3_600_000))
@@ -22,5 +22,17 @@ describe('Europe/London display on clock-change days', () => {
     expect(fromLocalInput('2026-07-01T18:00')).toBe(ms)
     expect(fromLocalInput('2026-12-01T18:00')).toBe(Date.parse('2026-12-01T18:00:00Z'))
     expect(fromLocalInput('nonsense')).toBeNull()
+  })
+})
+
+describe('axis ticks', () => {
+  it('falls on UK 00/06/12/18 and labels midnight with the day', () => {
+    // 2026-10-17 21:00Z = 22:00 BST; next UK midnight is 2026-10-17T23:00Z.
+    const ticks = axisTicks(Date.parse('2026-10-17T21:00:00Z'), Date.parse('2026-10-18T12:00:00Z'))
+    expect(ticks.map((t) => formatTick(t))).toEqual(['Sun 18', '06:00', '12:00'])
+  })
+  it('keeps 6-hourly UK ticks across the October clock change', () => {
+    const ticks = axisTicks(Date.parse('2026-10-24T22:00:00Z'), Date.parse('2026-10-25T13:00:00Z'))
+    expect(ticks.map((t) => formatTick(t))).toEqual(['Sun 25', '06:00', '12:00'])
   })
 })

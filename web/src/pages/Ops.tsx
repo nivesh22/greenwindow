@@ -13,17 +13,17 @@ const th = 'px-2 py-1 text-left font-medium'
 const td = 'px-2 py-1 tabular-nums'
 
 function Table({ caption, head, rows }: { caption: string; head: string[]; rows: (string | number)[][] }) {
-  if (rows.length === 0) return <p className="text-sm text-stone-600 dark:text-stone-300">No data yet.</p>
+  if (rows.length === 0) return <p className="text-sm text-ink-2">No data yet.</p>
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-xs">
         <caption className="sr-only">{caption}</caption>
-        <thead className="border-b border-stone-200 dark:border-stone-700">
+        <thead className="border-b border-line">
           <tr>{head.map((h) => <th key={h} scope="col" className={th}>{h}</th>)}</tr>
         </thead>
         <tbody>
           {rows.map((r, i) => (
-            <tr key={i} className="border-b border-stone-100 last:border-0 dark:border-stone-800">
+            <tr key={i} className="border-b border-line last:border-0">
               {r.map((c, j) => (j === 0 ? <th key={j} scope="row" className={`${th} break-all`}>{c}</th> : <td key={j} className={td}>{c}</td>))}
             </tr>
           ))}
@@ -38,7 +38,7 @@ export function Ops() {
   if (state.status !== 'ok') {
     return (
       <div className="space-y-3">
-        <h1 className="text-2xl font-bold tracking-tight">Ops</h1>
+        <h1 className="page-title">Ops</h1>
         <AdminGate state={state} />
       </div>
     )
@@ -58,8 +58,8 @@ export function OpsView({ d }: { d: OpsResponse }) {
   return (
     <div className="space-y-4">
       <header>
-        <h1 className="text-2xl font-bold tracking-tight">Ops</h1>
-        <p className="text-xs text-stone-500 dark:text-stone-400">
+        <h1 className="page-title">Ops</h1>
+        <p className="text-xs text-ink-3">
           Last {d.days} days, generated {formatDateTime(d.generated_at_utc)}. Model prices checked {d.prices_checked}.
         </p>
       </header>
@@ -88,7 +88,7 @@ export function OpsView({ d }: { d: OpsResponse }) {
 
         <Panel title="Free-tier requests per day" note={`Estimated daily request allowance: ${d.free_tier_rpd_estimate}. Dashed line is that estimate; the real limit may differ.`}>
           <DayBars data={freeData} series={[{ key: 'free', label: 'Free-tier requests', color: PALETTE[2]! }]} limit={{ y: d.free_tier_rpd_estimate, label: 'RPD estimate' }} />
-          <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
+          <p className="mt-1 text-xs text-ink-3">
             LLM requests in the window: {sum(d.daily.map((x) => x.llm_requests))}, of which free tier {sum(d.daily.map((x) => x.free_tier_requests))}.
           </p>
         </Panel>
@@ -119,7 +119,7 @@ export function OpsView({ d }: { d: OpsResponse }) {
           <div className="space-y-4">
             {d.gates.map((g) => (
               <div key={g.gate} className="space-y-1">
-                <h3 className="text-sm font-medium">{g.gate} <span className="font-normal text-stone-500 dark:text-stone-400">(n = {g.n})</span></h3>
+                <h3 className="text-sm font-medium">{g.gate} <span className="font-normal text-ink-3">(n = {g.n})</span></h3>
                 {Object.entries(g.by_source).map(([k, n]) => <ShareBar key={k} label={`source: ${k}`} n={n} total={g.n} />)}
                 {Object.entries(g.by_choice).map(([k, n]) => <ShareBar key={k} label={`choice: ${k}`} n={n} total={g.n} />)}
                 <Histogram buckets={g.confidence_hist} label={`${g.gate} confidence histogram`} />
@@ -149,7 +149,7 @@ export function OpsView({ d }: { d: OpsResponse }) {
               {d.thumbs_down.map((t) => (
                 <li key={t.turn_id}>
                   <Link className="underline" to={`/ops/trace/${t.turn_id}`}>{formatDateTime(t.created_at_utc)}</Link>
-                  {t.comment && <span className="ml-2 break-words text-stone-600 dark:text-stone-300">{t.comment}</span>}
+                  {t.comment && <span className="ml-2 break-words text-ink-2">{t.comment}</span>}
                 </li>
               ))}
             </ul>

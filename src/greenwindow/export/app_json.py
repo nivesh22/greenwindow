@@ -41,6 +41,18 @@ def r1(x: Any) -> float | None:
     return round(float(x), 1)
 
 
+# Ratio metrics are small numbers; one decimal would flatten them (0.087 -> 0.1).
+_THREE_DP = {"wql", "coverage80"}
+
+
+def leaderboard_value(key: str, v: Any) -> Any:
+    if not isinstance(v, float):
+        return v
+    if key in _THREE_DP:
+        return None if math.isnan(v) else round(v, 3)
+    return r1(v)
+
+
 def build_files(
     observations: pd.DataFrame,
     snapshots: pd.DataFrame,
@@ -105,7 +117,7 @@ def build_files(
             "generated_at_utc": gen,
             "window_days": LEADERBOARD_DAYS,
             "n_runs": n_runs,
-            "rows": [{k: (r1(v) if isinstance(v, float) else v) for k, v in row.items()} for row in rows],
+            "rows": [{k: leaderboard_value(k, v) for k, v in row.items()} for row in rows],
         },
     }
 

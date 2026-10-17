@@ -19,13 +19,13 @@ const FAMILY_LABEL: Record<ModelInfo['family'], string> = {
 export function ModelPicker({ id, label, models, value, onChange, allowNone }: Props) {
   const families = (['ensemble', 'foundation', 'classical', 'benchmark'] as const).filter((f) => models.some((m) => m.family === f))
   return (
-    <label htmlFor={id} className="flex flex-col gap-1 text-sm">
-      <span className="font-medium text-stone-700 dark:text-stone-300">{label}</span>
+    <label htmlFor={id} className="flex flex-col gap-1.5 text-sm">
+      <span className="font-medium text-ink">{label}</span>
       <select
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-lg border border-stone-300 bg-white px-3 py-2 text-stone-900 focus-visible:outline-2 focus-visible:outline-brand-600 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100"
+        className="field cursor-pointer"
       >
         {allowNone && <option value="">None</option>}
         {families.map((f) => (

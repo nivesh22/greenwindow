@@ -49,7 +49,7 @@ export function OpsTrace() {
   return (
     <div className="space-y-4">
       <p className="text-sm"><Link className="underline" to="/ops">Back to Ops</Link></p>
-      <h1 className="text-2xl font-bold tracking-tight">Turn trace</h1>
+      <h1 className="page-title">Turn trace</h1>
       {state.status === 'ok' ? <TraceView d={state.data} /> : <AdminGate state={state} />}
     </div>
   )
@@ -58,7 +58,7 @@ export function OpsTrace() {
 export function TraceView({ d }: { d: AdminTraceResponse }) {
   const t = d.turn
   const depths = spanDepths(d.spans)
-  const box = 'rounded-2xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900'
+  const box = 'card p-4'
   return (
     <div className="space-y-4">
       <section aria-label="Turn" className={box}>
@@ -75,7 +75,7 @@ export function TraceView({ d }: { d: AdminTraceResponse }) {
             ['Turn', t.id],
           ].map(([k, v]) => (
             <div key={k} className="min-w-0">
-              <dt className="text-stone-500 dark:text-stone-400">{k}</dt>
+              <dt className="text-ink-3">{k}</dt>
               <dd className="font-medium break-all">{v}</dd>
             </div>
           ))}
@@ -89,15 +89,15 @@ export function TraceView({ d }: { d: AdminTraceResponse }) {
 
       <section aria-label="Conversation" className={`${box} space-y-3 text-sm`}>
         <div>
-          <h2 className="text-xs font-semibold text-stone-500 dark:text-stone-400">User message</h2>
+          <h2 className="text-xs font-semibold text-ink-3">User message</h2>
           <p className="whitespace-pre-wrap break-words">{d.user_message ?? '(not stored)'}</p>
         </div>
         <div>
-          <h2 className="text-xs font-semibold text-stone-500 dark:text-stone-400">Answer</h2>
+          <h2 className="text-xs font-semibold text-ink-3">Answer</h2>
           <p className="whitespace-pre-wrap break-words">{d.answer ?? '(none)'}</p>
         </div>
         <div>
-          <h2 className="text-xs font-semibold text-stone-500 dark:text-stone-400">Feedback</h2>
+          <h2 className="text-xs font-semibold text-ink-3">Feedback</h2>
           {d.feedback.length === 0 ? <p>None.</p> : (
             <ul>
               {d.feedback.map((f, i) => (
@@ -113,9 +113,9 @@ export function TraceView({ d }: { d: AdminTraceResponse }) {
         {d.spans.length === 0 && <p className="text-sm">No spans recorded.</p>}
         <ol className="mt-2 space-y-1">
           {ordered(d.spans).map((s) => (
-            <li key={s.id} style={{ marginLeft: `${Math.min(depths.get(s.id) ?? 0, 6) * 1}rem` }} className="rounded-lg border border-stone-200 p-2 text-xs dark:border-stone-700">
+            <li key={s.id} style={{ marginLeft: `${Math.min(depths.get(s.id) ?? 0, 6) * 1}rem` }} className="rounded-lg border border-line p-2 text-xs">
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
-                <span className="rounded bg-stone-100 px-1.5 py-0.5 font-medium dark:bg-stone-800">{s.kind}</span>
+                <span className="rounded bg-surface-2 px-1.5 py-0.5 font-medium">{s.kind}</span>
                 <span className="font-medium break-all">{s.name}</span>
                 <span className="tabular-nums">{Math.round(s.duration_ms)} ms</span>
                 <span className={s.status === 'error' ? 'font-semibold text-red-700 dark:text-red-400' : ''}>{s.status === 'error' ? 'error' : 'ok'}</span>
@@ -125,7 +125,7 @@ export function TraceView({ d }: { d: AdminTraceResponse }) {
               {Object.keys(s.attrs).length > 0 && (
                 <details className="mt-1">
                   <summary className="cursor-pointer">Attributes</summary>
-                  <pre className="mt-1 max-h-60 overflow-auto rounded bg-stone-100 p-2 whitespace-pre-wrap break-words dark:bg-stone-800">{JSON.stringify(s.attrs, null, 2)}</pre>
+                  <pre className="mt-1 max-h-60 overflow-auto rounded bg-surface-2 p-2 whitespace-pre-wrap break-words">{JSON.stringify(s.attrs, null, 2)}</pre>
                 </details>
               )}
             </li>

@@ -96,7 +96,10 @@ describe('Leaderboard', () => {
     ]
     stubFetch({ 'leaderboard.json': { ...(FIXTURES['leaderboard.json'] as object), rows, n_runs: 2 } })
     wrap(<Leaderboard />)
-    expect(await screen.findAllByText('n=12')).toHaveLength(6)
+    expect(await screen.findAllByText('n=12')).toHaveLength(2)
+    await userEvent.click(screen.getByRole('radio', { name: 'Band coverage' }))
+    expect(screen.getAllByText('n=12')).toHaveLength(2)
+    expect(screen.getByText('75%')).toBeInTheDocument()
     expect(screen.getByText(/provisional/)).toBeInTheDocument()
   })
 })
