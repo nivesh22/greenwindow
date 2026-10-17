@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ForecastChart } from '../components/ForecastChart'
 import { IntensityStrip } from '../components/IntensityStrip'
+import { AssistantPromo } from '../assistant/AssistantPromo'
+import { ASSISTANT_ENABLED } from '../assistant/flag'
 import { ModelPicker } from '../components/ModelPicker'
 import { ErrorPanel, Loading } from '../components/Status'
 import { useDataFile } from '../data/hooks'
@@ -9,7 +11,7 @@ import { forecastModels, pickDefault } from '../data/models'
 import { fmtIntensity } from '../lib/format'
 import { HOUR_MS, formatDateTime, toMs } from '../lib/time'
 
-export function Home({ now = Date.now() }: { now?: number }) {
+export function Home({ now = Date.now(), assistantEnabled = ASSISTANT_ENABLED }: { now?: number; assistantEnabled?: boolean }) {
   const meta = useDataFile('meta')
   const fc = useDataFile('latestForecast')
   const obs = useDataFile('recentObservations')
@@ -59,11 +61,13 @@ export function Home({ now = Date.now() }: { now?: number }) {
               <span className="text-sm">gCO₂/kWh forecast (P50)</span>
             </p>
             <Link to="/scheduler" className="btn-primary mt-5 w-full sm:w-auto">
-              Find the cleanest start time for a job <span aria-hidden>→</span>
+              {assistantEnabled ? 'Plan a job with the AI assistant' : 'Find the cleanest start time for a job'} <span aria-hidden>→</span>
             </Link>
           </div>
         )}
       </section>
+
+      {assistantEnabled && <AssistantPromo />}
 
       <section aria-label="Summary" className="grid gap-3 sm:grid-cols-3">
         <Stat label="Latest measured intensity" value={latest ? fmtIntensity(latest.ci_actual) : '–'} unit="gCO₂/kWh"
@@ -113,7 +117,7 @@ export function Home({ now = Date.now() }: { now?: number }) {
       </section>
 
       <section aria-label="More" className="grid gap-3 sm:grid-cols-3">
-        <NextLink to="/scheduler" title="Plan a job" body="Give a duration and a deadline; get the start time with the lowest forecast intensity, and whether it is robust." />
+        <NextLink to="/scheduler" title={assistantEnabled ? 'Plan a job with the AI assistant' : 'Plan a job'} body="Describe the job or fill in the form; get the start time with the lowest forecast intensity, and whether it is robust." />
         <NextLink to="/leaderboard" title="Live leaderboard" body="Every forecast is stored and scored against what happened, next to the seasonal-naive benchmark." />
         <NextLink to="/backtest" title="Backtest" body="How each model did on 90 past start times, including the negative results." />
       </section>

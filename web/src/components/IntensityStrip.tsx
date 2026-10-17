@@ -9,7 +9,7 @@ const STOPS = [
 ]
 
 /** Colour for a position r in [0, 1] between the lowest and highest hour shown. */
-export function rampColor(r: number): string {
+function rampColor(r: number): string {
   const x = Math.min(1, Math.max(0, r)) * (STOPS.length - 1)
   const i = Math.min(STOPS.length - 2, Math.floor(x))
   const f = x - i

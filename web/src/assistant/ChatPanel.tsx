@@ -1,4 +1,4 @@
-import { useId, useState, type KeyboardEvent } from 'react'
+import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react'
 import type { PanelState, PlanUpdate } from '../../agent/harness/events'
 import { ChatActions } from './ChatActions'
 import { AccountMenu } from './AccountMenu'
@@ -12,9 +12,11 @@ import { useChat } from './useChat'
 interface Props {
   getPanelState?: () => PanelState | null
   onPlanUpdate?: (u: PlanUpdate) => void
+  /** Sent once on mount, e.g. a question typed on the home page. */
+  initialMessage?: string | null
 }
 
-export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
+export function ChatPanel({ getPanelState = () => null, onPlanUpdate, initialMessage }: Props) {
   const chat = useChat({ getPanelState, onPlanUpdate })
   const auth = useAuth()
   const [draft, setDraft] = useState('')
@@ -29,6 +31,16 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate }: Props) {
       if (!ok) setDraft((d) => d || text)
     })
   }
+  const initialSent = useRef(false)
+  const submitRef = useRef(submit)
+  useEffect(() => {
+    submitRef.current = submit
+  })
+  useEffect(() => {
+    if (!initialMessage || initialSent.current) return
+    initialSent.current = true // a ref, so StrictMode's second effect run does not send twice
+    submitRef.current(initialMessage)
+  }, [initialMessage])
   const onKey = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault()
