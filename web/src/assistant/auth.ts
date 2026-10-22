@@ -94,7 +94,8 @@ async function getTurnstileToken(sitekey: string): Promise<string> {
         sitekey,
         appearance: 'interaction-only',
         callback: (t: string) => resolve(t),
-        'error-callback': () => reject(new Error('Verification failed')),
+        // Cloudflare passes an error code, e.g. 110200 when this hostname is not on the widget's allowed list.
+        'error-callback': (code?: string) => reject(new Error(code ? `Verification failed, code ${code}` : 'Verification failed')),
         'timeout-callback': () => reject(new Error('Verification timed out')),
       })
     })

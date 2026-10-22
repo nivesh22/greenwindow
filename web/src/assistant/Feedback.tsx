@@ -24,19 +24,28 @@ export function Feedback({ turnId }: { turnId: string }) {
     }
   }
 
-  if (phase === 'done') return <p className="mt-1 text-xs text-ink-3">Thanks for the feedback.</p>
+  if (phase === 'done') return <p className="px-1 text-xs text-ink-3">Thanks for the feedback.</p>
 
   const btn =
     'rounded-md border border-line-strong px-2 py-0.5 text-xs hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50'
+  const thumb = (on: boolean) =>
+    `grid h-7 w-7 cursor-pointer place-items-center rounded-md transition-colors hover:bg-surface-2 hover:text-ink focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50 ${
+      on ? 'text-accent' : 'text-ink-3'
+    }`
+  const icon = (down: boolean) => (
+    <svg aria-hidden="true" viewBox="0 0 20 20" className={`h-4 w-4 ${down ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6.5 9v7H4V9zM6.5 9l3-5.5a1.6 1.6 0 0 1 2.9 1.2L11.6 8h3.6a1.5 1.5 0 0 1 1.5 1.8l-1.2 5A1.5 1.5 0 0 1 14 16H6.5" />
+    </svg>
+  )
   return (
-    <div className="mt-1 text-xs">
-      <div className="flex items-center gap-2">
-        <span className="text-ink-3">Was this helpful?</span>
-        <button type="button" className={btn} aria-label="Helpful" disabled={phase === 'sending'} onClick={() => { setRating(1); setPhase('comment') }}>
-          <span aria-hidden="true">👍</span>
+    <div className="text-xs">
+      <div className="flex items-center">
+        <span className="sr-only">Was this helpful?</span>
+        <button type="button" className={thumb(rating === 1)} aria-label="Helpful" title="Helpful" disabled={phase === 'sending'} onClick={() => { setRating(1); setPhase('comment') }}>
+          {icon(false)}
         </button>
-        <button type="button" className={btn} aria-label="Not helpful" disabled={phase === 'sending'} onClick={() => { setRating(-1); setPhase('comment') }}>
-          <span aria-hidden="true">👎</span>
+        <button type="button" className={thumb(rating === -1)} aria-label="Not helpful" title="Not helpful" disabled={phase === 'sending'} onClick={() => { setRating(-1); setPhase('comment') }}>
+          {icon(true)}
         </button>
       </div>
       {(phase === 'comment' || phase === 'error' || phase === 'sending') && rating !== null && (

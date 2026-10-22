@@ -20,8 +20,8 @@ const badge = 'rounded px-1.5 py-0.5 text-xs font-medium'
 export function TraceDrawer({ trace }: { trace: TraceSummary }) {
   const { gates, tools, llm_calls: calls, totals } = trace
   return (
-    <details className="mt-1 max-w-[92%] text-xs text-ink-2">
-      <summary className="cursor-pointer rounded px-1 py-0.5 font-medium focus-visible:outline-2 focus-visible:outline-accent">
+    <details className="max-w-[92%] text-xs text-ink-3 open:basis-full">
+      <summary className="cursor-pointer rounded-md px-1.5 py-1 hover:bg-surface-2 hover:text-ink focus-visible:outline-2 focus-visible:outline-accent">
         How I got this
       </summary>
       <div className="mt-2 space-y-3 rounded-lg border border-line p-3">
