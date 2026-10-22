@@ -8,7 +8,9 @@ import { FIXTURES, FIXTURE_NOW, clone, stubFetch } from '../test/fixtures'
 import { Backtest } from './Backtest'
 import { Home } from './Home'
 import { Leaderboard } from './Leaderboard'
+import { Privacy } from './Privacy'
 import { Scheduler } from './Scheduler'
+import { Terms } from './Terms'
 
 function wrap(ui: ReactNode) {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
@@ -132,5 +134,22 @@ describe('Backtest', () => {
     wrap(<Backtest />)
     await screen.findByRole('note')
     expect(spy).toHaveBeenCalledWith('/backtest_summary.json')
+  })
+})
+
+describe('Legal pages', () => {
+  it('privacy policy links to terms and settings and never claims CO2 savings', () => {
+    wrap(<Privacy />)
+    expect(screen.getByRole('heading', { level: 1, name: 'Privacy policy' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Terms of service' })).toHaveAttribute('href', '/terms')
+    expect(screen.getByRole('link', { name: 'Settings' })).toHaveAttribute('href', '/settings')
+    expect(document.body.textContent).not.toMatch(/saved|avoided/i)
+  })
+
+  it('terms state forecasts are estimates and link to the privacy policy', () => {
+    wrap(<Terms />)
+    expect(screen.getByRole('heading', { level: 1, name: 'Terms of service' })).toBeInTheDocument()
+    expect(screen.getByText(/not a certified\s+carbon saving/)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Privacy policy' })).toHaveAttribute('href', '/privacy')
   })
 })

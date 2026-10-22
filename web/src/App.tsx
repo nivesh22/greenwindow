@@ -13,6 +13,7 @@ const Settings = lazy(() => import('./pages/Settings').then((m) => ({ default: m
 const Ops = lazy(() => import('./pages/Ops').then((m) => ({ default: m.Ops })))
 const OpsTrace = lazy(() => import('./pages/OpsTrace').then((m) => ({ default: m.OpsTrace })))
 const Privacy = lazy(() => import('./pages/Privacy').then((m) => ({ default: m.Privacy })))
+const Terms = lazy(() => import('./pages/Terms').then((m) => ({ default: m.Terms })))
 
 export function AppRoutes() {
   return (
@@ -36,6 +37,14 @@ export function AppRoutes() {
           element={
             <Suspense fallback={<p role="status">Loading…</p>}>
               <Privacy />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/terms"
+          element={
+            <Suspense fallback={<p role="status">Loading…</p>}>
+              <Terms />
             </Suspense>
           }
         />

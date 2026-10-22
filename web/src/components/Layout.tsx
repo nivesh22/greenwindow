@@ -67,6 +67,7 @@ export function Layout({ children }: { children: ReactNode }) {
           <ul className="flex gap-4 sm:flex-col sm:gap-1.5 sm:text-right">
             <li><NavLink className={footLink} to="/about">About &amp; limits</NavLink></li>
             <li><NavLink className={footLink} to="/privacy">Privacy</NavLink></li>
+            <li><NavLink className={footLink} to="/terms">Terms</NavLink></li>
             <li><a className={footLink} href="https://github.com/nivesh22/greenwindow">Source on GitHub</a></li>
           </ul>
         </div>
