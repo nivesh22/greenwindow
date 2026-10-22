@@ -29,7 +29,7 @@ describe('Home', () => {
     wrap(<Home now={FIXTURE_NOW} />)
     const picker = await screen.findByLabelText('Forecast model')
     expect(picker).toHaveValue('chronos2_cov')
-    expect(screen.getByRole('figure', { name: /Chronos-2 \+ weather/ })).toBeInTheDocument()
+    expect(await screen.findByRole('figure', { name: /Chronos-2 \+ weather/ })).toBeInTheDocument() // chart loads lazily
     await userEvent.selectOptions(picker, 'sarimax_wx')
     expect(screen.getByRole('figure', { name: /SARIMAX \+ weather/ })).toBeInTheDocument()
   })
