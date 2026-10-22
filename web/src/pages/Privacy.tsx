@@ -35,13 +35,13 @@ export function Privacy() {
       <h1 className="page-title">Privacy policy</h1>
       <p className="text-ink-3 text-sm">Last updated {PRIVACY_UPDATED}</p>
       <p className="text-ink-2">
-        GreenWindow is a free, non-commercial portfolio project run by an individual developer (&ldquo;we&rdquo;). The forecast
+        GreenWindow is a free, non-commercial portfolio project run by Nivesh Kannan Elangovanraaj (&ldquo;we&rdquo;). The forecast
         pages store nothing about you. This policy mainly covers the optional assistant and accounts.
       </p>
 
       <Section title="Who is responsible">
         <p>
-          The GreenWindow maintainer is the data controller. Contact details are under <a className="underline" href="#contact">Contact</a>.
+          Nivesh Kannan Elangovanraaj, who runs GreenWindow, is the data controller. Contact details are under <a className="underline" href="#contact">Contact</a>.
         </p>
       </Section>
 

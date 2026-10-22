@@ -18,7 +18,7 @@ export function Terms() {
       <h1 className="page-title">Terms of service</h1>
       <p className="text-ink-3 text-sm">Last updated {TERMS_UPDATED}</p>
       <p className="text-ink-2">
-        GreenWindow is a free, non-commercial portfolio project run by an individual developer (&ldquo;we&rdquo;). By using this
+        GreenWindow is a free, non-commercial portfolio project run by Nivesh Kannan Elangovanraaj (&ldquo;we&rdquo;). By using this
         site you agree to these terms. If you don&apos;t agree, please don&apos;t use it.
       </p>
 
