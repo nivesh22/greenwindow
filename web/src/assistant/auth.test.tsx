@@ -354,15 +354,16 @@ describe('Settings', () => {
 
 describe('Privacy', () => {
   it('covers storage, retention, processors, scopes, deletion and contact', () => {
-    render(<Privacy />)
-    for (const h of ['What is stored', 'How long', 'Who processes it', 'Google sign-in', 'Deleting your data', 'Contact']) {
+    render(<MemoryRouter><Privacy /></MemoryRouter>)
+    for (const h of ['What is stored', 'How long', 'Who processes it', 'Google sign-in', 'Your rights', 'Contact']) {
       expect(screen.getByRole('heading', { name: h })).toBeInTheDocument()
     }
     expect(screen.getByText(/90 days/)).toBeInTheDocument()
     expect(screen.getByText(/Supabase \(EU, Ireland\)/)).toBeInTheDocument()
     expect(screen.getByText(/Google Gemini API/)).toBeInTheDocument()
-    expect(screen.getByText(/Cloudflare Turnstile/)).toBeInTheDocument()
+    expect(screen.getAllByText(/Cloudflare Turnstile/).length).toBeGreaterThan(0)
     expect(screen.getByText(/email and profile scopes only/)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'GitHub repository' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Settings' })).toHaveAttribute('href', '/settings')
   })
 })

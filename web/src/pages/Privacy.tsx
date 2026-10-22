@@ -1,3 +1,8 @@
+import type { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
+
+export const PRIVACY_UPDATED = '21 October 2026'
+
 const PROCESSORS: [string, string][] = [
   [
     'Google Gemini API',
@@ -6,7 +11,8 @@ const PROCESSORS: [string, string][] = [
   ['Vercel AI Gateway, routing to Anthropic', 'Fallback model provider for assistant answers when the primary model is unavailable.'],
   ['TypeSafe (Jev)', 'Evaluates the safety rules that check requests and answers.'],
   ['Supabase (EU, Ireland)', 'Stores accounts, conversations and the data below.'],
-  ['Vercel', 'Hosts this site and the assistant API.'],
+  ['Vercel', 'Hosts this site and the assistant API. Like any web host, it sees your IP address and browser details when you load a page.'],
+  ['GitHub', 'Serves the published forecast files your browser downloads, so it sees the same request details.'],
   ['Cloudflare Turnstile', 'Checks that a first-time visitor is human before a guest session starts.'],
   [
     'Langfuse (EU)',
@@ -14,17 +20,34 @@ const PROCESSORS: [string, string][] = [
   ],
 ]
 
+function Section({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section>
+      <h2 className="font-display text-xl font-semibold">{title}</h2>
+      <div className="mt-2 space-y-2 text-sm text-ink-2">{children}</div>
+    </section>
+  )
+}
+
 export function Privacy() {
   return (
     <article className="max-w-3xl space-y-6">
-      <h1 className="page-title">Privacy</h1>
+      <h1 className="page-title">Privacy policy</h1>
+      <p className="text-ink-3 text-sm">Last updated {PRIVACY_UPDATED}</p>
       <p className="text-ink-2">
-        The forecast pages store nothing about you. This notice covers the optional assistant and accounts.
+        GreenWindow is a free, non-commercial portfolio project run by Nivesh Kannan Elangovanraaj (&ldquo;we&rdquo;). The forecast
+        pages store nothing about you. This policy mainly covers the optional assistant and accounts.
       </p>
 
-      <section>
-        <h2 className="font-display text-xl font-semibold">What is stored</h2>
-        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-ink-2">
+      <Section title="Who is responsible">
+        <p>
+          Nivesh Kannan Elangovanraaj, who runs GreenWindow, is the data controller. Contact details are under <a className="underline" href="#contact">Contact</a>.
+        </p>
+      </Section>
+
+      <Section title="What is stored">
+        <ul className="list-disc space-y-1 pl-5">
+          <li>Account: your e-mail address and name from Google, if you sign in. Guests get a random ID only.</li>
           <li>Messages: what you type to the assistant and its answers.</li>
           <li>Profile: display name, default risk mode and quiet hours, if you set them.</li>
           <li>Devices: names and power ratings you save.</li>
@@ -36,54 +59,84 @@ export function Privacy() {
           </li>
           <li>Feedback: thumbs and comments you send.</li>
           <li>Traces: which tools ran, timings and token counts for each assistant turn, used to debug and measure quality.</li>
+          <li>
+            Abuse limits: a salted one-way hash of your IP address, used to cap how many guest sessions and messages one network
+            can start. We do not store the IP address itself.
+          </li>
         </ul>
-      </section>
+        <p>Please don&apos;t type sensitive personal information into the assistant. It doesn&apos;t need any.</p>
+      </Section>
 
-      <section>
-        <h2 className="font-display text-xl font-semibold">How long</h2>
-        <p className="mt-2 text-sm text-ink-2">
-          Data is kept for 90 days. Guest (anonymous) users who have been idle for 30 days are deleted sooner.
+      <Section title="Why we use it (legal basis)">
+        <ul className="list-disc space-y-1 pl-5">
+          <li>To provide the assistant and your account when you choose to use them (performing the service you asked for).</li>
+          <li>To keep the service secure, stop abuse and keep costs under a fixed budget (legitimate interests).</li>
+          <li>To debug and improve answer quality from traces and feedback (legitimate interests).</li>
+          <li>To send reminders only after you turn notifications on (consent, which you can withdraw at any time).</li>
+        </ul>
+        <p>We do not sell your data, show ads, or use it to profile you for marketing.</p>
+      </Section>
+
+      <Section title="Cookies and browser storage">
+        <p>
+          There are no advertising or analytics cookies. If you use the assistant, your browser keeps a sign-in session in local
+          storage and a guest token in session storage. Cloudflare Turnstile may set its own cookies to tell humans from bots.
+          Clearing your site data removes what we store in your browser.
         </p>
-      </section>
+      </Section>
 
-      <section>
-        <h2 className="font-display text-xl font-semibold">Who processes it</h2>
-        <ul className="mt-2 space-y-2 text-sm">
+      <Section title="How long">
+        <p>Data is kept for 90 days. Guest (anonymous) users who have been idle for 30 days are deleted sooner.</p>
+      </Section>
+
+      <Section title="Who processes it">
+        <ul className="space-y-2">
           {PROCESSORS.map(([n, d]) => (
             <li key={n}>
-              <span className="font-medium">{n}.</span> <span className="text-ink-2">{d}</span>
+              <span className="font-medium text-ink">{n}.</span> {d}
             </li>
           ))}
         </ul>
-      </section>
+        <p>Some of these providers process data outside the UK and EU, under their own standard data protection terms.</p>
+      </Section>
 
-      <section>
-        <h2 className="font-display text-xl font-semibold">Google sign-in</h2>
-        <p className="mt-2 text-sm text-ink-2">
-          Signing in with Google requests the email and profile scopes only. Nothing else in your Google account is read.
+      <Section title="Google sign-in">
+        <p>Signing in with Google requests the email and profile scopes only. Nothing else in your Google account is read.</p>
+      </Section>
+
+      <Section title="Your rights">
+        <p>
+          Under UK and EU data protection law you can ask to access, correct, delete or export your data, object to how it is
+          used, or withdraw consent. Signed-in users can delete their account and all data from{' '}
+          <Link className="underline" to="/settings">Settings</Link> (Delete my data). Guests can clear their browser data; guest
+          records are removed after 30 idle days. You can also complain to the UK Information Commissioner&apos;s Office (ico.org.uk)
+          or your local regulator.
         </p>
-      </section>
+      </Section>
 
-      <section>
-        <h2 className="font-display text-xl font-semibold">Deleting your data</h2>
-        <p className="mt-2 text-sm text-ink-2">
-          Signed-in users can delete their account and all data from <a className="underline" href="/settings">Settings</a> (Delete my
-          data). Guests can clear their browser data; guest records are removed after 30 idle days.
+      <Section title="Children">
+        <p>The assistant is not meant for children under 13, and we do not knowingly collect their data.</p>
+      </Section>
+
+      <Section title="Changes">
+        <p>
+          If this policy changes, the date at the top changes too. The full history is public in the source repository.
         </p>
-      </section>
+      </Section>
 
-      <section>
-        <h2 className="font-display text-xl font-semibold">Limits of the service</h2>
-        <p className="mt-2 text-sm text-ink-2">
-          Great Britain national grid only. Everything shown is an estimate of average grid intensity from a forecast, not a guarantee.
+      <Section title="Limits of the service">
+        <p>
+          Great Britain national grid only. Everything shown is an estimate of average grid intensity from a forecast, not a
+          guarantee. See also the <Link className="underline" to="/terms">Terms of service</Link>.
         </p>
-      </section>
+      </Section>
 
-      <section>
+      <section id="contact">
         <h2 className="font-display text-xl font-semibold">Contact</h2>
         <p className="mt-2 text-sm text-ink-2">
           Open an issue on the{' '}
-          <a className="underline" href="https://github.com/nivesh22/greenwindow/issues">GitHub repository</a>.
+          <a className="underline" href="https://github.com/nivesh22/greenwindow/issues">GitHub repository</a>. Please don&apos;t
+          post personal data in a public issue; ask for a private contact instead.
         </p>
       </section>
     </article>
