@@ -8,6 +8,8 @@ export interface AuthUser {
   userId: string
   isAnonymous: boolean
   email: string | null
+  /** Name from the Google identity (`profile` scope), used to fill an empty display_name. */
+  name?: string | null
 }
 
 export interface Profile {

@@ -1,13 +1,17 @@
 // GET/PUT /api/profile: profile and saved devices. Signed-in (non-anonymous) users only.
 import { profileUpdateSchema, type ProfileResponse } from '../agent/harness/api_schemas.js'
-import type { Profile } from '../agent/store/user_types.js'
+import { seedDisplayName } from '../agent/store/seed_name.js'
+import type { AuthUser, Profile } from '../agent/store/user_types.js'
 import { authenticate, lazyFetch, methodNotAllowed, readBody, unauthorized, type ApiDeps } from './_lib/deps.js'
 import { errorBody, json } from './_lib/http.js'
 
 export const maxDuration = 15
 
-async function load(deps: ApiDeps, userId: string): Promise<ProfileResponse> {
-  const [p, devices] = await Promise.all([deps.users.getProfile(userId), deps.users.listDevices(userId)])
+async function load(deps: ApiDeps, auth: AuthUser): Promise<ProfileResponse> {
+  const [p, devices] = await Promise.all([
+    deps.users.getProfile(auth.userId).then((x) => seedDisplayName(deps.users, auth, x)),
+    deps.users.listDevices(auth.userId),
+  ])
   return {
     profile: { display_name: p?.displayName ?? null, risk_default: p?.riskDefault ?? 'expected', quiet_from: p?.quietFrom ?? null, quiet_to: p?.quietTo ?? null },
     devices: devices.map((d) => ({ id: d.id, name: d.name, kw: d.kw, typical_hours: d.typicalHours })),
@@ -21,7 +25,7 @@ export function createProfileHandler(deps: ApiDeps): (request: Request) => Promi
     if (!auth) return unauthorized()
     if (auth.isAnonymous) return json(403, errorBody('sign_in_required', 'Sign in to use a profile.'))
     try {
-      if (request.method === 'GET') return json(200, await load(deps, auth.userId))
+      if (request.method === 'GET') return json(200, await load(deps, auth))
       const body = await readBody(request, profileUpdateSchema)
       if (body instanceof Response) return body
       if (body.profile) {
@@ -42,7 +46,7 @@ export function createProfileHandler(deps: ApiDeps): (request: Request) => Promi
           await deps.users.saveDevice({ id: d.id, userId: auth.userId, name: d.name, kw: d.kw, typicalHours: d.typical_hours, sourceDeviceId: prior?.sourceDeviceId ?? null })
         }
       }
-      return json(200, await load(deps, auth.userId))
+      return json(200, await load(deps, auth))
     } catch {
       return json(503, errorBody('store_unavailable', 'Could not reach your profile right now.'))
     }

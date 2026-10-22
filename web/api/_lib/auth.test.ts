@@ -27,7 +27,7 @@ describe('verifyAuth', () => {
   it('maps the user and uses the publishable key when given', async () => {
     const { f, calls } = fakeFetch()
     const u = await verifyAuth(req('Bearer tok'), cfg, f, () => 0, 'sb_publishable_p')
-    expect(u).toEqual({ userId: ID, isAnonymous: true, email: null })
+    expect(u).toEqual({ userId: ID, isAnonymous: true, email: null, name: null })
     expect(calls[0]!.url).toBe('https://x.supabase.co/auth/v1/user')
     expect(calls[0]!.headers).toMatchObject({ apikey: 'sb_publishable_p', authorization: 'Bearer tok' })
   })
@@ -35,7 +35,7 @@ describe('verifyAuth', () => {
   it('falls back to the service key and maps email / non-anonymous', async () => {
     const { f, calls } = fakeFetch(200, { id: ID, is_anonymous: false, email: 'a@b.c' })
     const u = await verifyAuth(req('bearer tok'), cfg, f, () => 0, '')
-    expect(u).toEqual({ userId: ID, isAnonymous: false, email: 'a@b.c' })
+    expect(u).toEqual({ userId: ID, isAnonymous: false, email: 'a@b.c', name: null })
     expect(calls[0]!.headers.apikey).toBe('sb_secret_k')
   })
 

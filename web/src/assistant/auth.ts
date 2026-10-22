@@ -13,6 +13,15 @@ export interface AuthInfo {
   token: string
   isAnonymous: boolean
   email: string | null
+  /** Google name (full_name or name in user_metadata), when the provider sent one. */
+  name: string | null
+}
+
+function metadataName(meta: unknown): string | null {
+  if (typeof meta !== 'object' || meta === null) return null
+  const m = meta as Record<string, unknown>
+  const n = typeof m.full_name === 'string' ? m.full_name : typeof m.name === 'string' ? m.name : ''
+  return n.trim() || null
 }
 
 let clientPromise: Promise<SupabaseClient | null> | null = null
@@ -36,7 +45,7 @@ export async function getAuthInfo(): Promise<AuthInfo | null> {
   const { data } = await client.auth.getSession()
   const s = data.session
   if (!s) return null
-  return { token: s.access_token, isAnonymous: s.user.is_anonymous === true, email: s.user.email ?? null }
+  return { token: s.access_token, isAnonymous: s.user.is_anonymous === true, email: s.user.email ?? null, name: metadataName(s.user.user_metadata) }
 }
 
 /** fetch() with the Bearer token when a session exists. */

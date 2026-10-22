@@ -34,6 +34,7 @@ import { HISTORY_MAX, type ChatRequest, type SseEvent, type StopReason } from '.
 import { checkGrounding, regenerateInstruction, type ToolResultLike, type Violation } from './grounding.js'
 import { runLoop, type LoopOptions, type LoopResult } from './loop.js'
 import { clipContent, fitHistory, impactRow, profileBlock, resolveRiskMode, summarize, SUMMARY_SCAN_LIMIT, summaryPlan } from './memory.js'
+import { seedDisplayName } from '../store/seed_name.js'
 
 export interface TurnDeps {
   config: AgentConfig
@@ -98,7 +99,7 @@ async function openMemory(users: UserStore, auth: AuthUser, requested: string | 
   try {
     const [conv, profile, devices] = await Promise.all([
       users.ensureConversation(auth.userId, requested, nowMs),
-      soft(users.getProfile(auth.userId), null, 'getProfile'),
+      soft(users.getProfile(auth.userId).then((p) => seedDisplayName(users, auth, p)), null, 'getProfile'),
       soft(users.listDevices(auth.userId), [], 'listDevices'),
     ])
     // A new conversation (or someone else's id, which ensureConversation never reuses) has no history to load.

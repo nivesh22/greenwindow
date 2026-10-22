@@ -6,12 +6,13 @@ import { Settings } from '../pages/Settings'
 import { ANON_TOKEN_KEY, HELD_KEY, resetAuthClient } from './auth'
 import { ChatPanel } from './ChatPanel'
 import { AccountControls } from './HeaderAccount'
+import { initials } from './initials'
 import { CONV_ID, sseResponse, turnEvents } from './testing'
 import { useChat } from './useChat'
 
 interface FakeSession {
   access_token: string
-  user: { is_anonymous: boolean; email: string | null }
+  user: { is_anonymous: boolean; email: string | null; user_metadata?: Record<string, unknown> }
 }
 const fake = vi.hoisted(() => {
   const state = { session: null as FakeSession | null }
@@ -34,7 +35,7 @@ const fake = vi.hoisted(() => {
 vi.mock('@supabase/supabase-js', () => ({ createClient: vi.fn(() => ({ auth: fake.auth })) }))
 
 const ANON: FakeSession = { access_token: 'anon-token', user: { is_anonymous: true, email: null } }
-const USER: FakeSession = { access_token: 'user-token', user: { is_anonymous: false, email: 'ada@example.com' } }
+const USER: FakeSession = { access_token: 'user-token', user: { is_anonymous: false, email: 'ada@example.com', user_metadata: { full_name: 'Ada Lovelace' } } }
 const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } })
 
 type Handler = (init: RequestInit) => Response | Promise<Response>
@@ -152,14 +153,24 @@ describe('restore and account line', () => {
     expect(await screen.findByText(/Guest — 7 free messages left/)).toBeInTheDocument()
   })
 
-  it('header: shows email, Settings and Sign out for a signed-in user', async () => {
+  it('header: a signed-in user gets a profile button whose panel has name, email, Settings and Sign out', async () => {
     fake.state.session = USER
     render(
       <MemoryRouter>
         <AccountControls />
       </MemoryRouter>,
     )
-    expect(await screen.findByText('ada@example.com')).toBeInTheDocument()
+    const btn = await screen.findByRole('button', { name: 'Profile' })
+    expect(btn).toHaveTextContent('AL')
+    expect(btn).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.queryByText('ada@example.com')).not.toBeInTheDocument()
+    await userEvent.click(btn)
+    expect(btn).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByText('Ada Lovelace')).toBeInTheDocument()
+    expect(screen.getByText('ada@example.com')).toBeInTheDocument()
+    await userEvent.keyboard('{Escape}')
+    expect(screen.queryByText('ada@example.com')).not.toBeInTheDocument()
+    await userEvent.click(btn)
     expect(screen.getByRole('link', { name: 'Settings' })).toHaveAttribute('href', '/settings')
     await userEvent.click(screen.getByRole('button', { name: 'Sign out' }))
     expect(fake.auth.signOut).toHaveBeenCalled()
@@ -365,5 +376,14 @@ describe('Privacy', () => {
     expect(screen.getByText(/email and profile scopes only/)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'GitHub repository' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Settings' })).toHaveAttribute('href', '/settings')
+  })
+})
+
+describe('initials', () => {
+  it('uses first and last name, else the email', () => {
+    expect(initials('Nivesh Kannan Elangovanraaj', 'n@x.y')).toBe('NE')
+    expect(initials('ada', null)).toBe('A')
+    expect(initials(null, 'bob@x.y')).toBe('B')
+    expect(initials('  ', null)).toBe('?')
   })
 })

@@ -23,6 +23,8 @@ const NOW = Date.UTC(2026, 9, 8, 10)
 const authUsers: Record<string, unknown> = {
   anon: { id: ANON, is_anonymous: true, email: null },
   google: { id: USER, is_anonymous: false, email: 'a@b.c' },
+  named: { id: USER, is_anonymous: false, email: 'a@b.c', user_metadata: { full_name: '  Ada Lovelace ' } },
+  linked: { id: USER, is_anonymous: false, email: 'a@b.c', user_metadata: {}, identities: [{ provider: 'google', identity_data: { name: 'Ada L' } }] },
 }
 
 function setup(turnstileOk = true) {
@@ -168,6 +170,24 @@ describe('/api/profile', () => {
     expect(del.devices).toEqual([])
     expect((await h(req('/api/profile', 'PUT', 'google', { profile: { display_name: 'x' } }))).status).toBe(400)
   })
+
+  it('fills an empty display_name from the Google name and never overwrites a chosen one', async () => {
+    const { deps, users } = setup()
+    const h = createProfileHandler(deps)
+    const first = (await (await h(req('/api/profile', 'GET', 'named'))).json()) as { profile: { display_name: string | null } }
+    expect(first.profile.display_name).toBe('Ada Lovelace')
+    expect((await users.getProfile(USER))?.displayName).toBe('Ada Lovelace')
+    await h(req('/api/profile', 'PUT', 'named', { profile: { display_name: 'Ada', risk_default: 'cautious', quiet_from: null, quiet_to: null } }))
+    clearAuthCache()
+    const again = (await (await h(req('/api/profile', 'GET', 'named'))).json()) as { profile: { display_name: string; risk_default: string } }
+    expect(again.profile).toMatchObject({ display_name: 'Ada', risk_default: 'cautious' })
+  })
+
+  it('reads the name from a linked Google identity when user_metadata has none', async () => {
+    const { deps } = setup()
+    const r = (await (await createProfileHandler(deps)(req('/api/profile', 'GET', 'linked'))).json()) as { profile: { display_name: string } }
+    expect(r.profile.display_name).toBe('Ada L')
+  })
 })
 
 describe('POST /api/feedback', () => {
@@ -227,7 +247,7 @@ describe('POST /api/chat with auth', () => {
     const { handler, seen } = mkChat()
     for (let i = 0; i < 3; i++) await (await handler(post('anon'))).text()
     expect(seen).toHaveLength(3)
-    expect(seen[0]!.auth).toEqual({ userId: ANON, isAnonymous: true, email: null })
+    expect(seen[0]!.auth).toEqual({ userId: ANON, isAnonymous: true, email: null, name: null })
     expect(seen.map((s) => s.messagesLeft)).toEqual([2, 1, 0])
     const ev = await events(await handler(post('anon')))
     expect(ev).toHaveLength(1)

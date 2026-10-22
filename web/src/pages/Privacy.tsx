@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
-export const PRIVACY_UPDATED = '21 October 2026'
+export const PRIVACY_UPDATED = '22 October 2026'
 
 const PROCESSORS: [string, string][] = [
   [
@@ -49,7 +49,10 @@ export function Privacy() {
         <ul className="list-disc space-y-1 pl-5">
           <li>Account: your e-mail address and name from Google, if you sign in. Guests get a random ID only.</li>
           <li>Messages: what you type to the assistant and its answers.</li>
-          <li>Profile: display name, default risk mode and quiet hours, if you set them.</li>
+          <li>
+            Profile: display name (filled in from your Google name when you sign in; you can change it in Settings), default
+            risk mode and quiet hours. The assistant sees your display name so it can address you.
+          </li>
           <li>Devices: names and power ratings you save.</li>
           <li>Plans and impact rows: the job plans the assistant makes and their estimated outcomes.</li>
           <li>
