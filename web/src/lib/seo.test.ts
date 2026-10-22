@@ -1,0 +1,36 @@
+import { applyPageMeta, canonicalUrl, metaFor, PUBLIC_PAGES } from './seo'
+
+describe('seo', () => {
+  it('gives every public page its own title and description', () => {
+    const titles = Object.values(PUBLIC_PAGES).map((m) => m.title)
+    const descs = Object.values(PUBLIC_PAGES).map((m) => m.description)
+    expect(new Set(titles).size).toBe(titles.length)
+    expect(new Set(descs).size).toBe(descs.length)
+    for (const m of Object.values(PUBLIC_PAGES)) {
+      expect(m.title.length).toBeLessThanOrEqual(70)
+      expect(m.description.length).toBeLessThanOrEqual(160)
+      expect(`${m.title} ${m.description}`).not.toMatch(/saved|avoided/i)
+    }
+  })
+
+  it('marks private, nested and unknown routes noindex', () => {
+    expect(metaFor('/about/').index).toBe(true)
+    expect(metaFor('/settings').index).toBe(false)
+    expect(metaFor('/ops/trace/abc').title).toMatch(/^Ops/)
+    expect(metaFor('/nope').title).toMatch(/^Page not found/)
+    expect(canonicalUrl('/')).toBe('https://greenwindow.uk/')
+    expect(canonicalUrl('/about/')).toBe('https://greenwindow.uk/about')
+  })
+
+  it('updates the head on navigation', () => {
+    applyPageMeta('/about')
+    expect(document.title).toBe(PUBLIC_PAGES['/about']!.title)
+    expect(document.head.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://greenwindow.uk/about')
+    applyPageMeta('/settings')
+    expect(document.head.querySelector('link[rel="canonical"]')).toBeNull()
+    expect(document.head.querySelector('meta[name="robots"]')).toHaveAttribute('content', 'noindex')
+    applyPageMeta('/')
+    expect(document.head.querySelector('meta[name="robots"]')).toBeNull()
+    expect(document.head.querySelector('meta[name="description"]')).toHaveAttribute('content', PUBLIC_PAGES['/']!.description)
+  })
+})

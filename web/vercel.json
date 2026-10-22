@@ -34,8 +34,44 @@
       "destination": "/api/admin?route=:view"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/scheduler",
+      "destination": "/scheduler.html"
+    },
+    {
+      "source": "/leaderboard",
+      "destination": "/leaderboard.html"
+    },
+    {
+      "source": "/backtest",
+      "destination": "/backtest.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/settings",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/account",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/ops",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/ops/:path*",
+      "destination": "/app.html"
     }
   ]
 }

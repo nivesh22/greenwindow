@@ -29,7 +29,20 @@ export function Leaderboard() {
   const meta = useDataFile('meta')
   const [metricKey, setMetricKey] = useState<Metric['key']>('mae')
   if (lb.error && !lb.data) return <ErrorPanel error={lb.error} onRetry={() => void lb.refetch()} />
-  if (!lb.data || !meta.data) return <Loading label="Loading leaderboard" />
+  if (!lb.data || !meta.data) {
+    return (
+      <div className="space-y-8">
+        <section>
+          <h1 className="page-title">Live leaderboard</h1>
+          <p className="lede">
+            Every forecast is stored when issued and scored once the actual value arrives. Lower error is better. The
+            seasonal-naive rows are the benchmark a useful model has to beat.
+          </p>
+        </section>
+        <Loading label="Loading leaderboard" />
+      </div>
+    )
+  }
   const info = (name: string): ModelInfo | undefined => meta.data.models.find((m) => m.name === name)
   const models = [...new Set(lb.data.rows.map((r) => r.model))]
   const metric = METRICS.find((m) => m.key === metricKey)!

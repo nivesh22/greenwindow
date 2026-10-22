@@ -25,7 +25,20 @@ export function Backtest() {
   const meta = useDataFile('meta')
   const [bucket, setBucket] = useState<Bucket>('all')
   if (bt.error && !bt.data) return <ErrorPanel error={bt.error} onRetry={() => void bt.refetch()} />
-  if (!bt.data) return <Loading label="Loading backtest" />
+  if (!bt.data) {
+    return (
+      <div className="space-y-6">
+        <section>
+          <h1 className="page-title">Backtest</h1>
+          <p className="lede">
+            Every model forecast the next 48 hours from many past start times, using only data available at the time, and
+            was scored against what happened.
+          </p>
+        </section>
+        <Loading label="Loading backtest" />
+      </div>
+    )
+  }
 
   const labels: Record<string, string> = {
     ...Object.fromEntries((meta.data?.models ?? []).map((m) => [m.name, m.label])),
