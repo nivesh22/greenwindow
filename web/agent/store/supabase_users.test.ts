@@ -36,6 +36,25 @@ describe('SupabaseUserStore', () => {
     }
   })
 
+  it('lists conversations with the first user message embedded, newest first, dropping empty ones', async () => {
+    const { store, calls } = mk(() => ({
+      body: [
+        { id: 'c2', title: null, updated_at: '2026-10-09T10:00:00.5+00:00', messages: [{ content: 'Dishwasher tonight', role: 'user' }] },
+        { id: 'c1', title: 'Saved title', updated_at: '2026-10-08T10:00:00+00:00', messages: [{ content: 'ignored', role: 'user' }] },
+        { id: 'c0', title: null, updated_at: '2026-10-07T10:00:00+00:00', messages: [] },
+      ],
+    }))
+    expect(await store.listConversations(U, 30)).toEqual([
+      { id: 'c2', title: 'Dishwasher tonight', updatedAtUtc: '2026-10-09T10:00:00.500Z' },
+      { id: 'c1', title: 'Saved title', updatedAtUtc: '2026-10-08T10:00:00Z' },
+    ])
+    const url = decodeURIComponent(calls[0]!.url)
+    expect(url).toContain(`user_id=eq.${U}`)
+    expect(url).toContain('select=id,title,updated_at,messages(content,role)')
+    expect(url).toContain('messages.role=eq.user&messages.order=created_at.asc&messages.limit=1')
+    expect(url).toContain('order=updated_at.desc')
+  })
+
   it('maps profile rows (time -> HH:mm) and upserts with merge-duplicates', async () => {
     const row = { user_id: U, display_name: 'N', risk_default: 'cautious', quiet_from: '22:00:00', quiet_to: '07:30:00' }
     const { store, calls } = mk(() => ({ body: [row] }))

@@ -2,20 +2,10 @@ import { useEffect, useId, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { profileResponseSchema, type ProfileUpdate } from '../../agent/harness/api_schemas'
 import { MODES } from '../../agent/harness/events'
-import { apiFetch, signInWithGoogle, signOut } from '../assistant/auth'
-import { NotificationsSection, PlansSection } from '../assistant/SettingsSections'
+import { apiFetch, signOut } from '../assistant/auth'
+import { NotificationsSection } from '../assistant/SettingsSections'
+import { SignInPrompt } from '../assistant/SignInPrompt'
 import { useAuth } from '../assistant/useAuth'
-
-interface DeviceRow {
-  key: string
-  id?: string
-  name: string
-  kw: string
-  hours: string
-}
-
-let rowSeq = 0
-const blankRow = (): DeviceRow => ({ key: `n${++rowSeq}`, name: '', kw: '', hours: '' })
 
 const inputCls = 'w-full rounded-lg border border-line-strong bg-surface px-3 py-2 text-sm'
 const btnCls =
@@ -24,33 +14,10 @@ const btnCls =
 export function Settings() {
   const auth = useAuth()
   if (!auth.ready) return <p role="status">Loading…</p>
-  if (!auth.enabled || !auth.info || auth.info.isAnonymous) return <SignInPrompt enabled={auth.enabled} />
+  if (!auth.enabled || !auth.info || auth.info.isAnonymous) {
+    return <SignInPrompt title="Settings" reason="Sign in to save your profile and preferences." enabled={auth.enabled} />
+  }
   return <SettingsForm email={auth.info.email} />
-}
-
-function SignInPrompt({ enabled }: { enabled: boolean }) {
-  const [err, setErr] = useState<string | null>(null)
-  return (
-    <section className="max-w-xl space-y-3">
-      <h1 className="page-title">Settings</h1>
-      <p className="text-ink-2">Sign in to save your profile and devices.</p>
-      {enabled ? (
-        <button
-          type="button"
-          className="btn-primary"
-          onClick={() => signInWithGoogle().catch((e: unknown) => setErr(e instanceof Error ? e.message : 'Sign-in failed'))}
-        >
-          Continue with Google
-        </button>
-      ) : (
-        <p className="text-sm">Sign-in is not enabled on this deployment.</p>
-      )}
-      {err && <p role="alert" className="text-sm text-amber-700 dark:text-amber-300">Sign-in failed ({err}).</p>}
-      <p className="text-xs text-ink-3">
-        We only read your email and name. See the <Link className="underline" to="/privacy">privacy notice</Link>.
-      </p>
-    </section>
-  )
 }
 
 function SettingsForm({ email }: { email: string | null }) {
@@ -61,8 +28,6 @@ function SettingsForm({ email }: { email: string | null }) {
   const [risk, setRisk] = useState<(typeof MODES)[number]>('expected')
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
-  const [rows, setRows] = useState<DeviceRow[]>([])
-  const [removed, setRemoved] = useState<string[]>([])
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null)
   const [saving, setSaving] = useState(false)
   const [confirming, setConfirming] = useState(false)
@@ -93,29 +58,13 @@ function SettingsForm({ email }: { email: string | null }) {
     setRisk(p.profile.risk_default)
     setFrom(p.profile.quiet_from ?? '')
     setTo(p.profile.quiet_to ?? '')
-    setRows(p.devices.map((d) => ({ key: d.id, id: d.id, name: d.name, kw: String(d.kw), hours: d.typical_hours === null ? '' : String(d.typical_hours) })))
-    setRemoved([])
   }
-
-  const setRow = (key: string, patch: Partial<DeviceRow>) => setRows((r) => r.map((x) => (x.key === key ? { ...x, ...patch } : x)))
 
   async function save(e: FormEvent) {
     e.preventDefault()
     setMsg(null)
-    const devices: NonNullable<ProfileUpdate['upsert_devices']> = []
-    for (const r of rows) {
-      const kw = Number(r.kw)
-      const hours = r.hours.trim() === '' ? null : Number(r.hours)
-      if (!r.name.trim() || !(kw > 0) || kw > 10000 || (hours !== null && (!Number.isInteger(hours) || hours < 1 || hours > 12))) {
-        setMsg({ ok: false, text: 'Each device needs a name, a power above 0 kW, and typical hours of 1 to 12 (or blank).' })
-        return
-      }
-      devices.push({ ...(r.id ? { id: r.id } : {}), name: r.name.trim(), kw, typical_hours: hours })
-    }
     const body: ProfileUpdate = {
       profile: { display_name: name.trim() || null, risk_default: risk, quiet_from: from || null, quiet_to: to || null },
-      upsert_devices: devices,
-      delete_device_ids: removed,
     }
     setSaving(true)
     try {
@@ -183,43 +132,6 @@ function SettingsForm({ email }: { email: string | null }) {
             </div>
           </fieldset>
 
-          <fieldset className="space-y-3">
-            <legend className="text-lg font-semibold">Saved devices</legend>
-            {rows.length === 0 && <p className="text-sm text-ink-2">No devices yet.</p>}
-            {rows.map((r, i) => (
-              <div key={r.key} className="grid grid-cols-2 gap-2 rounded-xl border border-line p-3 sm:grid-cols-[1fr_6rem_6rem_auto]">
-                <div className="col-span-2 sm:col-span-1">
-                  <label className="text-xs font-medium" htmlFor={`${r.key}-n`}>Device {i + 1} name</label>
-                  <input id={`${r.key}-n`} className={inputCls} value={r.name} maxLength={60} onChange={(e) => setRow(r.key, { name: e.target.value })} />
-                </div>
-                <div>
-                  <label className="text-xs font-medium" htmlFor={`${r.key}-k`}>Device {i + 1} power (kW)</label>
-                  <input id={`${r.key}-k`} inputMode="decimal" className={inputCls} value={r.kw} onChange={(e) => setRow(r.key, { kw: e.target.value })} />
-                </div>
-                <div>
-                  <label className="text-xs font-medium" htmlFor={`${r.key}-h`}>Device {i + 1} typical hours</label>
-                  <input id={`${r.key}-h`} inputMode="numeric" className={inputCls} value={r.hours} onChange={(e) => setRow(r.key, { hours: e.target.value })} />
-                </div>
-                <div className="col-span-2 flex items-end sm:col-span-1">
-                  <button
-                    type="button"
-                    className={btnCls}
-                    aria-label={`Delete device ${i + 1}`}
-                    onClick={() => {
-                      if (r.id) setRemoved((x) => [...x, r.id as string])
-                      setRows((x) => x.filter((y) => y.key !== r.key))
-                    }}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))}
-            <button type="button" className={btnCls} disabled={rows.length >= 25} onClick={() => setRows((r) => [...r, blankRow()])}>
-              Add device
-            </button>
-          </fieldset>
-
           <div className="flex items-center gap-3">
             <button type="submit" disabled={saving} className="btn-primary">
               {saving ? 'Saving…' : 'Save'}
@@ -233,8 +145,11 @@ function SettingsForm({ email }: { email: string | null }) {
         </p>
       )}
 
+      <p className="text-sm text-ink-2">
+        Your saved devices and scheduled jobs are on <Link className="underline" to="/account">Devices &amp; schedule</Link>.
+      </p>
+
       <NotificationsSection />
-      <PlansSection />
 
       <section className="space-y-3 rounded-2xl border border-red-300 p-4 dark:border-red-800">
         <h2 className="font-display text-xl font-semibold">Delete my data</h2>

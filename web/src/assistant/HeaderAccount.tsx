@@ -48,6 +48,9 @@ function ProfileMenu({ name, email }: { name: string | null; email: string | nul
             <p className="truncate text-xs text-ink-3">{email ?? 'Signed in'}</p>
           </div>
           <div className="pt-1.5">
+            <NavLink className={item} to="/account" onClick={() => setOpen(false)}>
+              Devices &amp; schedule
+            </NavLink>
             <NavLink className={item} to="/settings" onClick={() => setOpen(false)}>
               Settings
             </NavLink>

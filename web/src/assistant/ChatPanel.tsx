@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react'
 import type { PanelState, PlanUpdate } from '../../agent/harness/events'
 import { ChatActions } from './ChatActions'
+import { ChatHistory } from './ChatHistory'
 import { AccountMenu } from './AccountMenu'
 import { Feedback } from './Feedback'
 import { FormattedText } from './FormattedText'
@@ -20,6 +21,8 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate, initialMes
   const chat = useChat({ getPanelState, onPlanUpdate })
   const auth = useAuth()
   const [draft, setDraft] = useState('')
+  const [showHistory, setShowHistory] = useState(false)
+  const signedIn = auth.info !== null && !auth.info.isAnonymous
   const inputId = useId()
   const unavailable = chat.limit ?? chat.error
   const blocked = chat.limit !== null
@@ -61,6 +64,39 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate, initialMes
         </div>
         <AccountMenu auth={auth} messagesLeft={chat.messagesLeft} />
       </div>
+      {(signedIn || chat.messages.length > 0) && (
+        <div className="mt-3 flex gap-2">
+          <button
+            type="button"
+            className="btn-secondary py-1.5"
+            disabled={chat.busy || (chat.messages.length === 0 && !showHistory)}
+            onClick={() => {
+              chat.newChat()
+              setShowHistory(false)
+            }}
+          >
+            New chat
+          </button>
+          {signedIn && (
+            <button type="button" className="btn-secondary py-1.5" aria-expanded={showHistory} onClick={() => setShowHistory((s) => !s)}>
+              {showHistory ? 'Back to chat' : 'History'}
+            </button>
+          )}
+        </div>
+      )}
+
+      {showHistory ? (
+        <div className="mt-4 lg:max-h-[min(60vh,40rem)] lg:overflow-y-auto lg:pr-1">
+          <ChatHistory
+            currentId={chat.conversationId}
+            onPick={(id) => {
+              void chat.openConversation(id).then((ok) => {
+                if (ok) setShowHistory(false)
+              })
+            }}
+          />
+        </div>
+      ) : (
 
       <div aria-live="polite" role="log" aria-label="Conversation" className="mt-4 space-y-3 lg:max-h-[min(60vh,40rem)] lg:overflow-y-auto lg:pr-1">
         {chat.messages.length === 0 && (
@@ -105,6 +141,7 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate, initialMes
           </p>
         )}
       </div>
+      )}
 
       {unavailable && (
         <div role="alert" className="mt-3 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-100">

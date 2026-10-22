@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import { ASSISTANT_ENABLED } from '../assistant/flag'
 import { HeaderAccount } from '../assistant/HeaderAccount'
+import { useAuth } from '../assistant/useAuth'
 import { useDataFile } from '../data/hooks'
 import { formatHour, hoursAgo } from '../lib/time'
 import { LogoMark } from './Logo'
@@ -22,7 +23,12 @@ const FALLBACK_ATTRIBUTION = [
 
 const footLink = 'underline decoration-line-strong underline-offset-2 hover:text-ink hover:decoration-ink-3'
 
+/** Signed-in only: the user's saved devices and scheduled plans. */
+const ACCOUNT_NAV = { to: '/account', label: 'Devices & schedule' }
+
 export function Layout({ children }: { children: ReactNode }) {
+  const auth = useAuth()
+  const signedIn = ASSISTANT_ENABLED && auth.info !== null && !auth.info.isAnonymous
   const meta = useDataFile('meta')
   const generated = meta.data?.generated_at_utc
   const fresh = generated ? hoursAgo(generated) <= STALE_AFTER_H : null
@@ -35,7 +41,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <span className="font-display text-xl font-semibold tracking-tight">GreenWindow</span>
           </NavLink>
           <nav aria-label="Main" className="hidden md:block">
-            <NavItems />
+            <NavItems signedIn={signedIn} />
           </nav>
           <div className="ml-auto flex items-center gap-x-3">
             <p className="hidden items-center gap-1.5 text-xs text-ink-3 lg:flex" title="When the forecast data was last published">
@@ -47,7 +53,7 @@ export function Layout({ children }: { children: ReactNode }) {
         </div>
         {/* Phones: the nav scrolls sideways rather than wrapping or overflowing the page. */}
         <nav aria-label="Main (compact)" className="overflow-x-auto px-3 py-2 [scrollbar-width:none] [mask-image:linear-gradient(90deg,#000_85%,transparent)] md:hidden">
-          <NavItems />
+          <NavItems signedIn={signedIn} />
         </nav>
       </header>
       {meta.data && <StaleBanner generatedAt={meta.data.generated_at_utc} />}
@@ -76,10 +82,10 @@ export function Layout({ children }: { children: ReactNode }) {
   )
 }
 
-function NavItems() {
+function NavItems({ signedIn }: { signedIn: boolean }) {
   return (
     <ul className="flex gap-1 text-sm whitespace-nowrap">
-      {NAV.map((n) => (
+      {(signedIn ? [...NAV.slice(0, 2), ACCOUNT_NAV, ...NAV.slice(2)] : NAV).map((n) => (
         <li key={n.to}>
           <NavLink
             to={n.to}

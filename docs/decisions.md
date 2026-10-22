@@ -155,3 +155,9 @@ Format:
 - **Result:** 25-48 h MASE 0.581 -> 0.553, all horizons 0.484 -> 0.470, 80% coverage 83%.
 - **Leaderboard continuity:** a new model row; existing models and their history are untouched. Blend rows are backfilled for any stored run that has both components, because those inputs were issued at that run's origin (no leakage). Rows for runs before 2026-10-08 were derived after the fact, not issued live. No existing snapshot row is edited (D5 holds).
 - **JSON contract (7.6):** `family` gains `"ensemble"`. Additive; `schema_version` stays 1 because the web app deploys on push to `main`, before the next cron pipeline run writes it.
+
+## 2026-10-22 — Assistant: new chat per visit, chat history, Devices & schedule page
+- **What:** the chat no longer restores the latest conversation on load; every visit starts a new chat. The exception is the guest -> Google sign-in hand-off with a held message, which continues the guest conversation and resends the message (FR-6.2 unchanged). Signed-in users get a History list (newest 30, titled by the first user message) and a New chat button.
+- **Why:** owner request: a clear division between conversations, always starting fresh.
+- **API:** `api/conversations/latest.ts` became `api/conversations.ts` (same Function count, Hobby limit 12): `GET /api/conversations` (list), `?id=` (one), `?view=latest` (old behaviour; `/api/conversations/latest` is rewritten to it in `vercel.json`). The list uses PostgREST embedded filters/limits (`messages.role=eq.user&messages.order=created_at.asc&messages.limit=1`, verified in the PostgREST resource-embedding docs). No migration; `conversations.title` stays unused.
+- **UI:** saved devices and plans moved from Settings to `/account` ("Devices & schedule"), linked from the profile menu and a signed-in-only nav item. The profile display name is filled from the Google name when empty.

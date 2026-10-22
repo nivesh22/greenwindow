@@ -2,6 +2,7 @@ import { act, render, renderHook, screen, waitFor } from '@testing-library/react
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { Privacy } from '../pages/Privacy'
+import { Account } from '../pages/Account'
 import { Settings } from '../pages/Settings'
 import { ANON_TOKEN_KEY, HELD_KEY, resetAuthClient } from './auth'
 import { ChatPanel } from './ChatPanel'
@@ -84,7 +85,7 @@ describe('anonymous first use', () => {
         order.push('session')
         return json({ ok: true })
       },
-      '/api/conversations/latest': () => json({ conversation: null, messages_left: 10, is_anonymous: true }),
+      '/api/conversations?view=latest': () => json({ conversation: null, messages_left: 10, is_anonymous: true }),
       '/api/chat': () => sseResponse(turnEvents('hi')),
     })
     const { result } = renderHook(() => useChat())
@@ -131,26 +132,51 @@ describe('anonymous first use', () => {
 })
 
 describe('restore and account line', () => {
-  it('restores the latest conversation and shows messages left for guests', async () => {
+  it('starts a new chat on load (the latest is not shown) and shows messages left for guests', async () => {
     fake.state.session = ANON
     route({
-      '/api/conversations/latest': () =>
+      '/api/conversations?view=latest': () =>
         json({
-          conversation: {
-            id: CONV_ID,
-            messages: [
-              { role: 'user', content: 'earlier question', turn_id: null, created_at_utc: '2026-10-08T10:00:00Z' },
-              { role: 'assistant', content: 'earlier answer', turn_id: '22222222-2222-4222-8222-222222222222', created_at_utc: '2026-10-08T10:00:05Z' },
-            ],
-          },
+          conversation: { id: CONV_ID, messages: [{ role: 'user', content: 'earlier question', turn_id: null, created_at_utc: '2026-10-08T10:00:00Z' }] },
           messages_left: 7,
           is_anonymous: true,
         }),
     })
     render(<ChatPanel />)
-    expect(await screen.findByText('earlier answer')).toBeInTheDocument()
-    expect(screen.getByText('earlier question')).toBeInTheDocument()
     expect(await screen.findByText(/Guest — 7 free messages left/)).toBeInTheDocument()
+    expect(screen.queryByText('earlier question')).toBeNull()
+    expect(screen.queryByRole('button', { name: 'History' })).toBeNull()
+  })
+
+  it('signed in: History lists past chats, opens one, and New chat clears it and sends without its id', async () => {
+    fake.state.session = USER
+    const m = route({
+      '/api/conversations?view=latest': () => json({ conversation: null, messages_left: null, is_anonymous: false }),
+      '/api/conversations': () =>
+        json({ conversations: [{ id: CONV_ID, title: 'Dishwasher tonight', updated_at_utc: '2026-10-08T10:00:00Z' }] }),
+      [`/api/conversations?id=${CONV_ID}`]: () =>
+        json({
+          conversation: {
+            id: CONV_ID,
+            messages: [
+              { role: 'user', content: 'Dishwasher tonight', turn_id: null, created_at_utc: '2026-10-08T10:00:00Z' },
+              { role: 'assistant', content: 'Start at 01:00', turn_id: null, created_at_utc: '2026-10-08T10:00:05Z' },
+            ],
+          },
+          messages_left: null,
+          is_anonymous: false,
+        }),
+      '/api/chat': () => sseResponse(turnEvents('fresh answer')),
+    })
+    render(<ChatPanel />)
+    await userEvent.click(await screen.findByRole('button', { name: 'History' }))
+    await userEvent.click(await screen.findByRole('button', { name: /Dishwasher tonight/ }))
+    expect(await screen.findByText('Start at 01:00')).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'New chat' }))
+    expect(screen.queryByText('Start at 01:00')).toBeNull()
+    await userEvent.type(screen.getByLabelText('Message to the assistant'), 'new question{Enter}')
+    await waitFor(() => expect(calls(m, '/api/chat')).toHaveLength(1))
+    expect(JSON.parse(calls(m, '/api/chat')[0]?.[1]?.body as string)).toMatchObject({ conversation_id: null, message: 'new question', history: [] })
   })
 
   it('header: a signed-in user gets a profile button whose panel has name, email, Settings and Sign out', async () => {
@@ -172,6 +198,7 @@ describe('restore and account line', () => {
     expect(screen.queryByText('ada@example.com')).not.toBeInTheDocument()
     await userEvent.click(btn)
     expect(screen.getByRole('link', { name: 'Settings' })).toHaveAttribute('href', '/settings')
+    expect(screen.getByRole('link', { name: 'Devices & schedule' })).toHaveAttribute('href', '/account')
     await userEvent.click(screen.getByRole('button', { name: 'Sign out' }))
     expect(fake.auth.signOut).toHaveBeenCalled()
   })
@@ -201,7 +228,7 @@ describe('restore and account line', () => {
 
   it('chat panel does not repeat the signed-in account line', async () => {
     fake.state.session = USER
-    route({ '/api/conversations/latest': () => json({ conversation: null, messages_left: null, is_anonymous: false }) })
+    route({ '/api/conversations?view=latest': () => json({ conversation: null, messages_left: null, is_anonymous: false }) })
     render(<ChatPanel />)
     await screen.findByLabelText('Message to the assistant')
     expect(screen.queryByText('ada@example.com')).toBeNull()
@@ -218,7 +245,7 @@ describe('limit -> Continue with Google', () => {
   async function hitLimit() {
     fake.state.session = ANON
     route({
-      '/api/conversations/latest': () => json({ conversation: null, messages_left: 1, is_anonymous: true }),
+      '/api/conversations?view=latest': () => json({ conversation: null, messages_left: 1, is_anonymous: true }),
       '/api/chat': limit,
     })
     render(<ChatPanel />)
@@ -249,7 +276,12 @@ describe('limit -> Continue with Google', () => {
     sessionStorage.setItem(HELD_KEY, 'plan my wash')
     const m = route({
       '/api/session/merge': () => json({ ok: true, moved_conversations: 1 }),
-      '/api/conversations/latest': () => json({ conversation: null, messages_left: null, is_anonymous: false }),
+      '/api/conversations?view=latest': () =>
+        json({
+          conversation: { id: CONV_ID, messages: [{ role: 'user', content: 'guest question', turn_id: null, created_at_utc: '2026-10-08T10:00:00Z' }] },
+          messages_left: null,
+          is_anonymous: false,
+        }),
       '/api/chat': () => sseResponse(turnEvents('done')),
     })
     const { result } = renderHook(() => useChat())
@@ -257,7 +289,7 @@ describe('limit -> Continue with Google', () => {
     expect(JSON.parse(calls(m, '/api/session/merge')[0]?.[1]?.body as string)).toEqual({ anon_access_token: 'old-anon' })
     expect(authHeader(calls(m, '/api/session/merge')[0]?.[1])).toBe('Bearer user-token')
     expect(sessionStorage.getItem(ANON_TOKEN_KEY)).toBeNull()
-    expect(JSON.parse(calls(m, '/api/chat')[0]?.[1]?.body as string).message).toBe('plan my wash')
+    expect(JSON.parse(calls(m, '/api/chat')[0]?.[1]?.body as string)).toMatchObject({ message: 'plan my wash', conversation_id: CONV_ID })
     await waitFor(() => expect(result.current.messages.at(-1)?.text).toBe('done'))
     expect(calls(m, '/api/chat')).toHaveLength(1)
   })
@@ -265,25 +297,29 @@ describe('limit -> Continue with Google', () => {
 
 describe('feedback', () => {
   it('posts the rating and comment with the turn id, then thanks the user', async () => {
-    fake.state.session = ANON
+    fake.state.session = USER
     const turn = '33333333-3333-4333-8333-333333333333'
     const m = route({
-      '/api/conversations/latest': () =>
+      '/api/conversations?view=latest': () => json({ conversation: null, messages_left: null, is_anonymous: false }),
+      '/api/conversations': () => json({ conversations: [{ id: CONV_ID, title: 'q', updated_at_utc: '2026-10-08T10:00:00Z' }] }),
+      [`/api/conversations?id=${CONV_ID}`]: () =>
         json({
           conversation: { id: CONV_ID, messages: [{ role: 'assistant', content: 'an answer', turn_id: turn, created_at_utc: '2026-10-08T10:00:00Z' }] },
-          messages_left: 5,
-          is_anonymous: true,
+          messages_left: null,
+          is_anonymous: false,
         }),
       '/api/feedback': () => json({ ok: true }),
     })
     render(<ChatPanel />)
+    await userEvent.click(await screen.findByRole('button', { name: 'History' }))
+    await userEvent.click(await screen.findByRole('button', { name: /^q/ }))
     await userEvent.click(await screen.findByRole('button', { name: 'Not helpful' }))
     await userEvent.type(screen.getByLabelText('Optional comment'), 'too vague')
     await userEvent.click(screen.getByRole('button', { name: 'Send feedback' }))
     expect(await screen.findByText(/Thanks for the feedback/)).toBeInTheDocument()
     const call = calls(m, '/api/feedback')[0]
     expect(JSON.parse(call?.[1]?.body as string)).toEqual({ turn_id: turn, rating: -1, comment: 'too vague' })
-    expect(authHeader(call?.[1])).toBe('Bearer anon-token')
+    expect(authHeader(call?.[1])).toBe('Bearer user-token')
   })
 })
 
@@ -302,51 +338,26 @@ describe('Settings', () => {
     expect(screen.getByRole('link', { name: 'privacy notice' })).toBeInTheDocument()
   })
 
-  it('loads, edits and saves the profile and devices', async () => {
+  it('loads, edits and saves the profile only, and links to Devices & schedule', async () => {
     fake.state.session = USER
     const m = route({
-      '/api/profile': (init) => {
-        if (init.method === 'PUT') {
-          const body = JSON.parse(init.body as string)
-          return json({ profile: body.profile, devices: [{ id: 'd1', name: 'EV', kw: 7, typical_hours: 4 }, { id: 'd2', name: 'Dishwasher', kw: 1.2, typical_hours: 2 }] })
-        }
-        return json(profile)
-      },
+      '/api/profile': (init) => (init.method === 'PUT' ? json({ profile: JSON.parse(init.body as string).profile, devices: profile.devices }) : json(profile)),
     })
     page()
     const name = await screen.findByLabelText('Display name')
     expect(name).toHaveValue('Ada')
-    expect(screen.getByLabelText('Device 1 name')).toHaveValue('EV')
+    expect(screen.queryByLabelText('Device 1 name')).toBeNull()
+    expect(screen.getByRole('link', { name: 'Devices & schedule' })).toHaveAttribute('href', '/account')
     await userEvent.clear(name)
     await userEvent.type(name, 'Ada L')
     await userEvent.selectOptions(screen.getByLabelText('Default risk mode'), 'cautious')
-    await userEvent.click(screen.getByRole('button', { name: 'Add device' }))
-    await userEvent.type(screen.getByLabelText('Device 2 name'), 'Dishwasher')
-    await userEvent.type(screen.getByLabelText('Device 2 power (kW)'), '1.2')
-    await userEvent.type(screen.getByLabelText('Device 2 typical hours'), '2')
     await userEvent.click(screen.getByRole('button', { name: 'Save' }))
     expect(await screen.findByText('Saved.')).toBeInTheDocument()
     const put = calls(m, '/api/profile').find((c) => c[1]?.method === 'PUT')
     expect(authHeader(put?.[1])).toBe('Bearer user-token')
     expect(JSON.parse(put?.[1]?.body as string)).toEqual({
       profile: { display_name: 'Ada L', risk_default: 'cautious', quiet_from: '22:00', quiet_to: '07:00' },
-      upsert_devices: [
-        { id: 'd1', name: 'EV', kw: 7, typical_hours: 4 },
-        { name: 'Dishwasher', kw: 1.2, typical_hours: 2 },
-      ],
-      delete_device_ids: [],
     })
-  })
-
-  it('sends deleted device ids', async () => {
-    fake.state.session = USER
-    const m = route({ '/api/profile': (init) => (init.method === 'PUT' ? json({ ...profile, devices: [] }) : json(profile)) })
-    page()
-    await userEvent.click(await screen.findByRole('button', { name: 'Delete device 1' }))
-    await userEvent.click(screen.getByRole('button', { name: 'Save' }))
-    await screen.findByText('Saved.')
-    const put = calls(m, '/api/profile').find((c) => c[1]?.method === 'PUT')
-    expect(JSON.parse(put?.[1]?.body as string).delete_device_ids).toEqual(['d1'])
   })
 
   it('deletes all data only after typing DELETE, then signs out', async () => {
@@ -385,5 +396,58 @@ describe('initials', () => {
     expect(initials('ada', null)).toBe('A')
     expect(initials(null, 'bob@x.y')).toBe('B')
     expect(initials('  ', null)).toBe('?')
+  })
+})
+
+describe('Devices & schedule (/account)', () => {
+  const profile = {
+    profile: { display_name: 'Ada', risk_default: 'expected', quiet_from: null, quiet_to: null },
+    devices: [{ id: 'd1', name: 'EV', kw: 7, typical_hours: 4 }],
+  }
+  const page = () => render(<MemoryRouter><Account /></MemoryRouter>)
+
+  it('asks guests to sign in', async () => {
+    fake.state.session = ANON
+    route({})
+    page()
+    expect(await screen.findByRole('button', { name: 'Continue with Google' })).toBeInTheDocument()
+  })
+
+  it('shows devices and the schedule; adds a device and saves only devices', async () => {
+    fake.state.session = USER
+    const m = route({
+      '/api/profile': (init) =>
+        init.method === 'PUT' ? json({ ...profile, devices: [...profile.devices, { id: 'd2', name: 'Dishwasher', kw: 1.2, typical_hours: 2 }] }) : json(profile),
+      '/api/plans': () => json({ plans: [] }),
+    })
+    page()
+    expect(await screen.findByLabelText('Device 1 name')).toHaveValue('EV')
+    expect(await screen.findByRole('heading', { name: 'Your schedule' })).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Add device' }))
+    await userEvent.type(screen.getByLabelText('Device 2 name'), 'Dishwasher')
+    await userEvent.type(screen.getByLabelText('Device 2 power (kW)'), '1.2')
+    await userEvent.type(screen.getByLabelText('Device 2 typical hours'), '2')
+    await userEvent.click(screen.getByRole('button', { name: 'Save devices' }))
+    expect(await screen.findByText('Saved.')).toBeInTheDocument()
+    const put = calls(m, '/api/profile').find((c) => c[1]?.method === 'PUT')
+    expect(JSON.parse(put?.[1]?.body as string)).toEqual({
+      upsert_devices: [
+        { id: 'd1', name: 'EV', kw: 7, typical_hours: 4 },
+        { name: 'Dishwasher', kw: 1.2, typical_hours: 2 },
+      ],
+      delete_device_ids: [],
+    })
+  })
+
+  it('sends deleted device ids', async () => {
+    fake.state.session = USER
+    const m = route({ '/api/profile': (init) => (init.method === 'PUT' ? json({ ...profile, devices: [] }) : json(profile)), '/api/plans': () => json({ plans: [] }) })
+    page()
+    await userEvent.click(await screen.findByRole('button', { name: 'Delete device 1' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Save devices' }))
+    await screen.findByText('Saved.')
+    const put = calls(m, '/api/profile').find((c) => c[1]?.method === 'PUT')
+    expect(JSON.parse(put?.[1]?.body as string).delete_device_ids).toEqual(['d1'])
+    expect(await screen.findByText(/No devices yet/)).toBeInTheDocument()
   })
 })

@@ -95,10 +95,10 @@ export function PlansSection() {
   const active = (plans ?? []).filter((p) => p.active)
   return (
     <section aria-labelledby="plans-h" className="space-y-2">
-      <h2 id="plans-h" className="text-lg font-semibold">Your plans</h2>
+      <h2 id="plans-h" className="text-lg font-semibold">Your schedule</h2>
       {err && <p role="alert" className="text-sm text-amber-700 dark:text-amber-300">Could not load or change your plans ({err}).</p>}
       {plans === null && !err && <p role="status" className="text-sm">Loading…</p>}
-      {plans !== null && active.length === 0 && <p className="text-sm text-ink-2">No saved plans.</p>}
+      {plans !== null && active.length === 0 && <p className="text-sm text-ink-2">Nothing scheduled. Ask the assistant to plan a job and save it.</p>}
       <ul className="space-y-2">
         {active.map((p) => (
           <li key={p.id} className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-line p-3 text-sm">
