@@ -176,7 +176,7 @@ describe('Settings sections', () => {
     expect(screen.queryByRole('switch')).toBeNull()
   })
 
-  it('Your plans lists active plans in London time and cancels with DELETE', async () => {
+  it('Your schedule lists active plans in London time and cancels with DELETE', async () => {
     const plan = (id: string, label: string, active: boolean) => ({
       id,
       label,
@@ -201,7 +201,7 @@ describe('Settings sections', () => {
     expect(screen.queryByText('Old one')).toBeNull()
     expect(screen.getByText(/Next start: Sat 10 Oct, 00:00 BST/)).toBeInTheDocument()
     await userEvent.click(screen.getByRole('button', { name: 'Cancel plan Charge EV' }))
-    await waitFor(() => expect(screen.getByText('No saved plans.')).toBeInTheDocument())
+    await waitFor(() => expect(screen.getByText(/Nothing scheduled/)).toBeInTheDocument())
     expect(m.mock.calls.some((c) => (c[1] as RequestInit | undefined)?.method === 'DELETE' && c[0] === '/api/plans?id=p1')).toBe(true)
   })
 })

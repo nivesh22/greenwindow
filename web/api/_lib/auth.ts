@@ -10,6 +10,21 @@ const MAX_CACHE = 500
 
 const userSchema = z.object({ id: z.string().uuid(), is_anonymous: z.boolean().optional(), email: z.string().nullish() })
 
+const nameOf = (v: unknown): string | null => {
+  if (typeof v !== 'object' || v === null) return null
+  const r = v as Record<string, unknown>
+  const n = typeof r.full_name === 'string' ? r.full_name : typeof r.name === 'string' ? r.name : ''
+  return n.trim().slice(0, 60) || null
+}
+
+/** Google name from user_metadata, else from a linked google identity (linkIdentity may leave user_metadata empty). */
+export function googleName(user: unknown): string | null {
+  if (typeof user !== 'object' || user === null) return null
+  const u = user as { user_metadata?: unknown; identities?: unknown }
+  const ids = Array.isArray(u.identities) ? (u.identities as { provider?: unknown; identity_data?: unknown }[]) : []
+  return nameOf(u.user_metadata) ?? nameOf(ids.find((i) => i?.provider === 'google')?.identity_data)
+}
+
 const cache = new Map<string, { user: AuthUser; expiresMs: number }>()
 
 export function clearAuthCache(): void {
@@ -54,14 +69,16 @@ export async function verifyToken(
     return null
   }
   if (!res.ok) return null
-  let parsed: ReturnType<typeof userSchema.safeParse>
+  let raw: unknown
   try {
-    parsed = userSchema.safeParse(await res.json())
+    raw = await res.json()
   } catch {
     return null
   }
+  const parsed = userSchema.safeParse(raw)
   if (!parsed.success) return null
-  const u: AuthUser = { userId: parsed.data.id, isAnonymous: parsed.data.is_anonymous === true, email: parsed.data.email || null }
+  const isAnonymous = parsed.data.is_anonymous === true
+  const u: AuthUser = { userId: parsed.data.id, isAnonymous, email: parsed.data.email || null, name: isAnonymous ? null : googleName(raw) }
   if (cache.size >= MAX_CACHE) cache.clear()
   cache.set(key, { user: u, expiresMs: nowMs + AUTH_CACHE_MS })
   return u

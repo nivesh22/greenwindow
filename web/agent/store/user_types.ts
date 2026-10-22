@@ -8,6 +8,8 @@ export interface AuthUser {
   userId: string
   isAnonymous: boolean
   email: string | null
+  /** Name from the Google identity (`profile` scope), used to fill an empty display_name. */
+  name?: string | null
 }
 
 export interface Profile {
@@ -42,6 +44,20 @@ export interface StoredMessage {
   content: string
   turnId: string | null
   createdAtUtc: string
+}
+
+/** One row of the chat history list; title is the stored title, else the first user message. */
+export interface ConversationListItem {
+  id: string
+  title: string | null
+  updatedAtUtc: string
+}
+
+export const TITLE_MAX = 80
+
+export function conversationTitle(stored: string | null, firstUserMessage: string | null): string | null {
+  const t = (stored ?? firstUserMessage ?? '').replace(/\s+/g, ' ').trim()
+  return t ? (t.length > TITLE_MAX ? `${t.slice(0, TITLE_MAX - 1)}…` : t) : null
 }
 
 export interface ConversationContext {
@@ -91,6 +107,8 @@ export interface UserStore {
   /** The conversation if it exists and belongs to userId, else a new one with this id (or a fresh id when null). */
   ensureConversation(userId: string, conversationId: string | null, nowMs: number): Promise<Conversation>
   latestConversation(userId: string): Promise<Conversation | null>
+  /** Newest first; conversations with no messages are left out. */
+  listConversations(userId: string, limit: number): Promise<ConversationListItem[]>
   /** null when the conversation does not exist or belongs to someone else. */
   loadConversation(userId: string, conversationId: string, limit: number): Promise<ConversationContext | null>
   appendMessages(userId: string, conversationId: string, msgs: Omit<StoredMessage, 'id' | 'conversationId' | 'createdAtUtc'>[], nowMs: number): Promise<void>
@@ -162,6 +180,17 @@ export class MemoryUserStore implements UserStore {
   async latestConversation(userId: string): Promise<Conversation | null> {
     const mine = this.conversations.filter((c) => c.userId === userId).sort((a, b) => b.updatedAtUtc.localeCompare(a.updatedAtUtc))
     return mine[0] ? { ...mine[0] } : null
+  }
+  async listConversations(userId: string, limit: number): Promise<ConversationListItem[]> {
+    return this.conversations
+      .filter((c) => c.userId === userId && this.messages.some((m) => m.conversationId === c.id))
+      .sort((a, b) => b.updatedAtUtc.localeCompare(a.updatedAtUtc))
+      .slice(0, limit)
+      .map((c) => ({
+        id: c.id,
+        title: conversationTitle(c.title, this.messages.find((m) => m.conversationId === c.id && m.role === 'user')?.content ?? null),
+        updatedAtUtc: c.updatedAtUtc,
+      }))
   }
   async loadConversation(userId: string, conversationId: string, limit: number): Promise<ConversationContext | null> {
     const c = this.conversations.find((x) => x.id === conversationId && x.userId === userId)

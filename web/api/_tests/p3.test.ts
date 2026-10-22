@@ -7,7 +7,7 @@ import { createChatHandler } from '../chat.js'
 import { clearAuthCache } from '../_lib/auth.js'
 import type { ApiDeps } from '../_lib/deps.js'
 import { createFeedbackHandler } from '../feedback.js'
-import { createLatestHandler } from '../conversations/latest.js'
+import { createConversationsHandler } from '../conversations.js'
 import { createDeleteMeHandler } from '../me/delete.js'
 import { createProfileHandler } from '../profile.js'
 import { createSessionHandler, TURNSTILE_URL } from '../session.js'
@@ -23,6 +23,8 @@ const NOW = Date.UTC(2026, 9, 8, 10)
 const authUsers: Record<string, unknown> = {
   anon: { id: ANON, is_anonymous: true, email: null },
   google: { id: USER, is_anonymous: false, email: 'a@b.c' },
+  named: { id: USER, is_anonymous: false, email: 'a@b.c', user_metadata: { full_name: '  Ada Lovelace ' } },
+  linked: { id: USER, is_anonymous: false, email: 'a@b.c', user_metadata: {}, identities: [{ provider: 'google', identity_data: { name: 'Ada L' } }] },
 }
 
 function setup(turnstileOk = true) {
@@ -127,7 +129,7 @@ describe('GET /api/conversations/latest', () => {
     const { deps, users } = setup()
     const c = await users.ensureConversation(ANON, null, NOW)
     await users.appendMessages(ANON, c.id, [{ role: 'user', content: 'hi', turnId: null }, { role: 'assistant', content: 'hello', turnId: TURN }], NOW)
-    const r = await createLatestHandler(deps)(req('/api/conversations/latest', 'GET', 'anon'))
+    const r = await createConversationsHandler(deps)(req('/api/conversations/latest', 'GET', 'anon'))
     const body = (await r.json()) as { conversation: { id: string; messages: { content: string }[] }; messages_left: number; is_anonymous: boolean }
     expect(body.is_anonymous).toBe(true)
     expect(body.messages_left).toBe(2)
@@ -136,9 +138,46 @@ describe('GET /api/conversations/latest', () => {
 
   it('null conversation and null messages_left for signed-in users; 401 without a token', async () => {
     const { deps } = setup()
-    const h = createLatestHandler(deps)
+    const h = createConversationsHandler(deps)
     expect(await (await h(req('/api/conversations/latest', 'GET', 'google'))).json()).toEqual({ conversation: null, messages_left: null, is_anonymous: false })
     expect((await h(req('/api/conversations/latest', 'GET'))).status).toBe(401)
+  })
+  it('?view=latest works like the old path', async () => {
+    const { deps } = setup()
+    const r = await createConversationsHandler(deps)(req('/api/conversations?view=latest', 'GET', 'google'))
+    expect(await r.json()).toEqual({ conversation: null, messages_left: null, is_anonymous: false })
+  })
+})
+
+describe('GET /api/conversations (history)', () => {
+  it('lists the caller’s conversations newest first, titled by the first user message, skipping empty ones', async () => {
+    const { deps, users } = setup()
+    const a = await users.ensureConversation(USER, null, NOW)
+    await users.appendMessages(USER, a.id, [{ role: 'user', content: 'Run   the\ndishwasher tonight', turnId: null }, { role: 'assistant', content: 'ok', turnId: TURN }], NOW)
+    const b = await users.ensureConversation(USER, null, NOW + 1000)
+    await users.appendMessages(USER, b.id, [{ role: 'user', content: 'x'.repeat(120), turnId: null }], NOW + 60_000)
+    await users.ensureConversation(USER, null, NOW + 2000) // empty: not listed
+    const other = await users.ensureConversation(ANON, null, NOW)
+    await users.appendMessages(ANON, other.id, [{ role: 'user', content: 'not mine', turnId: null }], NOW)
+    const body = (await (await createConversationsHandler(deps)(req('/api/conversations', 'GET', 'google'))).json()) as {
+      conversations: { id: string; title: string }[]
+    }
+    expect(body.conversations.map((c) => c.id)).toEqual([b.id, a.id])
+    expect(body.conversations[0]!.title).toHaveLength(80)
+    expect(body.conversations[1]!.title).toBe('Run the dishwasher tonight')
+  })
+
+  it('?id= opens one of the caller’s conversations; someone else’s is 404, a bad id 400', async () => {
+    const { deps, users } = setup()
+    const h = createConversationsHandler(deps)
+    const mine = await users.ensureConversation(USER, null, NOW)
+    await users.appendMessages(USER, mine.id, [{ role: 'user', content: 'hi', turnId: null }], NOW)
+    const theirs = await users.ensureConversation(ANON, null, NOW)
+    const r = (await (await h(req(`/api/conversations?id=${mine.id}`, 'GET', 'google'))).json()) as { conversation: { id: string; messages: { content: string }[] } }
+    expect(r.conversation.id).toBe(mine.id)
+    expect(r.conversation.messages.map((m) => m.content)).toEqual(['hi'])
+    expect((await h(req(`/api/conversations?id=${theirs.id}`, 'GET', 'google'))).status).toBe(404)
+    expect((await h(req('/api/conversations?id=nope', 'GET', 'google'))).status).toBe(400)
   })
 })
 
@@ -167,6 +206,24 @@ describe('/api/profile', () => {
     const del = (await (await h(req('/api/profile', 'PUT', 'google', { delete_device_ids: [saved.devices[0]!.id] }))).json()) as { devices: unknown[] }
     expect(del.devices).toEqual([])
     expect((await h(req('/api/profile', 'PUT', 'google', { profile: { display_name: 'x' } }))).status).toBe(400)
+  })
+
+  it('fills an empty display_name from the Google name and never overwrites a chosen one', async () => {
+    const { deps, users } = setup()
+    const h = createProfileHandler(deps)
+    const first = (await (await h(req('/api/profile', 'GET', 'named'))).json()) as { profile: { display_name: string | null } }
+    expect(first.profile.display_name).toBe('Ada Lovelace')
+    expect((await users.getProfile(USER))?.displayName).toBe('Ada Lovelace')
+    await h(req('/api/profile', 'PUT', 'named', { profile: { display_name: 'Ada', risk_default: 'cautious', quiet_from: null, quiet_to: null } }))
+    clearAuthCache()
+    const again = (await (await h(req('/api/profile', 'GET', 'named'))).json()) as { profile: { display_name: string; risk_default: string } }
+    expect(again.profile).toMatchObject({ display_name: 'Ada', risk_default: 'cautious' })
+  })
+
+  it('reads the name from a linked Google identity when user_metadata has none', async () => {
+    const { deps } = setup()
+    const r = (await (await createProfileHandler(deps)(req('/api/profile', 'GET', 'linked'))).json()) as { profile: { display_name: string } }
+    expect(r.profile.display_name).toBe('Ada L')
   })
 })
 
@@ -227,7 +284,7 @@ describe('POST /api/chat with auth', () => {
     const { handler, seen } = mkChat()
     for (let i = 0; i < 3; i++) await (await handler(post('anon'))).text()
     expect(seen).toHaveLength(3)
-    expect(seen[0]!.auth).toEqual({ userId: ANON, isAnonymous: true, email: null })
+    expect(seen[0]!.auth).toEqual({ userId: ANON, isAnonymous: true, email: null, name: null })
     expect(seen.map((s) => s.messagesLeft)).toEqual([2, 1, 0])
     const ev = await events(await handler(post('anon')))
     expect(ev).toHaveLength(1)

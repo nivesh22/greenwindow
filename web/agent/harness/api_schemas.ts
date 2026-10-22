@@ -17,7 +17,7 @@ export const sessionResponseSchema = z.object({ ok: z.literal(true) })
 export const mergeRequestSchema = z.object({ anon_access_token: z.string().min(1) })
 export const mergeResponseSchema = z.object({ ok: z.literal(true), moved_conversations: z.number().int().nonnegative() })
 
-/** GET /api/conversations/latest — the caller's most recent conversation for restoring the chat on reload. */
+/** GET /api/conversations?view=latest (old path /api/conversations/latest) or ?id=<uuid> — one conversation's messages. */
 export const conversationResponseSchema = z.object({
   conversation: z
     .object({
@@ -27,6 +27,11 @@ export const conversationResponseSchema = z.object({
     .nullable(),
   messages_left: z.number().int().nullable(), // anonymous users: free messages left; null when signed in
   is_anonymous: z.boolean(),
+})
+
+/** GET /api/conversations — the caller's chat history, newest first. */
+export const conversationListSchema = z.object({
+  conversations: z.array(z.object({ id: z.string().uuid(), title: z.string().nullable(), updated_at_utc: utcTs })),
 })
 
 export const deviceSchema = z.object({
@@ -63,6 +68,7 @@ export const deleteMeRequestSchema = z.object({ confirm: z.literal('DELETE') })
 export type ProfileResponse = z.infer<typeof profileResponseSchema>
 export type ProfileUpdate = z.infer<typeof profileUpdateSchema>
 export type ConversationResponse = z.infer<typeof conversationResponseSchema>
+export type ConversationList = z.infer<typeof conversationListSchema>
 export type FeedbackRequest = z.infer<typeof feedbackRequestSchema>
 
 // ---------- P4 (design §8, plan P4.3/P4.4) ----------

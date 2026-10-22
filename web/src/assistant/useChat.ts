@@ -211,7 +211,50 @@ export function useChat(opts: UseChatOptions = {}) {
     sendRef.current = send
   })
 
-  // On load: finish a pending account merge, restore the latest conversation, resend a held message once.
+  const showConversation = useCallback((c: { id: string; messages: { role: 'user' | 'assistant'; content: string; turn_id: string | null }[] }) => {
+    convRef.current = c.id
+    setConversationId(c.id)
+    setMessages(
+      c.messages.map((m) => ({
+        id: `m${++seq.current}`,
+        role: m.role,
+        text: m.content,
+        ...(m.turn_id ? { turnId: m.turn_id } : {}),
+      })),
+    )
+  }, [])
+
+  /** Starts an empty conversation; the server creates it on the first message. */
+  const newChat = useCallback(() => {
+    if (busyRef.current) return
+    convRef.current = null
+    setConversationId(null)
+    setMessages([])
+    setError(null)
+  }, [])
+
+  /** Opens a past conversation from the history list. Returns false when it could not be loaded. */
+  const openConversation = useCallback(
+    async (id: string): Promise<boolean> => {
+      if (busyRef.current) return false
+      try {
+        const res = await apiFetch(`/api/conversations?id=${encodeURIComponent(id)}`)
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const parsed = conversationResponseSchema.parse(await res.json())
+        if (!parsed.conversation) return false
+        showConversation(parsed.conversation)
+        setError(null)
+        return true
+      } catch (e) {
+        setError({ code: 'open_failed', message: `Could not open that conversation${e instanceof Error ? ` (${e.message})` : ''}.` })
+        return false
+      }
+    },
+    [showConversation],
+  )
+
+  // On load: finish a pending account merge and read a guest's messages left. Every visit starts a new chat, except
+  // right after sign-in with a held message: that continues the conversation it came from and resends the message.
   useEffect(() => {
     if (!authEnabled()) return
     let live = true
@@ -221,30 +264,17 @@ export function useChat(opts: UseChatOptions = {}) {
         await mergeAnonymousIfPending().catch(() => undefined)
         const info = await getAuthInfo()
         if (!info || !live) return
-        const res = await apiFetch('/api/conversations/latest')
+        const held = info.isAnonymous ? null : takeHeldMessage()
+        const res = await apiFetch('/api/conversations?view=latest')
         if (res.ok) {
           const parsed = conversationResponseSchema.safeParse(await res.json())
           if (parsed.success && live) {
             const { conversation, messages_left } = parsed.data
             setMessagesLeft(messages_left)
-            if (conversation && convRef.current === null) {
-              convRef.current = conversation.id
-              setConversationId(conversation.id)
-              setMessages(
-                conversation.messages.map((m) => ({
-                  id: `m${++seq.current}`,
-                  role: m.role,
-                  text: m.content,
-                  ...(m.turn_id ? { turnId: m.turn_id } : {}),
-                })),
-              )
-            }
+            if (held && conversation && convRef.current === null) showConversation(conversation)
           }
         }
-        if (!info.isAnonymous && live) {
-          const held = takeHeldMessage()
-          if (held) void sendRef.current(held)
-        }
+        if (held && live) void sendRef.current(held)
       } catch {
         // restoring is best-effort; the chat still works
       }
@@ -252,7 +282,7 @@ export function useChat(opts: UseChatOptions = {}) {
     return () => {
       live = false
     }
-  }, [])
+  }, [showConversation])
 
   /** Limit -> sign in (FR-6.2): hold the last message, then link Google (or fall back to sign-in). */
   const signIn = useCallback(async () => {
@@ -264,5 +294,5 @@ export function useChat(opts: UseChatOptions = {}) {
     }
   }, [])
 
-  return { messages, status, conversationId, limit, error, busy, checking, messagesLeft, send, stop, signIn }
+  return { messages, status, conversationId, limit, error, busy, checking, messagesLeft, send, stop, signIn, newChat, openConversation }
 }

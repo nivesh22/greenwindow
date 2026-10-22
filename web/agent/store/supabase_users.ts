@@ -4,7 +4,7 @@
 import { z } from 'zod'
 import { modeSchema } from '../harness/events.js'
 import { authHeaders, StoreError } from './supabase.js'
-import type { Conversation, ConversationContext, Device, FeedbackInput, ImpactRow, NewImpactRow, Profile, StoredMessage, UserStore } from './user_types.js'
+import { conversationTitle, type Conversation, type ConversationContext, type ConversationListItem, type Device, type FeedbackInput, type ImpactRow, type NewImpactRow, type Profile, type StoredMessage, type UserStore } from './user_types.js'
 
 export interface SupabaseUserStoreOptions {
   url: string
@@ -21,6 +21,7 @@ const hhmm = z.string().nullable().transform((s) => (s ? s.slice(0, 5) : null))
 const profileRow = z.object({ user_id: z.string(), display_name: z.string().nullable(), risk_default: modeSchema, quiet_from: hhmm, quiet_to: hhmm })
 const deviceRow = z.object({ id: z.string(), user_id: z.string(), name: z.string(), kw: num, typical_hours: z.number().int().nullable(), source_device_id: z.string().nullable() })
 const convRow = z.object({ id: z.string(), user_id: z.string(), title: z.string().nullable(), created_at: ts, updated_at: ts })
+const convListRow = z.object({ id: z.string(), title: z.string().nullable(), updated_at: ts, messages: z.array(z.object({ content: z.string(), role: z.string() })) })
 const msgRow = z.object({ id: z.string(), conversation_id: z.string(), role: z.enum(['user', 'assistant']), content: z.string(), turn_id: z.string().nullable(), created_at: ts })
 const summaryRow = z.object({ summary: z.string(), upto_message_id: z.string().nullable() })
 const impactRow = z.object({
@@ -181,6 +182,19 @@ export class SupabaseUserStore implements UserStore {
   async latestConversation(userId: string): Promise<Conversation | null> {
     const r = await this.rows(convRow, `/conversations?user_id=eq.${q(userId)}&select=*&order=updated_at.desc&limit=1`, 'conversations')
     return r[0] ? this.toConv(r[0]) : null
+  }
+
+  async listConversations(userId: string, limit: number): Promise<ConversationListItem[]> {
+    // PostgREST resource embedding: each conversation with its first user message (for the title).
+    const r = await this.rows(
+      convListRow,
+      `/conversations?user_id=eq.${q(userId)}&select=id,title,updated_at,messages(content,role)` +
+        `&messages.role=eq.user&messages.order=created_at.asc&messages.limit=1&limit=${Math.max(0, Math.floor(limit))}&order=updated_at.desc`,
+      'conversations',
+    )
+    return r
+      .filter((c) => c.messages.length > 0)
+      .map((c) => ({ id: c.id, title: conversationTitle(c.title, c.messages.find((m) => m.role === 'user')?.content ?? null), updatedAtUtc: c.updated_at }))
   }
 
   async loadConversation(userId: string, conversationId: string, limit: number): Promise<ConversationContext | null> {
