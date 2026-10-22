@@ -37,13 +37,13 @@ describe('ChatPanel', () => {
     expect(screen.queryByRole('button', { name: STARTERS[0]! })).toBeNull()
   })
 
-  it('Enter sends, Shift+Enter inserts a newline, and the counter updates', async () => {
+  it('Enter sends, Shift+Enter inserts a newline, and the counter stays hidden for short messages', async () => {
     const mock = stubOk('Done.')
     render(<ChatPanel />)
     const box = screen.getByLabelText('Message to the assistant')
     await userEvent.type(box, 'line one{Shift>}{Enter}{/Shift}line two')
     expect(box).toHaveValue('line one\nline two')
-    expect(screen.getByLabelText('Characters used')).toHaveTextContent('17/2000')
+    expect(screen.queryByLabelText('Characters used')).toBeNull() // shown only near the limit
     expect(mock).not.toHaveBeenCalled()
     await userEvent.type(box, '{Enter}')
     expect(await screen.findByText('Done.')).toBeInTheDocument()
