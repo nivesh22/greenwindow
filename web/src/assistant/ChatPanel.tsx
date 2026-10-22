@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react'
 import type { PanelState, PlanUpdate } from '../../agent/harness/events'
+import { Mascot } from '../components/Mascot'
 import { AccountMenu } from './AccountMenu'
 import { ChatActions } from './ChatActions'
 import { ChatHistory } from './ChatHistory'
@@ -121,11 +122,7 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate, initialMes
     >
       <header className="flex items-center justify-between gap-3 border-b border-line px-4 py-2.5">
         <div className="flex min-w-0 items-center gap-2.5">
-          <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-accent-soft text-accent">
-            <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 5.5h12v7H9l-3.5 3v-3H4z" />
-            </svg>
-          </span>
+          <Mascot className="h-9 w-9 shrink-0" />
           <div className="min-w-0">
             <h2 className="font-display text-base leading-tight font-semibold">Ask the assistant</h2>
             <AccountMenu auth={auth} messagesLeft={chat.messagesLeft} />
@@ -175,9 +172,12 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate, initialMes
         >
           {chat.messages.length === 0 && (
             <div className="flex h-full flex-col justify-end gap-3 pb-1">
-              <div>
+              <div className="flex items-end gap-3">
+                <Mascot className="h-14 w-14 shrink-0" />
                 <p className="font-display text-lg font-semibold">{firstName ? `Hi ${firstName}.` : 'Hi there.'}</p>
-                <p className="mt-1 text-sm text-ink-2">
+              </div>
+              <div>
+                <p className="text-sm text-ink-2">
                   Tell me about a job and when it must be done. I&apos;ll find the hours with the lowest forecast grid
                   intensity.
                 </p>
@@ -206,22 +206,25 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate, initialMes
                 </div>
               </div>
             ) : (
-              <div key={m.id} className="group flex flex-col items-start">
-                <div className="max-w-[92%] rounded-2xl rounded-bl-md bg-surface-2 px-3.5 py-2.5 text-sm leading-relaxed break-words text-ink">
-                  <span className="sr-only">Assistant: </span>
-                  <FormattedText text={m.text} />
-                </div>
-                {m.actions && <ChatActions actions={m.actions} />}
-                {(m.turnId || m.trace) && (
-                  <div
-                    className={`mt-1 flex w-full flex-wrap items-center gap-x-1 transition-opacity ${
-                      i === lastAssistant ? '' : 'opacity-0 group-hover:opacity-100 focus-within:opacity-100'
-                    }`}
-                  >
-                    {m.turnId && <Feedback turnId={m.turnId} />}
-                    {m.trace && <TraceDrawer trace={m.trace} />}
+              <div key={m.id} className="group flex items-start gap-2">
+                <Mascot className="h-8 w-8 shrink-0" />
+                <div className="flex min-w-0 flex-1 flex-col items-start">
+                  <div className="max-w-[95%] rounded-2xl rounded-tl-md bg-surface-2 px-3.5 py-2.5 text-sm leading-relaxed break-words text-ink">
+                    <span className="sr-only">Assistant: </span>
+                    <FormattedText text={m.text} />
                   </div>
-                )}
+                  {m.actions && <ChatActions actions={m.actions} />}
+                  {(m.turnId || m.trace) && (
+                    <div
+                      className={`mt-1 flex w-full flex-wrap items-center gap-x-1 transition-opacity ${
+                        i === lastAssistant ? '' : 'opacity-0 group-hover:opacity-100 focus-within:opacity-100'
+                      }`}
+                    >
+                      {m.turnId && <Feedback turnId={m.turnId} />}
+                      {m.trace && <TraceDrawer trace={m.trace} />}
+                    </div>
+                  )}
+                </div>
               </div>
             ),
           )}
@@ -229,15 +232,18 @@ export function ChatPanel({ getPanelState = () => null, onPlanUpdate, initialMes
             <p role="status" className="text-xs text-ink-3">Checking you&apos;re human…</p>
           )}
           {chat.busy && !chat.checking && (
-            <div role="status" className="flex flex-col items-start gap-1">
-              <span className="rounded-2xl rounded-bl-md bg-surface-2 px-3.5 py-3" aria-hidden="true">
-                <span className="flex gap-1">
-                  {[0, 150, 300].map((d) => (
-                    <span key={d} className="h-1.5 w-1.5 animate-bounce rounded-full bg-ink-3" style={{ animationDelay: `${d}ms` }} />
-                  ))}
+            <div role="status" className="flex items-start gap-2">
+              <Mascot className="h-8 w-8 shrink-0" />
+              <div className="flex flex-col items-start gap-1">
+                <span className="rounded-2xl rounded-tl-md bg-surface-2 px-3.5 py-3" aria-hidden="true">
+                  <span className="flex gap-1">
+                    {[0, 150, 300].map((d) => (
+                      <span key={d} className="h-1.5 w-1.5 animate-bounce rounded-full bg-ink-3" style={{ animationDelay: `${d}ms` }} />
+                    ))}
+                  </span>
                 </span>
-              </span>
-              <span className="text-xs text-ink-3">{chat.status ?? 'Thinking...'}</span>
+                <span className="text-xs text-ink-3">{chat.status ?? 'Thinking...'}</span>
+              </div>
             </div>
           )}
         </div>
