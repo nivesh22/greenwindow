@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { LazyForecastChart } from '../components/LazyForecastChart'
+import { Mascot } from '../components/Mascot'
 import { IntensityStrip } from '../components/IntensityStrip'
 import { AssistantPromo } from '../assistant/AssistantPromo'
 import { ASSISTANT_ENABLED } from '../assistant/flag'
@@ -52,8 +53,9 @@ export function Home({ now = Date.now(), assistantEnabled = ASSISTANT_ENABLED }:
       <section className="grid items-end gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
         <HomeIntro />
         {lowest && (
-          <div className="card relative overflow-hidden p-5 sm:p-6">
+          <div className="card relative overflow-hidden p-5 sm:p-6 sm:pr-36">
             <div aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 via-brand-600 to-brand-700" />
+            <Mascot className="absolute top-1/2 right-5 hidden h-28 w-28 -translate-y-1/2 sm:block" />
             <p className="eyebrow">Lowest expected hour ahead</p>
             <p className="mt-2 font-display text-3xl font-semibold tracking-tight">{formatDateTime(lowest.ts)}</p>
             <p className="mt-1 text-ink-2">

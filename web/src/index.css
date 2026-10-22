@@ -116,3 +116,18 @@ h1, h2, h3 {
 .recharts-surface:focus:not(:focus-visible) {
   outline: none;
 }
+
+/* Assistant mascot (components/Mascot.tsx): an occasional blink, only for visitors who allow motion. */
+.mascot-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes mascot-blink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mascot-eye {
+    animation: mascot-blink 5s infinite;
+  }
+}
