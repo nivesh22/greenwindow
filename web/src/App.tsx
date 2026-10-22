@@ -3,12 +3,13 @@ import { lazy, Suspense, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { makeQueryClient } from './data/hooks'
-import { About } from './pages/About'
-import { Backtest } from './pages/Backtest'
 import { Home } from './pages/Home'
-import { Leaderboard } from './pages/Leaderboard'
-import { Scheduler } from './pages/Scheduler'
 
+// Only the home page is in the main bundle; the other pages load on demand (the prerendered HTML already has their text).
+const Scheduler = lazy(() => import('./pages/Scheduler').then((m) => ({ default: m.Scheduler })))
+const Leaderboard = lazy(() => import('./pages/Leaderboard').then((m) => ({ default: m.Leaderboard })))
+const Backtest = lazy(() => import('./pages/Backtest').then((m) => ({ default: m.Backtest })))
+const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })))
 const Settings = lazy(() => import('./pages/Settings').then((m) => ({ default: m.Settings })))
 const Ops = lazy(() => import('./pages/Ops').then((m) => ({ default: m.Ops })))
 const OpsTrace = lazy(() => import('./pages/OpsTrace').then((m) => ({ default: m.OpsTrace })))
@@ -21,10 +22,38 @@ export function AppRoutes() {
     <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/scheduler" element={<Scheduler />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/backtest" element={<Backtest />} />
-        <Route path="/about" element={<About />} />
+        <Route
+          path="/scheduler"
+          element={
+            <Suspense fallback={<p role="status">Loading…</p>}>
+              <Scheduler />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/leaderboard"
+          element={
+            <Suspense fallback={<p role="status">Loading…</p>}>
+              <Leaderboard />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/backtest"
+          element={
+            <Suspense fallback={<p role="status">Loading…</p>}>
+              <Backtest />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <Suspense fallback={<p role="status">Loading…</p>}>
+              <About />
+            </Suspense>
+          }
+        />
         <Route
           path="/settings"
           element={

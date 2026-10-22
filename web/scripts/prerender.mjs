@@ -1,4 +1,4 @@
-// Build step after `vite build` and the SSR build of src/entry-server.tsx (see package.json "build").
+// Build step after `vite build` and the SSR build of src/entry-server.ts (see package.json "build").
 // Writes one HTML file per public page into dist/ with that page's content, title, description and canonical URL, so
 // crawlers that do not run JavaScript see real pages. Also writes 404.html, app.html (the bare shell for signed-in
 // routes, rewritten in vercel.json), robots.txt and sitemap.xml. The browser app still starts with createRoot and
@@ -9,7 +9,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist')
-const { render, PUBLIC_PAGES, NOT_FOUND, SITE_URL, canonicalUrl } = await import(pathToFileURL(join(root, 'dist-ssr', 'entry-server.js')).href)
+const { render, PUBLIC_PAGES, NOT_FOUND, SITE_URL, canonicalUrl, ogImageUrl, structuredData } = await import(pathToFileURL(join(root, 'dist-ssr', 'entry-server.js')).href)
 
 const template = await readFile(join(dist, 'index.html'), 'utf8')
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -24,6 +24,12 @@ function page(meta, path, body) {
     `<meta property="og:title" content="${esc(meta.title)}" />`,
     `<meta property="og:description" content="${esc(meta.description)}" />`,
     meta.index ? `<meta property="og:url" content="${canonicalUrl(path)}" />` : '',
+    `<meta property="og:image" content="${ogImageUrl(path)}" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="${esc(meta.title)}" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    jsonLd(path),
   ]
     .filter(Boolean)
     .join('\n    ')
@@ -34,6 +40,12 @@ function page(meta, path, body) {
     .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
   if (!out.includes(canonicalUrl(path)) && meta.index) throw new Error(`prerender: head not injected for ${path}`)
   return out
+}
+
+// JSON-LD inside <script>: escape "<" so the text can never close the tag.
+function jsonLd(path) {
+  const data = structuredData(path)
+  return data ? `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>` : ''
 }
 
 const fileFor = (path) => (path === '/' ? 'index.html' : `${path.slice(1)}.html`)

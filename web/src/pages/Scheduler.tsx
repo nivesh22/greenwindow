@@ -5,7 +5,7 @@ import { ChatPanel } from '../assistant/ChatPanel'
 import { ASSISTANT_ENABLED } from '../assistant/flag'
 import { PlanActions } from '../assistant/PlanActions'
 import { useAuth } from '../assistant/useAuth'
-import { ForecastChart } from '../components/ForecastChart'
+import { LazyForecastChart } from '../components/LazyForecastChart'
 import { PlanPanel, type FormState } from '../components/PlanPanel'
 import { ErrorPanel, Loading } from '../components/Status'
 import { useDataFile } from '../data/hooks'
@@ -181,7 +181,7 @@ export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABL
     <>
       <div className="card p-4 sm:p-5">
         <h2 className="mb-3 font-display text-lg font-semibold">Forecast for your range</h2>
-        <ForecastChart
+        <LazyForecastChart
           actuals={[]}
           main={{ label, points: series.points }}
           now={now}

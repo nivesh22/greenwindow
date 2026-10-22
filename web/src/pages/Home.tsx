@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ForecastChart } from '../components/ForecastChart'
+import { LazyForecastChart } from '../components/LazyForecastChart'
 import { IntensityStrip } from '../components/IntensityStrip'
 import { AssistantPromo } from '../assistant/AssistantPromo'
 import { ASSISTANT_ENABLED } from '../assistant/flag'
@@ -100,7 +100,7 @@ export function Home({ now = Date.now(), assistantEnabled = ASSISTANT_ENABLED }:
               onChange={setCompare} allowNone />
           </div>
         </div>
-        <ForecastChart
+        <LazyForecastChart
           actuals={actuals}
           main={{ label: labelFor(selected), points: main.points }}
           compare={cmp ? { label: labelFor(cmp.model), points: cmp.points } : undefined}

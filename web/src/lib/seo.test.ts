@@ -1,4 +1,4 @@
-import { applyPageMeta, canonicalUrl, metaFor, PUBLIC_PAGES } from './seo'
+import { applyPageMeta, canonicalUrl, metaFor, ogImageUrl, PUBLIC_PAGES, structuredData } from './seo'
 
 describe('seo', () => {
   it('gives every public page its own title and description', () => {
@@ -32,5 +32,21 @@ describe('seo', () => {
     applyPageMeta('/')
     expect(document.head.querySelector('meta[name="robots"]')).toBeNull()
     expect(document.head.querySelector('meta[name="description"]')).toHaveAttribute('content', PUBLIC_PAGES['/']!.description)
+  })
+
+  it('has a share image on disk for every public page', () => {
+    const files = Object.keys(import.meta.glob('../../public/og/*.png')).map((f) => f.replace('../../public', ''))
+    for (const path of Object.keys(PUBLIC_PAGES)) expect(files).toContain(new URL(ogImageUrl(path)).pathname)
+    expect(ogImageUrl('/nope')).toBe('https://greenwindow.uk/og/home.png')
+  })
+
+  it('describes the forecast dataset on the home page only, with the fields Google requires', () => {
+    expect(structuredData('/about')).toBeNull()
+    const graph = (structuredData('/') as { '@graph': Record<string, unknown>[] })['@graph']
+    const ds = graph.find((n) => n['@type'] === 'Dataset')!
+    expect(typeof ds.name).toBe('string')
+    expect((ds.description as string).length).toBeGreaterThanOrEqual(50)
+    expect(ds.license).toBeUndefined() // the repository has no license; do not claim one
+    expect(JSON.stringify(ds)).toContain('CC BY 4.0')
   })
 })
