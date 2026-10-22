@@ -120,7 +120,14 @@ export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABL
 
   const error = meta.error ?? fc.error
   if (error && !ready) return <ErrorPanel error={error} onRetry={() => void Promise.all([meta.refetch(), fc.refetch()])} />
-  if (!ready) return <Loading label="Loading forecast" />
+  if (!ready) {
+    return (
+      <div className="space-y-8">
+        <SchedulerIntro />
+        <Loading label="Loading forecast" />
+      </div>
+    )
+  }
   if (!series || hours.length === 0) return <p>No forecast with uncertainty bands is available right now.</p>
 
   const onField = (k: keyof FormState, v: string) => {
@@ -194,14 +201,7 @@ export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABL
 
   return (
     <div className="space-y-8">
-      <section>
-        <p className="eyebrow">Carbon-aware scheduling</p>
-        <h1 className="page-title mt-2">Plan a flexible job</h1>
-        <p className="lede">
-          Tell us how long the job runs and when it must finish. We find the start time with the lowest forecast average
-          grid intensity, and say whether that choice still holds if the forecast is off.
-        </p>
-      </section>
+      <SchedulerIntro />
 
       {assistantEnabled ? (
         <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]">
@@ -227,6 +227,20 @@ export function Scheduler({ now = Date.now(), assistantEnabled = ASSISTANT_ENABL
         </div>
       )}
     </div>
+  )
+}
+
+/** Heading and intro; also shown (and prerendered) while the forecast loads. */
+function SchedulerIntro() {
+  return (
+    <section>
+      <p className="eyebrow">Carbon-aware scheduling</p>
+      <h1 className="page-title mt-2">Plan a flexible job</h1>
+      <p className="lede">
+        Tell us how long the job runs and when it must finish. We find the start time with the lowest forecast average grid
+        intensity, and say whether that choice still holds if the forecast is off.
+      </p>
+    </section>
   )
 }
 

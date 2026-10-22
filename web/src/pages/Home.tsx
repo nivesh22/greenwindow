@@ -22,7 +22,14 @@ export function Home({ now = Date.now(), assistantEnabled = ASSISTANT_ENABLED }:
   if (error && !(meta.data && fc.data && obs.data)) {
     return <ErrorPanel error={error} onRetry={() => void Promise.all([meta.refetch(), fc.refetch(), obs.refetch()])} />
   }
-  if (!meta.data || !fc.data || !obs.data) return <Loading label="Loading forecast" />
+  if (!meta.data || !fc.data || !obs.data) {
+    return (
+      <div className="space-y-8">
+        <HomeIntro />
+        <Loading label="Loading forecast" />
+      </div>
+    )
+  }
 
   const models = forecastModels(meta.data, fc.data)
   if (models.length === 0) return <p>No model forecasts in the latest run.</p>
@@ -43,14 +50,7 @@ export function Home({ now = Date.now(), assistantEnabled = ASSISTANT_ENABLED }:
   return (
     <div className="space-y-8">
       <section className="grid items-end gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
-        <div>
-          <p className="eyebrow">Great Britain · next 48 hours</p>
-          <h1 className="page-title mt-2 sm:text-5xl">When is Great Britain's grid cleanest in the next 48 hours?</h1>
-          <p className="lede">
-            Hourly forecasts of grid carbon intensity with an honest 80% uncertainty band, from classical time-series
-            models and the Chronos-2 foundation model, scored live against what actually happened.
-          </p>
-        </div>
+        <HomeIntro />
         {lowest && (
           <div className="card relative overflow-hidden p-5 sm:p-6">
             <div aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 via-brand-600 to-brand-700" />
@@ -146,5 +146,19 @@ function NextLink({ to, title, body }: { to: string; title: string; body: string
       </p>
       <p className="mt-1.5 text-sm leading-relaxed text-ink-3">{body}</p>
     </Link>
+  )
+}
+
+/** Heading and intro; also shown (and prerendered) while the forecast loads. */
+function HomeIntro() {
+  return (
+    <div>
+      <p className="eyebrow">Great Britain · next 48 hours</p>
+      <h1 className="page-title mt-2 sm:text-5xl">When is Great Britain's grid cleanest in the next 48 hours?</h1>
+      <p className="lede">
+        Hourly forecasts of grid carbon intensity with an honest 80% uncertainty band, from classical time-series models
+        and the Chronos-2 foundation model, scored live against what actually happened.
+      </p>
+    </div>
   )
 }

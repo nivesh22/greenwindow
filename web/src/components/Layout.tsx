@@ -1,9 +1,10 @@
-import type { ReactNode } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useEffect, type ReactNode } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 import { ASSISTANT_ENABLED } from '../assistant/flag'
 import { HeaderAccount } from '../assistant/HeaderAccount'
 import { useAuth } from '../assistant/useAuth'
 import { useDataFile } from '../data/hooks'
+import { applyPageMeta } from '../lib/seo'
 import { formatHour, hoursAgo } from '../lib/time'
 import { LogoMark } from './Logo'
 import { STALE_AFTER_H, StaleBanner } from './Status'
@@ -28,6 +29,8 @@ const ACCOUNT_NAV = { to: '/account', label: 'Devices & schedule' }
 
 export function Layout({ children }: { children: ReactNode }) {
   const auth = useAuth()
+  const { pathname } = useLocation()
+  useEffect(() => applyPageMeta(pathname), [pathname])
   const signedIn = ASSISTANT_ENABLED && auth.info !== null && !auth.info.isAnonymous
   const meta = useDataFile('meta')
   const generated = meta.data?.generated_at_utc
